@@ -1,0 +1,351 @@
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,600,700");
+body {
+  background-color: #fcfbfb;
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 16px;
+}
+
+@font-face {
+  font-family: 'reef';
+  src: url("./../fonts/reef.eot");
+  src: url("./../fonts/reef.eot?#iefix") format("embedded-opentype"), url("./../fonts/reef.woff2") format("woff2"), url("./../fonts/reef.woff") format("woff"), url("./../fonts/reef.ttf") format("truetype"), url("./../fonts/reef.svg#reef") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+.Button {
+  display: inline-block;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.15) 0 -5px 2px 0 inset;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0 -5px 2px 0 inset;
+  box-shadow: rgba(0, 0, 0, 0.15) 0 -5px 2px 0 inset;
+  color: white;
+  font-family: "reef";
+  font-size: 28px;
+  font-style: normal;
+  line-height: 1.1em;
+  padding: 15px 25px;
+  -moz-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+.Button--red {
+  background-color: #b00725;
+}
+.Button--blue {
+  background-color: #2845a0;
+}
+.Button:hover {
+  -moz-box-shadow: rgba(0, 0, 0, 0.15) 0 5px 2px 0 inset;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0 5px 2px 0 inset;
+  box-shadow: rgba(0, 0, 0, 0.15) 0 5px 2px 0 inset;
+  color: white;
+  text-decoration: none;
+}
+
+.Header {
+  position: fixed;
+  padding: 15px 0;
+  top: 0;
+  width: 100%;
+  z-index: 99;
+}
+
+.Header-logo {
+  margin: 0;
+}
+
+.Header-menu {
+  display: -webkit-flex;
+  display: flex;
+  margin: 0;
+  padding-top: 25px;
+  padding-left: 0;
+}
+
+.MainMenu {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-around;
+  justify-content: space-around;
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+  width: 100%;
+}
+.MainMenu li {
+  border-right: 1px solid #fcfbfb;
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+  text-align: center;
+}
+.MainMenu li:last-child {
+  border-right: none;
+}
+.MainMenu li a {
+  color: #fcfbfb;
+  font-size: 0.875em;
+  padding-bottom: 3px;
+  -moz-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+.MainMenu li a:hover {
+  text-decoration: none;
+}
+.MainMenu li:hover a, .MainMenu li.active a {
+  border-bottom: 3px solid #b00725;
+}
+
+.Carousel--home .carousel-caption {
+  -webkit-align-content: center;
+  align-content: center;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  bottom: auto;
+  height: 100%;
+  left: 10%;
+  padding: 0;
+  right: auto;
+  text-align: left;
+  top: 0;
+  width: 40%;
+}
+.Carousel--home .carousel-caption h2, .Carousel--home .carousel-caption h3, .Carousel--home .carousel-caption p {
+  -webkit-flex-basis: 100%;
+  flex-basis: 100%;
+}
+.Carousel--home .carousel-caption h3 {
+  font-size: 2.875em;
+  font-style: italic;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+.Carousel--home .carousel-caption h2 {
+  font-family: "reef";
+  font-size: 5.625em;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+.Carousel--home .carousel-caption p {
+  font-size: 1.5em;
+  font-style: italic;
+  margin-top: 0;
+}
+
+.PageHome {
+  padding: 40px 0 0;
+}
+
+.PageHome-subtitle {
+  color: #7d7d7d;
+  font-family: "reef";
+  font-size: 1.875em;
+}
+
+.PageHome-title {
+  color: #b00725;
+  font-family: "reef";
+  font-size: 2.625em;
+  margin-top: 0;
+}
+
+.PageHome-legend {
+  margin: 0 auto 20px auto;
+  width: 60%;
+}
+
+.PageHome-cols {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-around;
+  justify-content: space-around;
+}
+
+.PageHome-item {
+  -webkit-flex: 1 1 100%;
+  flex: 1 1 100%;
+  padding: 0 25px;
+}
+
+.PageHome-info {
+  margin: 40px 0;
+}
+.PageHome-info--blog .PageHome-item {
+  border-radius: 8px;
+  -moz-box-shadow: 0 5px 2px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0 5px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 5px 2px rgba(0, 0, 0, 0.3);
+  margin: 0 5px;
+  padding: 0;
+}
+.PageHome-info--blog .PageHome-info-figure img {
+  -moz-border-radius: 8px 8px 0 0;
+  -webkit-border-radius: 8px;
+  border-radius: 8px 8px 0 0;
+}
+.PageHome-info--blog .PageHome-info-title {
+  font-size: 1.125em;
+  font-weight: 600;
+  padding: 0 10px;
+}
+.PageHome-info--blog .PageHome-info-title a {
+  color: #415cb0;
+}
+.PageHome-info--blog .PageHome-info-text {
+  font-size: 0.875em;
+  padding: 0 10px;
+}
+
+.PageHome-info-figure {
+  margin-bottom: 20px;
+  position: relative;
+}
+.PageHome-info-figure--border img {
+  border: 8px solid #004e94;
+}
+
+.PageHome-info-title {
+  color: #004e94;
+  font-size: 1.5em;
+  font-weight: 600;
+}
+
+.PageHome-info-text {
+  color: #2b2b2b;
+  font-size: 1.25em;
+}
+
+.PageHome-info-date {
+  background-color: #415cb0;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+  color: white;
+  left: 15px;
+  line-height: 1.1em;
+  padding: 5px 10px;
+  position: absolute;
+  top: 15px;
+}
+.PageHome-info-date span {
+  display: block;
+}
+.PageHome-info-date .day {
+  font-size: 1.375em;
+  font-weight: 700;
+}
+.PageHome-info-date .month {
+  font-weight: 700;
+}
+
+.Parallax {
+  background-color: transparent;
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  padding: 120px 0;
+}
+
+.Parallax-caption {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  width: 45%;
+}
+.Parallax-caption--left {
+  margin: 0 auto 0 10%;
+}
+.Parallax-caption--right {
+  margin: 0 10% 0 auto;
+}
+.Parallax-caption p {
+  color: #fcfbfb;
+  -webkit-flex-basis: 100%;
+  flex-basis: 100%;
+  font-size: 2em;
+  font-style: italic;
+}
+
+.Parallax-caption-title {
+  color: #fcfbfb;
+  font-family: "reef";
+  font-size: 4.5em;
+  margin-bottom: 0;
+  margin-top: 0;
+  -webkit-flex-basis: 100%;
+  flex-basis: 100%;
+}
+
+.Prefooter {
+  background-color: #b00725;
+  margin-top: 25px;
+  padding: 30px 0;
+}
+
+.Prefooter-title {
+  color: #fcfbfb;
+  font-family: "Reef";
+  font-size: 1.625em;
+}
+
+.Prefooter-subtitle {
+  color: #fcfbfb;
+  font-size: 1.25em;
+  font-weight: 700;
+}
+
+.Prefooter-text {
+  color: #fcfbfb;
+  font-size: 1.125em;
+  margin-bottom: 0;
+}
+
+.Footer {
+  background-color: #222222;
+  padding: 35px 0;
+}
+
+.Footer-title {
+  color: #fcfbfb;
+  font-family: "Reef";
+  font-size: 1.625em;
+}
+
+.Footer-logos {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-around;
+  justify-content: space-around;
+  margin: 25px 0;
+}
+
+.Footer-separator {
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.Footer-copy {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+}
+.Footer-copy p {
+  color: #fcfbfb;
+  font-size: 0.875em;
+  font-weight: 300;
+}
+.Footer-copy p a {
+  color: #fcfbfb;
+}

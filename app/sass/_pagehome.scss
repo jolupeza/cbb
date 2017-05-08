@@ -1,0 +1,92 @@
+.PageHome {
+  padding: 40px 0 0;
+}
+.PageHome-subtitle {
+  color: $gray;
+  font-family: "reef";
+  font-size: 1.875em;
+}
+.PageHome-title {
+  color: $red;
+  font-family: "reef";
+  font-size: 2.625em;
+  margin-top: 0;
+}
+.PageHome-legend {
+  margin: 0 auto 20px auto;
+  width: 60%;
+}
+.PageHome-cols {
+  @include display-flex();
+  @include justify-content(space-around);
+}
+.PageHome-item {
+  @include flex(1 1 100%);
+  padding: 0 25px;
+}
+.PageHome-info {
+  margin: 40px 0;
+  &--blog {
+    .PageHome-item {
+      border-radius: 8px;
+      @include box-shadow(0 5px 2px rgba(black, 0.3));
+      margin: 0 5px;
+      padding: 0;
+    }
+    .PageHome-info-figure {
+      img {
+        @include border-radius(8px 8px 0 0);
+      }
+    }
+    .PageHome-info-title {
+      font-size: 1.125em;
+      font-weight: 600;
+      padding: 0 10px;
+      a {
+        color: $blueSoft;
+      }
+    }
+    .PageHome-info-text {
+      font-size: 0.875em;
+      padding: 0 10px;
+    }
+  }
+}
+.PageHome-info-figure {
+  margin-bottom: 20px;
+  position: relative;
+  &--border {
+    img {
+      border: 8px solid $blue;
+    }
+  }
+}
+.PageHome-info-title {
+  color: $blue;
+  font-size: 1.5em;
+  font-weight: 600;
+}
+.PageHome-info-text {
+  color: $grayText;
+  font-size: 1.25em;
+}
+.PageHome-info-date {
+  background-color: $blueSoft;
+  @include border-radius(8px);
+  color: white;
+  left: 15px;
+  line-height: 1.1em;
+  padding: 5px 10px;
+  position: absolute;
+  top: 15px;
+  span {
+    display: block;
+  }
+  .day {
+    font-size: 1.375em;
+    font-weight: 700;
+  }
+  .month {
+    font-weight: 700;
+  }
+}

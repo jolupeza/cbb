@@ -1,0 +1,30 @@
+.Footer {
+  background-color: $brown;
+  padding: 35px 0;
+}
+.Footer-title {
+  color: $white;
+  font-family: "Reef";
+  font-size: 1.625em;
+}
+.Footer-logos {
+  @include display-flex();
+  @include justify-content(space-around);
+  margin: 25px 0;
+}
+.Footer-separator {
+  border-top: 1px solid rgba(white, 0.15);
+  border-bottom: 1px solid rgba(black, 0.15);
+}
+.Footer-copy {
+  @include display-flex();
+  @include justify-content(space-between);
+  p {
+    color: $white;
+    font-size: 0.875em;
+    font-weight: 300;
+    a {
+      color: $white;
+    }
+  }
+}

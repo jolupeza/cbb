@@ -1,0 +1,16 @@
+.Header {
+  position: fixed;
+  padding: 15px 0;
+  top: 0;
+  width: 100%;
+  z-index: 99;
+}
+.Header-logo {
+  margin: 0;
+}
+.Header-menu {
+  @include display-flex();
+  margin: 0;
+  padding-top: 25px;
+  padding-left: 0;
+}
