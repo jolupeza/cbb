@@ -2,8 +2,13 @@
 
 var gulp = require('gulp'),
   compass = require('gulp-compass'),
+  cssnano = require('gulp-cssnano'),
+  gulpif = require('gulp-if'),
   inject = require('gulp-inject'),
-  livereload = require('gulp-livereload');
+  livereload = require('gulp-livereload'),
+  useref = require('gulp-useref'),
+  uglify = require('gulp-uglify'),
+  uncss = require('gulp-uncss');
 
 var paths = {
   compass: ['./app/sass/**/*.scss']
@@ -37,6 +42,33 @@ gulp.task('inject', function () {
     .pipe(gulp.dest('./app/'));
 });
 
+gulp.task('uncss', ['compress'], function () {
+  return gulp.src('./wp-content/themes/cbb/css/style.min.css')
+            .pipe(uncss({
+              html: ['./app/index.html']
+            }))
+            .pipe(gulp.dest('./wp-content/themes/cbb/css'));
+});
+
+// Comprime los archivos CSS y JS enlazados en el index.html y los minifica
+gulp.task('compress', function () {
+  gulp.src('./app/*.html')
+    .pipe(useref())
+    .pipe(gulpif('*.js', uglify()))
+    .pipe(gulpif('*.css', cssnano()))
+    .pipe(gulp.dest('./wp-content/themes/cbb'))
+});
+
+// Copia el contenido de los estáticos de index.html al directorio de producción sin tags de comentarios
+gulp.task('copy', function () {
+  gulp.src('./app/images/**')
+    .pipe(gulp.dest('./wp-content/themes/cbb/images'))
+  gulp.src('./app/fonts/**')
+    .pipe(gulp.dest('./wp-content/themes/cbb/fonts'))
+  gulp.src('./bower_components/bootstrap/dist/fonts/**')
+    .pipe(gulp.dest('./wp-content/themes/cbb/fonts'))
+});
+
 gulp.task('watch', function(){
   livereload.listen()
   gulp.watch(['./app/**/*.html'], ['html'])
@@ -45,3 +77,5 @@ gulp.task('watch', function(){
   // gulp.watch(['./app/js/**/*.js'], ['jshint', 'inject'])
   // gulp.watch(['./bower.json'], ['wiredep'])
 })
+
+gulp.task('build', ['uncss', 'copy']);

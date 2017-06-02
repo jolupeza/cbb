@@ -21,3 +21,4 @@ wp-content/plugins/hello.php
 /bower_components
 /resources
 /.sass-cache
+/nbproject/private/
