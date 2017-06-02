@@ -11,6 +11,7 @@ define('THEMEDOMAIN', 'cbb-framework');
 /****************************************/
 function load_custom_scripts() {
   wp_enqueue_script('vendor_script', THEMEROOT . '/js/vendor.min.js', array('jquery'), false, true);
+  wp_enqueue_script('main_script', THEMEROOT . '/js/main.js', array('jquery'), false, true);
   wp_localize_script('custom_script', 'CbbAjax', array('url' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('cbbajax-nonce')));
 }
 
@@ -35,6 +36,17 @@ function my_theme_setup() {
 }
 
 add_action('after_setup_theme', 'my_theme_setup');
+
+/****************************************/
+/* Add Menus */
+/****************************************/
+function register_my_menus() {
+  register_nav_menus([
+    'main-menu' => __( 'Main Menu', THEMEDOMAIN ),
+  ]);
+}
+
+add_action('init', 'register_my_menus');
 
 /**********************************************/
 /* Load Theme Options Page and Custom Widgets */

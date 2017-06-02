@@ -4,6 +4,12 @@ body {
   font-family: "Source Sans Pro", sans-serif;
   font-size: 16px;
 }
+body.home .Header.affix-top .Menu--home {
+  visibility: hidden;
+}
+body.home .Header.affix .Menu--home {
+  visibility: visible;
+}
 
 @font-face {
   font-family: 'reef';
@@ -49,8 +55,19 @@ body {
   position: fixed;
   padding: 15px 0;
   top: 0;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
   width: 100%;
   z-index: 99;
+}
+.Header.affix {
+  background-color: #b00725;
+  padding: 10px 0;
+}
+.Header.affix .MainMenu li:hover a, .Header.affix .MainMenu li.active a, .Header.affix .MainMenu li.current-menu-item a {
+  border-bottom: 3px solid #fcfbfb;
 }
 
 .Header-logo {
@@ -80,6 +97,10 @@ body {
   -webkit-flex-grow: 1;
   flex-grow: 1;
   text-align: center;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 .MainMenu li:last-child {
   border-right: none;
@@ -96,7 +117,7 @@ body {
 .MainMenu li a:hover {
   text-decoration: none;
 }
-.MainMenu li:hover a, .MainMenu li.active a {
+.MainMenu li:hover a, .MainMenu li.active a, .MainMenu li.current-menu-item a {
   border-bottom: 3px solid #b00725;
 }
 

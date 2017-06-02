@@ -39,17 +39,16 @@
             </h1>
           </div>
           <div class="col-md-9">
-            <menu class="Header-menu">
-              <ul class="MainMenu">
-                <li><a href="">Nosotros</a></li>
-                <li><a href="">Propuesta educativa</a></li>
-                <li><a href="">Infraestructura</a></li>
-                <li><a href="">Vida Escolar</a></li>
-                <li><a href="">Contáctanos</a></li>
-                <li><a href="">Repositorio</a></li>
-                <li><a href="">Admisión</a></li>
-              </ul>
-            </menu>
+            <?php
+              $args = [
+                'theme_location' => 'main-menu',
+                'container' => 'nav',
+                'container_class' => 'Header-menu',
+                'menu_class' => 'MainMenu'
+              ];
+
+              wp_nav_menu($args);
+            ?>
           </div>
         </div>
       </div>

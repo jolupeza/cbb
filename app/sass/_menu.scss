@@ -9,6 +9,7 @@
     border-right: 1px solid $white;
     @include flex-grow(1);
     text-align: center;
+    @include transition(all 0.2s ease-in-out);
     &:last-child {
       border-right: none;
     }
@@ -21,7 +22,7 @@
         text-decoration: none;
       }
     }
-    &:hover, &.active {
+    &:hover, &.active, &.current-menu-item {
       a {
         border-bottom: 3px solid $red;
       }

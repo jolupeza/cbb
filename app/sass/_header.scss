@@ -2,8 +2,22 @@
   position: fixed;
   padding: 15px 0;
   top: 0;
+  @include transition(all 0.2s ease-in-out);
   width: 100%;
   z-index: 99;
+  &.affix {
+    background-color: $red;
+    padding: 10px 0;
+    .MainMenu {
+      li {
+        &:hover, &.active, &.current-menu-item {
+          a {
+            border-bottom: 3px solid $white;
+          }
+        }
+      }
+    }
+  }
 }
 .Header-logo {
   margin: 0;

@@ -1,6 +1,7 @@
 'use strict';
 
 var gulp = require('gulp'),
+  clean = require('gulp-clean'),
   compass = require('gulp-compass'),
   cssnano = require('gulp-cssnano'),
   gulpif = require('gulp-if'),
@@ -69,6 +70,16 @@ gulp.task('copy', function () {
     .pipe(gulp.dest('./wp-content/themes/cbb/fonts'))
 });
 
+gulp.task('cleanwp', function () {
+  return gulp.src([
+    'wp-content/themes/cbb/images/',
+    'wp-content/themes/cbb/fonts/',
+    'wp-content/themes/cbb/css/style.min.css',
+    'wp-content/themes/cbb/js/vendor.min.js'
+  ], {read: false})
+  .pipe(clean());
+});
+
 gulp.task('watch', function(){
   livereload.listen()
   gulp.watch(['./app/**/*.html'], ['html'])
@@ -78,4 +89,5 @@ gulp.task('watch', function(){
   // gulp.watch(['./bower.json'], ['wiredep'])
 })
 
+gulp.task('del', ['cleanwp']);
 gulp.task('build', ['uncss', 'copy']);
