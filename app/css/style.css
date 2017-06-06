@@ -276,6 +276,11 @@ body.home .Header.affix .Menu--home {
   align-items: center;
   padding: 120px 0;
 }
+.Parallax--fixed {
+  background-attachment: fixed;
+  background-position: 0 70px;
+  background-size: contain;
+}
 
 .Parallax-caption {
   display: -webkit-flex;

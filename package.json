@@ -5,6 +5,7 @@
   "main": "index.html",
   "dependencies": {},
   "devDependencies": {
+    "animate.css": "^3.5.2",
     "gulp": "^3.9.1",
     "gulp-clean": "^0.3.2",
     "gulp-compass": "^2.1.0",

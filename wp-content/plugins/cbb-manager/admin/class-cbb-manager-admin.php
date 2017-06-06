@@ -233,6 +233,157 @@ class Cbb_Manager_Admin
     {
         require_once plugin_dir_path(__FILE__) . 'partials/cbb-mb-partners.php';
     }
+    
+    /**
+     * Registers the meta box that will be used to display all of the post meta data
+     * associated with post type locals.
+     */
+    public function cd_mb_locals_add()
+    {
+        add_meta_box(
+            'mb-locals-id', 'Configuraciones', array($this, 'render_mb_locals'), 'locals', 'normal', 'core'
+        );
+    }
+
+    public function cd_mb_locals_save($post_id)
+    {
+        // Bail if we're doing an auto save
+        if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+            return;
+        }
+
+        // if our nonce isn't there, or we can't verify it, bail
+        if (!isset($_POST['meta_box_nonce']) || !wp_verify_nonce($_POST['meta_box_nonce'], 'locals_meta_box_nonce')) {
+            return;
+        }
+
+        // if our current user can't edit this post, bail
+        if (!current_user_can('edit_post', $post_id)) {
+            return;
+        }
+
+        // Address
+        if (isset($_POST['mb_address']) && !empty($_POST['mb_address'])) {
+            update_post_meta($post_id, 'mb_address', esc_attr($_POST['mb_address']));
+        } else {
+            delete_post_meta($post_id, 'mb_address');
+        }
+
+        // Phone
+        if (isset($_POST['mb_phone']) && !empty($_POST['mb_phone'])) {
+            update_post_meta($post_id, 'mb_phone', esc_attr($_POST['mb_phone']));
+        } else {
+            delete_post_meta($post_id, 'mb_phone');
+        }
+    }
+
+    /**
+     * Requires the file that is used to display the user interface of the post meta box.
+     */
+    public function render_mb_locals()
+    {
+        require_once plugin_dir_path(__FILE__) . 'partials/cbb-mb-locals.php';
+    }
+    
+    /**
+     * Registers the meta box that will be used to display all of the post meta data
+     * associated with post type parallaxs.
+     */
+    public function cd_mb_parallaxs_add()
+    {
+        add_meta_box(
+            'mb-parallaxs-id', 'Configuraciones', array($this, 'render_mb_parallaxs'), 'parallaxs', 'normal', 'core'
+        );
+    }
+
+    public function cd_mb_parallaxs_save($post_id)
+    {
+        // Bail if we're doing an auto save
+        if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+            return;
+        }
+
+        // if our nonce isn't there, or we can't verify it, bail
+        if (!isset($_POST['meta_box_nonce']) || !wp_verify_nonce($_POST['meta_box_nonce'], 'parallaxs_meta_box_nonce')) {
+            return;
+        }
+
+        // if our current user can't edit this post, bail
+        if (!current_user_can('edit_post', $post_id)) {
+            return;
+        }
+
+        // title
+        if (isset($_POST['mb_title']) && !empty($_POST['mb_title'])) {
+            update_post_meta($post_id, 'mb_title', esc_attr($_POST['mb_title']));
+        } else {
+            delete_post_meta($post_id, 'mb_title');
+        }
+
+        // legend
+        if (isset($_POST['mb_legend']) && !empty($_POST['mb_legend'])) {
+            update_post_meta($post_id, 'mb_legend', esc_attr($_POST['mb_legend']));
+        } else {
+            delete_post_meta($post_id, 'mb_legend');
+        }
+    }
+
+    /**
+     * Requires the file that is used to display the user interface of the post meta box.
+     */
+    public function render_mb_parallaxs()
+    {
+        require_once plugin_dir_path(__FILE__) . 'partials/cbb-mb-parallaxs.php';
+    }
+    
+    /**
+     * Registers the meta box that will be used to display all of the post meta data
+     * associated with post type page.
+     */
+    public function cd_mb_pages_add()
+    {
+        add_meta_box(
+            'mb-pages-id',
+            'Configuraciones',
+            array($this, 'render_mb_pages'),
+            'page',
+            'normal',
+            'core'
+        );
+    }
+
+    public function cd_mb_pages_save($post_id)
+    {
+        // Bail if we're doing an auto save
+        if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+            return;
+        }
+
+        // if our nonce isn't there, or we can't verify it, bail
+        if (!isset($_POST['meta_box_nonce']) || !wp_verify_nonce($_POST['meta_box_nonce'], 'pages_meta_box_nonce')) {
+            return;
+        }
+
+        // if our current user can't edit this post, bail
+        if (!current_user_can('edit_post', $post_id)) {
+            return;
+        }
+
+        // Parallax
+        if (isset($_POST['mb_parallax']) && !empty($_POST['mb_parallax'])) {
+            update_post_meta($post_id, 'mb_parallax', esc_attr($_POST['mb_parallax']));
+        } else {
+            delete_post_meta($post_id, 'mb_parallax');
+        }
+    }
+
+    /**
+     * Requires the file that is used to display the user interface of the post meta box.
+     */
+    public function render_mb_pages()
+    {
+        require_once plugin_dir_path(__FILE__).'partials/cbb-mb-pages.php';
+    }
 
     /**
      * Add custom content type slides.
@@ -354,6 +505,122 @@ class Cbb_Manager_Admin
              'rewrite'     => false
         );
         register_post_type('partners', $args);
+        
+        $labels = array(
+            'name'               => __('Sedes', $this->domain),
+            'singular_name'      => __('Sed', $this->domain),
+            'add_new'            => __('Nueva sede', $this->domain),
+            'add_new_item'       => __('Agregar nueva sede', $this->domain),
+            'edit_item'          => __('Editar sede', $this->domain),
+            'new_item'           => __('Nueva sede', $this->domain),
+            'view_item'          => __('Ver sede', $this->domain),
+            'search_items'       => __('Buscar sede', $this->domain),
+            'not_found'          => __('Sede no encontrada', $this->domain),
+            'not_found_in_trash' => __('Sede no encontrada en la papelera', $this->domain),
+            'all_items'          => __('Todas las sedes', $this->domain),
+//            'archives' - String for use with archives in nav menus. Default is Post Archives/Page Archives.
+//            'attributes' - Label for the attributes meta box. Default is 'Post Attributes' / 'Page Attributes'. 
+//            'insert_into_item' - String for the media frame button. Default is Insert into post/Insert into page.
+//            'uploaded_to_this_item' - String for the media frame filter. Default is Uploaded to this post/Uploaded to this page.
+//            'featured_image' - Default is Featured Image.
+//            'set_featured_image' - Default is Set featured image.
+//            'remove_featured_image' - Default is Remove featured image.
+//            'use_featured_image' - Default is Use as featured image.
+//            'menu_name' - Default is the same as `name`.
+//            'filter_items_list' - String for the table views hidden heading.
+//            'items_list_navigation' - String for the table pagination hidden heading.
+//            'items_list' - String for the table hidden heading.
+//            'name_admin_bar' - String for use in New in Admin menu bar. Default is the same as `singular_name`. 
+        );
+        $args = array(
+            'labels' => $labels,
+            'description' => 'Nuestras Sedes',
+            // 'public'              => false,
+            // 'exclude_from_search' => true,
+            // 'publicly_queryable' => false,
+            'show_ui' => true,
+            'show_in_nav_menus' => false,
+            'show_in_menu' => true,
+            'show_in_admin_bar' => true,
+            // 'menu_position'          => null,
+            'menu_icon' => 'dashicons-networking',
+            // 'hierarchical'        => false,
+            'supports' => array(
+                'title',
+//                'editor',
+                'custom-fields',
+                'author',
+//                'thumbnail',
+//                'page-attributes',
+                // 'excerpt'
+                // 'trackbacks'
+                // 'comments',
+                // 'revisions',
+                // 'post-formats'
+            ),
+            // 'taxonomies'  => array('post_tag', 'category'),
+            // 'has_archive' => false,
+             'rewrite'     => false
+        );
+        register_post_type('locals', $args);
+        
+        $labels = array(
+            'name'               => __('Parallaxs', $this->domain),
+            'singular_name'      => __('Parallax', $this->domain),
+            'add_new'            => __('Nuevo parallax', $this->domain),
+            'add_new_item'       => __('Agregar nuevo parallax', $this->domain),
+            'edit_item'          => __('Editar parallax', $this->domain),
+            'new_item'           => __('Nuevo parallax', $this->domain),
+            'view_item'          => __('Ver parallax', $this->domain),
+            'search_items'       => __('Buscar parallax', $this->domain),
+            'not_found'          => __('Parallax no encontrado', $this->domain),
+            'not_found_in_trash' => __('Parallax no encontrado en la papelera', $this->domain),
+            'all_items'          => __('Todos los parallaxs', $this->domain),
+//            'archives' - String for use with archives in nav menus. Default is Post Archives/Page Archives.
+//            'attributes' - Label for the attributes meta box. Default is 'Post Attributes' / 'Page Attributes'. 
+//            'insert_into_item' - String for the media frame button. Default is Insert into post/Insert into page.
+//            'uploaded_to_this_item' - String for the media frame filter. Default is Uploaded to this post/Uploaded to this page.
+//            'featured_image' - Default is Featured Image.
+//            'set_featured_image' - Default is Set featured image.
+//            'remove_featured_image' - Default is Remove featured image.
+//            'use_featured_image' - Default is Use as featured image.
+//            'menu_name' - Default is the same as `name`.
+//            'filter_items_list' - String for the table views hidden heading.
+//            'items_list_navigation' - String for the table pagination hidden heading.
+//            'items_list' - String for the table hidden heading.
+//            'name_admin_bar' - String for use in New in Admin menu bar. Default is the same as `singular_name`. 
+        );
+        $args = array(
+            'labels' => $labels,
+            'description' => 'Todos los Parallaxs',
+            // 'public'              => false,
+            // 'exclude_from_search' => true,
+            // 'publicly_queryable' => false,
+            'show_ui' => true,
+            'show_in_nav_menus' => false,
+            'show_in_menu' => true,
+            'show_in_admin_bar' => true,
+            // 'menu_position'          => null,
+            'menu_icon' => 'dashicons-format-image',
+            // 'hierarchical'        => false,
+            'supports' => array(
+                'title',
+                'editor',
+                'custom-fields',
+                'author',
+                'thumbnail',
+//                'page-attributes',
+                // 'excerpt'
+                // 'trackbacks'
+                // 'comments',
+                // 'revisions',
+                // 'post-formats'
+            ),
+            // 'taxonomies'  => array('post_tag', 'category'),
+            // 'has_archive' => false,
+             'rewrite'     => false
+        );
+        register_post_type('parallaxs', $args);
     }
 
     public function unregister_post_type()

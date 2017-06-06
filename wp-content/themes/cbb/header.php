@@ -5,6 +5,8 @@
     <title><?php wp_title('|', true, 'right'); ?><?php bloginfo('name'); ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,600,700" rel="stylesheet" />
+
     <link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" />
 
     <?php if ( is_singular() && pings_open( get_queried_object() ) ) : ?>

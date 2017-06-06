@@ -6,6 +6,11 @@
   @include display-flex();
   @include align-items(center);
   padding: 120px 0;
+  &--fixed {
+    background-attachment: fixed;
+    background-position: 0 70px;
+    background-size: contain;
+  }
 }
 .Parallax-caption {
   @include display-flex();

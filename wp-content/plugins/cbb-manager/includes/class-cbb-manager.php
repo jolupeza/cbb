@@ -106,6 +106,15 @@ class Cbb_Manager
         
         $this->loader->add_action('add_meta_boxes', $admin, 'cd_mb_partners_add');
         $this->loader->add_action('save_post', $admin, 'cd_mb_partners_save' );
+        
+        $this->loader->add_action('add_meta_boxes', $admin, 'cd_mb_locals_add');
+        $this->loader->add_action('save_post', $admin, 'cd_mb_locals_save' );
+        
+        $this->loader->add_action('add_meta_boxes', $admin, 'cd_mb_parallaxs_add');
+        $this->loader->add_action('save_post', $admin, 'cd_mb_parallaxs_save' );
+        
+        $this->loader->add_action('add_meta_boxes', $admin, 'cd_mb_pages_add');
+        $this->loader->add_action('save_post', $admin, 'cd_mb_pages_save' );
     }
 
     /**
