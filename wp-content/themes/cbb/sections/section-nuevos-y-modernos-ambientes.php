@@ -1,4 +1,4 @@
-<section class="PageHome">
+<section class="PageHome" id="<?php echo $post->post_name; ?>">
   <div class="container">
     <h3 class="PageHome-subtitle text-center">Nuevos y modernos</h3>
     <h2 class="PageHome-title text-center">Ambientes</h2>

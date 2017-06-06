@@ -49,11 +49,9 @@
     </header>
 
     <section id="carousel-home" class="carousel slide Carousel Carousel--home" data-ride="carousel">
-      <ol class="carousel-indicators">
+      <!-- <ol class="carousel-indicators">
         <li data-target="#carousel-home" data-slide-to="0" class="active"></li>
-        <!-- <li data-target="#carousel-home" data-slide-to="1"></li>
-        <li data-target="#carousel-home" data-slide-to="2"></li> -->
-      </ol>
+      </ol> -->
 
       <div class="carousel-inner" role="listbox">
         <div class="item active">
@@ -75,6 +73,8 @@
         <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
       </a> -->
+
+      <button class="Arrow js-move-scroll" href="">ir abajo <i class="glyphicon glyphicon-chevron-down"></i></button>
     </section>
 
     <section class="PageHome">
@@ -247,11 +247,14 @@
       </div>
     </footer>
 
+    <button class="ArrowTop text-hide" title="Ir arriba"><i class="glyphicon glyphicon-chevron-up"></i></button>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <!-- build:js js/vendor.min.js -->
     <!-- bower:js -->
     <script src="./../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="./../node_modules/jquery.easing/jquery.easing.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:js js/app.min.js -->

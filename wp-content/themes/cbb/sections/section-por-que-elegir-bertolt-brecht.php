@@ -1,4 +1,4 @@
-<section class="PageHome">
+<section class="PageHome" id="<?php echo $post->post_name; ?>">
   <div class="container">
     <h3 class="PageHome-subtitle text-center">¿Por qué elegir</h3>
     <h2 class="PageHome-title text-center">Bertolt Brecht?</h2>

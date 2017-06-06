@@ -51,6 +51,36 @@ body.home .Header.affix .Menu--home {
   text-decoration: none;
 }
 
+.Arrow {
+  -moz-animation-duration: 3s;
+  -webkit-animation-duration: 3s;
+  animation-duration: 3s;
+  background-color: transparent;
+  border: none;
+  bottom: 80px;
+  color: #fcfbfb;
+  left: 50%;
+  position: absolute;
+  text-align: center;
+}
+.Arrow i {
+  display: block;
+  font-size: 2em;
+}
+
+.ArrowTop {
+  -moz-animation-duration: 3s;
+  -webkit-animation-duration: 3s;
+  animation-duration: 3s;
+  bottom: 50px;
+  color: #2b2b2b;
+  display: none;
+  font-size: 2em;
+  position: fixed;
+  right: 25px;
+  z-index: 9;
+}
+
 .Header {
   position: fixed;
   padding: 15px 0;

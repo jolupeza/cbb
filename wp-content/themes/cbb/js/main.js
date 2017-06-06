@@ -39,7 +39,34 @@ var j = jQuery.noConflict();
 
   $win.on('scroll resize', checkIfInView);
 
+  $win.on('scroll', function(event) {
+    var arrow = j('.ArrowTop');
+
+    if ( j(this).scrollTop() > 150) {
+      arrow.fadeIn();
+    } else {
+      arrow.fadeOut();
+    }
+  });
+
   $doc.on('ready', function () {
     affixHeader();
+
+    j('.ArrowTop').on('click', function(ev){
+      ev.preventDefault();
+      j('html, body').animate({scrollTop: 0}, 800);
+    });
+
+    j('.js-move-scroll').on('click', function(event) {
+      event.preventDefault();
+      var $this = j(this);
+      var dest = $this.data('href');
+
+      dest = (dest.charAt(0) === '#') ? dest : '#' + dest;
+
+      j('html, body').stop().animate({
+        scrollTop: j(dest).offset().top
+      }, 2000, 'easeInOutExpo');
+    });
   });
 })(jQuery);

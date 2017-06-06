@@ -66,6 +66,8 @@
     <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a> -->
+
+  <button class="Arrow js-move-scroll" data-href="por-que-elegir-bertolt-brecht">ir abajo <i class="glyphicon glyphicon-chevron-down"></i></button>
 </section>
 <?php endif; ?>
 <?php wp_reset_postdata(); ?>
