@@ -1,0 +1,34 @@
+.Page {
+  padding: 40px 0;
+  p {
+    margin-bottom: 15px;
+  }
+  &--red {
+    background-color: $red;
+    p {
+      color: $white;
+    }
+    .Page-title {
+      color: $white;
+      margin-bottom: 0;
+    }
+  }
+}
+.Page-title {
+  font-family: "reef";
+  font-size: 2.5em;
+  margin-bottom: 25px;
+  margin-top: 0;
+  span {
+    color: $red;
+  }
+}
+.Page-subtitle {
+  font-family: "reef";
+  font-size: 1.875em;
+}
+.Page-resalt {
+  font-family: "reef";
+  font-size: 3.25em;
+  margin-top: 0;
+}

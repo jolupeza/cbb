@@ -11,6 +11,10 @@
     background-position: 0 70px;
     background-size: contain;
   }
+  &--pages {
+    @include align-items(start);
+    padding: 50px 0;
+  }
 }
 .Parallax-caption {
   @include display-flex();
@@ -36,4 +40,28 @@
   margin-bottom: 0;
   margin-top: 0;
   @include flex-basis(100%);
+}
+.Parallax-caption-author {
+  color: $white;
+  font-size: 1.25em;
+  font-style: italic;
+  margin-bottom: 0;
+  margin-top: 0;
+  @include flex-basis(100%);
+}
+.Parallax-page {
+  @include flex-basis(50%);
+  padding: 0 60px;
+  p {
+    color: $white;
+    font-size: 1.25em;
+  }
+  &:first-child {
+    border-right: 1px solid $white;
+  }
+}
+.Parallax-page-title {
+  color: $white;
+  font-family: "reef";
+  font-size: 2.625em;
 }

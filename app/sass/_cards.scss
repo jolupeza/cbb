@@ -1,0 +1,38 @@
+.Cards {
+  @include display-flex();
+  &--history {
+    p {
+      color: $grayHard;
+    }
+    .Cards-item {
+      padding: 40px 10px;
+      &:nth-child(2n+1) {
+        background-color: #e0e0e0;
+      }
+    }
+    .Cards-title {
+      &::after {
+        background: transparent url('./../images/icon-separator.png') 0 0 no-repeat;
+        content: "";
+        display: block;
+        height: 13px;
+        margin: 25px auto;
+        width: 52px;
+      }
+    }
+  }
+  &--logos {
+    @include flex-wrap(wrap);
+    .Cards-item {
+      @include flex-basis(25%);
+      margin-bottom: 25px;
+    }
+  }
+}
+.Cards-item {
+  @include flex(1 1 0);
+}
+.Cards-title {
+  font-family: "reef";
+  font-size: 2em;
+}
