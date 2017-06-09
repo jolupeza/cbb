@@ -52,6 +52,35 @@
 
     <button class="ArrowTop text-hide" title="Ir arriba"><i class="glyphicon glyphicon-chevron-up"></i></button>
 
+    <?php $options = get_option('cbb_custom_settings'); ?>
+
+    <?php if ($options['display_social_link'] && !is_null($options['display_social_link'])) : ?>
+      <aside class="Social">
+        <ul class="Social-list">
+          <?php if (!empty($options['whatsapp'])) : ?>
+            <li>
+              <a href="" title="Ir a Whatsapp" target="_blank" rel="noopener noreferrer"><i class="icon-phone"></i></a>
+            </li>
+          <?php endif; ?>
+          <?php if (!empty($options['facebook'])) : ?>
+            <li>
+              <a href="https://www.facebook.com/<?php echo $options['facebook']; ?>" title="Ir a Facebook" target="_blank" rel="noopener noreferrer"><i class="icon-facebook"></i></a>
+            </li>
+          <?php endif; ?>
+          <?php if (!empty($options['flickr'])) : ?>
+            <li>
+              <a href="https://www.flickr.com/<?php echo $options['flickr']; ?>" title="Ir a Flickr" target="_blank" rel="noopener noreferrer"><i class="icon-flickr2"></i></a>
+            </li>
+          <?php endif; ?>
+          <?php if (!empty($options['youtube'])) : ?>
+            <li>
+              <a href="https://www.youtube.com/<?php echo $options['youtube']; ?>" title="Ir a Youtube" target="_blank" rel="noopener noreferrer"><i class="icon-youtube"></i></a>
+            </li>
+          <?php endif; ?>
+        </ul>
+      </aside>
+    <?php endif; ?>
+
     <script>
       _root_ = '<?php echo home_url(); ?>'
     </script>
