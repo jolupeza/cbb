@@ -1,0 +1,29 @@
+.Social {
+  background-color: $blue;
+  @include border-radius(15px 0 0 15px);
+  @include box-shadow(rgba($blueShadow, 1) 0 -5px 2px 0 inset);
+  padding: 25px 20px;
+  position: fixed;
+  right: 0;
+  top: 30%;
+  z-index: 99;
+}
+.Social-list {
+  list-style: none;
+  margin-bottom: 0;
+  padding-left: 0;
+  li {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+    a {
+      color: $white;
+      &:hover, &:focus {
+        color: $brown;
+        text-decoration: none;
+      }
+    }
+  }
+}
