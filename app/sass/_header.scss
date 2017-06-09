@@ -9,12 +9,21 @@
     background-color: $red;
     padding: 10px 0;
     .MainMenu {
-      li {
+      > li {
         &:hover, &.active, &.current-menu-item {
-          a {
+          > a {
             border-bottom: 3px solid $white;
           }
         }
+        a {
+          &::after {
+            border-bottom-color: purple;
+          }
+        }
+      }
+      .sub-menu {
+        background-color: purple;
+        bottom: -28px;
       }
     }
   }

@@ -384,6 +384,54 @@ class Cbb_Manager_Admin
     {
         require_once plugin_dir_path(__FILE__).'partials/cbb-mb-pages.php';
     }
+    
+    /**
+     * Registers the meta box that will be used to display all of the post meta data
+     * associated with post type achievements.
+     */
+    public function cd_mb_achievements_add()
+    {
+        add_meta_box(
+            'mb-achievements-id', 'Configuraciones', array($this, 'render_mb_achievements'), 'achievements', 'normal', 'core'
+        );
+    }
+
+    public function cd_mb_achievements_save($post_id)
+    {
+        // Bail if we're doing an auto save
+        if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+            return;
+        }
+
+        // if our nonce isn't there, or we can't verify it, bail
+        if (!isset($_POST['meta_box_nonce']) || !wp_verify_nonce($_POST['meta_box_nonce'], 'achievements_meta_box_nonce')) {
+            return;
+        }
+
+        // if our current user can't edit this post, bail
+        if (!current_user_can('edit_post', $post_id)) {
+            return;
+        }
+        
+        // URL
+        if (isset($_POST['mb_url']) && !empty($_POST['mb_url'])) {
+            update_post_meta($post_id, 'mb_url', esc_attr($_POST['mb_url']));
+        } else {
+            delete_post_meta($post_id, 'mb_url');
+        }
+
+        // Target
+        $target = isset($_POST['mb_target']) && $_POST['mb_target'] ? 'on' : 'off';
+        update_post_meta($post_id, 'mb_target', $target);
+    }
+
+    /**
+     * Requires the file that is used to display the user interface of the post meta box.
+     */
+    public function render_mb_achievements()
+    {
+        require_once plugin_dir_path(__FILE__) . 'partials/cbb-mb-achievements.php';
+    }
 
     /**
      * Add custom content type slides.
@@ -621,6 +669,64 @@ class Cbb_Manager_Admin
              'rewrite'     => false
         );
         register_post_type('parallaxs', $args);
+        
+        $labels = array(
+            'name'               => __('Logros', $this->domain),
+            'singular_name'      => __('Logro', $this->domain),
+            'add_new'            => __('Nuevo logro', $this->domain),
+            'add_new_item'       => __('Agregar nuevo logro', $this->domain),
+            'edit_item'          => __('Editar logro', $this->domain),
+            'new_item'           => __('Nuevo logro', $this->domain),
+            'view_item'          => __('Ver logro', $this->domain),
+            'search_items'       => __('Buscar logro', $this->domain),
+            'not_found'          => __('Logro no encontrado', $this->domain),
+            'not_found_in_trash' => __('Logro no encontrado en la papelera', $this->domain),
+            'all_items'          => __('Todos los logros', $this->domain),
+//            'archives' - String for use with archives in nav menus. Default is Post Archives/Page Archives.
+//            'attributes' - Label for the attributes meta box. Default is 'Post Attributes' / 'Page Attributes'. 
+//            'insert_into_item' - String for the media frame button. Default is Insert into post/Insert into page.
+//            'uploaded_to_this_item' - String for the media frame filter. Default is Uploaded to this post/Uploaded to this page.
+//            'featured_image' - Default is Featured Image.
+//            'set_featured_image' - Default is Set featured image.
+//            'remove_featured_image' - Default is Remove featured image.
+//            'use_featured_image' - Default is Use as featured image.
+//            'menu_name' - Default is the same as `name`.
+//            'filter_items_list' - String for the table views hidden heading.
+//            'items_list_navigation' - String for the table pagination hidden heading.
+//            'items_list' - String for the table hidden heading.
+//            'name_admin_bar' - String for use in New in Admin menu bar. Default is the same as `singular_name`. 
+        );
+        $args = array(
+            'labels' => $labels,
+            'description' => 'Nuestros logros',
+            // 'public'              => false,
+            // 'exclude_from_search' => true,
+            // 'publicly_queryable' => false,
+            'show_ui' => true,
+            'show_in_nav_menus' => false,
+            'show_in_menu' => true,
+            'show_in_admin_bar' => true,
+            // 'menu_position'          => null,
+            'menu_icon' => 'dashicons-thumbs-up',
+            // 'hierarchical'        => false,
+            'supports' => array(
+                'title',
+//                'editor',
+                'custom-fields',
+                'author',
+                'thumbnail',
+                'page-attributes',
+                // 'excerpt'
+                // 'trackbacks'
+                // 'comments',
+                // 'revisions',
+                // 'post-formats'
+            ),
+            // 'taxonomies'  => array('post_tag', 'category'),
+            // 'has_archive' => false,
+             'rewrite'     => false
+        );
+        register_post_type('achievements', $args);
     }
 
     public function unregister_post_type()

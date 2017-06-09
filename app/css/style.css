@@ -3,6 +3,7 @@ body {
   background-color: #fcfbfb;
   font-family: "Source Sans Pro", sans-serif;
   font-size: 16px;
+  position: relative;
 }
 body.home .Header.affix-top .Menu--home {
   visibility: hidden;
@@ -112,8 +113,15 @@ body.home .Header.affix .Menu--home {
   background-color: #b00725;
   padding: 10px 0;
 }
-.Header.affix .MainMenu li:hover a, .Header.affix .MainMenu li.active a, .Header.affix .MainMenu li.current-menu-item a {
+.Header.affix .MainMenu > li:hover > a, .Header.affix .MainMenu > li.active > a, .Header.affix .MainMenu > li.current-menu-item > a {
   border-bottom: 3px solid #fcfbfb;
+}
+.Header.affix .MainMenu > li a::after {
+  border-bottom-color: purple;
+}
+.Header.affix .MainMenu .sub-menu {
+  background-color: purple;
+  bottom: -28px;
 }
 
 .Header-logo {
@@ -155,7 +163,6 @@ body.home .Header.affix .Menu--home {
   color: #fcfbfb;
   display: inline-block;
   font-size: 0.875em;
-  padding-bottom: 8px;
   position: relative;
   text-align: center;
   text-transform: uppercase;
@@ -174,8 +181,15 @@ body.home .Header.affix .Menu--home {
 .MainMenu li.menu-item-has-children:hover > a::after {
   display: block;
 }
+.MainMenu > li {
+  position: static;
+}
 .MainMenu > li:hover > a, .MainMenu > li.active > a, .MainMenu > li.current-menu-item > a {
+  background-color: transparent;
   border-bottom: 3px solid #fcfbfb;
+}
+.MainMenu > li a {
+  padding: 0 0 8px 0;
 }
 .MainMenu > li a::after {
   border-bottom: 10px solid #b00725;
@@ -218,7 +232,7 @@ body.home .Header.affix .Menu--home {
   border-bottom: 2px solid transparent;
   padding-bottom: 5px;
 }
-.MainMenu .sub-menu li:hover a {
+.MainMenu .sub-menu li:hover a, .MainMenu .sub-menu li.active a {
   border-bottom-color: #fcfbfb;
 }
 
@@ -261,7 +275,7 @@ body.home .Header.affix .Menu--home {
 }
 
 .PageHome {
-  padding: 40px 0 0;
+  padding: 120px 0 40px;
 }
 
 .PageHome-subtitle {
@@ -367,7 +381,7 @@ body.home .Header.affix .Menu--home {
 }
 
 .Page {
-  padding: 40px 0;
+  padding: 120px 0 40px;
 }
 .Page p {
   margin-bottom: 15px;

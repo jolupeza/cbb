@@ -25,7 +25,7 @@
 
     <?php wp_head(); ?>
   </head>
-  <body <?php body_class(); ?>>
+  <body <?php body_class(); ?> data-spy="scroll" data-target=".Header-menu">
     <header class="Header">
       <div class="container">
         <div class="row">
@@ -40,13 +40,14 @@
               </a>
             </h1>
           </div>
-          <div class="col-md-9">
+          <div class="col-md-9 Grid-positionStatic">
             <?php
               $args = [
                 'theme_location' => 'main-menu',
                 'container' => 'nav',
                 'container_class' => 'Header-menu',
-                'menu_class' => 'MainMenu'
+                'menu_class' => 'MainMenu nav',
+                'walker' => new CBB_Walker_Nav_menu()
               ];
 
               wp_nav_menu($args);

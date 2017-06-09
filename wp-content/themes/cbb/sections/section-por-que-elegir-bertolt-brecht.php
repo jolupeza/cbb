@@ -4,41 +4,43 @@
     <h2 class="PageHome-title text-center">Bertolt Brecht?</h2>
     <p class="text-center PageHome-legend"><?php echo get_the_content(); ?></p>
 
-    <section class="PageHome-cols PageHome-info">
-      <article class="PageHome-item">
-        <figure class="PageHome-info-figure PageHome-info-figure--border">
-          <img class="img-responsive center-block img-rounded" src="https://lorempixel.com/400/352" alt="" />
-        </figure>
-        <h4 class="text-center PageHome-info-title">Formación Integral</h4>
-        <p class="text-center PageHome-info-text">tanto a nivel intelectual como social de nuestros estudiantes.</p>
-      </article>
-      <article class="PageHome-item">
-        <figure class="PageHome-info-figure PageHome-info-figure--border">
-          <img class="img-responsive center-block img-rounded" src="https://lorempixel.com/400/352" alt="" />
-        </figure>
-        <h4 class="text-center PageHome-info-title">Formamos Líderes</h4>
-        <p class="text-center PageHome-info-text">la toma de decisiones un pilar fundamental.</p>
-      </article>
-      <article class="PageHome-item">
-        <figure class="PageHome-info-figure PageHome-info-figure--border">
-          <img class="img-responsive center-block img-rounded" src="https://lorempixel.com/400/352" alt="" />
-        </figure>
-        <h4 class="text-center PageHome-info-title">Formación Integral</h4>
-        <p class="text-center PageHome-info-text">tanto a nivel intelectual como social de nuestros estudiantes.</p>
-      </article>
-      <article class="PageHome-item">
-        <figure class="PageHome-info-figure PageHome-info-figure--border">
-          <img class="img-responsive center-block img-rounded" src="https://lorempixel.com/400/352" alt="" />
-        </figure>
-        <h4 class="text-center PageHome-info-title">Formamos Líderes</h4>
-        <p class="text-center PageHome-info-text">la toma de decisiones un pilar fundamental.</p>
-      </article>
-    </section>
+    <?php
+      $idParent = get_the_id();
+
+      $arguments = [
+        'post_type' => 'page',
+        'post_parent' => $idParent,
+        'orderby' => 'menu_order',
+        'order' => 'ASC',
+        'posts_per_page' => -1
+      ];
+
+      $childPages = new WP_Query($arguments);
+      if ($childPages->have_posts()) :
+    ?>
+      <section class="PageHome-cols PageHome-info">
+        <?php while ($childPages->have_posts()) : ?>
+          <?php $childPages->the_post(); ?>
+          <article class="PageHome-item">
+            <?php if (has_post_thumbnail()) : ?>
+              <figure class="PageHome-info-figure PageHome-info-figure--border">
+                <?php the_post_thumbnail('full', ['class' => 'img-responsive center-block img-rounded', 'alt' => get_the_title()]); ?>
+              </figure>
+            <?php endif; ?>
+            <h4 class="text-center PageHome-info-title"><?php the_title(); ?></h4>
+            <div class="text-center PageHome-info-text">
+              <?php the_content(); ?>
+            </div>
+          </article>
+        <?php endwhile; ?>
+      </section>
+    <?php endif; ?>
+    <?php wp_reset_postdata(); ?>
   </div>
 </section>
 
 <?php
-  $values = get_post_custom(get_the_id());
+  $values = get_post_custom($idParent);
   $parallax = isset($values['mb_parallax']) ? esc_attr($values['mb_parallax'][0]) : '';
 
   if (!empty($parallax)) :

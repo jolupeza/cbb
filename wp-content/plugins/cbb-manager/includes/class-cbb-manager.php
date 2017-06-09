@@ -115,6 +115,9 @@ class Cbb_Manager
         
         $this->loader->add_action('add_meta_boxes', $admin, 'cd_mb_pages_add');
         $this->loader->add_action('save_post', $admin, 'cd_mb_pages_save' );
+        
+        $this->loader->add_action('add_meta_boxes', $admin, 'cd_mb_achievements_add');
+        $this->loader->add_action('save_post', $admin, 'cd_mb_achievements_save' );
     }
 
     /**

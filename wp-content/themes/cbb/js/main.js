@@ -62,6 +62,8 @@ var j = jQuery.noConflict();
       var $this = j(this);
       var dest = $this.data('href');
 
+      dest = (typeof dest === 'undefined') ? $this.attr('href') : dest;
+
       dest = (dest.charAt(0) === '#') ? dest : '#' + dest;
 
       j('html, body').stop().animate({

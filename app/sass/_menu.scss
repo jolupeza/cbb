@@ -17,7 +17,6 @@
       color: $white;
       display: inline-block;
       font-size: 0.875em;
-      padding-bottom: 8px;
       position: relative;
       text-align: center;
       text-transform: uppercase;
@@ -42,12 +41,15 @@
     }
   }
   > li {
+    position: static;
     &:hover, &.active, &.current-menu-item {
       > a {
+        background-color: transparent;
         border-bottom: 3px solid $white;
       }
     }
     a {
+      padding: 0 0 8px 0;
       &::after {
         border-bottom: 10px solid $red;
         border-left: 10px solid transparent;
@@ -81,7 +83,7 @@
         border-bottom: 2px solid transparent;
         padding-bottom: 5px;
       }
-      &:hover {
+      &:hover, &.active {
         a {
           border-bottom-color: $white;
         }
