@@ -37,8 +37,8 @@ body.home .Header.affix .Menu--home {
 }
 @font-face {
   font-family: 'icomoon';
-  src: url("./../fonts/icomoon.eot?yyjcq0");
-  src: url("./../fonts/icomoon.eot?yyjcq0#iefix") format("embedded-opentype"), url("./../fonts/icomoon.ttf?yyjcq0") format("truetype"), url("./../fonts/icomoon.woff?yyjcq0") format("woff"), url("./../fonts/icomoon.svg?yyjcq0#icomoon") format("svg");
+  src: url("./../fonts/icomoon.eot?s9aty3");
+  src: url("./../fonts/icomoon.eot?s9aty3#iefix") format("embedded-opentype"), url("./../fonts/icomoon.ttf?s9aty3") format("truetype"), url("./../fonts/icomoon.woff?s9aty3") format("woff"), url("./../fonts/icomoon.svg?s9aty3#icomoon") format("svg");
   font-weight: normal;
   font-style: normal;
 }
@@ -56,12 +56,16 @@ body.home .Header.affix .Menu--home {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-youtube:before {
-  content: "\e900";
+.icon-brush-alt:before {
+  content: "\e901";
 }
 
 .icon-phone:before {
   content: "\e942";
+}
+
+.icon-play2:before {
+  content: "\ea15";
 }
 
 .icon-facebook:before {
@@ -70,6 +74,14 @@ body.home .Header.affix .Menu--home {
 
 .icon-flickr2:before {
   content: "\eaa4";
+}
+
+.icon-commenting-o:before {
+  content: "\e902";
+}
+
+.icon-youtube:before {
+  content: "\e900";
 }
 
 .Button {
@@ -91,13 +103,16 @@ body.home .Header.affix .Menu--home {
   -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
 }
+.Button--icon i {
+  vertical-align: middle;
+}
 .Button--red {
   background-color: #b00725;
 }
 .Button--blue {
   background-color: #2845a0;
 }
-.Button:hover {
+.Button:hover, .Button:focus {
   -moz-box-shadow: rgba(0, 0, 0, 0.15) 0 5px 2px 0 inset;
   -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0 5px 2px 0 inset;
   box-shadow: rgba(0, 0, 0, 0.15) 0 5px 2px 0 inset;
@@ -310,6 +325,57 @@ body.home .Header.affix .Menu--home {
   font-style: italic;
   margin-top: 0;
 }
+.Carousel--page .carousel-content {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+}
+.Carousel--page .carousel-figure {
+  -webkit-flex-basis: 50%;
+  flex-basis: 50%;
+}
+@media screen and (max-width: 1400px) {
+  .Carousel--page .carousel-figure {
+    -webkit-flex-basis: 60%;
+    flex-basis: 60%;
+  }
+}
+.Carousel--page .carousel-caption {
+  bottom: 0;
+  -webkit-flex-basis: 30%;
+  flex-basis: 30%;
+  left: 0;
+  padding: 0 25px;
+  position: relative;
+  right: 0;
+  text-align: left;
+  text-shadow: none;
+  top: 0;
+}
+.Carousel--page .carousel-caption h3 {
+  font-family: "reef";
+  font-size: 2.625em;
+  margin-bottom: 25px;
+  margin-top: 0;
+}
+.Carousel--page .carousel-caption p {
+  font-size: 1.125em;
+}
+.Carousel--page .carousel-indicators {
+  bottom: 10%;
+  left: auto;
+  margin: 0;
+  right: 35%;
+  width: auto;
+}
+.Carousel--page .carousel-indicators li {
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  height: 25px;
+  width: 25px;
+}
 
 .PageHome {
   padding: 120px 0 0;
@@ -423,15 +489,18 @@ body.home .Header.affix .Menu--home {
 .Page p {
   margin-bottom: 15px;
 }
-.Page--red {
+.Page--red, .Page--redSoft {
   background-color: #b00725;
 }
-.Page--red p {
+.Page--red p, .Page--redSoft p {
   color: #fcfbfb;
 }
-.Page--red .Page-title {
+.Page--red .Page-title, .Page--redSoft .Page-title {
   color: #fcfbfb;
   margin-bottom: 0;
+}
+.Page--redSoft {
+  background-color: #ce0321;
 }
 
 .Page-title {
@@ -452,6 +521,59 @@ body.home .Header.affix .Menu--home {
 .Page-resalt {
   font-family: "reef";
   font-size: 3.25em;
+  margin-top: 0;
+}
+
+.Page-table {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin: 30px 0;
+}
+.Page-table--blue .Page-cel:first-child {
+  background-color: #004e94;
+  -moz-border-radius-topleft: 15px;
+  -webkit-border-top-left-radius: 15px;
+  border-top-left-radius: 15px;
+}
+.Page-table--blue .Page-cel:nth-child(2) {
+  background-color: #0067b0;
+  -moz-border-radius-topright: 15px;
+  -webkit-border-top-right-radius: 15px;
+  border-top-right-radius: 15px;
+}
+.Page-table--blue .Page-cel:nth-child(3) {
+  background-color: #0080c9;
+  -moz-border-radius-bottomleft: 15px;
+  -webkit-border-bottom-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+}
+.Page-table--blue .Page-cel:last-child {
+  background-color: #009be3;
+  -moz-border-radius-bottomright: 15px;
+  -webkit-border-bottom-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+.Page-cel {
+  color: #fcfbfb;
+  -webkit-flex: 1 1 50%;
+  flex: 1 1 50%;
+  padding: 15px 15px 10px 50px;
+  position: relative;
+}
+.Page-cel i {
+  font-size: 1.25em;
+  left: 15px;
+  position: absolute;
+  top: 20px;
+}
+
+.Page-cel-title {
+  font-style: italic;
+  font-weight: 600;
+  margin-bottom: 0;
   margin-top: 0;
 }
 
@@ -489,6 +611,10 @@ body.home .Header.affix .Menu--home {
 }
 .Parallax-caption--right {
   margin: 0 10% 0 auto;
+}
+.Parallax-caption--full {
+  margin: 0 auto;
+  width: 80%;
 }
 .Parallax-caption p {
   color: #fcfbfb;

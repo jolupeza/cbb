@@ -14,11 +14,11 @@
 
 @font-face {
   font-family: 'icomoon';
-  src:  url('./../fonts/icomoon.eot?yyjcq0');
-  src:  url('./../fonts/icomoon.eot?yyjcq0#iefix') format('embedded-opentype'),
-    url('./../fonts/icomoon.ttf?yyjcq0') format('truetype'),
-    url('./../fonts/icomoon.woff?yyjcq0') format('woff'),
-    url('./../fonts/icomoon.svg?yyjcq0#icomoon') format('svg');
+  src:  url('./../fonts/icomoon.eot?s9aty3');
+  src:  url('./../fonts/icomoon.eot?s9aty3#iefix') format('embedded-opentype'),
+    url('./../fonts/icomoon.ttf?s9aty3') format('truetype'),
+    url('./../fonts/icomoon.woff?s9aty3') format('woff'),
+    url('./../fonts/icomoon.svg?s9aty3#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -38,15 +38,24 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-youtube:before {
-  content: "\e900";
+.icon-brush-alt:before {
+  content: "\e901";
 }
 .icon-phone:before {
   content: "\e942";
+}
+.icon-play2:before {
+  content: "\ea15";
 }
 .icon-facebook:before {
   content: "\ea90";
 }
 .icon-flickr2:before {
   content: "\eaa4";
+}
+.icon-commenting-o:before {
+  content: "\e902";
+}
+.icon-youtube:before {
+  content: "\e900";
 }

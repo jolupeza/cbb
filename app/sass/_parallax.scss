@@ -26,6 +26,10 @@
   &--right {
     margin: 0 10% 0 auto;
   }
+  &--full {
+    margin: 0 auto;
+    width: 80%;
+  }
   p {
     color: $white;
     @include flex-basis(100%);

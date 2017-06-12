@@ -9,13 +9,18 @@
   line-height: 1.1em;
   padding: 15px 25px;
   @include transition(all 0.2s ease);
+  &--icon {
+    i {
+      vertical-align: middle;
+    }
+  }
   &--red {
     background-color: $red;
   }
   &--blue {
     background-color: $blueHard;
   }
-  &:hover {
+  &:hover, &:focus {
     @include box-shadow(rgba(black, 0.15) 0 5px 2px 0 inset);
     color: white;
     text-decoration: none;
