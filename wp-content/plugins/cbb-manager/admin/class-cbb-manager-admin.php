@@ -368,6 +368,13 @@ class Cbb_Manager_Admin
         if (!current_user_can('edit_post', $post_id)) {
             return;
         }
+        
+        // Template
+        if (isset($_POST['mb_template']) && !empty($_POST['mb_template'])) {
+            update_post_meta($post_id, 'mb_template', esc_attr($_POST['mb_template']));
+        } else {
+            delete_post_meta($post_id, 'mb_template');
+        }
 
         // Parallax
         if (isset($_POST['mb_parallax']) && !empty($_POST['mb_parallax'])) {
@@ -727,6 +734,64 @@ class Cbb_Manager_Admin
              'rewrite'     => false
         );
         register_post_type('achievements', $args);
+        
+        $labels = array(
+            'name'               => __('Plantillas', $this->domain),
+            'singular_name'      => __('Plantilla', $this->domain),
+            'add_new'            => __('Nueva plantilla', $this->domain),
+            'add_new_item'       => __('Agregar nueva plantilla', $this->domain),
+            'edit_item'          => __('Editar plantilla', $this->domain),
+            'new_item'           => __('Nuevo plantilla', $this->domain),
+            'view_item'          => __('Ver plantilla', $this->domain),
+            'search_items'       => __('Buscar plantilla', $this->domain),
+            'not_found'          => __('Plantilla no encontrada', $this->domain),
+            'not_found_in_trash' => __('Plantilla no encontrada en la papelera', $this->domain),
+            'all_items'          => __('Todas las plantillas', $this->domain),
+//            'archives' - String for use with archives in nav menus. Default is Post Archives/Page Archives.
+//            'attributes' - Label for the attributes meta box. Default is 'Post Attributes' / 'Page Attributes'. 
+//            'insert_into_item' - String for the media frame button. Default is Insert into post/Insert into page.
+//            'uploaded_to_this_item' - String for the media frame filter. Default is Uploaded to this post/Uploaded to this page.
+//            'featured_image' - Default is Featured Image.
+//            'set_featured_image' - Default is Set featured image.
+//            'remove_featured_image' - Default is Remove featured image.
+//            'use_featured_image' - Default is Use as featured image.
+//            'menu_name' - Default is the same as `name`.
+//            'filter_items_list' - String for the table views hidden heading.
+//            'items_list_navigation' - String for the table pagination hidden heading.
+//            'items_list' - String for the table hidden heading.
+//            'name_admin_bar' - String for use in New in Admin menu bar. Default is the same as `singular_name`. 
+        );
+        $args = array(
+            'labels' => $labels,
+            'description' => 'Listado de Plantillas',
+            // 'public'              => false,
+            // 'exclude_from_search' => true,
+            // 'publicly_queryable' => false,
+            'show_ui' => true,
+            'show_in_nav_menus' => false,
+            'show_in_menu' => true,
+            'show_in_admin_bar' => true,
+            // 'menu_position'          => null,
+            'menu_icon' => 'dashicons-welcome-widgets-menus',
+            // 'hierarchical'        => false,
+            'supports' => array(
+                'title',
+//                'editor',
+//                'custom-fields',
+                'author',
+//                'thumbnail',
+//                'page-attributes',
+                // 'excerpt'
+                // 'trackbacks'
+                // 'comments',
+                // 'revisions',
+                // 'post-formats'
+            ),
+            // 'taxonomies'  => array('post_tag', 'category'),
+            // 'has_archive' => false,
+             'rewrite'     => false
+        );
+        register_post_type('templates', $args);
     }
 
     public function unregister_post_type()
