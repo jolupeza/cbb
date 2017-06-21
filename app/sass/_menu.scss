@@ -91,3 +91,74 @@
     }
   }
 }
+.MenuZone, .MenuCategories {
+  @include display-flex();
+}
+.MenuZone {
+  margin-bottom: 30px;
+}
+.MenuZone-list {
+  @include display-flex();
+  @include justify-content(center);
+  margin-bottom: 0;
+  padding-left: 0;
+  width: 100%;
+  li {
+    list-style: none;
+    margin-right: 1px;
+    &:first-child {
+      a {
+        @include border-top-left-radius(8px);
+        @include border-bottom-left-radius(8px);
+      }
+    }
+    &:last-child {
+      margin-right: 0;
+      a {
+        @include border-top-right-radius(8px);
+        @include border-bottom-right-radius(8px);
+      }
+    }
+    a {
+      background-color: $red;
+      color: $white;
+      display: block;
+      font-family: "reef";
+      font-size: 1.25em;
+      padding: 5px 60px;
+    }
+    &.active, &:hover {
+      a {
+        background-color: $redDark;
+        text-decoration: underline;
+      }
+    }
+  }
+}
+.MenuCategories {
+  margin-bottom: 25px;
+}
+.MenuCategories-list {
+  @include display-flex();
+  margin-bottom: 0;
+  padding-left: 0;
+  width: 100%;
+  li {
+    list-style: none;
+    margin-right: 3px;
+    a {
+      background-color: $azul;
+      @include border-radius(5px);
+      color: $white;
+      display: block;
+      font-size: 1.125em;
+      padding: 8px 20px;
+    }
+    &.active, &:hover {
+      a {
+        background-color: $orange;
+        text-decoration: none;
+      }
+    }
+  }
+}

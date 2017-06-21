@@ -18,6 +18,9 @@ body {
     }
   }
 }
+a {
+  @include transition(all 0.2s ease);
+}
 .Grid-positionStatic {
   position: static;
 }
@@ -29,4 +32,10 @@ body {
 }
 .text-gray {
   color: $gray;
+}
+.text-azul {
+  color: $azul;
+}
+.text-resalt {
+  font-size: 1.25em;
 }

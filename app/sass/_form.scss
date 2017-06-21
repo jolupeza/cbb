@@ -1,0 +1,35 @@
+.Form {
+  &--group {
+
+  }
+  &--search {
+    .form-control {
+      background-color: transparent;
+      border: none;
+      border-bottom: 1px solid $gray;
+      @include box-shadow(none);
+      color: $grayText;
+      font-size: 1em;
+      font-weight: 300;
+      text-align: right;
+      @include input-placeholder {
+        color: $grayText;
+        font-size: 1em;
+        font-weight: 300;
+      }
+      &:first-child {
+        @include border-radius(0);
+      }
+    }
+    .input-group-btn {
+      &:last-child {
+        > .btn {
+          background-color: transparent;
+          @include border-radius(0);
+          color: $gray;
+          font-size: 18px;
+        }
+      }
+    }
+  }
+}

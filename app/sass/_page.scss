@@ -22,6 +22,9 @@
   font-size: 2.5em;
   margin-bottom: 25px;
   margin-top: 0;
+  &--nmb {
+    margin-bottom: 10px;
+  }
   span {
     color: $red;
   }

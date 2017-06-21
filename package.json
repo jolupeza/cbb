@@ -16,6 +16,7 @@
     "gulp-uglify": "^3.0.0",
     "gulp-uncss": "^1.0.6",
     "gulp-useref": "^3.1.2",
+    "isotope-layout": "^3.0.4",
     "jquery.easing": "^1.4.1"
   },
   "scripts": {

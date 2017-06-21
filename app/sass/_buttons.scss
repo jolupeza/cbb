@@ -20,6 +20,17 @@
   &--blue {
     background-color: $blueHard;
   }
+  &--yellow {
+    background-color: $yellow;
+  }
+  &--medium {
+    font-size: 24px;
+    padding: 10px 20px;
+  }
+  &--small {
+    font-size: 18px;
+    padding: 10px 15px;
+  }
   &:hover, &:focus {
     @include box-shadow(rgba(black, 0.15) 0 5px 2px 0 inset);
     color: white;

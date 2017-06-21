@@ -1,0 +1,49 @@
+.Box {
+  margin-bottom: 25px;
+}
+.Box-item {
+  @include border-radius(0 0 8px 8px);
+  @include box-shadow(rgba(black, 0.2) 0 -5px 2px 0 inset);
+  display: inline-block;
+  margin-right: 15px;
+  vertical-align: top;
+  width: 30%;
+}
+.Box-figure {
+  img {
+    @include border-radius(8px 8px 0 0);
+  }
+  &--red {
+    border-bottom: 5px solid $red;
+  }
+  &--green {
+    border-bottom: 5px solid $green;
+  }
+  &--blue {
+    border-bottom: 5px solid $azul;
+  }
+}
+.Box-content {
+  padding: 15px;
+  &--red {
+    @include border-radius(8px 8px 0 0);
+    border-top: 5px solid $red;
+  }
+  &--green {
+    @include border-radius(8px 8px 0 0);
+    border-top: 5px solid $green;
+  }
+  &--blue {
+    @include border-radius(8px 8px 0 0);
+    border-top: 5px solid $azul;
+  }
+  p {
+    font-size: 0.875em;
+  }
+}
+.Box-title {
+  color: $blueSoft;
+  font-size: 1.125em;
+  font-weight: 600;
+  margin-top: 0;
+}
