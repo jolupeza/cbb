@@ -209,7 +209,7 @@ a {
   background-color: #b00725;
   padding: 10px 0;
 }
-.Header.affix .MainMenu > li:hover > a, .Header.affix .MainMenu > li.active > a, .Header.affix .MainMenu > li.current-menu-item > a {
+.Header.affix .MainMenu > li:hover > a, .Header.affix .MainMenu > li.active > a, .Header.affix .MainMenu > li.current-menu-item > a, .Header.affix .MainMenu > li.current-post-ancestor > a {
   border-bottom: 3px solid #fcfbfb;
 }
 .Header.affix .MainMenu > li a::after {
@@ -280,7 +280,7 @@ a {
 .MainMenu > li {
   position: static;
 }
-.MainMenu > li:hover > a, .MainMenu > li.active > a, .MainMenu > li.current-menu-item > a {
+.MainMenu > li:hover > a, .MainMenu > li.active > a, .MainMenu > li.current-menu-item > a, .MainMenu > li.current-post-ancestor > a {
   background-color: transparent;
   border-bottom: 3px solid #fcfbfb;
 }

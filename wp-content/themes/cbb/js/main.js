@@ -8,13 +8,18 @@ var j = jQuery.noConflict();
       $animationElements = j('.animation-element');
 
   function affixHeader() {
-    j('.Header').affix({
-      offset: {
-        top: function () {
-          return 20;
+    var single = j('body').hasClass('single') ? true : false;
+    if (!single) {
+      j('.Header').affix({
+        offset: {
+          top: function () {
+            return 20;
+          }
         }
-      }
-    });
+      });
+    } else {
+      j('.Header').addClass('affix');
+    }
   }
 
   function checkIfInView() {

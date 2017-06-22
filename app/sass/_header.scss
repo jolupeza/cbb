@@ -10,7 +10,7 @@
     padding: 10px 0;
     .MainMenu {
       > li {
-        &:hover, &.active, &.current-menu-item {
+        &:hover, &.active, &.current-menu-item, &.current-post-ancestor {
           > a {
             border-bottom: 3px solid $white;
           }

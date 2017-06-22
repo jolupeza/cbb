@@ -42,7 +42,7 @@
   }
   > li {
     position: static;
-    &:hover, &.active, &.current-menu-item {
+    &:hover, &.active, &.current-menu-item, &.current-post-ancestor {
       > a {
         background-color: transparent;
         border-bottom: 3px solid $white;

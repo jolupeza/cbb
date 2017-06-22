@@ -27,7 +27,6 @@
 
 <section class="Page" id="js-page">
   <div class="container">
-    <?php $thumb = false; ?>
     <?php if (have_posts()) : ?>
       <?php
         $args = [
@@ -49,8 +48,6 @@
 
           $menuItems = wp_get_nav_menu_items($menu->term_id);
         }
-
-        // dump($menuItems);
       ?>
       <nav class="MenuCategories">
         <ul class="MenuCategories-list">
@@ -82,23 +79,13 @@
 
       <section class="grid Box">
         <div class="grid-sizer"></div>
-        <article class="grid-item Box-item">
-          <figure class="Box-figure Box-figure--red">
-            <img src="http://lorempixel.com/400/250" alt="" class="img-responsive center-block">
-          </figure>
-          <article class="Box-content">
-            <h3 class="Box-title"><a href="">Inicio de Clases 2016</a></h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam dignissimos, officia aut nam et voluptatem fuga voluptatibus alias? Magnam laborum nisi quidem harum delectus cupiditate dolorum illum fuga repellat ut.</p>
-            <p class="text-center"><a href="" class="Button Button--small Button--yellow">Leer más</a></p>
-          </article>
-        </article>
-
         <?php while (have_posts()) : ?>
           <?php the_post(); ?>
+          <?php $thumb = false; ?>
           <article class="grid-item Box-item">
             <?php if (has_post_thumbnail()) : ?>
               <figure class="Box-figure Box-figure--red">
-                <?php the_post_thumbnail('full', ['class' => 'img-rsponsive center-block']); ?>
+                <?php the_post_thumbnail('full', ['class' => 'img-responsive center-block']); ?>
               </figure>
               <?php $thumb = true; ?>
             <?php endif; ?>
@@ -114,7 +101,9 @@
         <?php endwhile; ?>
       </section>
 
-      <p class="text-center"><a href="" class="Button Button--blue Button--medium">ver más</a></p>
+      <!-- <p class="text-center">
+        <a href="" class="Button Button--blue Button--medium">ver más</a>
+      </p> -->
     <?php endif; ?>
   </div>
 </section>
