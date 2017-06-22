@@ -1,13 +1,13 @@
 .Box {
   margin-bottom: 25px;
 }
+.grid-sizer, .Box-item {
+  width: 32%;
+}
 .Box-item {
   @include border-radius(0 0 8px 8px);
   @include box-shadow(rgba(black, 0.2) 0 -5px 2px 0 inset);
-  display: inline-block;
   margin-right: 15px;
-  vertical-align: top;
-  width: 30%;
 }
 .Box-figure {
   img {
@@ -42,8 +42,13 @@
   }
 }
 .Box-title {
-  color: $blueSoft;
   font-size: 1.125em;
   font-weight: 600;
   margin-top: 0;
+  a {
+    color: $blueSoft;
+    &:hover {
+      text-decoration: none;
+    }
+  }
 }

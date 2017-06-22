@@ -11,7 +11,7 @@ var j = jQuery.noConflict();
     j('.Header').affix({
       offset: {
         top: function () {
-          return j('.Carousel--home').outerHeight(true) / 3;
+          return 20;
         }
       }
     });
@@ -69,6 +69,15 @@ var j = jQuery.noConflict();
       j('html, body').stop().animate({
         scrollTop: j(dest).offset().top
       }, 2000, 'easeInOutExpo');
+    });
+
+    j('.grid').isotope({
+      itemSelector: '.grid-item',
+      percentPosition: true,
+      mansory: {
+        columnWidth: '.grid-sizer',
+        gutter: 15
+      }
     });
   });
 })(jQuery);

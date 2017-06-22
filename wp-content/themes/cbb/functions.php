@@ -42,7 +42,9 @@ add_action('after_setup_theme', 'my_theme_setup');
 /****************************************/
 function register_my_menus() {
   register_nav_menus([
-    'main-menu' => __( 'Main Menu', THEMEDOMAIN ),
+    'main-menu' => __('Main Menu', THEMEDOMAIN),
+    'areas-menu' => __('Areas Menu', THEMEDOMAIN),
+    'categories-menu' => __('Categories Menu', THEMEDOMAIN),
   ]);
 }
 
@@ -51,8 +53,8 @@ add_action('init', 'register_my_menus');
 /****************************************/
 /* Menu Walker Main Menu */
 /****************************************/
-class CBB_Walker_Nav_Menu extends Walker_Nav_Menu {
-
+class CBB_Walker_Nav_Menu extends Walker_Nav_Menu
+{
     /**
      * Starts the list before the elements are added.
      *
@@ -89,7 +91,8 @@ class CBB_Walker_Nav_Menu extends Walker_Nav_Menu {
     * @param array  $args   An array of arguments. @see wp_nav_menu()
      * @param int    $id     Current item ID.
      */
-    public function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
+    public function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 )
+    {
         global $wp_query;
         $indent = ( $depth > 0 ? str_repeat( "\t", $depth ) : '' ); // code indent
 

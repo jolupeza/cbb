@@ -63,6 +63,11 @@
         @include transition(all 0.2s ease);
       }
     }
+    > a {
+      &:focus {
+        background-color: transparent;
+      }
+    }
   }
   .sub-menu {
     background-color: $red;
@@ -127,7 +132,7 @@
       font-size: 1.25em;
       padding: 5px 60px;
     }
-    &.active, &:hover {
+    &.current-menu-item, &.active, &:hover {
       a {
         background-color: $redDark;
         text-decoration: underline;

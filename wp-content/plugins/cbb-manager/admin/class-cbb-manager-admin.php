@@ -792,6 +792,8 @@ class Cbb_Manager_Admin
              'rewrite'     => false
         );
         register_post_type('templates', $args);
+        
+        flush_rewrite_rules();
     }
 
     public function unregister_post_type()
@@ -805,5 +807,47 @@ class Cbb_Manager_Admin
         }
 
         return false;
+    }
+    
+    /**
+     * Add custom taxonomies types to post type post.
+     */
+    public function add_taxonomies_post()
+    {
+        $labels = array(
+            'name' => _x('Zonas', 'Taxonomy plural name', THEMEDOMAIN),
+            'singular_name' => _x('Zona', 'Taxonomy singular name', THEMEDOMAIN),
+            'search_items' => __('Buscar Zonas', THEMEDOMAIN),
+            'popular_items' => __('Zonas Populares', THEMEDOMAIN),
+            'all_items' => __('Todas las Zonas', THEMEDOMAIN),
+            'parent_item' => __('Zona Padre', THEMEDOMAIN),
+            'parent_item_colon' => __('Zona Padre', THEMEDOMAIN),
+            'edit_item' => __('Editar Zona', THEMEDOMAIN),
+            'update_item' => __('Actualizar Zona', THEMEDOMAIN),
+            'add_new_item' => __('Añadir nueva Zona', THEMEDOMAIN),
+            'new_item_name' => __('Nueva Zona', THEMEDOMAIN),
+            'add_or_remove_items' => __('Añadir o eliminar Zona', THEMEDOMAIN),
+            'choose_from_most_used' => __('Choose from most used text-domain', THEMEDOMAIN),
+            'menu_name' => __('Zonas', THEMEDOMAIN),
+        );
+
+        $args = array(
+            'labels' => $labels,
+            'public' => true,
+            'show_in_nav_menus' => true,
+            'show_in_menu' => true,
+            'show_admin_column' => true,
+            'hierarchical' => true,
+            'show_tagcloud' => false,
+            'show_ui' => true,
+            'query_var' => true,
+            'rewrite' => array(
+              'slug' => 'zona',
+            ),
+            'query_var' => true,
+//            'capabilities' => array(),
+        );
+
+        register_taxonomy('areas', 'post', $args);
     }
 }

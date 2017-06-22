@@ -11,6 +11,20 @@ body.home .Header.affix-top .Menu--home {
 body.home .Header.affix .Menu--home {
   visibility: visible;
 }
+body.tax-areas .MainMenu > li:hover > a, body.tax-areas .MainMenu > li.active > a, body.tax-areas .MainMenu > li.menu-item-object-category > a {
+  background-color: transparent;
+  border-bottom: 3px solid #fcfbfb;
+}
+body.tax-areas .Header.affix .MainMenu > li:hover > a, body.tax-areas .Header.affix .MainMenu > li.active > a, body.tax-areas .Header.affix .MainMenu > li.menu-item-object-category > a {
+  border-bottom: 3px solid #fcfbfb;
+}
+body.tax-areas .Header.affix .MainMenu > li a::after {
+  border-bottom-color: #8b041c;
+}
+body.tax-areas .Header.affix .MainMenu .sub-menu {
+  background-color: #8b041c;
+  bottom: -28px;
+}
 
 a {
   -moz-transition: all 0.2s ease;
@@ -288,6 +302,9 @@ a {
   -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
 }
+.MainMenu > li > a:focus {
+  background-color: transparent;
+}
 .MainMenu .sub-menu {
   background-color: #b00725;
   bottom: -23px;
@@ -367,7 +384,7 @@ a {
   font-size: 1.25em;
   padding: 5px 60px;
 }
-.MenuZone-list li.active a, .MenuZone-list li:hover a {
+.MenuZone-list li.current-menu-item a, .MenuZone-list li.active a, .MenuZone-list li:hover a {
   background-color: #73001a;
   text-decoration: underline;
 }
@@ -973,6 +990,10 @@ a {
   margin-bottom: 25px;
 }
 
+.grid-sizer, .Box-item {
+  width: 32%;
+}
+
 .Box-item {
   -moz-border-radius: 0 0 8px 8px;
   -webkit-border-radius: 0;
@@ -980,10 +1001,7 @@ a {
   -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 -5px 2px 0 inset;
   -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 -5px 2px 0 inset;
   box-shadow: rgba(0, 0, 0, 0.2) 0 -5px 2px 0 inset;
-  display: inline-block;
   margin-right: 15px;
-  vertical-align: top;
-  width: 30%;
 }
 
 .Box-figure img {
@@ -1027,8 +1045,13 @@ a {
 }
 
 .Box-title {
-  color: #415cb0;
   font-size: 1.125em;
   font-weight: 600;
   margin-top: 0;
+}
+.Box-title a {
+  color: #415cb0;
+}
+.Box-title a:hover {
+  text-decoration: none;
 }
