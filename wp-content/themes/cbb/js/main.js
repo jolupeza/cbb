@@ -76,13 +76,13 @@ var j = jQuery.noConflict();
       }, 2000, 'easeInOutExpo');
     });
 
-    j('.grid').isotope({
-      itemSelector: '.grid-item',
-      percentPosition: true,
-      mansory: {
-        columnWidth: '.grid-sizer',
-        gutter: 15
-      }
-    });
+    // j('.grid').isotope({
+    //   itemSelector: '.grid-item',
+    //   percentPosition: true,
+    //   mansory: {
+    //     columnWidth: '.grid-sizer',
+    //     gutter: 15
+    //   }
+    // });
   });
 })(jQuery);

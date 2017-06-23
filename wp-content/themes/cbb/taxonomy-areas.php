@@ -78,7 +78,7 @@
       </div>
 
       <section class="grid Box">
-        <div class="grid-sizer"></div>
+        <!-- <div class="grid-sizer"></div> -->
         <?php while (have_posts()) : ?>
           <?php the_post(); ?>
           <?php $thumb = false; ?>

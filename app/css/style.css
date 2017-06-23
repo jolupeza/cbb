@@ -987,11 +987,13 @@ a {
 }
 
 .Box {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-justify-content: space-around;
+  justify-content: space-around;
   margin-bottom: 25px;
-}
-
-.grid-sizer, .Box-item {
-  width: 32%;
 }
 
 .Box-item {
@@ -1001,6 +1003,9 @@ a {
   -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 -5px 2px 0 inset;
   -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 -5px 2px 0 inset;
   box-shadow: rgba(0, 0, 0, 0.2) 0 -5px 2px 0 inset;
+  -webkit-flex: 0 1 30%;
+  flex: 0 1 30%;
+  margin-bottom: 15px;
   margin-right: 15px;
 }
 
