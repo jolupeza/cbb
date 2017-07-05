@@ -26,6 +26,20 @@ body.tax-areas .Header.affix .MainMenu .sub-menu {
   background-color: #8b041c;
   bottom: -28px;
 }
+body.single-locals .MainMenu > li:hover > a, body.single-locals .MainMenu > li.active > a, body.single-locals .MainMenu > li.menu-item-object-locals > a {
+  background-color: transparent;
+  border-bottom: 3px solid #fcfbfb;
+}
+body.single-locals .Header.affix .MainMenu > li:hover > a, body.single-locals .Header.affix .MainMenu > li.active > a, body.single-locals .Header.affix .MainMenu > li.menu-item-object-locals > a {
+  border-bottom: 3px solid #fcfbfb;
+}
+body.single-locals .Header.affix .MainMenu > li a::after {
+  border-bottom-color: #8b041c;
+}
+body.single-locals .Header.affix .MainMenu .sub-menu {
+  background-color: #8b041c;
+  bottom: -28px;
+}
 
 a {
   -moz-transition: all 0.2s ease;

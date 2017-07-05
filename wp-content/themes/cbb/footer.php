@@ -1,7 +1,8 @@
     <?php
       $args = [
         'post_type' => 'locals',
-        'posts_per_page' => -1
+        'posts_per_page' => -1,
+        'post_parent' => 0
       ];
 
       $the_query = new WP_Query($args);

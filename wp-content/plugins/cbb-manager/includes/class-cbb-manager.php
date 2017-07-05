@@ -97,6 +97,7 @@ class Cbb_Manager
         $admin = new Cbb_Manager_Admin($this->get_version());
         
         $this->loader->add_action('init', $admin, 'add_post_type');
+//        $this->loader->add_action('init', $admin, 'unregister_post_type');
         
         $this->loader->add_action('admin_enqueue_scripts', $admin, 'enqueue_styles');
         $this->loader->add_action('admin_enqueue_scripts', $admin, 'enqueue_scripts');
@@ -119,7 +120,8 @@ class Cbb_Manager
         $this->loader->add_action('add_meta_boxes', $admin, 'cd_mb_achievements_add');
         $this->loader->add_action('save_post', $admin, 'cd_mb_achievements_save' );
         
-        $this->loader->add_action('init', $admin, 'add_taxonomies_post');
+        $this->loader->add_action('init', $admin, 'remove_taxonomies_post');
+        $this->loader->add_action('init', $admin, 'add_taxonomies_sliders');
     }
 
     /**

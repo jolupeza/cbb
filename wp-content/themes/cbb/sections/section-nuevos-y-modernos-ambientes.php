@@ -4,7 +4,7 @@
     <h2 class="PageHome-title text-center">Ambientes</h2>
 
     <p class="text-center PageHome-legend"><?php echo get_the_content(); ?></p>
-    <p class="text-center"><a class="Button Button--blue" href="">ver ambientes</a></p>
+    <p class="text-center"><a class="Button Button--blue" href="<?php echo home_url('infraestructura'); ?>">ver ambientes</a></p>
   </div>
   <?php if (has_post_thumbnail()) : ?>
     <figure class="PageHome-figure">

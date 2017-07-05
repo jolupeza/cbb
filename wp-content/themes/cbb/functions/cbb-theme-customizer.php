@@ -97,4 +97,37 @@ function cbb_customize_register($wp_customize) {
     'settings' => 'cbb_custom_settings[youtube]',
     'type' => 'text'
   ]);
+
+  // Infraestructura
+  $wp_customize->add_section('cbb_locals', [
+    'title' => __('Infraestructura', THEMEDOMAIN),
+    'description' => __('Configuración página Infraestructura', THEMEDOMAIN),
+    'priority' => 36
+  ]);
+
+  $sections = get_terms('sections');
+  $sects = [];
+  $i = 0;
+
+  foreach ($sections as $section) {
+    if ($i === 0) {
+      $default = $section->term_id;
+      $i++;
+    }
+
+    $sects[$section->term_id] = $section->name;
+  }
+
+  $wp_customize->add_setting('cbb_custom_settings[slider]', [
+    'default' => '',
+    'type' => 'option'
+  ]);
+
+  $wp_customize->add_control('cbb_custom_settings[slider]', array(
+    'label'      => __('Sliders', THEMEDOMAIN),
+    'section'    => 'cbb_locals',
+    'settings'   => 'cbb_custom_settings[slider]',
+    'type'       => 'select',
+    'choices'    => $sects,
+  ));
 }

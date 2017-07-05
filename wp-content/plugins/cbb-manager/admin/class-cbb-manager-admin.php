@@ -562,8 +562,8 @@ class Cbb_Manager_Admin
         register_post_type('partners', $args);
         
         $labels = array(
-            'name'               => __('Sedes', $this->domain),
-            'singular_name'      => __('Sed', $this->domain),
+            'name'               => __('Infraestructura', $this->domain),
+            'singular_name'      => __('Sede', $this->domain),
             'add_new'            => __('Nueva sede', $this->domain),
             'add_new_item'       => __('Agregar nueva sede', $this->domain),
             'edit_item'          => __('Editar sede', $this->domain),
@@ -590,23 +590,23 @@ class Cbb_Manager_Admin
         $args = array(
             'labels' => $labels,
             'description' => 'Nuestras Sedes',
-            // 'public'              => false,
+            'public' => true,
             // 'exclude_from_search' => true,
             // 'publicly_queryable' => false,
             'show_ui' => true,
-            'show_in_nav_menus' => false,
+            'show_in_nav_menus' => true,
             'show_in_menu' => true,
             'show_in_admin_bar' => true,
             // 'menu_position'          => null,
             'menu_icon' => 'dashicons-networking',
-            // 'hierarchical'        => false,
+            'hierarchical' => true,
             'supports' => array(
                 'title',
-//                'editor',
+                'editor',
                 'custom-fields',
                 'author',
-//                'thumbnail',
-//                'page-attributes',
+                'thumbnail',
+                'page-attributes',
                 // 'excerpt'
                 // 'trackbacks'
                 // 'comments',
@@ -614,8 +614,10 @@ class Cbb_Manager_Admin
                 // 'post-formats'
             ),
             // 'taxonomies'  => array('post_tag', 'category'),
-            // 'has_archive' => false,
-             'rewrite'     => false
+             'has_archive' => true,
+             'rewrite'     => [
+                 'slug' => 'infraestructura'
+             ]
         );
         register_post_type('locals', $args);
         
@@ -799,6 +801,8 @@ class Cbb_Manager_Admin
     public function unregister_post_type()
     {
         global $wp_post_types;
+        
+        dump_exit($wp_post_types);
 
         if (isset($wp_post_types[ 'testimonials' ])) {
             unset($wp_post_types[ 'testimonials' ]);
@@ -810,7 +814,7 @@ class Cbb_Manager_Admin
     }
     
     /**
-     * Add custom taxonomies types to post type post.
+     * Add custom taxonomies areas to post type post.
      */
     public function add_taxonomies_post()
     {
@@ -844,10 +848,57 @@ class Cbb_Manager_Admin
             'rewrite' => array(
               'slug' => 'zona',
             ),
-            'query_var' => true,
 //            'capabilities' => array(),
         );
 
         register_taxonomy('areas', 'post', $args);
+    }
+    
+    public function remove_taxonomies_post()
+    {
+        wp_delete_term(3, 'areas');
+        wp_delete_term(4, 'areas');
+        wp_delete_term(5, 'areas');
+        
+        unregister_taxonomy('areas');
+    }
+    
+    /**
+     * Add custom taxonomies areas to post type sliders.
+     */
+    public function add_taxonomies_sliders()
+    {
+        $labels = array(
+            'name' => _x('Secciones', 'Taxonomy plural name', THEMEDOMAIN),
+            'singular_name' => _x('Sección', 'Taxonomy singular name', THEMEDOMAIN),
+            'search_items' => __('Buscar Sección', THEMEDOMAIN),
+            'popular_items' => __('Secciones Populares', THEMEDOMAIN),
+            'all_items' => __('Todas las Secciones', THEMEDOMAIN),
+            'parent_item' => __('Sección Padre', THEMEDOMAIN),
+            'parent_item_colon' => __('Sección Padre', THEMEDOMAIN),
+            'edit_item' => __('Editar Sección', THEMEDOMAIN),
+            'update_item' => __('Actualizar Sección', THEMEDOMAIN),
+            'add_new_item' => __('Añadir nueva Sección', THEMEDOMAIN),
+            'new_item_name' => __('Nueva Sección', THEMEDOMAIN),
+            'add_or_remove_items' => __('Añadir o eliminar Sección', THEMEDOMAIN),
+            'choose_from_most_used' => __('Choose from most used text-domain', THEMEDOMAIN),
+            'menu_name' => __('Secciones', THEMEDOMAIN),
+        );
+
+        $args = array(
+            'labels' => $labels,
+            'public' => false,
+            'show_in_nav_menus' => false,
+            'show_in_menu' => true,
+            'show_admin_column' => true,
+            'hierarchical' => true,
+            'show_tagcloud' => false,
+            'show_ui' => true,
+            'query_var' => true,
+            'rewrite' => false,
+//            'capabilities' => array(),
+        );
+
+        register_taxonomy('sections', 'sliders', $args);
     }
 }

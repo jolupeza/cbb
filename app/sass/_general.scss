@@ -51,6 +51,40 @@ body {
       }
     }
   }
+  &.single-locals {
+    .MainMenu {
+      > li {
+        &:hover, &.active, &.menu-item-object-locals {
+          > a {
+            background-color: transparent;
+            border-bottom: 3px solid $white;
+          }
+        }
+      }
+    }
+    .Header {
+      &.affix {
+        .MainMenu {
+          > li {
+            &:hover, &.active, &.menu-item-object-locals {
+              > a {
+                border-bottom: 3px solid $white;
+              }
+            }
+            a {
+              &::after {
+                border-bottom-color: $redHard;
+              }
+            }
+          }
+          .sub-menu {
+            background-color: $redHard;
+            bottom: -28px;
+          }
+        }
+      }
+    }
+  }
 }
 a {
   @include transition(all 0.2s ease);
