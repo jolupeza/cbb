@@ -88,4 +88,73 @@
       }
     }
   }
+  &--sedes {
+    margin-bottom: 30px;
+    .item {
+      img {
+        margin-bottom: 15px;
+        width: 90%;
+      }
+    }
+    .carousel-indicators {
+      bottom: 80px;
+      left: 25px;
+      margin-bottom: 0;
+      margin-left: 0;
+      text-align: left;
+      width: auto;
+    }
+    .carousel-control {
+      bottom: auto;
+      font-size: 2em;
+      @include opacity(1);
+      @include text-shadow(none);
+      width: auto;
+      i {
+        background-color: #d2d2d2;
+        @include border-radius(50%);
+        display: block;
+        padding: 3px;
+      }
+      &.left, &.right {
+        background-image: none;
+        right: 50px;
+      }
+      &.left {
+        left: auto;
+      }
+      &.right {
+        top: 50px;
+      }
+      &:hover, &:focus {
+        i {
+          background-color: #2845a0;
+        }
+      }
+    }
+    .carousel-caption {
+      background-color: #fff;
+      border: 1px solid #d2d2d2;
+      bottom: 0;
+      left: auto;
+      padding: 15px;
+      right: 0;
+      text-align: left;
+      @include text-shadow(none);
+      width: 40%;
+      h3 {
+        color: #db1d1d;
+        font-family: "reef";
+        font-size: 2em;
+        margin-bottom: 15px;
+        margin-top: 0;
+      }
+      p {
+        color: #2a2a2a;
+        font-family: 'Roboto', sans-serif;
+        font-size: 1em;
+        margin-bottom: 0;
+      }
+    }
+  }
 }

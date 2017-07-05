@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,600,700");
+@import url("https://fonts.googleapis.com/css?family=Roboto");
 body {
   background-color: #fcfbfb;
   font-family: "Source Sans Pro", sans-serif;
@@ -66,8 +67,8 @@ a {
 }
 @font-face {
   font-family: 'icomoon';
-  src: url("./../fonts/icomoon.eot?q292c1");
-  src: url("./../fonts/icomoon.eot?q292c1#iefix") format("embedded-opentype"), url("./../fonts/icomoon.ttf?q292c1") format("truetype"), url("./../fonts/icomoon.woff?q292c1") format("woff"), url("./../fonts/icomoon.svg?q292c1#icomoon") format("svg");
+  src: url("./../fonts/icomoon.eot?j3i2dl");
+  src: url("./../fonts/icomoon.eot?j3i2dl#iefix") format("embedded-opentype"), url("./../fonts/icomoon.ttf?j3i2dl") format("truetype"), url("./../fonts/icomoon.woff?j3i2dl") format("woff"), url("./../fonts/icomoon.svg?j3i2dl#icomoon") format("svg");
   font-weight: normal;
   font-style: normal;
 }
@@ -83,6 +84,22 @@ a {
   /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-keyboard_arrow_up:before {
+  content: "\e903";
+}
+
+.icon-keyboard_arrow_right:before {
+  content: "\e904";
+}
+
+.icon-keyboard_arrow_left:before {
+  content: "\e905";
+}
+
+.icon-keyboard_arrow_down:before {
+  content: "\e906";
 }
 
 .icon-brush-alt:before {
@@ -388,6 +405,12 @@ a {
   background-color: #73001a;
   text-decoration: underline;
 }
+.MenuZone-list--blue li a {
+  background-color: #216fb5;
+}
+.MenuZone-list--blue li.current-menu-item a, .MenuZone-list--blue li.active a, .MenuZone-list--blue li:hover a {
+  background-color: #004e94;
+}
 
 .MenuCategories {
   margin-bottom: 25px;
@@ -510,6 +533,74 @@ a {
   border-radius: 50%;
   height: 25px;
   width: 25px;
+}
+.Carousel--sedes {
+  margin-bottom: 30px;
+}
+.Carousel--sedes .item img {
+  margin-bottom: 15px;
+  width: 90%;
+}
+.Carousel--sedes .carousel-indicators {
+  bottom: 80px;
+  left: 25px;
+  margin-bottom: 0;
+  margin-left: 0;
+  text-align: left;
+  width: auto;
+}
+.Carousel--sedes .carousel-control {
+  bottom: auto;
+  font-size: 2em;
+  filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+  opacity: 1;
+  text-shadow: none;
+  width: auto;
+}
+.Carousel--sedes .carousel-control i {
+  background-color: #d2d2d2;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  display: block;
+  padding: 3px;
+}
+.Carousel--sedes .carousel-control.left, .Carousel--sedes .carousel-control.right {
+  background-image: none;
+  right: 50px;
+}
+.Carousel--sedes .carousel-control.left {
+  left: auto;
+}
+.Carousel--sedes .carousel-control.right {
+  top: 50px;
+}
+.Carousel--sedes .carousel-control:hover i, .Carousel--sedes .carousel-control:focus i {
+  background-color: #2845a0;
+}
+.Carousel--sedes .carousel-caption {
+  background-color: #fff;
+  border: 1px solid #d2d2d2;
+  bottom: 0;
+  left: auto;
+  padding: 15px;
+  right: 0;
+  text-align: left;
+  text-shadow: none;
+  width: 40%;
+}
+.Carousel--sedes .carousel-caption h3 {
+  color: #db1d1d;
+  font-family: "reef";
+  font-size: 2em;
+  margin-bottom: 15px;
+  margin-top: 0;
+}
+.Carousel--sedes .carousel-caption p {
+  color: #2a2a2a;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1em;
+  margin-bottom: 0;
 }
 
 .PageHome {

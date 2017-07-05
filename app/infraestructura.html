@@ -52,8 +52,8 @@
                     <li><a href="">Integración Educativa</a></li>
                   </ul>
                 </li>
-                <li><a href="infraestructura.html">Infraestructura</a></li>
-                <li class="active"><a href="">Vida Escolar</a></li>
+                <li class="active"><a href="">Infraestructura</a></li>
+                <li><a href="blog.html">Vida Escolar</a></li>
                 <li><a href="">Contáctanos</a></li>
                 <li><a href="">Repositorio</a></li>
                 <li><a href="">Admisión</a></li>
@@ -64,67 +64,72 @@
       </div>
     </header>
 
-    <section class="Page Single">
+    <section id="carousel-infraestructura" class="carousel slide Carousel Carousel--home">
+      <!-- <ol class="carousel-indicators">
+        <li data-target="#carousel-infraestructura" data-slide-to="0" class="active"></li>
+      </ol> -->
+
+      <div class="carousel-inner" role="listbox">
+        <div class="item active">
+          <img src="images/slide-infraestructura.jpg" alt="Slide Infraestructura" />
+          <div class="carousel-caption">
+            <h3>aprendes más</h3>
+            <h2>estando feliz</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae natus deserunt perspiciatis possimus.</p>
+            <p><a class="Button Button--red" href="">conocer más</a></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- <a class="left carousel-control" href="#carousel-infraestructura" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#carousel-infraestructura" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a> -->
+
+      <button class="Arrow js-move-scroll" href="">ir abajo <i class="glyphicon glyphicon-chevron-down"></i></button>
+    </section>
+
+    <section class="Page">
       <div class="container">
-        <div class="row">
-          <div class="col-md-8">
-            <article class="Single-box">
-              <figure class="Single-figure">
-                <img src="./images/posts/single01.jpg" class="img-responsive center-block" alt="" />
-              </figure>
+        <nav class="MenuZone">
+          <ul class="MenuZone-list MenuZone-list--blue">
+            <li class="active"><a href="">Lima Norte</a></li>
+            <li><a href="">Lima Centro</a></li>
+            <li><a href="">Lima Este</a></li>
+          </ul>
+        </nav>
 
-              <div class="Single-content">
-                <h2 class="Single-title">Inicio de Clases 2016</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem dolore sed et ullam dolor culpa alias, nobis quo similique tenetur accusamus eius saepe voluptate cum inventore nam commodi cumque! Quasi?</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam odit beatae rem, sed cupiditate laboriosam officia adipisci soluta assumenda vitae magni odio ea ducimus voluptates aspernatur, nostrum nulla excepturi voluptatem.</p>
+        <div id="carousel-sedes" class="carousel slide Carousel Carousel--sedes" data-ride="carousel">
+          <!-- Indicators -->
+          <ol class="carousel-indicators">
+            <li data-target="#carousel-sedes" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-sedes" data-slide-to="1"></li>
+            <!-- <li data-target="#carousel-sedes" data-slide-to="2"></li> -->
+          </ol>
 
-                <p><a href="single.html" class="Button Button--small Button--yellow">Admisión 2016</a></p>
+          <!-- Wrapper for slides -->
+          <div class="carousel-inner" role="listbox">
+            <div class="item active">
+              <img class="img-responsive" src="./images/slide-sedes.jpg" />
+              <div class="carousel-caption">
+                <h3>Sala de Juegos</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente, pariatur, aliquam. Cupiditate repudiandae corporis repellat aliquam, illum at, labore, dolor quidem repellendus sunt perspiciatis quam voluptatem quo placeat nulla aspernatur!</p>
               </div>
-            </article>
-
-            <section class="Single-related text-center">
-              <h3 class="Single-related-title text-left">También te puede interesar:</h3>
-              <article class="Box-item">
-                <figure class="Box-figure Box-figure--red">
-                  <img src="./images/posts/single02.jpg" alt="" class="img-responsive center-block">
-                </figure>
-                <article class="Box-content">
-                  <h3 class="Box-title"><a href="single.html">Inicio de Clases 2016</a></h3>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam dignissimos, officia aut nam et voluptatem fuga voluptatibus alias? Magnam laborum nisi quidem harum delectus cupiditate dolorum illum fuga repellat ut.</p>
-                  <p class="text-center"><a href="single.html" class="Button Button--small Button--yellow">Leer más</a></p>
-                </article>
-              </article>
-              <article class="grid-item Box-item">
-                <article class="Box-content Box-content--green">
-                  <h3 class="Box-title"><a href="single.html">Comunicado 2016</a></h3>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam dignissimos, officia aut nam et voluptatem fuga voluptatibus alias? Magnam laborum nisi quidem harum delectus cupiditate dolorum illum fuga repellat ut.</p>
-                  <p class="text-center"><a href="single.html" class="Button Button--small Button--yellow">Leer más</a></p>
-                </article>
-              </article>
-            </section>
+              <p><a class="Button Button--small Button--red" href="">Tour Virtual</a></p>
+            </div>
           </div>
-          <div class="col-md-4">
-            <aside class="Sidebar">
-              <div class="Sidebar-widget">
-                <form class="Form Form--group Form--search">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Buscar">
-                    <span class="input-group-btn">
-                      <button class="btn" type="submit"><i class="icon-search"></i></button>
-                    </span>
-                  </div><!-- /input-group -->
-                </form>
-              </div>
 
-              <div class="Sidebar-widget">
-                <article class="Ad Ad-320">
-                  <a href="">
-                    <img src="./images/banners/banner-320x320.jpg" alt="" class="img-responsive center-block">
-                  </a>
-                </article>
-              </div>
-            </aside>
-          </div>
+          <!-- Controls -->
+          <a class="left carousel-control" href="#carousel-sedes" role="button" data-slide="prev">
+            <i class="icon-keyboard_arrow_left"></i>
+          </a>
+          <a class="right carousel-control" href="#carousel-sedes" role="button" data-slide="next">
+            <i class="icon-keyboard_arrow_right"></i>
+          </a>
         </div>
       </div>
     </section>

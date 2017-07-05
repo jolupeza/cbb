@@ -139,6 +139,18 @@
       }
     }
   }
+  &--blue {
+    li {
+      a {
+        background-color: $blueMenu;
+      }
+      &.current-menu-item, &.active, &:hover {
+        a {
+          background-color: $blue;
+        }
+      }
+    }
+  }
 }
 .MenuCategories {
   margin-bottom: 25px;

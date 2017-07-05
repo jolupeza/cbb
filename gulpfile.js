@@ -46,7 +46,14 @@ gulp.task('inject', function () {
 gulp.task('uncss', ['compress'], function () {
   return gulp.src('./wp-content/themes/cbb/css/style.min.css')
             .pipe(uncss({
-              html: ['./app/index.html', './app/nosotros.html', './app/propuesta.html', './app/blog.html', './app/single.html']
+              html: [
+                './app/index.html',
+                './app/nosotros.html',
+                './app/propuesta.html',
+                './app/blog.html',
+                './app/single.html',
+                './app/infraestructura.html',
+              ]
             }))
             .pipe(gulp.dest('./wp-content/themes/cbb/css'));
 });
