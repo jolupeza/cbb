@@ -1,0 +1,17 @@
+.Contact-title {
+  color: #3c539a;
+  font-size: 1.25em;
+  font-weight: 700;
+  margin-bottom: 0;
+  margin-top: 0;
+  + p {
+    color: #3c539a;
+    margin-bottom: 0;
+  }
+}
+.Contact-map {
+  border: 6px solid $azul;
+  @include border-radius(6px);
+  height: 300px;
+  margin-bottom: 25px;
+}

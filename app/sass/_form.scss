@@ -32,4 +32,16 @@
       }
     }
   }
+  &--fields {
+    .form-control {
+      @include border-radius(6px);
+      border-color: #7f7f7f;
+      color: $text-color;
+      font-size: 1.125em;
+      height: auto;
+      @include input-placeholder {
+        color: $text-color;
+      }
+    }
+  }
 }

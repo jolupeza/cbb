@@ -179,3 +179,34 @@
     }
   }
 }
+.MenuSedes {
+  @include display-flex();
+  @include justify-content(center);
+  margin-bottom: 30px;
+}
+.MenuSedes-list {
+  @include display-flex();
+  @include justify-content(center);
+  color: white;
+  font-family: "reef";
+  font-size: 1.375em;
+  @include flex(0 1 auto);
+  list-style: none;
+  margin-bottom: 0;
+  padding-left: 0;
+  li {
+    background-color: $azul;
+    @include border-radius(4px);
+    @include box-shadow(rgba(black, 0.15) 0 -5px 2px 0 inset);
+    cursor: pointer;
+    margin-right: 10px;
+    padding: 5px 20px;
+    @include transition(all 0.2s ease-out);
+    &.active, &:hover {
+      background-color: #b20028;
+    }
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}

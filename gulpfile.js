@@ -53,6 +53,7 @@ gulp.task('uncss', ['compress'], function () {
                 './app/blog.html',
                 './app/single.html',
                 './app/infraestructura.html',
+                './app/contactanos.html'
               ]
             }))
             .pipe(gulp.dest('./wp-content/themes/cbb/css'));

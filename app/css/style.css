@@ -72,6 +72,10 @@ a {
   font-size: 1.25em;
 }
 
+.text-celeste {
+  color: #4f69bc;
+}
+
 @font-face {
   font-family: 'reef';
   src: url("./../fonts/reef.eot");
@@ -456,6 +460,51 @@ a {
   text-decoration: none;
 }
 
+.MenuSedes {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.MenuSedes-list {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  color: white;
+  font-family: "reef";
+  font-size: 1.375em;
+  -webkit-flex: 0 1 auto;
+  flex: 0 1 auto;
+  list-style: none;
+  margin-bottom: 0;
+  padding-left: 0;
+}
+.MenuSedes-list li {
+  background-color: #3c539a;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.15) 0 -5px 2px 0 inset;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0 -5px 2px 0 inset;
+  box-shadow: rgba(0, 0, 0, 0.15) 0 -5px 2px 0 inset;
+  cursor: pointer;
+  margin-right: 10px;
+  padding: 5px 20px;
+  -moz-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+.MenuSedes-list li.active, .MenuSedes-list li:hover {
+  background-color: #b20028;
+}
+.MenuSedes-list li:last-child {
+  margin-right: 0;
+}
+
 .Carousel--home .carousel-caption {
   -webkit-align-content: center;
   align-content: center;
@@ -741,6 +790,9 @@ a {
 }
 .Page--redSoft {
   background-color: #ce0321;
+}
+.Page--contact p {
+  color: #5c5c5c;
 }
 
 .Page-title {
@@ -1090,6 +1142,27 @@ a {
   color: #7d7d7d;
   font-size: 18px;
 }
+.Form--fields .form-control {
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  border-color: #7f7f7f;
+  color: #5c5c5c;
+  font-size: 1.125em;
+  height: auto;
+}
+.Form--fields .form-control:-moz-placeholder {
+  color: #5c5c5c;
+}
+.Form--fields .form-control::-moz-placeholder {
+  color: #5c5c5c;
+}
+.Form--fields .form-control:-ms-input-placeholder {
+  color: #5c5c5c;
+}
+.Form--fields .form-control::-webkit-input-placeholder {
+  color: #5c5c5c;
+}
 
 .Box {
   display: -webkit-flex;
@@ -1218,4 +1291,25 @@ a {
 
 .Sidebar-widget {
   margin-bottom: 20px;
+}
+
+.Contact-title {
+  color: #3c539a;
+  font-size: 1.25em;
+  font-weight: 700;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+.Contact-title + p {
+  color: #3c539a;
+  margin-bottom: 0;
+}
+
+.Contact-map {
+  border: 6px solid #3c539a;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  height: 300px;
+  margin-bottom: 25px;
 }

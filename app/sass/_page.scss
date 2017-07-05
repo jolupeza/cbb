@@ -16,6 +16,11 @@
   &--redSoft {
     background-color: $redSoft;
   }
+  &--contact {
+    p {
+      color: $text-color;
+    }
+  }
 }
 .Page-title {
   font-family: "reef";
