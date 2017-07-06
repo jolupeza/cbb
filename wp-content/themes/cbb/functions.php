@@ -12,7 +12,7 @@ define('THEMEDOMAIN', 'cbb-framework');
 function load_custom_scripts() {
   wp_enqueue_script('vendor_script', THEMEROOT . '/js/vendor.min.js', array('jquery'), false, true);
   wp_enqueue_script('main_script', THEMEROOT . '/js/main.js', array('jquery'), false, true);
-  wp_localize_script('custom_script', 'CbbAjax', array('url' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('cbbajax-nonce')));
+  wp_localize_script('main_script', 'CbbAjax', array('url' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('cbbajax-nonce')));
 }
 
 add_action('wp_enqueue_scripts', 'load_custom_scripts');
@@ -156,6 +156,128 @@ function cbb_add_excerpts_to_pages() {
 }
 
 add_action('init', 'cbb_add_excerpts_to_pages');
+
+/****************************************/
+/* Setting Mailtrap */
+/****************************************/
+function mailtrap($phpmailer) {
+  $phpmailer->isSMTP();
+  $phpmailer->Host = 'smtp.mailtrap.io';
+  $phpmailer->SMTPAuth = true;
+  $phpmailer->Port = 2525;
+  $phpmailer->Username = 'e6e50f29dbe2dd';
+  $phpmailer->Password = 'f1ea173da928d9';
+}
+
+add_action('phpmailer_init', 'mailtrap');
+
+// Bugs send emails WP 4.6.1
+add_filter('wp_mail_from', function() {
+  return 'no-reply@cbb.edu.pe';
+});
+
+/***********************************************************/
+/* Register subscriptor via ajax */
+/***********************************************************/
+add_action('wp_ajax_register_contact', 'register_contact_callback');
+add_action('wp_ajax_nopriv_register_contact', 'register_contact_callback');
+
+function register_contact_callback()
+{
+  $nonce = $_POST['nonce'];
+  $result = array(
+    'result' => false,
+    'error' => ''
+  );
+
+  if (!wp_verify_nonce($nonce, 'cbbajax-nonce')) {
+      die('¡Acceso denegado!');
+  }
+
+  $name = trim($_POST['contact_name']);
+  $email = trim($_POST['contact_email']);
+  $subject = (int)trim($_POST['contact_subject']);
+  $message = trim($_POST['contact_message']);
+
+  // if (!empty($name) && !empty($email) && is_email($email) && !empty($message) && $subject > 0) {
+  if (!empty($name) && !empty($email) && is_email($email) && !empty($message)) {
+    $options = get_option('cbb_custom_settings');
+
+    $name = sanitize_text_field($name);
+    $email = sanitize_email($email);
+    $message = sanitize_text_field($message);
+
+    // Comprobar subject
+
+    $receiverEmail = $options['email'];
+
+    if (!isset($receiverEmail) || empty($receiverEmail)) {
+      $receiverEmail = get_option('admin_email');
+    }
+
+    $subjectEmail = "Consulta Web Colegio Bertolt Brecht";
+
+    ob_start();
+    $filename = TEMPLATEPATH . '/templates/email-contact.php';
+    if (file_exists($filename)) {
+      include $filename;
+
+      $content = ob_get_contents();
+      ob_get_clean();
+
+      $headers[] = 'From: Colegio Bertolt Brecht';
+      //$headers[] = 'Reply-To: jolupeza@icloud.com';
+      $headers[] = 'Content-type: text/html; charset=utf-8';
+
+      if (wp_mail($receiverEmail, $subjectEmail, $content, $headers)) {
+        // Send email to customer
+        $subjectEmail = "Consulta enviada al Colegio Bertolt Brecht";
+
+        ob_start();
+        $filename = TEMPLATEPATH . '/templates/email-gratitude.php';
+        if (file_exists($filename)) {
+          $textEmail = 'Ya tenemos su consulta. En breve nos pondremos en contacto con usted.';
+
+          include $filename;
+
+          $content = ob_get_contents();
+          ob_get_clean();
+
+          $headers[] = 'From: Colegio Bertolt Brecht';
+          //$headers[] = 'Reply-To: jolupeza@icloud.com';
+          $headers[] = 'Content-type: text/html; charset=utf-8';
+
+          wp_mail($email, $subjectEmail, $content, $headers);
+
+          $post_id = wp_insert_post(array(
+              'post_author' => 1,
+              'post_status' => 'publish',
+              'post_type' => 'contacts',
+          ));
+          update_post_meta($post_id, 'mb_name', $name);
+          update_post_meta($post_id, 'mb_email', $email);
+          // Falta subject
+          update_post_meta($post_id, 'mb_message', $message);
+
+          $result['result'] = true;
+        } else {
+          $result['error'] = 'Plantilla email no encontrada.';
+          ob_get_clean();
+        }
+      } else {
+        $result['error'] = 'No se puedo enviar el email.';
+      }
+    } else {
+      $result['error'] = 'Plantilla email no encontrada.';
+      ob_get_clean();
+    }
+  } else {
+    $result['error'] = 'Verifique que ha ingresado los datos correctamente.';
+  }
+
+  echo json_encode($result);
+  die();
+}
 
 /**********************************************/
 /* Load Theme Options Page and Custom Widgets */

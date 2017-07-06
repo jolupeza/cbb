@@ -44,7 +44,6 @@
             $values = get_post_custom(get_the_id());
             $title = isset($values['mb_title']) ? esc_attr($values['mb_title'][0]) : '';
             $subtitle = isset($values['mb_subtitle']) ? esc_attr($values['mb_subtitle'][0]) : '';
-            // $text = isset($values['mb_text']) ? esc_attr($values['mb_text'][0]) : '';
             // $url = isset($values['mb_url']) ? esc_attr($values['mb_url'][0]) : '';
             // $target = isset($values['mb_target']) ? esc_attr($values['mb_target'][0]) : '';
             // $target = (!empty($target) && $target === 'on') ? ' target="_blank" rel="noopener noreferrer"' : '';

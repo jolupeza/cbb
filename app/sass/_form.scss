@@ -43,5 +43,12 @@
         color: $text-color;
       }
     }
+    .Form-loader {
+      color: white;
+      display: inline-block;
+      font-size: 1em;
+      margin: 0 0 0 10px;
+      vertical-align: middle;
+    }
   }
 }

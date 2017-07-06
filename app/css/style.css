@@ -1163,6 +1163,13 @@ a {
 .Form--fields .form-control::-webkit-input-placeholder {
   color: #5c5c5c;
 }
+.Form--fields .Form-loader {
+  color: white;
+  display: inline-block;
+  font-size: 1em;
+  margin: 0 0 0 10px;
+  vertical-align: middle;
+}
 
 .Box {
   display: -webkit-flex;
