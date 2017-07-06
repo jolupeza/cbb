@@ -1,55 +1,52 @@
-<section class="PageHome">
-      <div class="container">
-        <h3 class="PageHome-subtitle text-center">Nuestras actividades</h3>
-        <h2 class="PageHome-title text-center">Imperdibles</h2>
+<?php
+  $args = [
+    'post_type' => 'post',
+    'posts_per_page' => 4
+  ];
 
-        <section class="PageHome-cols PageHome-info PageHome-info--blog">
-          <article class="PageHome-item">
-            <figure class="PageHome-info-figure">
-              <img class="img-responsive center-block" src="https://lorempixel.com/400/352" alt="" />
-              <aside class="PageHome-info-date text-center">
-                <span class="day">10</span>
-                <span class="month">Mar</span>
-              </aside>
-            </figure>
-            <h4 class="PageHome-info-title"><a href="">Inicio de Clases 2016</a></h4>
-            <p class="PageHome-info-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic voluptas in saepe nesciunt nihil, voluptates vitae voluptatum. Magni quasi debitis aperiam, neque fugiat, dignissimos eum dolores at illo quisquam quam.</p>
-          </article>
-          <article class="PageHome-item">
-            <figure class="PageHome-info-figure">
-              <img class="img-responsive center-block" src="https://lorempixel.com/400/352" alt="" />
-              <aside class="PageHome-info-date text-center">
-                <span class="day">10</span>
-                <span class="month">Mar</span>
-              </aside>
-            </figure>
-            <h4 class="PageHome-info-title"><a href="">Inicio de Clases 2016</a></h4>
-            <p class="PageHome-info-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias blanditiis, totam at iure voluptatem itaque porro laborum architecto quae ex voluptates aut soluta sit accusamus perferendis possimus sequi fugit quaerat!</p>
-          </article>
-          <article class="PageHome-item">
-            <figure class="PageHome-info-figure">
-              <img class="img-responsive center-block" src="https://lorempixel.com/400/352" alt="" />
-              <aside class="PageHome-info-date text-center">
-                <span class="day">10</span>
-                <span class="month">Mar</span>
-              </aside>
-            </figure>
-            <h4 class="PageHome-info-title"><a href="">Inicio de Clases 2016</a></h4>
-            <p class="PageHome-info-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur tempora nam dignissimos amet beatae vitae vero id veniam dolorem, molestias rem quo cumque. Accusamus aliquid pariatur, fugit ex commodi asperiores.</p>
-          </article>
-          <article class="PageHome-item">
-            <figure class="PageHome-info-figure">
-              <img class="img-responsive center-block" src="https://lorempixel.com/400/352" alt="" />
-              <aside class="PageHome-info-date text-center">
-                <span class="day">10</span>
-                <span class="month">Mar</span>
-              </aside>
-            </figure>
-            <h4 class="PageHome-info-title"><a href="">Inicio de Clases 2016</a></h4>
-            <p class="PageHome-info-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente fuga, omnis, alias laudantium eius quod doloribus labore, nisi, magni dolorem accusantium quo vitae repellendus rerum. Hic fuga, ad eaque expedita!</p>
-          </article>
-        </section>
+  $the_query = new WP_Query($args);
 
-        <p class="text-center"><a class="Button Button--blue" href="">ver agenda escolar</a></p>
-      </div>
-    </section>
+  if ($the_query->have_posts()) :
+?>
+  <section class="PageHome">
+    <div class="container">
+      <h3 class="PageHome-subtitle text-center">Nuestras actividades</h3>
+      <h2 class="PageHome-title text-center">Imperdibles</h2>
+
+      <section class="PageHome-cols PageHome-info PageHome-info--blog">
+        <?php while ($the_query->have_posts()) : ?>
+          <?php $the_query->the_post(); ?>
+          <article class="PageHome-item">
+            <?php if (has_post_thumbnail()) : ?>
+              <figure class="PageHome-info-figure">
+                <?php the_post_thumbnail('medium', [
+                    'class' => 'img-responsive center-block',
+                    'alt' => get_the_title()
+                  ]);
+                ?>
+                <aside class="PageHome-info-date text-center">
+                  <span class="day"><?php echo get_the_date('d'); ?></span>
+                  <span class="month"><?php echo get_the_date('M'); ?></span>
+                </aside>
+              </figure>
+            <?php else : ?>
+              <figure class="PageHome-info-figure PageHome-info-figure--noImage">
+                <aside class="PageHome-info-date PageHome-info-date--noImage text-center">
+                  <span class="day"><?php echo get_the_date('d'); ?></span>
+                  <span class="month"><?php echo get_the_date('M'); ?></span>
+                </aside>
+              </figure>
+            <?php endif; ?>
+            <h4 class="PageHome-info-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
+            <div class="PageHome-info-text">
+              <?php the_content(' '); ?>
+            </div>
+          </article>
+        <?php endwhile; ?>
+      </section>
+
+      <p class="text-center"><a class="Button Button--blue" href="<?php echo home_url('vida-escolar'); ?>">ver agenda escolar</a></p>
+    </div>
+  </section>
+<?php endif; ?>
+<?php wp_reset_postdata(); ?>
