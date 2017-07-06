@@ -2,7 +2,9 @@
       $args = [
         'post_type' => 'locals',
         'posts_per_page' => -1,
-        'post_parent' => 0
+        'post_parent' => 0,
+        'orderby' => 'menu_order',
+        'order' => 'ASC'
       ];
 
       $the_query = new WP_Query($args);
@@ -87,5 +89,9 @@
     </script>
 
     <?php wp_footer(); ?>
+    <?php if (is_page('contactanos')) : ?>
+      <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcwEHssQPFRTJKnufst79FirJGX9NXo2o"></script> -->
+      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcwEHssQPFRTJKnufst79FirJGX9NXo2o&callback=initMap"></script>
+    <?php endif; ?>
   </body>
 </html>

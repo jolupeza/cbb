@@ -185,6 +185,7 @@
   margin-bottom: 30px;
 }
 .MenuSedes-list {
+  border-bottom: none;
   @include display-flex();
   @include justify-content(center);
   color: white;
@@ -207,6 +208,25 @@
     }
     &:last-child {
       margin-right: 0;
+    }
+  }
+  > li {
+    float: none;
+    margin-bottom: 0;
+    &.active {
+      > a, a:focus, a:hover {
+        background-color: transparent;
+        border: none;
+        color: white;
+      }
+    }
+    > a {
+      @include border-radius(none);
+      color: white;
+      &:hover, &:focus {
+        border-color: transparent;
+        text-decoration: none;
+      }
     }
   }
 }

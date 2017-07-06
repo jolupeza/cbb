@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,600,700");
-@import url("https://fonts.googleapis.com/css?family=Roboto");
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,700");
 body {
   background-color: #fcfbfb;
   font-family: "Source Sans Pro", sans-serif;
@@ -455,6 +455,7 @@ a {
 }
 
 .MenuSedes-list {
+  border-bottom: none;
   display: -webkit-flex;
   display: flex;
   -webkit-justify-content: center;
@@ -489,6 +490,25 @@ a {
 }
 .MenuSedes-list li:last-child {
   margin-right: 0;
+}
+.MenuSedes-list > li {
+  float: none;
+  margin-bottom: 0;
+}
+.MenuSedes-list > li.active > a, .MenuSedes-list > li.active a:focus, .MenuSedes-list > li.active a:hover {
+  background-color: transparent;
+  border: none;
+  color: white;
+}
+.MenuSedes-list > li > a {
+  -moz-border-radius: none;
+  -webkit-border-radius: none;
+  border-radius: none;
+  color: white;
+}
+.MenuSedes-list > li > a:hover, .MenuSedes-list > li > a:focus {
+  border-color: transparent;
+  text-decoration: none;
 }
 
 .Carousel--home .carousel-caption {
@@ -1318,4 +1338,26 @@ a {
   border-radius: 6px;
   height: 300px;
   margin-bottom: 25px;
+}
+
+.Marker {
+  padding-top: 15px;
+}
+
+.Marker-list {
+  padding-left: 0;
+}
+.Marker-list li {
+  font-size: 14px;
+  list-style: none;
+  margin-bottom: 10px;
+}
+.Marker-list li strong {
+  font-weight: 700;
+}
+
+.Marker-title {
+  font-family: "reef";
+  font-size: 1.75em;
+  margin-top: 0;
 }

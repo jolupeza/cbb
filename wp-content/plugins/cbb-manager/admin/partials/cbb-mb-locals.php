@@ -13,6 +13,8 @@
         $values = get_post_custom( get_the_ID() );
         $address = isset($values['mb_address']) ? esc_attr($values['mb_address'][0]) : '';
         $phone = isset($values['mb_phone']) ? esc_attr($values['mb_phone'][0]) : '';
+        $lat = isset($values['mb_lat']) ? esc_attr($values['mb_lat'][0]) : '';
+        $long = isset($values['mb_long']) ? esc_attr($values['mb_long'][0]) : '';
 
         wp_nonce_field( 'locals_meta_box_nonce', 'meta_box_nonce' );
     ?>
@@ -27,5 +29,17 @@
     <p class="content-mb">
         <label for="mb_phone">Teléfono: </label>
         <input type="text" name="mb_phone" id="mb_phone" value="<?php echo $phone; ?>" />
+    </p>
+    
+    <!-- Latitud -->
+    <p class="content-mb">
+        <label for="mb_lat">Google Map Latitud: </label>
+        <input type="text" name="mb_lat" id="mb_lat" value="<?php echo $lat; ?>" />
+    </p>
+    
+    <!-- Longitud -->
+    <p class="content-mb">
+        <label for="mb_long">Google Map Longitud: </label>
+        <input type="text" name="mb_long" id="mb_long" value="<?php echo $long; ?>" />
     </p>
 </div><!-- #mb-locals-id -->

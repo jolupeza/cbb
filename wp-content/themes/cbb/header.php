@@ -24,6 +24,9 @@
     <?php if (is_singular()) wp_enqueue_script( 'comment-reply' ); ?>
 
     <?php wp_head(); ?>
+    <script>
+      var map, marker, infowindow, lat, long, idMap;
+    </script>
   </head>
   <body <?php body_class(); ?> data-spy="scroll" data-target=".Header-menu">
     <header class="Header">
