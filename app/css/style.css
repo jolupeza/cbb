@@ -12,20 +12,6 @@ body.home .Header.affix-top .Menu--home {
 body.home .Header.affix .Menu--home {
   visibility: visible;
 }
-body.tax-areas .MainMenu > li:hover > a, body.tax-areas .MainMenu > li.active > a, body.tax-areas .MainMenu > li.menu-item-object-category > a {
-  background-color: transparent;
-  border-bottom: 3px solid #fcfbfb;
-}
-body.tax-areas .Header.affix .MainMenu > li:hover > a, body.tax-areas .Header.affix .MainMenu > li.active > a, body.tax-areas .Header.affix .MainMenu > li.menu-item-object-category > a {
-  border-bottom: 3px solid #fcfbfb;
-}
-body.tax-areas .Header.affix .MainMenu > li a::after {
-  border-bottom-color: #8b041c;
-}
-body.tax-areas .Header.affix .MainMenu .sub-menu {
-  background-color: #8b041c;
-  bottom: -28px;
-}
 body.single-locals .MainMenu > li:hover > a, body.single-locals .MainMenu > li.active > a, body.single-locals .MainMenu > li.menu-item-object-locals > a {
   background-color: transparent;
   border-bottom: 3px solid #fcfbfb;
@@ -244,7 +230,7 @@ a {
   background-color: #b00725;
   padding: 10px 0;
 }
-.Header.affix .MainMenu > li:hover > a, .Header.affix .MainMenu > li.active > a, .Header.affix .MainMenu > li.current-menu-item > a, .Header.affix .MainMenu > li.current-post-ancestor > a {
+.Header.affix .MainMenu > li:hover > a, .Header.affix .MainMenu > li.active > a, .Header.affix .MainMenu > li.current-menu-item > a, .Header.affix .MainMenu > li.current-post-ancestor > a, .Header.affix .MainMenu > li.current-category-ancestor > a {
   border-bottom: 3px solid #fcfbfb;
 }
 .Header.affix .MainMenu > li a::after {
@@ -315,7 +301,7 @@ a {
 .MainMenu > li {
   position: static;
 }
-.MainMenu > li:hover > a, .MainMenu > li.active > a, .MainMenu > li.current-menu-item > a, .MainMenu > li.current-post-ancestor > a {
+.MainMenu > li:hover > a, .MainMenu > li.active > a, .MainMenu > li.current-menu-item > a, .MainMenu > li.current-post-ancestor > a, .MainMenu > li.current-category-ancestor > a {
   background-color: transparent;
   border-bottom: 3px solid #fcfbfb;
 }
@@ -455,7 +441,7 @@ a {
   font-size: 1.125em;
   padding: 8px 20px;
 }
-.MenuCategories-list li.active a, .MenuCategories-list li:hover a {
+.MenuCategories-list li.active a, .MenuCategories-list li.current-menu-item a, .MenuCategories-list li:hover a {
   background-color: #f37519;
   text-decoration: none;
 }

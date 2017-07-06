@@ -42,7 +42,7 @@
   }
   > li {
     position: static;
-    &:hover, &.active, &.current-menu-item, &.current-post-ancestor {
+    &:hover, &.active, &.current-menu-item, &.current-post-ancestor, &.current-category-ancestor {
       > a {
         background-color: transparent;
         border-bottom: 3px solid $white;
@@ -171,7 +171,7 @@
       font-size: 1.125em;
       padding: 8px 20px;
     }
-    &.active, &:hover {
+    &.active, &.current-menu-item, &:hover {
       a {
         background-color: $orange;
         text-decoration: none;
