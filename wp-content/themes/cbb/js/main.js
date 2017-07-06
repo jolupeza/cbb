@@ -8,8 +8,8 @@ var j = jQuery.noConflict();
       $animationElements = j('.animation-element');
 
   function affixHeader() {
-    // var single = j('body').hasClass('single') ? true : false;
-    // if (!single) {
+    var single = j('body').hasClass('single-post') ? true : false;
+    if (!single) {
       j('.Header').affix({
         offset: {
           top: function () {
@@ -17,9 +17,9 @@ var j = jQuery.noConflict();
           }
         }
       });
-    // } else {
-    //   j('.Header').addClass('affix');
-    // }
+    } else {
+      j('.Header').addClass('affix');
+    }
   }
 
   function checkIfInView() {
