@@ -160,7 +160,7 @@ add_action('init', 'cbb_add_excerpts_to_pages');
 /****************************************/
 /* Setting Mailtrap */
 /****************************************/
-function mailtrap($phpmailer) {
+/*function mailtrap($phpmailer) {
   $phpmailer->isSMTP();
   $phpmailer->Host = 'smtp.mailtrap.io';
   $phpmailer->SMTPAuth = true;
@@ -169,7 +169,7 @@ function mailtrap($phpmailer) {
   $phpmailer->Password = 'f1ea173da928d9';
 }
 
-add_action('phpmailer_init', 'mailtrap');
+add_action('phpmailer_init', 'mailtrap');*/
 
 // Bugs send emails WP 4.6.1
 add_filter('wp_mail_from', function() {

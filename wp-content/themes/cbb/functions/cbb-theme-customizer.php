@@ -130,4 +130,24 @@ function cbb_customize_register($wp_customize) {
     'type'       => 'select',
     'choices'    => $sects,
   ));
+
+  // Information
+  $wp_customize->add_section('cbb_info', [
+    'title' => __('Información de la Web', THEMEDOMAIN),
+    'description' => __('Configuración acerca de información relevante de la Web', THEMEDOMAIN),
+    'priority' => 37
+  ]);
+
+  // Youtube
+  $wp_customize->add_setting('cbb_custom_settings[email]', [
+    'default' => '',
+    'type' => 'option'
+  ]);
+
+  $wp_customize->add_control('cbb_custom_settings[email]', [
+    'label' => __('Email', THEMEDOMAIN),
+    'section' => 'cbb_info',
+    'settings' => 'cbb_custom_settings[email]',
+    'type' => 'text'
+  ]);
 }
