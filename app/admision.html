@@ -9,7 +9,6 @@
     <!-- bower:css -->
     <link rel="stylesheet" href="./../bower_components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="./../node_modules/animate.css/animate.css" />
-    <link rel="stylesheet" href="./libs/formvalidation/dist/css/formValidation.css" />
     <!-- endbower -->
     <!-- inject:css -->
     <link rel="stylesheet" href="css/style.css">
@@ -53,11 +52,11 @@
                     <li><a href="">Integración Educativa</a></li>
                   </ul>
                 </li>
-                <li class="active"><a href="">Infraestructura</a></li>
+                <li><a href="">Infraestructura</a></li>
                 <li><a href="blog.html">Vida Escolar</a></li>
-                <li><a href="contactanos.html">Contáctanos</a></li>
+                <li><a href="">Contáctanos</a></li>
                 <li><a href="">Repositorio</a></li>
-                <li><a href="admision.html">Admisión</a></li>
+                <li class="active"><a href="">Admisión</a></li>
               </ul>
             </menu>
           </div>
@@ -65,72 +64,72 @@
       </div>
     </header>
 
-    <section id="carousel-infraestructura" class="carousel slide Carousel Carousel--home">
-      <!-- <ol class="carousel-indicators">
-        <li data-target="#carousel-infraestructura" data-slide-to="0" class="active"></li>
-      </ol> -->
-
-      <div class="carousel-inner" role="listbox">
-        <div class="item active">
-          <img src="images/slide-infraestructura.jpg" alt="Slide Infraestructura" />
-          <div class="carousel-caption">
-            <h3>aprendes más</h3>
-            <h2>estando feliz</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae natus deserunt perspiciatis possimus.</p>
-            <p><a class="Button Button--red" href="">conocer más</a></p>
-          </div>
-        </div>
-      </div>
-
-      <!-- <a class="left carousel-control" href="#carousel-infraestructura" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="right carousel-control" href="#carousel-infraestructura" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a> -->
-
-      <button class="Arrow js-move-scroll" href="">ir abajo <i class="glyphicon glyphicon-chevron-down"></i></button>
-    </section>
-
-    <section class="Page">
+    <section class="Page Page--contact">
       <div class="container">
-        <nav class="MenuZone">
-          <ul class="MenuZone-list MenuZone-list--blue">
-            <li class="active"><a href="">Lima Norte</a></li>
-            <li><a href="">Lima Centro</a></li>
-            <li><a href="">Lima Este</a></li>
-          </ul>
-        </nav>
+        <div class="row">
+          <div class="col-md-6">
+            <h2 class="Page-title text-celeste">Admisión 2018</h2>
+            <p>¡Ingresa tus datos y empieza el proceso de admisión en <strong>Bertolt Brecht!</strong></p>
 
-        <div id="carousel-sedes" class="carousel slide Carousel Carousel--sedes" data-ride="carousel">
-          <!-- Indicators -->
-          <ol class="carousel-indicators">
-            <li data-target="#carousel-sedes" data-slide-to="0" class="active"></li>
-            <li data-target="#carousel-sedes" data-slide-to="1"></li>
-            <!-- <li data-target="#carousel-sedes" data-slide-to="2"></li> -->
-          </ol>
-
-          <!-- Wrapper for slides -->
-          <div class="carousel-inner" role="listbox">
-            <div class="item active">
-              <img class="img-responsive" src="./images/slide-sedes.jpg" />
-              <div class="carousel-caption">
-                <h3>Sala de Juegos</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente, pariatur, aliquam. Cupiditate repudiandae corporis repellat aliquam, illum at, labore, dolor quidem repellendus sunt perspiciatis quam voluptatem quo placeat nulla aspernatur!</p>
+            <form class="Form Form--fields">
+              <h3 class="Form-title">1. Datos del padre de familia</h3>
+              <div class="form-group">
+                <label for="parent_name" class="sr-only">Nombre completo</label>
+                <input type="text" class="form-control" name="parent_name" placeholder="Nombre completo">
               </div>
-              <p><a class="Button Button--small Button--red" href="">Tour Virtual</a></p>
-            </div>
-          </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="parent_dni" class="sr-only">DNI / CE</label>
+                    <input type="text" class="form-control" name="parent_dni" placeholder="DNI / CE">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="parent_phone" class="sr-only">Teléfono / Celular</label>
+                    <input type="text" class="form-control" name="parent_phone" placeholder="Teléfono / Celular">
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="parent_email" class="sr-only">Correo electrónico</label>
+                <input type="email" class="form-control" name="parent_email" placeholder="Correo electrónico">
+              </div>
+              <div class="form-group">
+                <label for="parent_sede" class="sr-only">Sede</label>
+                <select name="parent_sede" class="form-control">
+                  <option value="">-- Seleccione la sede de interés --</option>
+                </select>
+              </div>
 
-          <!-- Controls -->
-          <a class="left carousel-control" href="#carousel-sedes" role="button" data-slide="prev">
-            <i class="icon-keyboard_arrow_left"></i>
-          </a>
-          <a class="right carousel-control" href="#carousel-sedes" role="button" data-slide="next">
-            <i class="icon-keyboard_arrow_right"></i>
-          </a>
+              <h3 class="Form-title">2. Datos del hijo de postular</h3>
+              <div class="form-group">
+                <label for="son_name" class="sr-only">Nombre completo</label>
+                <input type="text" class="form-control" name="son_name" placeholder="Nombre completo">
+              </div>
+              <div class="form-group">
+                <label for="son_grado" class="sr-only">Grado</label>
+                <select name="son_grado" class="form-control">
+                  <option value="">-- Seleccione el grado al que desea postular --</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" name="parent_terms"> Acepto las condiciones del proceso de admisión 2018
+                  </label>
+                </div>
+              </div>
+              <p class="text-center">
+                <button type="submit" class="btn Button Button--blue Button--medium">enviar</button>
+              </p>
+            </form>
+          </div>
+          <div class="col-md-6">
+            <figure class="Page-figure text-center">
+              <img src="images/bg-admision.jpg" alt="Admisión" class="img-responsive center-block" />
+            </figure>
+          </div>
         </div>
       </div>
     </section>
@@ -193,9 +192,6 @@
     <script src="./../bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="./../node_modules/jquery.easing/jquery.easing.js"></script>
     <script src="./../node_modules/isotope-layout/dist/isotope.pkgd.js"></script>
-    <script src="./libs/formvalidation/dist/js/formValidation.js"></script>
-    <script src="./libs/formvalidation/dist/js/framework/bootstrap.js"></script>
-    <script src="./libs/formvalidation/dist/js/language/es_ES.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:js js/app.min.js -->

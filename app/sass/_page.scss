@@ -19,6 +19,10 @@
   &--contact {
     p {
       color: $text-color;
+      strong {
+        font-family: "reef";
+        font-size: 1.125em;
+      }
     }
   }
 }

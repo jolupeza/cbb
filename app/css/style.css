@@ -813,6 +813,10 @@ a {
 .Page--contact p {
   color: #5c5c5c;
 }
+.Page--contact p strong {
+  font-family: "reef";
+  font-size: 1.125em;
+}
 
 .Page-title {
   font-family: "reef";
@@ -1188,6 +1192,11 @@ a {
   font-size: 1em;
   margin: 0 0 0 10px;
   vertical-align: middle;
+}
+.Form--fields .Form-title {
+  color: #3551ac;
+  font-family: "reef";
+  font-size: 1.375em;
 }
 
 .Box {
