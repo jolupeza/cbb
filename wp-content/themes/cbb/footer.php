@@ -90,7 +90,54 @@
 
     <?php wp_footer(); ?>
     <?php if (is_page('contactanos')) : ?>
-      <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcwEHssQPFRTJKnufst79FirJGX9NXo2o"></script> -->
+      <script>
+        if (infoMaps.length) {
+          function initMap() {
+            infoMaps.forEach( function(info) {
+              contentString = '<div id="content" class="Marker">'+
+                    '<div id="siteNotice">'+
+                    '</div>'+
+                    '<h1 id="firstHeading" class="firstHeading Marker-title text-center">Colegio Bertolt Brecht</h1>'+
+                    '<div id="bodyContent" class="Marker-body">'+
+                    '<ul class="Marker-list">'+
+                    '<li><strong>Dirección: </strong>' + info.address + '</li>'+
+                    '<li><strong>Teléfono: </strong>' + info.phone + '</li>'+
+                    '</ul>'+
+                    '</div>'+
+                    '</div>';
+
+              var mapCoord = new google.maps.LatLng(info.lat, info.long);
+              var options = {
+                zoom: 16,
+                center: mapCoord,
+                scrollwheel: false,
+              };
+
+              info.infowindow = new google.maps.InfoWindow({
+                content: contentString,
+                maxWidth: 300
+              });
+
+              info.map = new google.maps.Map(document.getElementById(info.id), options);
+
+              info.marker = new google.maps.Marker({
+                position: mapCoord,
+                map: info.map,
+                title: 'Colegio Bertolt Brecht'
+              });
+
+              info.marker.addListener('click', function() {
+                info.infowindow.open(info.map, info.marker);
+              });
+
+              // var currentCenter = info.map.getCenter();
+              // google.maps.event.trigger(info.map, "resize");
+              // info.map.setCenter(currentCenter);
+            });
+          }
+        }
+      </script>
+
       <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcwEHssQPFRTJKnufst79FirJGX9NXo2o&callback=initMap"></script>
     <?php endif; ?>
   </body>

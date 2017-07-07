@@ -172,51 +172,19 @@
                   <p><?php echo $phone; ?></p>
                 <?php endif; ?>
 
-                <?php if ($j === 0) : ?>
-                  <script>
-                    lat = '<?php echo $lat; ?>';
-                    long = '<?php echo $long; ?>';
-                    idMap = '<?php echo "{$post->post_name}-map"; ?>';
+                <script>
+                  infoMaps.push({
+                    id: "<?php echo $post->post_name; ?>-map",
+                    lat: <?php echo $lat; ?>,
+                    long: <?php echo $long; ?>,
+                    address: '<?php echo $address; ?>',
+                    phone: '<?php echo $phone; ?>',
+                    map: {},
+                    marker: {},
+                    infowindow: {}
+                  });
+                </script>
 
-                    contentString = '<div id="content" class="Marker">'+
-                          '<div id="siteNotice">'+
-                          '</div>'+
-                          '<h1 id="firstHeading" class="firstHeading Marker-title text-center">Colegio Bertolt Brecht</h1>'+
-                          '<div id="bodyContent" class="Marker-body">'+
-                          '<ul class="Marker-list">'+
-                          '<li><strong>Dirección: </strong><?php echo $address; ?></li>'+
-                          '<li><strong>Teléfono: </strong><?php echo $phone; ?></li>'+
-                          '</ul>'+
-                          '</div>'+
-                          '</div>';
-
-                    function initMap() {
-                      var mapCoord = new google.maps.LatLng(lat, long);
-                      var opciones = {
-                        zoom: 16,
-                        center: mapCoord,
-                        scrollwheel: false,
-                      };
-
-                      infowindow = new google.maps.InfoWindow({
-                        content: contentString,
-                        maxWidth: 300
-                      });
-
-                      map = new google.maps.Map(document.getElementById(idMap), opciones);
-
-                      marker = new google.maps.Marker({
-                        position: mapCoord,
-                        map: map,
-                        title: 'Colegio Bertolt Brecht'
-                      });
-
-                      marker.addListener('click', function() {
-                        infowindow.open(map, marker);
-                      });
-                    }
-                  </script>
-                <?php endif; ?>
               </div>
               <?php $j++; ?>
             <?php endwhile; ?>

@@ -25,7 +25,7 @@
 
     <?php wp_head(); ?>
     <script>
-      var map, marker, infowindow, lat, long, idMap;
+      var infoMaps = [];
     </script>
   </head>
   <body <?php body_class(); ?> data-spy="scroll" data-target=".Header-menu">

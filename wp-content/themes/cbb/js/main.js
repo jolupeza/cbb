@@ -42,32 +42,6 @@ var j = jQuery.noConflict();
     });
   }
 
-  function loadMap(latPriv, longPriv, idPriv, contentString) {
-    var mapCoord = new google.maps.LatLng(latPriv, longPriv);
-    var opciones = {
-      zoom: 16,
-      center: mapCoord,
-      scrollwheel: false,
-    };
-
-    infowindow = new google.maps.InfoWindow({
-      content: contentString,
-      maxWidth: 300
-    });
-
-    map = new google.maps.Map(document.getElementById(idPriv), opciones);
-
-    marker = new google.maps.Marker({
-      position: mapCoord,
-      map: map,
-      title: 'Colegio Bertolt Brecht'
-    });
-
-    marker.addListener('click', function() {
-      infowindow.open(map, marker);
-    });
-  }
-
   $win.on('scroll resize', checkIfInView);
 
   $win.on('scroll', function(event) {
@@ -160,35 +134,6 @@ var j = jQuery.noConflict();
         alert('No se pudo realizar la operación solicitada. Por favor vuelva a intentarlo.');
       });
     });
-
-    j('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
-      // console.log(j(e.target));
-      // console.log(e.relatedTarget);
-
-      var tab = j(e.target),
-          info = j(tab.attr('href') + ' figure.Contact-map');
-
-      lat = info.data('lat');
-      long = info.data('long');
-      idMap = info.attr('id');
-
-      var address = info.data('address'),
-          phone = info.data('phone');
-
-      var contentString = '<div id="content" class="Marker">'+
-            '<div id="siteNotice">'+
-            '</div>'+
-            '<h1 id="firstHeading" class="firstHeading Marker-title text-center">Colegio Bertolt Brecht</h1>'+
-            '<div id="bodyContent" class="Marker-body">'+
-            '<ul class="Marker-list">'+
-            '<li><strong>Dirección: </strong>' + address + '</li>'+
-            '<li><strong>Teléfono: </strong>' + phone + '</li>'+
-            '</ul>'+
-            '</div>'+
-            '</div>';
-
-      loadMap(lat, long, idMap, contentString);
-    })
 
     // j('.grid').isotope({
     //   itemSelector: '.grid-item',
