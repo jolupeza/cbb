@@ -279,6 +279,128 @@ function register_contact_callback()
   die();
 }
 
+/***********************************************************/
+/* Register subscriptor via ajax */
+/***********************************************************/
+add_action('wp_ajax_register_admision', 'register_admision_callback');
+add_action('wp_ajax_nopriv_register_admision', 'register_admision_callback');
+
+function register_admision_callback()
+{
+  $nonce = $_POST['nonce'];
+  $result = array(
+    'result' => false,
+    'error' => ''
+  );
+
+  if (!wp_verify_nonce($nonce, 'cbbajax-nonce')) {
+      die('¡Acceso denegado!');
+  }
+
+  $name = trim($_POST['parent_name']);
+  $dni = trim($_POST['parent_dni']);
+  $phone = trim($_POST['parent_phone']);
+  $email = trim($_POST['parent_email']);
+  $sede = (int)trim($_POST['parent_sede']);
+  $sonName = trim($_POST['son_name']);
+  $level = (int)trim($_POST['son_level']);
+
+  if (!empty($name) && !empty($dni) && preg_match('/^[0-9]+$/', $dni) && strlen($dni) === 8 && !empty($phone) && preg_match('/^[0-9]+$/', $phone) && (strlen($phone) > 6 || strlen($phone) < 10) && !empty($email) && is_email($email) && $sede > 0 && !empty($sonName) && $level > 0) {
+    $options = get_option('cbb_custom_settings');
+
+    $name = sanitize_text_field($name);
+    $dni = sanitize_text_field($dni);
+    $phone = sanitize_text_field($phone);
+    $email = sanitize_email($email);
+    $sonName = sanitize_text_field($sonName);
+
+    // Validate Sede
+    $dataSede = get_post($sede);
+    if (!is_null($dataSede)) {
+      // Validate Level
+      $dataLevel = get_term_by('id', $level, 'levels');
+
+      if (is_object($dataLevel)) {
+        $receiverEmail = $options['email'];
+
+        if (!isset($receiverEmail) || empty($receiverEmail)) {
+          $receiverEmail = get_option('admin_email');
+        }
+
+        $subjectEmail = "Admisión Colegio Bertolt Brecht";
+
+        ob_start();
+        $filename = TEMPLATEPATH . '/templates/email-admision.php';
+        if (file_exists($filename)) {
+          include $filename;
+
+          $content = ob_get_contents();
+          ob_get_clean();
+
+          $headers[] = 'From: Colegio Bertolt Brecht';
+          //$headers[] = 'Reply-To: jolupeza@icloud.com';
+          $headers[] = 'Content-type: text/html; charset=utf-8';
+
+          if (wp_mail($receiverEmail, $subjectEmail, $content, $headers)) {
+            // Send email to customer
+            $subjectEmail = "Formulario de Admisión enviada al Colegio Bertolt Brecht";
+
+            ob_start();
+            $filename = TEMPLATEPATH . '/templates/email-gratitude.php';
+            if (file_exists($filename)) {
+              $textEmail = 'Gracias por registrarse. En breve nos pondremos en contacto con usted.';
+
+              include $filename;
+
+              $content = ob_get_contents();
+              ob_get_clean();
+
+              $headers[] = 'From: Colegio Bertolt Brecht';
+              //$headers[] = 'Reply-To: jolupeza@icloud.com';
+              $headers[] = 'Content-type: text/html; charset=utf-8';
+
+              wp_mail($email, $subjectEmail, $content, $headers);
+
+              $post_id = wp_insert_post(array(
+                  'post_author' => 1,
+                  'post_status' => 'publish',
+                  'post_type' => 'prestudents',
+              ));
+              update_post_meta($post_id, 'mb_name', $name);
+              update_post_meta($post_id, 'mb_dni', $dni);
+              update_post_meta($post_id, 'mb_phone', $phone);
+              update_post_meta($post_id, 'mb_email', $email);
+              update_post_meta($post_id, 'mb_sede', $sede);
+              update_post_meta($post_id, 'mb_sonName', $sonName);
+              update_post_meta($post_id, 'mb_year', date("Y") + 1);
+              wp_set_object_terms($post_id, $level, 'levels');
+
+              $result['result'] = true;
+            } else {
+              $result['error'] = 'Plantilla email no encontrada.';
+              ob_get_clean();
+            }
+          } else {
+            $result['error'] = 'No se puedo enviar el email.';
+          }
+        } else {
+          $result['error'] = 'Plantilla email no encontrada.';
+          ob_get_clean();
+        }
+      } else {
+        $result['error'] = 'Debe seleccionar el grado al que desea postular.';
+      }
+    } else {
+      $result['error'] = 'Debe seleccionar la sede de su interés.';
+    }
+  } else {
+    $result['error'] = 'Verifique que ha ingresado los datos correctamente.';
+  }
+
+  echo json_encode($result);
+  die();
+}
+
 /**********************************************/
 /* Load Theme Options Page and Custom Widgets */
 /**********************************************/

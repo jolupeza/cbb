@@ -80,8 +80,13 @@
   <div class="container">
     <div class="row">
       <div class="col-md-6">
-        <h2 class="Page-title text-celeste">Contacto</h2>
-        <p>Escríbenos mediante el siguiente formulario cualquier consulta que tengas.</p>
+        <?php if (have_posts()) : ?>
+          <?php while (have_posts()) : ?>
+            <?php the_post(); ?>
+            <h2 class="Page-title text-celeste">Contacto</h2>
+            <?php the_content(); ?>
+          <?php endwhile; ?>
+        <?php endif; ?>
 
         <p class="text-center" id="js-form-contact-msg"></p>
 

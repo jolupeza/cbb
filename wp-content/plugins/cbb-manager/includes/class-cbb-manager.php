@@ -127,6 +127,12 @@ class Cbb_Manager
         $this->loader->add_filter('manage_edit-contacts_columns', $admin, 'custom_columns_contacts');
         $this->loader->add_action('manage_contacts_posts_custom_column', $admin, 'custom_column_contacts');
 //        $this->loader->add_filter('views_edit-contacts', $admin, 'contacts_button_view_edit');
+        
+        $this->loader->add_action('add_meta_boxes', $admin, 'cd_mb_prestudents_add');
+        $this->loader->add_filter('manage_edit-prestudents_columns', $admin, 'custom_columns_prestudents');
+        $this->loader->add_action('manage_prestudents_posts_custom_column', $admin, 'custom_column_prestudents');
+//        $this->loader->add_filter('views_edit-contacts', $admin, 'contacts_button_view_edit');
+        $this->loader->add_action('init', $admin, 'add_taxonomies_prestudents');
     }
 
     /**

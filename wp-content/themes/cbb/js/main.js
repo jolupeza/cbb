@@ -8,8 +8,13 @@ var j = jQuery.noConflict();
       $animationElements = j('.animation-element');
 
   function affixHeader() {
-    var single = j('body').hasClass('single-post') ? true : false;
-    if (!single) {
+    var noAffix = false;
+
+    if (j('body').hasClass('single-post') || j('body').hasClass('page-template-page-admision')) {
+      noAffix = true;
+    }
+
+    if (!noAffix) {
       j('.Header').affix({
         offset: {
           top: function () {
@@ -39,6 +44,32 @@ var j = jQuery.noConflict();
       } else {
         element.removeClass(animation);
       }
+    });
+  }
+
+  function loadMap(latPriv, longPriv, idPriv, contentString) {
+    var mapCoord = new google.maps.LatLng(latPriv, longPriv);
+    var opciones = {
+      zoom: 16,
+      center: mapCoord,
+      scrollwheel: false,
+    };
+
+    infowindow = new google.maps.InfoWindow({
+      content: contentString,
+      maxWidth: 300
+    });
+
+    map = new google.maps.Map(document.getElementById(idPriv), opciones);
+
+    marker = new google.maps.Marker({
+      position: mapCoord,
+      map: map,
+      title: 'Colegio Bertolt Brecht'
+    });
+
+    marker.addListener('click', function() {
+      infowindow.open(map, marker);
     });
   }
 
@@ -134,6 +165,103 @@ var j = jQuery.noConflict();
         alert('No se pudo realizar la operación solicitada. Por favor vuelva a intentarlo.');
       });
     });
+
+    j('#js-frm-admision').formValidation({
+      locale: 'es_ES',
+      framework: 'bootstrap',
+      icon: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh'
+      },
+      fields: {
+        'parent_dni': {
+          validators: {
+            regexp: {
+              regexp: /^[0-9]+$/i,
+              message: 'Ingresar sólo dígitos'
+            }
+          }
+        },
+        'parent_phone': {
+          validators: {
+            regexp: {
+              regexp: /^[0-9]+$/i,
+              message: 'Ingresar sólo dígitos'
+            }
+          }
+        }
+      }
+    }).on('err.field.fv', function(e, data){
+      var field = e.target;
+      j('small.help-block[data-bv-result="INVALID"]').addClass('hide');
+    }).on('success.form.fv', function(e){
+      e.preventDefault();
+
+      var $form = j(e.target),
+          fv = j(e.target).data('formValidation');
+
+      var msg     = j('#js-form-admision-msg'),
+          loader  = j('#js-form-admision-loader');
+
+      loader.removeClass('hidden').addClass('infinite animated');
+      msg.text('');
+
+      var data = $form.serialize() + '&nonce=' + CbbAjax.nonce + '&action=register_admision';
+
+      j.post(CbbAjax.url, data, function(data){
+        $form.data('formValidation').resetForm(true);
+
+        if (data.result) {
+          msg.text('Se registró correctamente. En breve nos estaremos poniendo en contacto con usted.');
+        } else {
+          msg.text(data.error);
+        }
+
+        loader.addClass('hidden').removeClass('infinite animated');
+        msg.fadeIn('slow');
+        setTimeout(function(){
+          msg.fadeOut('slow', function(){
+              j(this).text('');
+          });
+        }, 5000);
+      }, 'json').fail(function(){
+        alert('No se pudo realizar la operación solicitada. Por favor vuelva a intentarlo.');
+      });
+    });
+
+    j('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
+      // console.log(j(e.target));
+      // console.log(e.relatedTarget);
+
+      var tab = j(e.target),
+          info = j(tab.attr('href') + ' figure.Contact-map');
+
+      lat = parseFloat(info.data('lat'));
+      long = parseFloat(info.data('long'));
+      idMap = info.attr('id');
+
+      var address = info.data('address'),
+          phone = info.data('phone');
+
+      var contentString = '<div id="content" class="Marker">'+
+            '<div id="siteNotice">'+
+            '</div>'+
+            '<h1 id="firstHeading" class="firstHeading Marker-title text-center">Colegio Bertolt Brecht</h1>'+
+            '<div id="bodyContent" class="Marker-body">'+
+            '<ul class="Marker-list">'+
+            '<li><strong>Dirección: </strong>' + address + '</li>'+
+            '<li><strong>Teléfono: </strong>' + phone + '</li>'+
+            '</ul>'+
+            '</div>'+
+            '</div>';
+
+      loadMap(lat, long, idMap, contentString);
+
+      var currentCenter = map.getCenter();
+      google.maps.event.trigger(map, "resize");
+      map.setCenter(currentCenter);
+    })
 
     // j('.grid').isotope({
     //   itemSelector: '.grid-item',
