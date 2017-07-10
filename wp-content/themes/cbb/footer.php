@@ -60,6 +60,11 @@
     <?php if ($options['display_social_link'] && !is_null($options['display_social_link'])) : ?>
       <aside class="Social">
         <ul class="Social-list">
+          <?php if (!empty($options['alexia'])) : ?>
+            <li>
+              <a href="<?php echo $options['alexia']; ?>" title="Ir a Alexia" target="_blank" rel="noopener noreferrer"><i class="icon-alexia"></i></a>
+            </li>
+          <?php endif; ?>
           <?php if (!empty($options['whatsapp'])) : ?>
             <li>
               <a href="" title="Ir a Whatsapp" target="_blank" rel="noopener noreferrer"><i class="icon-phone"></i></a>

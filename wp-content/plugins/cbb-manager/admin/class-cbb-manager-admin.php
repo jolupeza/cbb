@@ -832,7 +832,7 @@ class Cbb_Manager_Admin
                 'author',
                 'thumbnail',
                 'page-attributes',
-                // 'excerpt'
+                 'excerpt'
                 // 'trackbacks'
                 // 'comments',
                 // 'revisions',

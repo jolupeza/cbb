@@ -17,12 +17,12 @@
         }
         a {
           &::after {
-            border-bottom-color: $redHard;
+            border-bottom-color: $blue;
           }
         }
       }
       .sub-menu {
-        background-color: $redHard;
+        background-color: $blue;
         bottom: -28px;
       }
     }

@@ -90,3 +90,16 @@
   margin-bottom: 0;
   margin-top: 0;
 }
+.Page-video {
+  margin-bottom: 50px;
+  video {
+    margin: 0 auto;
+    width: 100%;
+    @media screen and (max-width: 767px) {
+      width: 100%;
+    }
+  }
+  // @media screen and (max-width: 991px) {
+  //   margin-top: 30px;
+  // }
+}

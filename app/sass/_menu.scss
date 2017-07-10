@@ -51,7 +51,7 @@
     a {
       padding: 0 0 8px 0;
       &::after {
-        border-bottom: 10px solid $red;
+        border-bottom: 10px solid $blue;
         border-left: 10px solid transparent;
         border-right: 10px solid transparent;
         bottom: 0;
@@ -70,7 +70,7 @@
     }
   }
   .sub-menu {
-    background-color: $red;
+    background-color: $blue;
     bottom: -23px;
     display: none;
     @include justify-content(center);

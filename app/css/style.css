@@ -234,10 +234,10 @@ a {
   border-bottom: 3px solid #fcfbfb;
 }
 .Header.affix .MainMenu > li a::after {
-  border-bottom-color: #8b041c;
+  border-bottom-color: #004e94;
 }
 .Header.affix .MainMenu .sub-menu {
-  background-color: #8b041c;
+  background-color: #004e94;
   bottom: -28px;
 }
 
@@ -309,7 +309,7 @@ a {
   padding: 0 0 8px 0;
 }
 .MainMenu > li a::after {
-  border-bottom: 10px solid #b00725;
+  border-bottom: 10px solid #004e94;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
   bottom: 0;
@@ -327,7 +327,7 @@ a {
   background-color: transparent;
 }
 .MainMenu .sub-menu {
-  background-color: #b00725;
+  background-color: #004e94;
   bottom: -23px;
   display: none;
   -webkit-justify-content: center;
@@ -895,6 +895,19 @@ a {
   margin-top: 0;
 }
 
+.Page-video {
+  margin-bottom: 50px;
+}
+.Page-video video {
+  margin: 0 auto;
+  width: 100%;
+}
+@media screen and (max-width: 767px) {
+  .Page-video video {
+    width: 100%;
+  }
+}
+
 .Parallax {
   background-color: transparent;
   background-position: 0 0;
@@ -1118,6 +1131,12 @@ a {
 .Social-list li a:hover, .Social-list li a:focus {
   color: #222222;
   text-decoration: none;
+}
+.Social-list .icon-alexia {
+  background: transparent url("./../images/alexia-icon.png") 0 0 no-repeat;
+  display: block;
+  height: 32px;
+  width: 32px;
 }
 
 .Form--search .form-control {

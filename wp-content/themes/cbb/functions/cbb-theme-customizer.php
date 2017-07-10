@@ -98,6 +98,19 @@ function cbb_customize_register($wp_customize) {
     'type' => 'text'
   ]);
 
+  // Alexia
+  $wp_customize->add_setting('cbb_custom_settings[alexia]', [
+    'default' => '',
+    'type' => 'option'
+  ]);
+
+  $wp_customize->add_control('cbb_custom_settings[alexia]', [
+    'label' => __('Alexia', THEMEDOMAIN),
+    'section' => 'cbb_social',
+    'settings' => 'cbb_custom_settings[alexia]',
+    'type' => 'text'
+  ]);
+
   // Infraestructura
   $wp_customize->add_section('cbb_locals', [
     'title' => __('Infraestructura', THEMEDOMAIN),
