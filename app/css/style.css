@@ -164,7 +164,7 @@ a {
   background-color: #b00725;
 }
 .Button--blue {
-  background-color: #2845a0;
+  background-color: #004e94;
 }
 .Button--yellow {
   background-color: #fdb62e;
@@ -763,7 +763,7 @@ a {
 }
 
 .PageHome-info-date {
-  background-color: #415cb0;
+  background-color: #3a519c;
   -moz-border-radius: 8px;
   -webkit-border-radius: 8px;
   border-radius: 8px;
@@ -816,6 +816,9 @@ a {
 .Page--contact p strong {
   font-family: "reef";
   font-size: 1.125em;
+}
+.Page--noPaddingTop {
+  padding-top: 0;
 }
 
 .Page-title {
