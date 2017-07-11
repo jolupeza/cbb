@@ -1132,7 +1132,7 @@ class Cbb_Manager_Admin
         );
         register_post_type('prestudents', $args);
         
-//        flush_rewrite_rules();
+        flush_rewrite_rules();
     }
 
     public function unregister_post_type()

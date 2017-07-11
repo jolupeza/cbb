@@ -1,4 +1,4 @@
-<section id="<?php echo $post->post_name; ?>" class="Page Page--redSoft carousel slide Carousel Carousel--page" data-ride="carousel">
+<section id="<?php echo $post->post_name; ?>" class="Page Page--noPaddingTop Page--redSoft carousel slide Carousel Carousel--page" data-ride="carousel">
   <!-- <ol class="carousel-indicators">
     <li data-target="#<?php echo $post->post_name; ?>" data-slide-to="0" class="active"></li>
     <li data-target="#<?php echo $post->post_name; ?>" data-slide-to="1"></li>
