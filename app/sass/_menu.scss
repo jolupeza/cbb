@@ -230,3 +230,34 @@
     }
   }
 }
+.NavMenu {
+  color: $white;
+  font-family: "reef";
+  font-size: 1em;
+  position: absolute;
+  text-align: center;
+  top: 35%;
+  &.left {
+    left: 20px;
+  }
+  &.right {
+    right: 20px;
+  }
+  i.glyphicon {
+    border: 1px solid $white;
+    @include border-radius(3px);
+    color: $white;
+    display: block;
+    font-size: 2em;
+    margin-top: 5px;
+    padding: 25px 10px;
+  }
+  &:hover, &:focus {
+    color: $red;
+    text-decoration: none;
+    i.glyphicon {
+      border-color: $red;
+      color: $red;
+    }
+  }
+}

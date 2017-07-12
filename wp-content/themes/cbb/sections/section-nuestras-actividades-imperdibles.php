@@ -10,8 +10,12 @@
 ?>
   <section class="PageHome">
     <div class="container">
-      <h3 class="PageHome-subtitle text-center">Nuestras actividades</h3>
-      <h2 class="PageHome-title text-center">Imperdibles</h2>
+      <?php
+        $title = get_the_excerpt();
+        $titleArr = explode('/', $title);
+      ?>
+      <h3 class="PageHome-subtitle text-center"><?php echo $titleArr[0]; ?></h3>
+      <h2 class="PageHome-title text-center"><?php echo $titleArr[1]; ?></h2>
 
       <section class="PageHome-cols PageHome-info PageHome-info--blog">
         <?php while ($the_query->have_posts()) : ?>

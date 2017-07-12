@@ -111,11 +111,58 @@ function cbb_customize_register($wp_customize) {
     'type' => 'text'
   ]);
 
+  // Homepage
+  $wp_customize->add_section('cbb_home', [
+    'title' => __('Página de Inicio', THEMEDOMAIN),
+    'description' => __('Configuración página de Inicio', THEMEDOMAIN),
+    'priority' => 37
+  ]);
+
+  $wp_customize->add_setting('cbb_custom_settings[home_video_img]', array(
+    'type' => 'option'
+  ));
+
+  $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'home_video_img', array(
+    'label' => __('Poster Video', THEMEDOMAIN),
+    'section' => 'cbb_home',
+    'settings' => 'cbb_custom_settings[home_video_img]'
+  )));
+
+  $wp_customize->add_setting('cbb_custom_settings[home_video_webm]', array(
+    'type' => 'option'
+  ));
+
+  $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'home_video_webm', array(
+    'label' => __('Formato Webm', THEMEDOMAIN),
+    'section' => 'cbb_home',
+    'settings' => 'cbb_custom_settings[home_video_webm]'
+  )));
+
+  $wp_customize->add_setting('cbb_custom_settings[home_video_mp4]', array(
+    'type' => 'option'
+  ));
+
+  $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'home_video_mp4', array(
+    'label' => __('Formato Mp4', THEMEDOMAIN),
+    'section' => 'cbb_home',
+    'settings' => 'cbb_custom_settings[home_video_mp4]'
+  )));
+
+  $wp_customize->add_setting('cbb_custom_settings[home_video_ogv]', array(
+    'type' => 'option'
+  ));
+
+  $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'home_video_ogv', array(
+    'label' => __('Formato Ogv', THEMEDOMAIN),
+    'section' => 'cbb_home',
+    'settings' => 'cbb_custom_settings[home_video_ogv]'
+  )));
+
   // Infraestructura
   $wp_customize->add_section('cbb_locals', [
     'title' => __('Infraestructura', THEMEDOMAIN),
     'description' => __('Configuración página Infraestructura', THEMEDOMAIN),
-    'priority' => 36
+    'priority' => 38
   ]);
 
   $sections = get_terms('sections');
@@ -148,7 +195,7 @@ function cbb_customize_register($wp_customize) {
   $wp_customize->add_section('cbb_info', [
     'title' => __('Información de la Web', THEMEDOMAIN),
     'description' => __('Configuración acerca de información relevante de la Web', THEMEDOMAIN),
-    'priority' => 37
+    'priority' => 38
   ]);
 
   // Youtube

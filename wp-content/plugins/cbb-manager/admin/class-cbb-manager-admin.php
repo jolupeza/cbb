@@ -163,14 +163,14 @@ class Cbb_Manager_Admin
         $target = isset($_POST['mb_target']) && $_POST['mb_target'] ? 'on' : 'off';
         update_post_meta($post_id, 'mb_target', $target);
 
-        // Carrera
-        /*if (isset($_POST['mb_carrera']) && !empty($_POST['mb_carrera'])) {
-            update_post_meta($post_id, 'mb_carrera', esc_attr($_POST['mb_carrera']));
+        // Page
+        if (isset($_POST['mb_page']) && !empty($_POST['mb_page'])) {
+            update_post_meta($post_id, 'mb_page', esc_attr($_POST['mb_page']));
         } else {
-            delete_post_meta($post_id, 'mb_carrera');
+            delete_post_meta($post_id, 'mb_page');
         }
 
-        // Image Responsive
+       /* // Image Responsive
         if (isset($_POST['mb_responsive']) && !empty($_POST['mb_responsive'])) {
             update_post_meta($post_id, 'mb_responsive', esc_attr($_POST['mb_responsive']));
         } else {

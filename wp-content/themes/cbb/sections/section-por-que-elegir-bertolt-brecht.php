@@ -1,7 +1,11 @@
 <section class="PageHome" id="<?php echo $post->post_name; ?>">
+  <?php
+    $title = get_the_excerpt();
+    $titleArr = explode('/', $title);
+  ?>
   <div class="container">
-    <h3 class="PageHome-subtitle text-center">¿Por qué elegir</h3>
-    <h2 class="PageHome-title text-center">Bertolt Brecht?</h2>
+    <h3 class="PageHome-subtitle text-center"><?php echo $titleArr[0]; ?></h3>
+    <h2 class="PageHome-title text-center"><?php echo $titleArr[1]; ?></h2>
     <p class="text-center PageHome-legend"><?php echo get_the_content(); ?></p>
 
     <?php

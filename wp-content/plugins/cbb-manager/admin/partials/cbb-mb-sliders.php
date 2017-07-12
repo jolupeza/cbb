@@ -12,10 +12,10 @@
     <?php
         $values = get_post_custom( get_the_ID() );
 //        $responsive = isset( $values['mb_responsive'] ) ? esc_attr($values['mb_responsive'][0]) : '';
-//        $carrera = isset($values['mb_carrera']) ? esc_attr($values['mb_carrera'][0]) : '';
         $title = isset($values['mb_title']) ? esc_attr($values['mb_title'][0]) : '';
         $subtitle = isset($values['mb_subtitle']) ? esc_attr($values['mb_subtitle'][0]) : '';
         $url = isset($values['mb_url']) ? esc_attr($values['mb_url'][0]) : '';
+        $page = isset($values['mb_page']) ? (int)esc_attr($values['mb_page'][0]) : '';
         $text = isset($values['mb_text']) ? esc_attr($values['mb_text'][0]) : '';
         $target = isset($values['mb_target']) ? esc_attr($values['mb_target'][0]) : '';
 
@@ -52,33 +52,32 @@
         <input type="checkbox" name="mb_target" id="mb_target" <?php checked($target, 'on'); ?> />
     </p>
     
-<?php /*
+<?php
+    $args = [
+        'post_type' => 'page',
+        'posts_per_page' => -1,
+        'post_parent' => 0
+    ];
+    $pages = new WP_Query($args);
+    
+    if ($pages->have_posts()) :
+?>
     <p class="content-mb">
-        <label for="mb_url">Seleccionar Carrera</label>
-        <select name="mb_carrera" id="mb_carrera">
-            <option value="" <?php selected($carrera, ''); ?>>-- Seleccione carrera --</option>
+        <label for="mb_page">Seleccionar página a enlazar</label>
+        <select name="mb_page" id="mb_page">
+            <option value="" <?php selected($page, ''); ?>>-- Seleccione página a enlazar --</option>
 
-        <?php
-            $args = array(
-                'post_type' => 'carreras',
-                'posts_per_page' => -1
-            );
-            $carreras = new WP_Query($args);
-            if ($carreras->have_posts()) :
-                while ($carreras->have_posts()) :
-                    $carreras->the_post();
-                    $id = get_the_ID();
-        ?>
-            <option value="<?php echo $id; ?>" <?php selected($carrera, $id); ?>><?php the_title(); ?></option>
-        <?php
-                endwhile;
-            endif;
-            wp_reset_postdata();
-        ?>
+            <?php while ($pages->have_posts()) : ?>
+                <?php $pages->the_post(); ?>
+            <option value="<?php echo get_the_ID(); ?>" <?php selected($page, get_the_ID()); ?>><?php the_title(); ?></option>
+            <?php endwhile; ?>
 
         </select>
     </p>
+<?php endif; ?>
+<?php wp_reset_postdata(); ?>
 
+<?php /*
     <fieldset class="GroupForm">
         <legend class="GroupForm-legend">Imagen Responsive</legend>
 

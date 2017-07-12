@@ -511,6 +511,40 @@ a {
   text-decoration: none;
 }
 
+.NavMenu {
+  color: #fcfbfb;
+  font-family: "reef";
+  font-size: 1em;
+  position: absolute;
+  text-align: center;
+  top: 35%;
+}
+.NavMenu.left {
+  left: 20px;
+}
+.NavMenu.right {
+  right: 20px;
+}
+.NavMenu i.glyphicon {
+  border: 1px solid #fcfbfb;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  color: #fcfbfb;
+  display: block;
+  font-size: 2em;
+  margin-top: 5px;
+  padding: 25px 10px;
+}
+.NavMenu:hover, .NavMenu:focus {
+  color: #b00725;
+  text-decoration: none;
+}
+.NavMenu:hover i.glyphicon, .NavMenu:focus i.glyphicon {
+  border-color: #b00725;
+  color: #b00725;
+}
+
 .Carousel--home .carousel-caption {
   -webkit-align-content: center;
   align-content: center;
@@ -1103,30 +1137,34 @@ a {
 
 .Social {
   background-color: #004e94;
-  -moz-border-radius: 15px 0 0 15px;
+  -moz-border-radius: 15px 15px 0 0;
   -webkit-border-radius: 15px;
-  border-radius: 15px 0 0 15px;
+  border-radius: 15px 15px 0 0;
   -moz-box-shadow: #00427d 0 -5px 2px 0 inset;
   -webkit-box-shadow: #00427d 0 -5px 2px 0 inset;
   box-shadow: #00427d 0 -5px 2px 0 inset;
-  padding: 25px 20px;
+  bottom: 0;
+  display: -webkit-flex;
+  display: flex;
+  padding: 15px 20px;
   position: fixed;
   right: 0;
-  top: 30%;
   z-index: 99;
 }
 
 .Social-list {
+  display: -webkit-flex;
+  display: flex;
   list-style: none;
   margin-bottom: 0;
   padding-left: 0;
 }
 .Social-list li {
   font-size: 1.5em;
-  margin-bottom: 15px;
+  margin-right: 15px;
 }
 .Social-list li:last-child {
-  margin-bottom: 0;
+  margin-right: 0;
 }
 .Social-list li a {
   color: #fcfbfb;
@@ -1391,4 +1429,8 @@ a {
   font-family: "reef";
   font-size: 1.75em;
   margin-top: 0;
+}
+
+.Video {
+  position: relative;
 }
