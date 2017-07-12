@@ -22,3 +22,5 @@ wp-content/plugins/hello.php
 /resources
 /.sass-cache
 /nbproject/private/
+
+wp-content/plugins/cbb-manager/admin/.sass-cache/

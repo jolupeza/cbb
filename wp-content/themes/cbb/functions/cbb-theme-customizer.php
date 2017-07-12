@@ -132,7 +132,7 @@ function cbb_customize_register($wp_customize) {
     'type' => 'option'
   ));
 
-  $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'home_video_webm', array(
+  $wp_customize->add_control(new WP_Customize_Upload_Control($wp_customize, 'home_video_webm', array(
     'label' => __('Formato Webm', THEMEDOMAIN),
     'section' => 'cbb_home',
     'settings' => 'cbb_custom_settings[home_video_webm]'
@@ -142,7 +142,7 @@ function cbb_customize_register($wp_customize) {
     'type' => 'option'
   ));
 
-  $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'home_video_mp4', array(
+  $wp_customize->add_control(new WP_Customize_Upload_Control($wp_customize, 'home_video_mp4', array(
     'label' => __('Formato Mp4', THEMEDOMAIN),
     'section' => 'cbb_home',
     'settings' => 'cbb_custom_settings[home_video_mp4]'
@@ -152,7 +152,7 @@ function cbb_customize_register($wp_customize) {
     'type' => 'option'
   ));
 
-  $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'home_video_ogv', array(
+  $wp_customize->add_control(new WP_Customize_Upload_Control($wp_customize, 'home_video_ogv', array(
     'label' => __('Formato Ogv', THEMEDOMAIN),
     'section' => 'cbb_home',
     'settings' => 'cbb_custom_settings[home_video_ogv]'
@@ -190,6 +190,46 @@ function cbb_customize_register($wp_customize) {
     'type'       => 'select',
     'choices'    => $sects,
   ));
+
+  $wp_customize->add_setting('cbb_custom_settings[infraestructura_video_img]', array(
+    'type' => 'option'
+  ));
+
+  $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'infraestructura_video_img', array(
+    'label' => __('Poster Video', THEMEDOMAIN),
+    'section' => 'cbb_locals',
+    'settings' => 'cbb_custom_settings[infraestructura_video_img]'
+  )));
+
+  $wp_customize->add_setting('cbb_custom_settings[infraestructura_video_webm]', array(
+    'type' => 'option'
+  ));
+
+  $wp_customize->add_control(new WP_Customize_Upload_Control($wp_customize, 'infraestructura_video_webm', array(
+    'label' => __('Formato Webm', THEMEDOMAIN),
+    'section' => 'cbb_locals',
+    'settings' => 'cbb_custom_settings[infraestructura_video_webm]'
+  )));
+
+  $wp_customize->add_setting('cbb_custom_settings[infraestructura_video_mp4]', array(
+    'type' => 'option'
+  ));
+
+  $wp_customize->add_control(new WP_Customize_Upload_Control($wp_customize, 'infraestructura_video_mp4', array(
+    'label' => __('Formato Mp4', THEMEDOMAIN),
+    'section' => 'cbb_locals',
+    'settings' => 'cbb_custom_settings[infraestructura_video_mp4]'
+  )));
+
+  $wp_customize->add_setting('cbb_custom_settings[infraestructura_video_ogv]', array(
+    'type' => 'option'
+  ));
+
+  $wp_customize->add_control(new WP_Customize_Upload_Control($wp_customize, 'infraestructura_video_ogv', array(
+    'label' => __('Formato Ogv', THEMEDOMAIN),
+    'section' => 'cbb_locals',
+    'settings' => 'cbb_custom_settings[infraestructura_video_ogv]'
+  )));
 
   // Information
   $wp_customize->add_section('cbb_info', [

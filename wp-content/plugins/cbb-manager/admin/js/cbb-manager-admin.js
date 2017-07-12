@@ -152,6 +152,10 @@
         container_media
             .children( 'p' )
             .hide();
+    
+        container_media
+            .children('i.Fieldset-icon')
+            .hide();
 
         // Then display the previous container
         container_media
