@@ -2,7 +2,11 @@
   <div class="container">
     <div class="row">
       <div class="col-md-6">
-        <h2 class="Page-title text-center text-gray">¿Por qué el nombre <span>Bertolt Brecht?</span></h2>
+        <?php
+          $title = get_the_excerpt();
+          $titleArr = explode('/', $title);
+        ?>
+        <h2 class="Page-title text-center text-gray"><?php echo $titleArr[0]; ?> <span><?php echo $titleArr[1]; ?></span></h2>
         <?php the_content(); ?>
         <p><a class="Button Button--blue" href="">ver reglamento escolar</a></p>
       </div>

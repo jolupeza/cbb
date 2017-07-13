@@ -28,7 +28,7 @@
 
 <?php if (!empty($webm) || !empty($mp4) || !empty($ogv)) : ?>
   <section class="Video text-center">
-    <video class="img-responsive" autoplay loop="true" poster="<?php echo $poster; ?>">
+    <video class="img-responsive" autoplay="true" loop="true" poster="<?php echo $poster; ?>">
       <?php if (!empty($webm)) : ?>
         <source
           src="<?php echo $webm; ?>"

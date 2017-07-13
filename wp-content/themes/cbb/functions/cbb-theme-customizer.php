@@ -238,7 +238,7 @@ function cbb_customize_register($wp_customize) {
     'priority' => 38
   ]);
 
-  // Youtube
+  // Email Contact
   $wp_customize->add_setting('cbb_custom_settings[email]', [
     'default' => '',
     'type' => 'option'

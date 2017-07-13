@@ -16,7 +16,8 @@
         $poster = isset($values['mb_poster']) ? esc_attr($values['mb_poster'][0]) : '';
         $webm = isset($values['mb_webm']) ? esc_attr($values['mb_webm'][0]) : '';
         $mp4 = isset($values['mb_mp4']) ? esc_attr($values['mb_mp4'][0]) : '';
-        $ogv = isset($values['mb_ogv']) ? esc_attr($values['mb_ogv'][0]) : '';
+        $ogv = isset($values['mb_ogv']) ? esc_attr($values['mb_ogv'][0]) : '';        
+        $pdf = isset($values['mb_pdf']) ? esc_attr($values['mb_pdf'][0]) : '';
         
         wp_nonce_field('pages_meta_box_nonce', 'meta_box_nonce');
     ?>
@@ -160,4 +161,8 @@
             </div><!-- end container-upload-file -->
         </section>
     </fieldset><!-- end GroupFrm -->
+    
+    <fieldset class="GroupForm">
+        <legend class="GroupForm-legend">PDF</legend>
+    </fieldset>
 </div><!-- #single-post-meta-manager -->

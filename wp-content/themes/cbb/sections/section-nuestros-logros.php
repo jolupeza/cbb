@@ -2,8 +2,12 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <h3 class="Page-subtitle text-center text-gray">Nuestros</h3>
-        <h2 class="Page-title text-center text-red">Logros</h2>
+        <?php
+          $title = get_the_excerpt();
+          $titleArr = explode('/', $title);
+        ?>
+        <h3 class="Page-subtitle text-center text-gray"><?php echo $titleArr[0]; ?></h3>
+        <h2 class="Page-title text-center text-red"><?php echo $titleArr[1]; ?></h2>
 
         <?php
           $arguments = [

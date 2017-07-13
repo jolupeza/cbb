@@ -2,8 +2,12 @@
   <div class="container">
     <div class="row">
       <div class="col-md-4">
-        <h4 class="Page-title text-white">¿Por qué elegir</h4>
-        <h3 class="Page-resalt text-white">Bertolt Brecht?</h3>
+        <?php
+          $title = get_the_excerpt();
+          $titleArr = explode('/', $title);
+        ?>
+        <h4 class="Page-title text-white"><?php echo $titleArr[0]; ?></h4>
+        <h3 class="Page-resalt text-white"><?php echo $titleArr[1]; ?></h3>
         <?php the_content(); ?>
       </div>
       <div class="col-md-4">
