@@ -18,6 +18,7 @@
         $mp4 = isset($values['mb_mp4']) ? esc_attr($values['mb_mp4'][0]) : '';
         $ogv = isset($values['mb_ogv']) ? esc_attr($values['mb_ogv'][0]) : '';        
         $pdf = isset($values['mb_pdf']) ? esc_attr($values['mb_pdf'][0]) : '';
+        $icon = isset($values['mb_icon']) ? esc_attr($values['mb_icon'][0]) : '';
         
         wp_nonce_field('pages_meta_box_nonce', 'meta_box_nonce');
     ?>
@@ -187,4 +188,14 @@
             </div><!-- end container-upload-file -->
         </section>
     </fieldset>
+    
+    <!-- Icon -->
+    <p class="content-mb">
+        <label for="mb_icon">Seleccionar Ícono: </label>
+        <select name="mb_icon" id="mb_icon">
+            <option value="" <?php selected($icon, ''); ?>>-- Seleccione ícono --</option>
+            <option value="icon-commenting-o" <?php selected($icon, 'icon-commenting-o'); ?>>Comentario</option>
+            <option value="icon-brush-alt" <?php selected($icon, 'icon-brush-alt'); ?>>Lapiz</option>
+        </select>
+    </p>
 </div><!-- #single-post-meta-manager -->

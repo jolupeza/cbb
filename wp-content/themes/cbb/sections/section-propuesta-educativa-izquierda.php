@@ -1,4 +1,4 @@
-<section class="Page" id="<?php echo $post->post_name; ?>">
+<section class="Page" id="<?php echo basename(get_permalink()); ?>">
   <div class="container">
     <div class="row">
       <div class="col-md-6">
@@ -7,33 +7,48 @@
         <?php the_content(); ?>
         <p><a class="Button Button--red Button--icon" href=""><i class="icon-play2"></i> ver video</a></p>
 
-        <section class="Page-table Page-table--blue">
-          <article class="Page-cel">
-            <i class="icon-commenting-o"></i>
-            <h3 class="Page-cel-title">Comunicarse</h3>
-            <p>con nuestros alumnos es la mejor forma de enseñar y saber que necesitan.</p>
-          </article>
-          <article class="Page-cel">
-            <i class="icon-brush-alt"></i>
-            <h3 class="Page-cel-title">Expresión Artística</h3>
-            <p>ayudamos a desarrollar su imaginación y su interés por el arte.</p>
-          </article>
-          <article class="Page-cel">
-            <i class="icon-commenting-o"></i>
-            <h3 class="Page-cel-title">Comunicarse</h3>
-            <p>con nuestros alumnos es la mejor forma de enseñar y saber que necesitan.</p>
-          </article>
-          <article class="Page-cel">
-            <i class="icon-brush-alt"></i>
-            <h3 class="Page-cel-title">Expresión Artística</h3>
-            <p>ayudamos a desarrollar su imaginación y su interés por el arte.</p>
-          </article>
-        </section>
+        <?php
+          $pageParent = get_the_id();
+
+          $arguments = [
+            'post_type' => 'page',
+            'posts_per_page' => -1,
+            'orderby' => 'menu_order',
+            'order' => 'ASC',
+            'post_parent' => $pageParent
+          ];
+
+          $pageChilds = new WP_Query($arguments);
+
+          if ($pageChilds->have_posts()) :
+        ?>
+          <section class="Page-table Page-table--blue">
+            <?php while ($pageChilds->have_posts()) : ?>
+              <?php $pageChilds->the_post(); ?>
+
+              <?php
+                $values = get_post_custom(get_the_id());
+                $icon = isset($values['mb_icon']) ? esc_attr($values['mb_icon'][0]) : '';
+              ?>
+
+              <article class="Page-cel">
+                <?php if (!empty($icon)) : ?>
+                  <i class="<?php echo $icon; ?>"></i>
+                <?php endif; ?>
+                <h3 class="Page-cel-title"><?php the_title(); ?></h3>
+                <?php the_content(); ?>
+              </article>
+            <?php endwhile; ?>
+          </section>
+        <?php endif; ?>
+        <?php wp_reset_postdata(); ?>
       </div>
+
+      <?php setup_postdata($post); ?>
       <div class="col-md-6">
-        <?php if (has_post_thumbnail()) : ?>
+        <?php if (has_post_thumbnail($pageParent)) : ?>
           <figure class="Page-figure">
-            <?php the_post_thumbnail('full', ['class' => 'img-responsive center-block', 'alt' => get_the_title()]); ?>
+            <?php echo get_the_post_thumbnail($pageParent, 'full', ['class' => 'img-responsive center-block', 'alt' => get_the_title()]); ?>
           </figure>
         <?php endif; ?>
       </div>
@@ -42,7 +57,7 @@
 </section>
 
 <?php
-  $values = get_post_custom(get_the_id());
+  $values = get_post_custom($pageParent);
   $parallax = isset($values['mb_parallax']) ? esc_attr($values['mb_parallax'][0]) : '';
 ?>
 

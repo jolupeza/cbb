@@ -111,7 +111,7 @@
           <?php endwhile; ?>
         </div>
 
-        <button class="Arrow js-move-scroll" href="">ir abajo <i class="glyphicon glyphicon-chevron-down"></i></button>
+        <button class="Arrow js-move-scroll" data-href="educacion-inicial">ir abajo <i class="glyphicon glyphicon-chevron-down"></i></button>
       </section>
   <?php endif; ?>
   <?php wp_reset_postdata(); ?>
@@ -130,12 +130,11 @@
     $mainQuery = new WP_Query($args);
   ?>
 
+  <?php global $post; ?>
   <?php if ($mainQuery->have_posts()) : ?>
     <?php
       while ($mainQuery->have_posts()) {
         $mainQuery->the_post();
-
-        global $post;
 
         $values = get_post_custom(get_the_id());
         $template = isset($values['mb_template']) ? (int)esc_attr($values['mb_template'][0]) : '';

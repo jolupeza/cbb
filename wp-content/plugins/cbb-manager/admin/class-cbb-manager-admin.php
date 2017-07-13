@@ -431,6 +431,13 @@ class Cbb_Manager_Admin
         } else {
             delete_post_meta($post_id, 'mb_pdf');
         }
+        
+        // Icon
+        if (isset($_POST['mb_icon']) && !empty($_POST['mb_icon'])) {
+            update_post_meta($post_id, 'mb_icon', esc_attr($_POST['mb_icon']));
+        } else {
+            delete_post_meta($post_id, 'mb_icon');
+        }
     }
 
     /**
