@@ -399,28 +399,28 @@ class Cbb_Manager_Admin
         
         // Poster
         if (isset($_POST['mb_poster']) && !empty($_POST['mb_poster'])) {
-            update_post_meta($post_id, 'mb_poster', $_POST['mb_poster']);
+            update_post_meta($post_id, 'mb_poster', esc_attr($_POST['mb_poster']));
         } else {
             delete_post_meta($post_id, 'mb_poster');
         }
         
         // Webm
         if (isset($_POST['mb_webm']) && !empty($_POST['mb_webm'])) {
-            update_post_meta($post_id, 'mb_webm', $_POST['mb_webm']);
+            update_post_meta($post_id, 'mb_webm', esc_attr($_POST['mb_webm']));
         } else {
             delete_post_meta($post_id, 'mb_webm');
         }
         
         // MP4
         if (isset($_POST['mb_mp4']) && !empty($_POST['mb_mp4'])) {
-            update_post_meta($post_id, 'mb_mp4', $_POST['mb_mp4']);
+            update_post_meta($post_id, 'mb_mp4', esc_attr($_POST['mb_mp4']));
         } else {
             delete_post_meta($post_id, 'mb_mp4');
         }
         
         // OGV
         if (isset($_POST['mb_ogv']) && !empty($_POST['mb_ogv'])) {
-            update_post_meta($post_id, 'mb_ogv', $_POST['mb_ogv']);
+            update_post_meta($post_id, 'mb_ogv', esc_attr($_POST['mb_ogv']));
         } else {
             delete_post_meta($post_id, 'mb_ogv');
         }

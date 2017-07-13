@@ -1,15 +1,26 @@
 <section class="Page" id="<?php echo basename(get_permalink()); ?>">
+  <?php
+    $pageParent = get_the_id();
+    $values = get_post_custom($pageParent);
+    $parallax = isset($values['mb_parallax']) ? esc_attr($values['mb_parallax'][0]) : '';
+    $webm = isset($values['mb_webm']) ? esc_attr($values['mb_webm'][0]) : '';
+    $mp4 = isset($values['mb_mp4']) ? esc_attr($values['mb_mp4'][0]) : '';
+    $ogv = isset($values['mb_ogv']) ? esc_attr($values['mb_ogv'][0]) : '';
+  ?>
   <div class="container">
     <div class="row">
       <div class="col-md-6">
         <h3 class="Page-subtitle text-gray">nivel</h3>
         <h2 class="Page-title text-red"><?php the_title(); ?></h2>
         <?php the_content(); ?>
-        <p><a class="Button Button--red Button--icon" href=""><i class="icon-play2"></i> ver video</a></p>
+
+        <?php if (!empty($webm) || !empty($mp4) || !empty($ogv)) : ?>
+          <p>
+            <a class="Button Button--red Button--icon" href="#" data-toggle="modal" data-target="#md-video-<?php echo $pageParent; ?>"><i class="icon-play2"></i> ver video</a>
+          </p>
+        <?php endif; ?>
 
         <?php
-          $pageParent = get_the_id();
-
           $arguments = [
             'post_type' => 'page',
             'posts_per_page' => -1,
@@ -27,8 +38,8 @@
               <?php $pageChilds->the_post(); ?>
 
               <?php
-                $values = get_post_custom(get_the_id());
-                $icon = isset($values['mb_icon']) ? esc_attr($values['mb_icon'][0]) : '';
+                $val = get_post_custom(get_the_id());
+                $icon = isset($val['mb_icon']) ? esc_attr($val['mb_icon'][0]) : '';
               ?>
 
               <article class="Page-cel">
@@ -56,11 +67,6 @@
   </div>
 </section>
 
-<?php
-  $values = get_post_custom($pageParent);
-  $parallax = isset($values['mb_parallax']) ? esc_attr($values['mb_parallax'][0]) : '';
-?>
-
 <?php if (!empty($parallax)) : ?>
   <?php
     $arguments = [
@@ -87,4 +93,41 @@
     <?php endwhile; ?>
   <?php endif; ?>
   <?php wp_reset_postdata(); ?>
+<?php endif; ?>
+
+<!-- Modal Video -->
+<?php if (!empty($webm) || !empty($mp4) || !empty($ogv)) : ?>
+  <div class="modal fade Modal Modal--video Modal--red" id="md-video-<?php echo $pageParent; ?>" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <figure class="Page-video text-center">
+            <!-- <video controls poster="<?php // echo IMAGES; ?>/video-about.jpg"> -->
+
+            <video controls>
+              <?php if (!empty($webm)) : ?>
+                <source
+                  src="<?php echo $webm; ?>"
+                  type="video/webm">
+              <?php endif; ?>
+
+              <?php if (!empty($mp4)) : ?>
+                <source
+                  src="<?php echo $mp4; ?>"
+                  type="video/mp4">
+              <?php endif; ?>
+
+              <?php if (!empty($ogv)) : ?>
+                <source
+                  src="<?php echo $ogv; ?>"
+                  type="video/ogg">
+              <?php endif; ?>
+              Su navegador no admite etiquetas de video HTML5.
+            </video>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </div>
 <?php endif; ?>

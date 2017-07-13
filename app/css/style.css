@@ -1434,3 +1434,39 @@ a {
 .Video {
   position: relative;
 }
+
+.Modal--video .modal-dialog {
+  margin-bottom: 0;
+  width: 660px;
+}
+@media screen and (max-width: 767px) {
+  .Modal--video .modal-dialog {
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+  }
+}
+.Modal--video .modal-body {
+  padding: 0;
+}
+.Modal--video .modal-body .close {
+  color: #b00725;
+  font-size: 4em;
+  filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+  opacity: 1;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 99;
+}
+.Modal--video .Page-video {
+  margin-bottom: 0;
+}
+@media screen and (max-width: 991px) {
+  .Modal--video .Page-video {
+    margin-top: 0;
+  }
+}
+.Modal--red .modal-content {
+  border: 10px solid #b00725;
+}
