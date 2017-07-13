@@ -1,3 +1,9 @@
+<?php
+  $values = get_post_custom(get_the_id());
+  $parallax = isset($values['mb_parallax']) ? esc_attr($values['mb_parallax'][0]) : '';
+  $pdf = isset($values['mb_pdf']) ? esc_attr($values['mb_pdf'][0]) : '';
+?>
+
 <section class="Page" id="<?php echo $post->post_name; ?>">
   <div class="container">
     <div class="row">
@@ -8,7 +14,12 @@
         ?>
         <h2 class="Page-title text-center text-gray"><?php echo $titleArr[0]; ?> <span><?php echo $titleArr[1]; ?></span></h2>
         <?php the_content(); ?>
-        <p><a class="Button Button--blue" href="">ver reglamento escolar</a></p>
+
+        <?php if (!empty($pdf)) : ?>
+          <p>
+            <a class="Button Button--blue" href="<?php echo $pdf; ?>" target="_blank" rel="noopener noreferrer">ver reglamento escolar</a>
+          </p>
+        <?php endif; ?>
       </div>
       <div class="col-md-6">
         <?php if (has_post_thumbnail()) : ?>
@@ -22,9 +33,6 @@
 </section>
 
 <?php
-  $values = get_post_custom(get_the_id());
-  $parallax = isset($values['mb_parallax']) ? esc_attr($values['mb_parallax'][0]) : '';
-
   if (!empty($parallax)) :
     $arguments = [
       'post_type' => 'parallaxs',

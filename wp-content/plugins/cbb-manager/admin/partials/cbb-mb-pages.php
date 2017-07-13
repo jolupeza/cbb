@@ -164,5 +164,27 @@
     
     <fieldset class="GroupForm">
         <legend class="GroupForm-legend">PDF</legend>
+        
+        <section class="GroupForm-flex">
+            <div class="container-upload-file GroupForm-wrapperImage">
+                <h4 class="Fieldset-subtitle">Enlace PDF</h4>
+                
+                <p class="btn-add-file">
+                    <a title="Agregar pdf" href="javascript:;" class="set-file button button-primary">Añadir PDF</a>
+                </p>
+
+                <div class="hidden media-container">
+                    <i class="Fieldset-icon dashicons-before dashicons-media-text"></i>
+                </div><!-- .media-container -->
+
+                <p class="hidden">
+                    <a title="Quitar pdf" href="javascript:;" class="remove-file button button-secondary">Quitar PDF</a>
+                </p>
+
+                <p class="media-info">
+                    <input class="hd-src" type="hidden" name="mb_pdf" value="<?php echo $pdf; ?>" />
+                </p><!-- .media-info -->
+            </div><!-- end container-upload-file -->
+        </section>
     </fieldset>
 </div><!-- #single-post-meta-manager -->

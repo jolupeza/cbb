@@ -424,6 +424,13 @@ class Cbb_Manager_Admin
         } else {
             delete_post_meta($post_id, 'mb_ogv');
         }
+        
+        // PDF
+        if (isset($_POST['mb_pdf']) && !empty($_POST['mb_pdf'])) {
+            update_post_meta($post_id, 'mb_pdf', esc_attr($_POST['mb_pdf']));
+        } else {
+            delete_post_meta($post_id, 'mb_pdf');
+        }
     }
 
     /**
