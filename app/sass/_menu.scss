@@ -243,11 +243,14 @@
   &.right {
     right: 20px;
   }
+  span {
+    display: block;
+  }
   i.glyphicon {
     border: 1px solid $white;
     @include border-radius(3px);
     color: $white;
-    display: block;
+    display: inline-block;
     font-size: 2em;
     margin-top: 5px;
     padding: 25px 10px;

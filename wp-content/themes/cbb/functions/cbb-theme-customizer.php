@@ -231,6 +231,19 @@ function cbb_customize_register($wp_customize) {
     'settings' => 'cbb_custom_settings[infraestructura_video_ogv]'
   )));
 
+  // Description
+  $wp_customize->add_setting('cbb_custom_settings[infraestructura_desc]', [
+    'default' => '',
+    'type' => 'option'
+  ]);
+
+  $wp_customize->add_control('cbb_custom_settings[infraestructura_desc]', [
+    'label' => __('Descripción', THEMEDOMAIN),
+    'section' => 'cbb_locals',
+    'settings' => 'cbb_custom_settings[infraestructura_desc]',
+    'type' => 'textarea'
+  ]);
+
   // Information
   $wp_customize->add_section('cbb_info', [
     'title' => __('Información de la Web', THEMEDOMAIN),

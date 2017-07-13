@@ -6,6 +6,28 @@
 <?php get_header(); ?>
 
 <?php
+  $mainMenu = wp_get_nav_menu_object('main-menu');
+  $menuItems = wp_get_nav_menu_items($mainMenu->term_id, [
+    'post_parent' => 0
+  ]);
+
+  $keyCurrentItem = NULL;
+  $prevMenuItem; $nextMenuItem;
+
+  foreach ($menuItems as $key => $item) {
+    if ((int)$item->object_id === get_queried_object_id()) {
+      $keyCurrentItem = $key;
+      break;
+    }
+  }
+
+  if (!is_null($keyCurrentItem)) {
+    $prevMenuItem = $menuItems[$keyCurrentItem - 1];
+    $nextMenuItem = $menuItems[$keyCurrentItem + 1];
+  }
+?>
+
+<?php
   $idPage = 0;
   $poster = '';
   $webm = '';
@@ -49,12 +71,19 @@
       Su navegador no admite etiquetas de video HTML5.
     </video>
 
-    <?php /* if (count($dataMenuNext)) : ?>
-      <a href="<?php echo $dataMenuNext['url']; ?>" class="right NavMenu">
-        <?php echo $dataMenuNext['title']; ?>
+    <?php if (is_object($prevMenuItem)) : ?>
+      <a href="<?php echo $prevMenuItem->url; ?>" class="left NavMenu">
+        <span><?php echo strtolower($prevMenuItem->title); ?></span>
+        <i class="glyphicon glyphicon-chevron-left"></i>
+      </a>
+    <?php endif; ?>
+
+    <?php if (is_object($nextMenuItem)) : ?>
+      <a href="<?php echo $nextMenuItem->url; ?>" class="right NavMenu">
+        <span><?php echo strtolower($nextMenuItem->title); ?></span>
         <i class="glyphicon glyphicon-chevron-right"></i>
       </a>
-    <?php endif; */ ?>
+    <?php endif; ?>
   </section>
 <?php else : ?>
   <?php
@@ -90,9 +119,11 @@
             $values = get_post_custom(get_the_id());
             $title = isset($values['mb_title']) ? esc_attr($values['mb_title'][0]) : '';
             $subtitle = isset($values['mb_subtitle']) ? esc_attr($values['mb_subtitle'][0]) : '';
-            // $url = isset($values['mb_url']) ? esc_attr($values['mb_url'][0]) : '';
-            // $target = isset($values['mb_target']) ? esc_attr($values['mb_target'][0]) : '';
-            // $target = (!empty($target) && $target === 'on') ? ' target="_blank" rel="noopener noreferrer"' : '';
+            $text = isset($values['mb_text']) ? esc_attr($values['mb_text'][0]) : '';
+            $url = isset($values['mb_url']) ? esc_attr($values['mb_url'][0]) : '';
+            $pageLink = isset($values['mb_page']) ? (int)esc_attr($values['mb_page'][0]) : 0;
+            $target = isset($values['mb_target']) ? esc_attr($values['mb_target'][0]) : '';
+            $target = (!empty($target) && $target === 'on') ? ' target="_blank" rel="noopener noreferrer"' : '';
           ?>
 
           <?php if (has_post_thumbnail()) : ?>
@@ -106,7 +137,13 @@
                 <?php if (!empty($subtitle)) : ?><h3><?php echo $subtitle; ?></h3><?php endif; ?>
                 <?php if (!empty($title)) : ?><h2><?php echo $title; ?></h2><?php endif; ?>
                 <?php the_content(); ?>
-                <p><a class="Button Button--red" href="">conocer más</a></p>
+
+                <?php if (!empty($url) || $pageLink > 0) : ?>
+                  <?php $link = ($pageLink > 0) ? get_page_link($pageLink) : $url; ?>
+                  <p>
+                    <a class="Button Button--red" href="<?php echo $link; ?>"<?php echo $target; ?>><?php echo $text; ?></a>
+                  </p>
+                <?php endif; ?>
               </div>
             </div>
           <?php endif; ?>
@@ -124,6 +161,20 @@
       </a> -->
 
       <button class="Arrow js-move-scroll" href="#contact">ir abajo <i class="glyphicon glyphicon-chevron-down"></i></button>
+
+      <?php if (is_object($prevMenuItem)) : ?>
+        <a href="<?php echo $prevMenuItem->url; ?>" class="left NavMenu">
+          <span><?php echo strtolower($prevMenuItem->title); ?></span>
+          <i class="glyphicon glyphicon-chevron-left"></i>
+        </a>
+      <?php endif; ?>
+
+      <?php if (is_object($nextMenuItem)) : ?>
+        <a href="<?php echo $nextMenuItem->url; ?>" class="right NavMenu">
+          <span><?php echo strtolower($nextMenuItem->title); ?></span>
+          <i class="glyphicon glyphicon-chevron-right"></i>
+        </a>
+      <?php endif; ?>
     </section>
   <?php endif; ?>
   <?php wp_reset_postdata(); ?>

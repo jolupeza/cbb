@@ -17,40 +17,6 @@ body {
       }
     }
   }
-  // &.tax-areas {
-  //   .MainMenu {
-  //     > li {
-  //       &:hover, &.active, &.menu-item-object-category {
-  //         > a {
-  //           background-color: transparent;
-  //           border-bottom: 3px solid $white;
-  //         }
-  //       }
-  //     }
-  //   }
-  //   .Header {
-  //     &.affix {
-  //       .MainMenu {
-  //         > li {
-  //           &:hover, &.active, &.menu-item-object-category {
-  //             > a {
-  //               border-bottom: 3px solid $white;
-  //             }
-  //           }
-  //           a {
-  //             &::after {
-  //               border-bottom-color: $redHard;
-  //             }
-  //           }
-  //         }
-  //         .sub-menu {
-  //           background-color: $redHard;
-  //           bottom: -28px;
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
   &.single-locals {
     .MainMenu {
       > li {
@@ -71,15 +37,6 @@ body {
                 border-bottom: 3px solid $white;
               }
             }
-            a {
-              &::after {
-                border-bottom-color: $redHard;
-              }
-            }
-          }
-          .sub-menu {
-            background-color: $redHard;
-            bottom: -28px;
           }
         }
       }

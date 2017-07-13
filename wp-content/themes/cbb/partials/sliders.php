@@ -44,7 +44,7 @@
 
     <?php if (count($dataMenuNext)) : ?>
       <a href="<?php echo $dataMenuNext['url']; ?>" class="right NavMenu">
-        <?php echo $dataMenuNext['title']; ?>
+        <span><?php echo strtolower($dataMenuNext['title']); ?></span>
         <i class="glyphicon glyphicon-chevron-right"></i>
       </a>
     <?php endif; ?>
@@ -135,7 +135,7 @@
 
       <?php if (count($dataMenuNext)) : ?>
         <a href="<?php echo $dataMenuNext['url']; ?>" class="right NavMenu">
-          <?php echo $dataMenuNext['title']; ?>
+          <span><?php echo strtolower($dataMenuNext['title']); ?></span>
           <i class="glyphicon glyphicon-chevron-right"></i>
         </a>
       <?php endif; ?>

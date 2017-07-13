@@ -19,13 +19,6 @@ body.single-locals .MainMenu > li:hover > a, body.single-locals .MainMenu > li.a
 body.single-locals .Header.affix .MainMenu > li:hover > a, body.single-locals .Header.affix .MainMenu > li.active > a, body.single-locals .Header.affix .MainMenu > li.menu-item-object-locals > a {
   border-bottom: 3px solid #fcfbfb;
 }
-body.single-locals .Header.affix .MainMenu > li a::after {
-  border-bottom-color: #8b041c;
-}
-body.single-locals .Header.affix .MainMenu .sub-menu {
-  background-color: #8b041c;
-  bottom: -28px;
-}
 
 a {
   -moz-transition: all 0.2s ease;
@@ -525,13 +518,16 @@ a {
 .NavMenu.right {
   right: 20px;
 }
+.NavMenu span {
+  display: block;
+}
 .NavMenu i.glyphicon {
   border: 1px solid #fcfbfb;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   border-radius: 3px;
   color: #fcfbfb;
-  display: block;
+  display: inline-block;
   font-size: 2em;
   margin-top: 5px;
   padding: 25px 10px;
