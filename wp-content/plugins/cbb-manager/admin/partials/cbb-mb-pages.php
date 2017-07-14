@@ -16,7 +16,11 @@
         $poster = isset($values['mb_poster']) ? esc_attr($values['mb_poster'][0]) : '';
         $webm = isset($values['mb_webm']) ? esc_attr($values['mb_webm'][0]) : '';
         $mp4 = isset($values['mb_mp4']) ? esc_attr($values['mb_mp4'][0]) : '';
-        $ogv = isset($values['mb_ogv']) ? esc_attr($values['mb_ogv'][0]) : '';        
+        $ogv = isset($values['mb_ogv']) ? esc_attr($values['mb_ogv'][0]) : '';
+        $poster2 = isset($values['mb_poster2']) ? esc_attr($values['mb_poster2'][0]) : '';
+        $webm2 = isset($values['mb_webm2']) ? esc_attr($values['mb_webm2'][0]) : '';
+        $mp42 = isset($values['mb_mp42']) ? esc_attr($values['mb_mp42'][0]) : '';
+        $ogv2 = isset($values['mb_ogv2']) ? esc_attr($values['mb_ogv2'][0]) : '';  
         $pdf = isset($values['mb_pdf']) ? esc_attr($values['mb_pdf'][0]) : '';
         $icon = isset($values['mb_icon']) ? esc_attr($values['mb_icon'][0]) : '';
         
@@ -78,7 +82,7 @@
     </p>
     
     <fieldset class="GroupForm">
-        <legend class="GroupForm-legend">Videos</legend>
+        <legend class="GroupForm-legend">Video 1</legend>
         
         <section class="GroupForm-flex">
             <div class="container-upload-file GroupForm-wrapperImage">
@@ -158,6 +162,92 @@
 
                 <p class="media-info">
                     <input class="hd-src" type="hidden" name="mb_ogv" value="<?php echo $ogv; ?>" />
+                </p><!-- .media-info -->
+            </div><!-- end container-upload-file -->
+        </section>
+    </fieldset><!-- end GroupFrm -->
+    
+    <fieldset class="GroupForm">
+        <legend class="GroupForm-legend">Video 2</legend>
+        
+        <section class="GroupForm-flex">
+            <div class="container-upload-file GroupForm-wrapperImage">
+                <h4 class="Fieldset-subtitle">Poster Imagen</h4>
+                
+                <p class="btn-add-file">
+                    <a title="Agregar poster" href="javascript:;" class="set-file button button-primary">Añadir poster</a>
+                </p>
+
+                <div class="hidden media-container">
+                    <img src="<?php echo $poster2; ?>" alt="<?php //echo get_post_meta( $post->ID, 'slider-1-alt', true ); ?>" title="<?php //echo get_post_meta( $post->ID, 'slider-1-title', true ); ?>" />
+                </div><!-- .media-container -->
+
+                <p class="hidden">
+                    <a title="Quitar poster" href="javascript:;" class="remove-file button button-secondary">Quitar poster</a>
+                </p>
+
+                <p class="media-info">
+                    <input class="hd-src" type="hidden" name="mb_poster2" value="<?php echo $poster2; ?>" />
+                </p><!-- .media-info -->
+            </div><!-- end container-upload-file -->
+            
+            <div class="container-upload-file GroupForm-wrapperImage">
+                <h4 class="Fieldset-subtitle">Video Webm</h4>
+                
+                <p class="btn-add-file">
+                    <a title="Agregar video" href="javascript:;" class="set-file button button-primary">Añadir video</a>
+                </p>
+
+                <div class="hidden media-container">
+                    <i class="Fieldset-icon dashicons-before dashicons-video-alt"></i>
+                </div><!-- .media-container -->
+
+                <p class="hidden">
+                    <a title="Quitar video" href="javascript:;" class="remove-file button button-secondary">Quitar video</a>
+                </p>
+
+                <p class="media-info">
+                    <input class="hd-src" type="hidden" name="mb_webm2" value="<?php echo $webm2; ?>" />
+                </p><!-- .media-info -->
+            </div><!-- end container-upload-file -->
+
+            <div class="container-upload-file GroupForm-wrapperImage">
+                <h4 class="Fieldset-subtitle">Video MP4</h4>
+
+                <p class="btn-add-file">
+                    <a title="Agregar video" href="javascript:;" class="set-file button button-primary">Añadir video</a>
+                </p>
+
+                <div class="hidden media-container">
+                    <i class="Fieldset-icon dashicons-before dashicons-video-alt"></i>
+                </div><!-- .media-container -->
+
+                <p class="hidden">
+                    <a title="Quitar video" href="javascript:;" class="remove-file button button-secondary">Quitar video</a>
+                </p>
+
+                <p class="media-info">
+                    <input class="hd-src" type="hidden" name="mb_mp42" value="<?php echo $mp42; ?>" />
+                </p><!-- .media-info -->
+            </div><!-- end container-upload-file -->
+
+            <div class="container-upload-file GroupForm-wrapperImage">
+                <h4 class="Fieldset-subtitle">Video OGV</h4>
+
+                <p class="btn-add-file">
+                    <a title="Agregar video" href="javascript:;" class="set-file button button-primary">Añadir video</a>
+                </p>
+
+                <div class="hidden media-container">
+                    <i class="Fieldset-icon dashicons-before dashicons-video-alt"></i>
+                </div><!-- .media-container -->
+
+                <p class="hidden">
+                    <a title="Quitar video" href="javascript:;" class="remove-file button button-secondary">Quitar video</a>
+                </p>
+
+                <p class="media-info">
+                    <input class="hd-src" type="hidden" name="mb_ogv2" value="<?php echo $ogv2; ?>" />
                 </p><!-- .media-info -->
             </div><!-- end container-upload-file -->
         </section>

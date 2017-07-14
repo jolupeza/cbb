@@ -425,6 +425,34 @@ class Cbb_Manager_Admin
             delete_post_meta($post_id, 'mb_ogv');
         }
         
+        // Poster2
+        if (isset($_POST['mb_poster2']) && !empty($_POST['mb_poster2'])) {
+            update_post_meta($post_id, 'mb_poster2', esc_attr($_POST['mb_poster2']));
+        } else {
+            delete_post_meta($post_id, 'mb_poster2');
+        }
+        
+        // Webm
+        if (isset($_POST['mb_webm2']) && !empty($_POST['mb_webm2'])) {
+            update_post_meta($post_id, 'mb_webm2', esc_attr($_POST['mb_webm2']));
+        } else {
+            delete_post_meta($post_id, 'mb_webm2');
+        }
+        
+        // MP4
+        if (isset($_POST['mb_mp42']) && !empty($_POST['mb_mp42'])) {
+            update_post_meta($post_id, 'mb_mp42', esc_attr($_POST['mb_mp42']));
+        } else {
+            delete_post_meta($post_id, 'mb_mp42');
+        }
+        
+        // OGV
+        if (isset($_POST['mb_ogv2']) && !empty($_POST['mb_ogv2'])) {
+            update_post_meta($post_id, 'mb_ogv2', esc_attr($_POST['mb_ogv2']));
+        } else {
+            delete_post_meta($post_id, 'mb_ogv2');
+        }
+        
         // PDF
         if (isset($_POST['mb_pdf']) && !empty($_POST['mb_pdf'])) {
             update_post_meta($post_id, 'mb_pdf', esc_attr($_POST['mb_pdf']));
