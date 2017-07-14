@@ -398,7 +398,7 @@ a {
   font-size: 1.25em;
   padding: 5px 60px;
 }
-.MenuZone-list li.current-menu-item a, .MenuZone-list li.active a, .MenuZone-list li:hover a {
+.MenuZone-list li.current-menu-item a, .MenuZone-list li.current-category-ancestor a, .MenuZone-list li.active a, .MenuZone-list li:hover a {
   background-color: #73001a;
   text-decoration: underline;
 }

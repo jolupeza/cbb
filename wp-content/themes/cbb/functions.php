@@ -43,8 +43,10 @@ add_action('after_setup_theme', 'my_theme_setup');
 function register_my_menus() {
   register_nav_menus([
     'main-menu' => __('Main Menu', THEMEDOMAIN),
-    // 'areas-menu' => __('Areas Menu', THEMEDOMAIN),
-    'categories-menu' => __('Categories Menu', THEMEDOMAIN),
+    'categories-zone-menu' => __('Categorías Zona Menu', THEMEDOMAIN),
+    'categories-lima-norte-menu' => __('Categorías Lima Norte Menu', THEMEDOMAIN),
+    'categories-lima-centro-menu' => __('Categorías Lima Centro Menu', THEMEDOMAIN),
+    'categories-lima-este-menu' => __('Categorías Lima Este Menu', THEMEDOMAIN),
     'locals-menu' => __('Infraestructura Menu', THEMEDOMAIN),
   ]);
 }

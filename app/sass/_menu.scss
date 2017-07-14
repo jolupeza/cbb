@@ -132,7 +132,7 @@
       font-size: 1.25em;
       padding: 5px 60px;
     }
-    &.current-menu-item, &.active, &:hover {
+    &.current-menu-item, &.current-category-ancestor, &.active, &:hover {
       a {
         background-color: $redDark;
         text-decoration: underline;

@@ -27,9 +27,9 @@
 
 <section class="Page" id="js-page">
   <div class="container">
-    <?php /*
+    <?php
       $args = [
-        'theme_location' => 'areas-menu',
+        'theme_location' => 'categories-zone-menu',
         'container' => 'nav',
         'container_class' => 'MenuZone',
         'menu_class' => 'MenuZone-list'
@@ -39,37 +39,26 @@
     ?>
 
     <?php
-      $menuName = 'categories-menu';
-      $menuItems = [];
-
-      if (($locations = get_nav_menu_locations()) && isset($locations[$menuName])) {
-        $menu = wp_get_nav_menu_object($locations[$menuName]);
-
-        $menuItems = wp_get_nav_menu_items($menu->term_id);
-      }
+      $categoryId = get_query_var('cat');
+      $category = get_category($categoryId);
+      $categoryParent = ($category->category_parent > 0) ? get_category($category->category_parent) : null;
+      $categoryGrand = (!is_null($categoryParent)) ? get_category($categoryParent->category_parent) : null;
     ?>
-    <nav class="MenuCategories">
-      <ul class="MenuCategories-list">
-        <li class="active"><a href="" data-filter="*">Destacados</a></li>
-        <?php if (count($menuItems)) : ?>
-          <?php foreach ($menuItems as $item) : ?>
-            <li><a href="" data-filter=".<?php echo sanitize_title($item->title); ?>"><?php echo $item->title; ?></a></li>
-          <?php endforeach; ?>
-        <?php endif; ?>
-      </ul>
-    </nav>
-    */ ?>
 
-    <?php
-      $args = [
-        'theme_location' => 'categories-menu',
-        'container' => 'nav',
-        'container_class' => 'MenuCategories',
-        'menu_class' => 'MenuCategories-list',
-      ];
+    <?php if ($category->category_parent > 0) : ?>
+      <?php $themeLocation = ($categoryGrand instanceof WP_Term && $categoryGrand->category_parent === 0) ? "categories-{$categoryParent->category_nicename}-menu" : "categories-{$category->category_nicename}-menu"; ?>
 
-      wp_nav_menu($args);
-    ?>
+      <?php
+        $args = [
+          'theme_location' => $themeLocation,
+          'container' => 'nav',
+          'container_class' => 'MenuCategories',
+          'menu_class' => 'MenuCategories-list',
+        ];
+
+        wp_nav_menu($args);
+      ?>
+    <?php endif; ?>
 
     <div class="row">
       <div class="col-md-6">
