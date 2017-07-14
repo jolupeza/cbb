@@ -1,29 +1,113 @@
 <?php get_header(); ?>
 
-<section id="blog-body" class="carousel slide Carousel Carousel--home">
-  <div class="carousel-inner" role="listbox">
-    <div class="item active">
-      <img src="<?php echo IMAGES; ?>/slide-blog.jpg" alt="Slide Vida Escolar" />
-      <div class="carousel-caption carousel-caption--right">
-        <h3>aprendes más</h3>
-        <h2>estando feliz</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae natus deserunt perspiciatis possimus.</p>
-        <p><a class="Button Button--red" href="">conocer más</a></p>
-      </div>
+<?php
+  $mainMenu = wp_get_nav_menu_object('main-menu');
+  $menuItems = wp_get_nav_menu_items($mainMenu->term_id, [
+    'post_parent' => 0
+  ]);
+
+  $keyCurrentItem = NULL;
+  $prevMenuItem; $nextMenuItem;
+
+  foreach ($menuItems as $key => $item) {
+    if ($item->object === 'category') {
+      $keyCurrentItem = $key;
+      break;
+    }
+  }
+
+  if (!is_null($keyCurrentItem)) {
+    $prevMenuItem = $menuItems[$keyCurrentItem - 1];
+    $nextMenuItem = $menuItems[$keyCurrentItem + 1];
+  }
+?>
+
+<?php
+  $args = [
+    'post_type' => 'sliders',
+    'posts_per_page' => -1,
+    'orderby' => 'menu_order',
+    'order' => 'ASC',
+    'tax_query' => [
+      [
+        'taxonomy' => 'sections',
+        'field' => 'slug',
+        'terms' => 'vida-escolar'
+      ]
+    ]
+  ];
+
+  $the_query = new WP_Query($args);
+
+  if ($the_query->have_posts()) :
+    $i = 0;
+?>
+  <section id="blog-body" class="carousel slide Carousel Carousel--home" data-ride="carousel">
+    <div class="carousel-inner" role="listbox">
+      <?php while ($the_query->have_posts()) : ?>
+        <?php $the_query->the_post(); ?>
+
+        <?php
+          $values = get_post_custom(get_the_id());
+          $title = isset($values['mb_title']) ? esc_attr($values['mb_title'][0]) : '';
+          $subtitle = isset($values['mb_subtitle']) ? esc_attr($values['mb_subtitle'][0]) : '';
+          $text = isset($values['mb_text']) ? esc_attr($values['mb_text'][0]) : '';
+          $url = isset($values['mb_url']) ? esc_attr($values['mb_url'][0]) : '';
+          $pageLink = isset($values['mb_page']) ? (int)esc_attr($values['mb_page'][0]) : 0;
+          $target = isset($values['mb_target']) ? esc_attr($values['mb_target'][0]) : '';
+          $target = (!empty($target) && $target === 'on') ? ' target="_blank" rel="noopener noreferrer"' : '';
+        ?>
+        <div class="item<?php echo ($i === 0) ? ' active' : ''; ?>">
+          <?php
+            if (has_post_thumbnail()) {
+              the_post_thumbnail('full', [
+                'class' => 'img-responsive center-block',
+                'alt' => get_the_title()
+              ]);
+            }
+          ?>
+          <div class="carousel-caption carousel-caption--right">
+            <?php if (!empty($subtitle)) : ?><h3><?php echo $subtitle; ?></h3><?php endif; ?>
+            <?php if (!empty($title)) : ?><h2><?php echo $title; ?></h2><?php endif; ?>
+            <?php the_content(); ?>
+
+            <?php if (!empty($url) || $pageLink > 0) : ?>
+              <?php $link = ($pageLink > 0) ? get_page_link($pageLink) : $url; ?>
+              <p><a class="Button Button--red" href="<?php echo $link; ?>"<?php echo $target; ?>><?php echo $text; ?></a></p>
+            <?php endif; ?>
+          </div>
+        </div>
+        <?php $i++; ?>
+      <?php endwhile; ?>
     </div>
-  </div>
 
-  <!-- <a class="left carousel-control" href="#blog-body" role="button" data-slide="prev">
-    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="right carousel-control" href="#blog-body" role="button" data-slide="next">
-    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a> -->
+    <!-- <a class="left carousel-control" href="#blog-body" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#blog-body" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a> -->
 
-  <button class="Arrow js-move-scroll" data-href="js-page">ir abajo <i class="glyphicon glyphicon-chevron-down"></i></button>
-</section>
+    <button class="Arrow js-move-scroll" data-href="js-page">ir abajo <i class="glyphicon glyphicon-chevron-down"></i></button>
+
+    <?php if (is_object($prevMenuItem)) : ?>
+      <a href="<?php echo $prevMenuItem->url; ?>" class="left NavMenu">
+        <span><?php echo strtolower($prevMenuItem->title); ?></span>
+        <i class="glyphicon glyphicon-chevron-left"></i>
+      </a>
+    <?php endif; ?>
+
+    <?php if (is_object($nextMenuItem)) : ?>
+      <a href="<?php echo $nextMenuItem->url; ?>" class="right NavMenu">
+        <span><?php echo strtolower($nextMenuItem->title); ?></span>
+        <i class="glyphicon glyphicon-chevron-right"></i>
+      </a>
+    <?php endif; ?>
+  </section>
+  <?php wp_reset_postdata(); ?>
+<?php endif; ?>
 
 <section class="Page" id="js-page">
   <div class="container">
