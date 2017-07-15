@@ -20,7 +20,7 @@
         $poster2 = isset($values['mb_poster2']) ? esc_attr($values['mb_poster2'][0]) : '';
         $webm2 = isset($values['mb_webm2']) ? esc_attr($values['mb_webm2'][0]) : '';
         $mp42 = isset($values['mb_mp42']) ? esc_attr($values['mb_mp42'][0]) : '';
-        $ogv2 = isset($values['mb_ogv2']) ? esc_attr($values['mb_ogv2'][0]) : '';  
+        $ogv2 = isset($values['mb_ogv2']) ? esc_attr($values['mb_ogv2'][0]) : '';
         $pdf = isset($values['mb_pdf']) ? esc_attr($values['mb_pdf'][0]) : '';
         $icon = isset($values['mb_icon']) ? esc_attr($values['mb_icon'][0]) : '';
         
