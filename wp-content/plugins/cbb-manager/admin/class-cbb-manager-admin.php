@@ -466,6 +466,31 @@ class Cbb_Manager_Admin
         } else {
             delete_post_meta($post_id, 'mb_icon');
         }
+        
+        // Text Link
+        if (isset($_POST['mb_text']) && !empty($_POST['mb_text'])) {
+            update_post_meta($post_id, 'mb_text', esc_attr($_POST['mb_text']));
+        } else {
+            delete_post_meta($post_id, 'mb_text');
+        }
+
+        // URL
+        if (isset($_POST['mb_url']) && !empty($_POST['mb_url'])) {
+            update_post_meta($post_id, 'mb_url', esc_attr($_POST['mb_url']));
+        } else {
+            delete_post_meta($post_id, 'mb_url');
+        }
+
+        // Target
+        $target = isset($_POST['mb_target']) && $_POST['mb_target'] ? 'on' : 'off';
+        update_post_meta($post_id, 'mb_target', $target);
+
+        // Page
+        if (isset($_POST['mb_page']) && !empty($_POST['mb_page'])) {
+            update_post_meta($post_id, 'mb_page', esc_attr($_POST['mb_page']));
+        } else {
+            delete_post_meta($post_id, 'mb_page');
+        }
     }
 
     /**

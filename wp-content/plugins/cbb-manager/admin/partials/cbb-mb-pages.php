@@ -23,6 +23,10 @@
         $ogv2 = isset($values['mb_ogv2']) ? esc_attr($values['mb_ogv2'][0]) : '';
         $pdf = isset($values['mb_pdf']) ? esc_attr($values['mb_pdf'][0]) : '';
         $icon = isset($values['mb_icon']) ? esc_attr($values['mb_icon'][0]) : '';
+        $url = isset($values['mb_url']) ? esc_attr($values['mb_url'][0]) : '';
+        $page = isset($values['mb_page']) ? (int)esc_attr($values['mb_page'][0]) : '';
+        $text = isset($values['mb_text']) ? esc_attr($values['mb_text'][0]) : '';
+        $target = isset($values['mb_target']) ? esc_attr($values['mb_target'][0]) : '';
         
         wp_nonce_field('pages_meta_box_nonce', 'meta_box_nonce');
     ?>
@@ -288,4 +292,47 @@
             <option value="icon-brush-alt" <?php selected($icon, 'icon-brush-alt'); ?>>Lapiz</option>
         </select>
     </p>
+    
+    <!-- Texto enlace-->
+    <p class="content-mb">
+        <label for="mb_text">Texto botón enlace: </label>
+        <input type="text" name="mb_text" id="mb_text" value="<?php echo $text; ?>" />
+    </p>
+    
+    <!-- URL-->
+    <p class="content-mb">
+        <label for="mb_url">Url: </label>
+        <input type="text" name="mb_url" id="mb_url" value="<?php echo $url; ?>" />
+    </p>
+    
+    <!-- Target-->
+    <p class="content-mb">
+        <label for="mb_target">Mostrar en otra pestaña:</label>
+        <input type="checkbox" name="mb_target" id="mb_target" <?php checked($target, 'on'); ?> />
+    </p>
+    
+<?php
+    $args = [
+        'post_type' => 'page',
+        'posts_per_page' => -1,
+        'post_parent' => 0
+    ];
+    $pages = new WP_Query($args);
+    
+    if ($pages->have_posts()) :
+?>
+    <p class="content-mb">
+        <label for="mb_page">Seleccionar página a enlazar</label>
+        <select name="mb_page" id="mb_page">
+            <option value="" <?php selected($page, ''); ?>>-- Seleccione página a enlazar --</option>
+
+            <?php while ($pages->have_posts()) : ?>
+                <?php $pages->the_post(); ?>
+            <option value="<?php echo get_the_ID(); ?>" <?php selected($page, get_the_ID()); ?>><?php the_title(); ?></option>
+            <?php endwhile; ?>
+
+        </select>
+    </p>
+<?php endif; ?>
+<?php wp_reset_postdata(); ?>
 </div><!-- #single-post-meta-manager -->
