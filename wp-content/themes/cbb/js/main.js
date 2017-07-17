@@ -10,7 +10,7 @@ var j = jQuery.noConflict();
   function affixHeader() {
     var noAffix = false;
 
-    if (j('body').hasClass('single-post') || j('body').hasClass('page-template-page-admision')) {
+    if (j('body').hasClass('single-post')) {
       noAffix = true;
     }
 

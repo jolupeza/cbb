@@ -22,8 +22,8 @@
   }
 
   if (!is_null($keyCurrentItem)) {
-    $prevMenuItem = $menuItems[$keyCurrentItem - 1];
-    $nextMenuItem = $menuItems[$keyCurrentItem + 1];
+    $prevMenuItem = (array_key_exists($keyCurrentItem - 1, $menuItems)) ? $menuItems[$keyCurrentItem - 1] : null;
+    $nextMenuItem = (array_key_exists($keyCurrentItem + 1, $menuItems)) ? $menuItems[$keyCurrentItem + 1] : null;
   }
 ?>
 

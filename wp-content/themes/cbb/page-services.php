@@ -22,7 +22,7 @@
   }
 
   if (!is_null($keyCurrentItem)) {
-    $prevMenuItem = $menuItems[$keyCurrentItem - 1];
+    $prevMenuItem = (array_key_exists($keyCurrentItem - 1, $menuItems)) ? $menuItems[$keyCurrentItem - 1] : null;
     $nextMenuItem = (array_key_exists($keyCurrentItem + 1, $menuItems)) ? $menuItems[$keyCurrentItem + 1] : null;
   }
 ?>
@@ -146,7 +146,7 @@
           <?php endwhile; ?>
       </div>
 
-      <button class="Arrow js-move-scroll" data-href="bertolt-brecht">ir abajo <i class="glyphicon glyphicon-chevron-down"></i></button>
+      <button class="Arrow js-move-scroll" data-href="page-0">ir abajo <i class="glyphicon glyphicon-chevron-down"></i></button>
 
       <?php if (is_object($prevMenuItem)) : ?>
         <a href="<?php echo $prevMenuItem->url; ?>" class="left NavMenu">
@@ -183,7 +183,7 @@
       while ($mainQuery->have_posts()) {
         $mainQuery->the_post();
 ?>
-        <section class="Page">
+        <section class="Page" id="page-<?php echo $i; ?>">
           <?php
             $values = get_post_custom(get_the_id());
             $text = isset($values['mb_text']) ? esc_attr($values['mb_text'][0]) : '';

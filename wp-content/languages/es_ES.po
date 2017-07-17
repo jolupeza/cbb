@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.8.x package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-07-16 10:25:15+0000\n"
+"PO-Revision-Date: 2017-07-17 19:18:17+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -255,7 +255,7 @@ msgstr "Reemplazar imagen"
 
 #: wp-includes/widgets/class-wp-widget-media-image.php:27
 msgid "Displays an image."
-msgstr "Mostrar una imagen."
+msgstr "Muestra una imagen."
 
 #: wp-includes/widgets/class-wp-widget-media-audio.php:198
 #: wp-includes/widgets/class-wp-widget-media-image.php:325
@@ -617,7 +617,7 @@ msgstr "Tu tema tiene 1 área de widget más, pero esta página en concreto no l
 
 #: wp-includes/option.php:1771
 msgid "This address is used for admin purposes, like new user notification."
-msgstr "Esta dirección se utiliza para fines de administración, por ejemplo notificación de nuevo usuario."
+msgstr "Esta dirección se utiliza para fines de administración, por ejemplo avisos de nuevos usuarios."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:101
 #: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:831
@@ -1145,7 +1145,7 @@ msgstr "New York, NY 10001"
 #: wp-includes/theme.php:1952
 msgctxt "Theme starter content"
 msgid "123 Main Street"
-msgstr "123 Main Street"
+msgstr "Calle Principal 123"
 
 #: wp-includes/theme.php:1951
 msgctxt "Theme starter content"
@@ -2122,7 +2122,7 @@ msgstr "Grupos de cambios"
 
 #: wp-includes/post.php:126 wp-includes/post.php:127
 msgid "Custom CSS"
-msgstr "CSS personalizada"
+msgstr "CSS personalizado"
 
 #: wp-includes/post.php:69
 msgid "Attachment Attributes"
@@ -2199,7 +2199,7 @@ msgstr "Siguiente"
 #: wp-includes/link-template.php:2534
 msgctxt "previous set of posts"
 msgid "Previous"
-msgstr "Previo"
+msgstr "Anteriores"
 
 #: wp-includes/general-template.php:408 wp-login.php:538 wp-login.php:902
 msgid "Username or Email Address"
@@ -3091,7 +3091,7 @@ msgstr "Pega la URL o teclea para buscar"
 
 #: wp-includes/class-wp-customize-manager.php:3861
 msgid "Logo"
-msgstr "Logo"
+msgstr "Logotipo"
 
 #: wp-includes/class-wp-customize-manager.php:3828
 #: wp-includes/class-wp-customize-manager.php:3905
@@ -3840,7 +3840,7 @@ msgstr "Desplegar/Plegar sección: Enlaces personalizados"
 
 #: wp-includes/script-loader.php:411
 msgid "Your new password has not been saved."
-msgstr "Tu contraseña no ha sido guardada"
+msgstr "Tu contraseña no se ha guardado."
 
 #: wp-includes/script-loader.php:417
 msgid "Hide password"
@@ -3948,11 +3948,11 @@ msgstr "Cuando empiezas un párrafo nuevo con uno de estos atajos de formato, se
 
 #: wp-login.php:509
 msgid "Your password reset link has expired. Please request a new link below."
-msgstr "Tu enlace de restablecimiento de contraseña ha caducado. Por favor, solicita un nuevo enlace abajo"
+msgstr "Tu enlace de restablecimiento de contraseña ha caducado. Por favor, solicita un nuevo enlace abajo."
 
 #: wp-login.php:507
 msgid "Your password reset link appears to be invalid. Please request a new link below."
-msgstr "Su enlace de restablecimiento de contraseña no es válido. Por favor, solicite un nuevo enlace debajo."
+msgstr "Tu enlace de restablecimiento de contraseña no es válido. Por favor, solicita un nuevo enlace debajo."
 
 #: wp-includes/wp-db.php:1385 wp-includes/wp-db.php:1402
 msgid "WordPress database error:"
@@ -4531,7 +4531,7 @@ msgstr[1] "Tu tema soporta %s menús. Elige qué menú debería aparecer en cada
 
 #: wp-includes/class-wp-customize-nav-menus.php:578
 msgid "Your theme supports one menu. Select which menu you would like to use."
-msgstr "Tu tema soporta un único menú. Elige qué menú te gustaría usar."
+msgstr "Tu tema es compatible con un solo menú. Elige qué menú te gustaría usar."
 
 #. translators: 1: number of comments, 2: post title
 #: wp-includes/theme-compat/comments.php:40
@@ -4686,7 +4686,7 @@ msgstr "<strong>No se pudo encontrar el sitio %1$s.</strong> Buscada la tabla %2
 #: wp-includes/pluggable.php:1467 wp-includes/pluggable.php:1478
 #: wp-includes/pluggable.php:1628 wp-includes/pluggable.php:1638
 msgid "Website: %1$s (IP: %2$s, %3$s)"
-msgstr "Sitio web: %1$s (IP: %2$s, %3$s)"
+msgstr "Web: %1$s (IP: %2$s, %3$s)"
 
 #. translators: 1: comment author, 2: author IP, 3: author domain
 #. translators: 1: Comment author name, 2: comment author's IP, 3: comment
@@ -5217,7 +5217,7 @@ msgstr "Tamaño de archivo:"
 
 #: wp-includes/media-template.php:345
 msgid "Uploaded on:"
-msgstr "Subido en:"
+msgstr "Subido el:"
 
 #: wp-includes/media-template.php:344
 msgid "File type:"
@@ -5273,7 +5273,7 @@ msgstr "Bitrate"
 
 #: wp-includes/class-wp-customize-widgets.php:422
 msgid "Widgets are independent sections of content that can be placed into widgetized areas provided by your theme (commonly called sidebars)."
-msgstr "Los widgets son secciones independientes de contenido que pueden ser colocadas en las áreas de widgets que tenga tu tema (también conocidas por barras laterales)"
+msgstr "Los widgets son secciones independientes de contenido que pueden colocarse en las áreas de widgets que tenga tu tema (también llamadas barras laterales)"
 
 #. translators: %s: the site/panel title in the Customizer
 #: wp-includes/class-wp-customize-panel.php:382
@@ -5289,7 +5289,7 @@ msgstr "Aunque puedes recortar imágenes a tu gusto después de hacer clic en <s
 #. translators: %s: header width in pixels
 #: wp-includes/customize/class-wp-customize-header-image-control.php:184
 msgid "While you can crop images to your liking after clicking <strong>Add new image</strong>, your theme recommends a header width of %s pixels."
-msgstr "Aunque puedes recortar imágenes a tu gusto tras hacer clic en <strong>Añadir nueva imagen</strong>, tu tema recomienda una cabecera de <strong>%s</strong> pixels de ancho. "
+msgstr "Aunque puedes recortar imágenes a tu gusto tras hacer clic en <strong>Añadir nueva imagen</strong>, tu tema recomienda una cabecera de %s píxeles de ancho. "
 
 #: wp-includes/comment.php:3101
 msgid "<strong>ERROR</strong>: The comment could not be saved. Please try again later."

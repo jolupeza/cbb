@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.8.x - Administration package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-07-17 17:31:47+0000\n"
+"PO-Revision-Date: 2017-07-17 19:09:14+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -232,7 +232,7 @@ msgstr "Lo sentimos, no tienes permisos para crear usuarios."
 
 #: wp-admin/customize.php:163
 msgid "The Customizer allows you to preview changes to your site before publishing them. You can navigate to different pages on your site within the preview. Edit shortcuts are shown for some editable elements."
-msgstr "El Personalizador te permite comprobar una vista previa de los cambios en tu sitio antes de publicarlos. Puedes navegar por las diferentes páginas de tu sitio en la vista previa. Se muestras algunos atajos de edición para algunos elementos editables."
+msgstr "El Personalizador te permite comprobar una vista previa de los cambios en tu sitio antes de publicarlos. Puedes navegar por las diferentes páginas de tu sitio en la vista previa. Se muestran algunos atajos de edición para algunos elementos editables."
 
 #: wp-admin/customize.php:176
 msgctxt "short (~12 characters) label for hide controls button"
@@ -2366,7 +2366,7 @@ msgstr "Plugins actualizados con éxito."
 #: wp-admin/includes/plugin-install.php:592
 msgctxt "Active plugin installs"
 msgid "1+ Million"
-msgstr "Más de un millón de"
+msgstr "Más de un millón"
 
 #: wp-admin/includes/plugin-install.php:590
 msgid "Active Installs:"
@@ -2408,11 +2408,11 @@ msgstr "Has seleccionado estos usuarios para ser borrados:"
 
 #: wp-admin/edit.php:274
 msgid "1 post not updated, somebody is editing it."
-msgstr "Una entrada no actualizada, alguien la está editando"
+msgstr "1 entrada no actualizada, alguien la está editando."
 
 #: wp-admin/edit.php:282
 msgid "1 page not updated, somebody is editing it."
-msgstr "Una página no actualizada, alguien la está editando"
+msgstr "1 página no actualizada, alguien la está editando."
 
 #: wp-admin/plugins.php:304
 msgid "These plugins may be active on other sites in the network."
@@ -2529,7 +2529,7 @@ msgstr "Haz clic en el enlace para abrir \"Publicar esto\". Una vez hecho, añá
 
 #: wp-admin/tools.php:71
 msgid "Open Press This"
-msgstr "Abrir \"Publicar esto\""
+msgstr "Abre \"Publicar esto\""
 
 #: wp-admin/user-edit.php:49
 msgid "You can log out of other devices, such as your phone or a public computer, by clicking the Log Out Everywhere Else button."
@@ -2583,7 +2583,7 @@ msgstr "Mostrar opciones de entrada"
 
 #: wp-admin/includes/class-wp-press-this.php:1272
 msgid "Press This!"
-msgstr "¡Publicar esto!"
+msgstr "¡Publica esto!"
 
 #: wp-admin/includes/class-wp-press-this.php:1373
 msgid "Scan site for content"
@@ -2629,7 +2629,7 @@ msgid ""
 "\n"
 "Thanks! -- The WordPress Team"
 msgstr ""
-"¿BETA TESTING?\n"
+"¿PRUEBAS BETA?\n"
 "=============\n"
 "\n"
 "Este correo electrónico de errores se te envía cuando estás usando una versión de desarrollo de WordPress.\n"
@@ -2683,7 +2683,7 @@ msgstr ""
 "Este correo se ha enviado a  ###EMAIL###\n"
 "\n"
 "Saludos,\n"
-"Los de  ###SITENAME###\n"
+"El equipo de ###SITENAME###\n"
 "###SITEURL###"
 
 #. translators: Do not translate USERNAME, ADMIN_URL, EMAIL, SITENAME, SITEURL:
@@ -2719,7 +2719,7 @@ msgstr ""
 "Este mensaje se ha enviado a ###EMAIL###\n"
 "\n"
 "Saludos,\n"
-"Los de  ###SITENAME###\n"
+"El equipo de ###SITENAME###\n"
 "###SITEURL###"
 
 #: wp-admin/includes/ms.php:529
@@ -2888,11 +2888,11 @@ msgstr "Filtrar por categoría"
 
 #: wp-admin/custom-background.php:232
 msgid "You can now manage and live-preview Custom Backgrounds in the <a href=\"%1$s\">Customizer</a>."
-msgstr "Ahora puedes administrar y tener una vista previa del Fondo Personalizado en el <a href=\"%1$s\">Personalizador</a>."
+msgstr "Ahora puedes administrar y tener una vista previa del Fondo personalizado en el <a href=\"%1$s\">Personalizador</a>."
 
 #: wp-admin/custom-header.php:463
 msgid "You can now manage and live-preview Custom Header in the <a href=\"%1$s\">Customizer</a>."
-msgstr "Ahora puedes administrar y tener una vista previa de la Cabecera Personalizada en el <a href=\"%1$s\">Personalizador</a>."
+msgstr "Ahora puedes administrar y tener una vista previa de la Cabecera personalizada en el <a href=\"%1$s\">Personalizador</a>."
 
 #: wp-admin/edit-link-form.php:100
 #: wp-admin/includes/class-wp-links-list-table.php:128
@@ -3041,7 +3041,7 @@ msgstr "Mes"
 
 #: wp-admin/includes/plugin-install.php:638
 msgid "Contributors"
-msgstr "Contribuidores"
+msgstr "Colaboradores"
 
 #: wp-admin/includes/plugin-install.php:604
 #: wp-admin/includes/plugin-install.php:658
@@ -3051,7 +3051,7 @@ msgstr "Dona para este plugin &#187;"
 #: wp-admin/includes/plugin-install.php:495
 msgctxt "Plugin installer section title"
 msgid "Reviews"
-msgstr "Revisiones"
+msgstr "Valoraciones"
 
 #: wp-admin/includes/class-wp-theme-install-list-table.php:67
 msgctxt "themes"
@@ -3104,7 +3104,7 @@ msgstr "Rendimiento"
 #: wp-admin/includes/class-wp-plugin-install-list-table.php:91
 msgctxt "Plugin Installer"
 msgid "Beta Testing"
-msgstr "Beta Testing"
+msgstr "Pruebas beta"
 
 #: wp-admin/includes/ajax-actions.php:3038
 msgid "%s failed to embed."
@@ -3125,11 +3125,11 @@ msgstr "No se encontraron temas. Prueba otra búsqueda."
 
 #: wp-admin/theme-install.php:220
 msgid "Filtering by:"
-msgstr "Filtrado por:"
+msgstr "Filtrando por:"
 
 #: wp-admin/includes/media.php:2831
 msgid "Displayed on attachment pages."
-msgstr "Mostrar en páginas de adjuntos."
+msgstr "Mostrado en páginas de adjuntos."
 
 #: wp-admin/includes/image-edit.php:151
 msgid "You can edit the image while preserving the thumbnail. For example, you may wish to have a square thumbnail that displays just a section of the image."
@@ -3137,7 +3137,7 @@ msgstr "Puedes editar la imagen al tiempo que conservas la miniatura. Por ejempl
 
 #: wp-admin/includes/image-edit.php:111
 msgid "Once you have made your selection, you can adjust it by entering the size in pixels. The minimum selection size is the thumbnail size as set in the Media settings."
-msgstr "Una vez que has hecho tu selección, puedes ajustar el tamaño especificando los pixels que debe tener. El tamaño de selección mínimo es el tamaño de la miniaturas indicado en los Ajustes mutimedia."
+msgstr "Una vez que has hecho tu selección puedes ajustar el tamaño especificando los pixels que debe tener. El tamaño de selección mínimo es el tamaño de la miniaturas indicado en los Ajustes de medios."
 
 #: wp-admin/includes/image-edit.php:108
 msgid "The aspect ratio is the relationship between the width and height. You can preserve the aspect ratio by holding down the shift key while resizing your selection. Use the input box to specify the aspect ratio, e.g. 1:1 (square), 4:3, 16:9, etc."
@@ -3287,7 +3287,7 @@ msgstr "<strong>WordPress</strong> &mdash; Actualizar tu instalación de WordPre
 
 #: wp-admin/update-core.php:552
 msgid "If an update is available, you&#8127;ll see a notification appear in the Toolbar and navigation menu."
-msgstr "Si hay una actualización disponible, aparecerá una notificación en la barra de herramientas y en el menú de navegación."
+msgstr "Si hay una actualización disponible aparecerá una notificación en la barra de herramientas y en el menú de navegación."
 
 #: wp-admin/update-core.php:561
 msgid "<strong>Themes and Plugins</strong> &mdash; To update individual themes or plugins from this screen, use the checkboxes to make your selection, then <strong>click on the appropriate &#8220;Update&#8221; button</strong>. To update all of your themes or plugins at once, you can check the box at the top of the section to select all before clicking the update button."
@@ -3517,7 +3517,7 @@ msgstr "Publicaciones recientes"
 
 #: wp-admin/includes/dashboard.php:768
 msgid "Publishing Soon"
-msgstr "Próxima publicación"
+msgstr "Próximas publicaciones"
 
 #: wp-admin/includes/dashboard.php:51 wp-admin/includes/dashboard.php:570
 msgid "Drafts"
@@ -3733,7 +3733,7 @@ msgstr "Descargando traducción desde <span class=\"code\">%s</span>&#8230;"
 
 #: wp-admin/includes/class-language-pack-upgrader.php:117
 msgid "The translations are up to date."
-msgstr "Las traducciones están actualizadas."
+msgstr "Las traducciones están al día."
 
 #: wp-admin/includes/class-language-pack-upgrader.php:116
 msgid "Some of your translations need updating. Sit tight for a few more seconds while we update them as well."
@@ -3951,7 +3951,7 @@ msgstr "Copia de seguridad automática de %s"
 #: wp-admin/includes/meta-boxes.php:210
 msgctxt "revisions"
 msgid "Browse"
-msgstr "Explora"
+msgstr "Explorar"
 
 #. translators: Post revisions heading. 1: The number of available revisions
 #: wp-admin/includes/meta-boxes.php:208
@@ -4008,11 +4008,11 @@ msgstr "Añade elementos de menú desde la columna de la izquierda."
 
 #: wp-admin/includes/plugin-install.php:235
 msgid "Plugins extend and expand the functionality of WordPress. You may automatically install plugins from the <a href=\"%1$s\">WordPress Plugin Directory</a> or upload a plugin in .zip format by clicking the button at the top of this page."
-msgstr "Los plugins extienden y amplían las funcionalidades de WordPress. Puedes instalar automáticamente plugins del <a href=\"%1$s\">Directorio de Plugins de WordPress</a> o subir un plugin en formato Zip a través de esta página."
+msgstr "Los plugins extienden y amplían las funcionalidades de WordPress. Puedes instalar automáticamente plugins del <a href=\"%1$s\">directorio de plugins de WordPress</a> o subir un plugin en formato .zip haciendo clic en el botón de la parte superior de esta página."
 
 #. Plugin URI of the plugin/theme
 msgid "http://wordpress.org/plugins/hello-dolly/"
-msgstr "http://wordpress.org/plugins/hello-dolly/"
+msgstr "http://es.wordpress.org/plugins/hello-dolly/"
 
 #: wp-admin/includes/class-theme-upgrader.php:70
 msgid "The theme contains no files."
@@ -4032,11 +4032,11 @@ msgstr "Cargando&hellip;"
 
 #: wp-admin/post.php:249
 msgid "This item has already been deleted."
-msgstr "Este elemento ya ha sido eliminado."
+msgstr "Este elemento ya ha sido borrado."
 
 #: wp-admin/post.php:231
 msgid "The item you are trying to restore from the Trash no longer exists."
-msgstr "El elemento que intentas restaurar de la papelera no existe ya."
+msgstr "El elemento que intentas restaurar de la papelera ya no existe."
 
 #: wp-admin/post.php:208
 msgid "The item you are trying to move to the Trash no longer exists."
@@ -4056,15 +4056,15 @@ msgstr "Para restaurar una revisión, <strong>haz clic en Restaurar esta revisi�
 
 #: wp-admin/revision.php:108
 msgid "From this screen you can review, compare, and restore revisions:"
-msgstr "En esta pantalla podrá revisar, comparar y restaurar las revisiones:"
+msgstr "En esta pantalla podrás revisar, comparar y restaurar revisiones:"
 
 #: wp-admin/revision.php:107
 msgid "Revisions are saved copies of your post or page, which are periodically created as you update your content. The red text on the left shows the content that was removed. The green text on the right shows the content that was added."
-msgstr "Las revisiones son copias guardadas de tus entradas o páginas que se crean periódicamente conforme vas creando tu contenido. El texto en rojo de la derecha muestra el contenido que ha sido quitado. El texto en verde de la derecha, el contenido que ha sido añadido."
+msgstr "Las revisiones son copias guardadas de tus entradas o páginas que se crean periódicamente conforme vas creando tu contenido. El texto en rojo de la derecha muestra el contenido que se ha eliminado. El texto en verde de la derecha, el contenido que se ha añadido."
 
 #: wp-admin/revision.php:106
 msgid "This screen is used for managing your content revisions."
-msgstr "Esta pantalla es utilizada para gestionar tus revisiones de contenido."
+msgstr "Esta pantalla se utiliza para gestionar las revisiones de tu contenido."
 
 #: wp-admin/includes/revision.php:354
 msgctxt "Followed by post revision info"
@@ -4114,7 +4114,7 @@ msgstr "Gestionar ubicaciones"
 
 #: wp-admin/nav-menus.php:597
 msgid "Edit Menus"
-msgstr "Editar Menús"
+msgstr "Editar menús"
 
 #: wp-admin/nav-menus.php:560
 msgid "To add a new menu instead of assigning an existing one, <strong>click the &#8217;Use new menu&#8217; link</strong>. Your new menu will be automatically assigned to that theme location"
@@ -4154,7 +4154,7 @@ msgstr "Cada menú personalizado puede contener una mezcla de enlaces a páginas
 
 #: wp-admin/nav-menus.php:540
 msgid "Menu Management"
-msgstr "Gestión de Menús"
+msgstr "Gestión de menús"
 
 #: wp-admin/nav-menus.php:536
 msgid "You can assign theme locations to individual menus by <strong>selecting the desired settings</strong> at the bottom of the menu editor. To assign menus to all theme locations at once, <strong>visit the Manage Locations tab</strong> at the top of the screen."
@@ -4236,7 +4236,7 @@ msgstr "Denegado: %s"
 
 #: wp-admin/user-edit.php:670
 msgid "Capabilities"
-msgstr "Permisos"
+msgstr "Capacidades"
 
 #: wp-admin/nav-menus.php:792
 msgid "Menu Settings"
@@ -4592,7 +4592,7 @@ msgstr "Estamos preparando algunos enlaces para que puedas comenzar:"
 
 #: wp-admin/includes/dashboard.php:1558
 msgid "Welcome to WordPress!"
-msgstr "Bienvenido a WordPress"
+msgstr "¡Bienvenido a WordPress!"
 
 #: wp-admin/includes/dashboard.php:341
 msgid "Search Engines Discouraged"
@@ -4830,7 +4830,7 @@ msgstr "Buscar temas por palabra clave."
 
 #: wp-admin/setup-config.php:172
 msgid "In all likelihood, these items were supplied to you by your Web Host. If you don&#8217;t have this information, then you will need to contact them before you can continue. If you&#8217;re all ready&hellip;"
-msgstr "Con toda seguridad, estos elementos te fueron suministrados por tu proveedor de hosting. Si no tienes esta información, necesitas contactar con ellos antes de continuar. SI estás listo&hellip;"
+msgstr "Con toda seguridad, estos elementos te los facilitó tu proveedor de alojamiento. Si no tienes esta información necesitas contactar con ellos antes de continuar. Si ya estás listo&hellip;"
 
 #: wp-admin/theme-editor.php:192
 msgid "This theme is broken."
@@ -4876,7 +4876,7 @@ msgstr "Introduce una URL o haz clic arriba para los ajustes por defecto."
 
 #: wp-admin/includes/media.php:1231
 msgid "Link URL"
-msgstr "URL (enlace)"
+msgstr "URL del enlace"
 
 #: wp-admin/includes/image-edit.php:70
 msgid "Scale"
@@ -5252,7 +5252,7 @@ msgstr "El archivo 'wp-config.php' ya existe. Si necesitas recuperar algunos de 
 
 #: wp-admin/setup-config.php:49
 msgid "Sorry, I need a wp-config-sample.php file to work from. Please re-upload this file to your WordPress installation."
-msgstr "Lo siento, necesito un archivo wp-config-sample.php para poder trabajar. Por favor, sube de nuevo ese archivo a tu instalación de WordPress."
+msgstr "Lo siento, necesito un archivo wp-config-sample.php desde el que poder trabajar. Por favor, sube de nuevo este archivo a tu instalación de WordPress."
 
 #. translators: %s: wp-config.php
 #: wp-admin/maint/repair.php:37
@@ -5332,7 +5332,7 @@ msgstr "Las opciones de publicar por correo electrónico te permiten enviar a tu
 
 #: wp-admin/users.php:42
 msgid "You can filter the list of users by User Role using the text links above the users list to show All, Administrator, Editor, Author, Contributor, or Subscriber. The default view is to show all users. Unused User Roles are not listed."
-msgstr "Puedes filtrar la lista de roles de usuario usando los enlaces de texto de arriba a la izquierda para mostrar Todos, Administrador, Editor, Autor, Colaborador o Suscriptor. La vista por defecto muestra todos los usuarios. Los roles de usuario no usados no se listan."
+msgstr "Puedes filtrar la lista de perfiles de usuario usando los enlaces de texto de arriba a la izquierda para mostrar Todos, Administrador, Editor, Autor, Colaborador o Suscriptor. La vista por defecto muestra todos los usuarios. Los perfiles de usuario sin utilizar no están en la lista."
 
 #: wp-admin/user-new.php:317
 msgid "Enter the email address of an existing user on this network to invite them to this site. That person will be sent an email asking them to confirm the invite."
@@ -5340,7 +5340,7 @@ msgstr "Escribe la dirección de correo electrónico de un usuario de esta red p
 
 #: wp-admin/plugin-editor.php:279
 msgid "<strong>Warning:</strong> Making changes to active plugins is not recommended. If your changes cause a fatal error, the plugin will be automatically deactivated."
-msgstr "<strong>Atención:</strong> Hacer cambios en plugins activos no es recomendable. Si tus cambios producen un error grave, el plugin será desactivado automáticamente."
+msgstr "<strong>Advertencia:</strong> No es recomendable hacer cambios en plugins activos. Si tus cambios producen un error grave se desactivará automáticamente el plugin."
 
 #: wp-admin/options-discussion.php:180
 msgid "An avatar is an image that follows you from weblog to weblog appearing beside your name when you comment on avatar enabled sites. Here you can enable the display of avatars for people who comment on your site."
@@ -5435,7 +5435,7 @@ msgstr "Versión de seguridad"
 
 #: wp-admin/about.php:41 wp-admin/credits.php:28 wp-admin/freedoms.php:27
 msgid "What&#8217;s New"
-msgstr "¿Qué hay de nuevo?"
+msgstr "Novedades"
 
 #: wp-admin/about.php:238
 msgid "Maintenance and Security Release"
@@ -5463,19 +5463,19 @@ msgstr "Solución de problemas"
 
 #: wp-admin/edit-tags.php:258
 msgid "Adding Tags"
-msgstr "Añadir etiquetas"
+msgstr "Añadiendo etiquetas"
 
 #: wp-admin/edit-tags.php:258
 msgid "Adding Categories"
-msgstr "Añadir categorías"
+msgstr "Añadiendo categorías"
 
 #: wp-admin/themes.php:97
 msgid "Adding Themes"
-msgstr "Añadir temas"
+msgstr "Añadiendo temas"
 
 #: wp-admin/edit.php:198
 msgid "You can customize the display of this screen&#8217;s contents in a number of ways:"
-msgstr "Puedes personalizar el formato de los contenidos de esta pantalla&#8217;s de muchas formas:"
+msgstr "Puedes personalizar el formato de los contenidos de esta pantalla de muchas formas:"
 
 #: wp-admin/edit.php:196
 msgid "Screen Content"
@@ -5483,11 +5483,11 @@ msgstr "Pantalla de contenido"
 
 #: wp-admin/plugin-install.php:88
 msgid "Adding Plugins"
-msgstr "Añadir plugins"
+msgstr "Añadiendo plugins"
 
 #: wp-admin/edit.php:222
 msgid "You can also edit or move multiple posts to the trash at once. Select the posts you want to act on using the checkboxes, then select the action you want to take from the Bulk Actions menu and click Apply."
-msgstr "También puedes editar o mover varias entradas a la basura a la vez. Selecciona los mensajes sobre los que deseas actuar utilizando las casillas de verificación. A continuación selecciona la acción a realizar en el menú Acciones en bloque y haz clic en Aplicar."
+msgstr "También puedes editar o mover varias entradas a la papelera a la vez. Selecciona los mensajes sobre los que deseas actuar utilizando las casillas de verificación. A continuación selecciona la acción a realizar en el menú Acciones en bloque y haz clic en Aplicar."
 
 #: wp-admin/edit.php:192
 msgid "This screen provides access to all of your posts. You can customize the display of this screen to suit your workflow."
@@ -5519,7 +5519,7 @@ msgstr "Los suscriptores pueden leer comentarios/comentar/recibir listas de dist
 
 #: wp-admin/edit-comments.php:173
 msgid "Moderating Comments"
-msgstr "Moderar comentarios"
+msgstr "Moderando comentarios"
 
 #: wp-admin/user-new.php:179
 msgid "To add a new user to your site, fill in the form on this screen and click the Add New User button at the bottom."
@@ -5527,11 +5527,11 @@ msgstr "Para añadir un usuario nuevo a tu sitio, rellena el formulario de esta 
 
 #: wp-admin/user-new.php:200
 msgid "User Roles"
-msgstr "Roles de usuario"
+msgstr "Perfiles de usuario"
 
 #: wp-admin/user-new.php:201
 msgid "Here is a basic overview of the different user roles and the permissions associated with each one:"
-msgstr "Aquí tienes una visión general de los diferentes roles de usuarios y los permisos que cada uno tiene:"
+msgstr "Aquí tienes una visión general de los diferentes perfiles de usuarios y los permisos que tiene cada uno:"
 
 #: wp-admin/upload.php:205
 msgid "Attaching Files"
@@ -5717,7 +5717,7 @@ msgstr "Puedes mostrar/ocultar columnas basándote en tus necesidades y decidir 
 
 #: wp-admin/edit.php:241
 msgid "Managing Pages"
-msgstr "Gestionar páginas"
+msgstr "Gestionando páginas"
 
 #: wp-admin/user-new.php:182
 msgid "Because this is a multisite installation, you may add accounts that already exist on the Network by specifying a username or email, and defining a role. For more options, such as specifying a password, you have to be a Network Administrator and use the hover link under an existing user&#8217;s name to Edit the user profile under Network Admin > All Users."
@@ -5733,11 +5733,11 @@ msgstr "Bienvenido a WordPress %s"
 
 #: wp-admin/about.php:218
 msgid "Return to Dashboard &rarr; Updates"
-msgstr "Vuelve a Escritorio &rarr; Actualizaciones"
+msgstr "Vuelve al Escritorio &rarr; Actualizaciones"
 
 #: wp-admin/about.php:221
 msgid "Go to Dashboard &rarr; Home"
-msgstr "Ve a Escritorio &rarr; Inicio"
+msgstr "Ve al Escritorio &rarr; Inicio"
 
 #: wp-admin/credits.php:50
 msgid "WordPress is created by a worldwide team of passionate individuals."
@@ -5830,7 +5830,7 @@ msgstr "La tabla %s ya está optimizada."
 #. translators: %s: table name
 #: wp-admin/maint/repair.php:114
 msgid "Successfully repaired the %s table."
-msgstr "La tabla %s ha sido reparada con éxito."
+msgstr "La tabla %s se ha reparado con éxito."
 
 #. translators: %s: plugin version
 #: wp-admin/update-core.php:289
@@ -6492,7 +6492,7 @@ msgstr "No es necesaria la actualización"
 
 #: wp-admin/upgrade.php:97
 msgid "WordPress has been updated! Before we send you on your way, we have to update your database to the newest version."
-msgstr "¡WordPress se ha actualizado! Antes de continuar, tenemos que actualizar tu base de datos a la última versión."
+msgstr "¡WordPress se ha actualizado! Antes de continuar tenemos que actualizar tu base de datos a la última versión."
 
 #: wp-admin/upgrade.php:96
 msgid "Database Update Required"
@@ -6853,7 +6853,7 @@ msgstr "Si eliminas un enlace, será eliminado de forma permanente. Aún no exis
 
 #: wp-admin/link-manager.php:53
 msgid "You can add links here to be displayed on your site, usually using <a href=\"%s\">Widgets</a>. By default, links to several sites in the WordPress community are included as examples."
-msgstr "Aquí puedes añadir enlaces a mostrar en tu sitio, generalmente usando <a href=\"%s\">Widgets</a>. Por defecto, se incluyen enlaces a varios sitios de la comunidad de WordPress como ejemplo."
+msgstr "Aquí puedes añadir enlaces a mostrar en tu sitio, generalmente usando <a href=\"%s\">widgets</a>. Por defecto, se incluyen enlaces a varios sitios de la comunidad de WordPress como ejemplo."
 
 #: wp-admin/plugin-editor.php:145
 msgid "You can use the editor to make changes to any of your plugins&#8217; individual PHP files. Be aware that if you make changes, plugins updates will overwrite your customizations."
@@ -7013,7 +7013,7 @@ msgstr "<strong>Advertencia:</strong> piensa detenidamente en la posibilidad de 
 
 #: wp-admin/widgets.php:55
 msgid "Widgets are independent sections of content that can be placed into any widgetized area provided by your theme (commonly called sidebars). To populate your sidebars/widget areas with individual widgets, drag and drop the title bars into the desired area. By default, only the first widget area is expanded. To populate additional widget areas, click on their title bars to expand them."
-msgstr "Los Widgets son secciones independientes de contenido que pueden ser colocados en cualquier parte de tu tema que esté preparado para ello (comúnmente llamados barras laterales/sidebars). Para colocar en tus áreas laterales/widgets con widgets de forma individual, arrastra y suelta la barra del título del widget al área deseada. Por defecto, sólo la primera área está desplegada. Para poner widgets en otras aéreas haz clic en el barra del título para desplegarlas."
+msgstr "Los widgets son secciones independientes de contenido que pueden ser colocados en cualquier parte de tu tema que esté preparado para ello (comúnmente llamados barras laterales/sidebars). Para colocar en tus áreas laterales/widgets con widgets de forma individual, arrastra y suelta la barra del título del widget al área deseada. Por defecto, sólo la primera área está desplegada. Para poner widgets en otras aéreas haz clic en el barra del título para desplegarlas."
 
 #: wp-admin/theme-editor.php:28
 msgid "Begin by choosing a theme to edit from the dropdown menu and clicking the Select button. A list then appears of the theme&#8217;s template files. Clicking once on any file name causes the file to appear in the large Editor box."
@@ -10839,7 +10839,7 @@ msgstr "Estás a punto de borrar el siguiente comentario:"
 
 #: wp-admin/comment.php:118
 msgid "You are about to move the following comment to the Trash:"
-msgstr "Estás a punto de mover el siguiente comentario a la basura:"
+msgstr "Estás a punto de mover el siguiente comentario a la papelera:"
 
 #: wp-admin/comment.php:114
 msgid "You are about to mark the following comment as spam:"

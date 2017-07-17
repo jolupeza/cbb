@@ -56,7 +56,7 @@
           <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
               <td height="112" align="center">
-                <img class="fix" src="<?php echo get_template_directory_uri(); ?>/images/logo.png" border="0" alt="Colegio Bertolt Brecht" />
+                <img class="fix" src="<?php echo get_template_directory_uri(); ?>/images/logo.jpg" border="0" alt="Colegio Bertolt Brecht" />
               </td>
             </tr>
           </table>
