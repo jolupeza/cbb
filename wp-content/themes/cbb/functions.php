@@ -201,77 +201,81 @@ function register_contact_callback()
   $subject = (int)trim($_POST['contact_subject']);
   $message = trim($_POST['contact_message']);
 
-  // if (!empty($name) && !empty($email) && is_email($email) && !empty($message) && $subject > 0) {
-  if (!empty($name) && !empty($email) && is_email($email) && !empty($message)) {
+  if (!empty($name) && !empty($email) && is_email($email) && !empty($message) && $subject > 0) {
     $options = get_option('cbb_custom_settings');
 
     $name = sanitize_text_field($name);
     $email = sanitize_email($email);
     $message = sanitize_text_field($message);
 
-    // Comprobar subject
+    // Validate Subject
+    $dataSubject = get_term_by('id', $subject, 'subjects');
 
-    $receiverEmail = $options['email'];
+    if (is_object($dataSubject)) {
+      $receiverEmail = $options['email'];
 
-    if (!isset($receiverEmail) || empty($receiverEmail)) {
-      $receiverEmail = get_option('admin_email');
-    }
+      if (!isset($receiverEmail) || empty($receiverEmail)) {
+        $receiverEmail = get_option('admin_email');
+      }
 
-    $subjectEmail = "Consulta Web Colegio Bertolt Brecht";
+      $subjectEmail = "Consulta Web Colegio Bertolt Brecht";
 
-    ob_start();
-    $filename = TEMPLATEPATH . '/templates/email-contact.php';
-    if (file_exists($filename)) {
-      include $filename;
+      ob_start();
+      $filename = TEMPLATEPATH . '/templates/email-contact.php';
+      if (file_exists($filename)) {
+        include $filename;
 
-      $content = ob_get_contents();
-      ob_get_clean();
+        $content = ob_get_contents();
+        ob_get_clean();
 
-      $headers[] = 'From: Colegio Bertolt Brecht';
-      //$headers[] = 'Reply-To: jolupeza@icloud.com';
-      $headers[] = 'Content-type: text/html; charset=utf-8';
+        $headers[] = 'From: Colegio Bertolt Brecht';
+        //$headers[] = 'Reply-To: jolupeza@icloud.com';
+        $headers[] = 'Content-type: text/html; charset=utf-8';
 
-      if (wp_mail($receiverEmail, $subjectEmail, $content, $headers)) {
-        // Send email to customer
-        $subjectEmail = "Consulta enviada al Colegio Bertolt Brecht";
+        if (wp_mail($receiverEmail, $subjectEmail, $content, $headers)) {
+          // Send email to customer
+          $subjectEmail = "Consulta enviada al Colegio Bertolt Brecht";
 
-        ob_start();
-        $filename = TEMPLATEPATH . '/templates/email-gratitude.php';
-        if (file_exists($filename)) {
-          $textEmail = 'Ya tenemos su consulta. En breve nos pondremos en contacto con usted.';
+          ob_start();
+          $filename = TEMPLATEPATH . '/templates/email-gratitude.php';
+          if (file_exists($filename)) {
+            $textEmail = 'Ya tenemos su consulta. En breve nos pondremos en contacto con usted.';
 
-          include $filename;
+            include $filename;
 
-          $content = ob_get_contents();
-          ob_get_clean();
+            $content = ob_get_contents();
+            ob_get_clean();
 
-          $headers[] = 'From: Colegio Bertolt Brecht';
-          //$headers[] = 'Reply-To: jolupeza@icloud.com';
-          $headers[] = 'Content-type: text/html; charset=utf-8';
+            $headers[] = 'From: Colegio Bertolt Brecht';
+            //$headers[] = 'Reply-To: jolupeza@icloud.com';
+            $headers[] = 'Content-type: text/html; charset=utf-8';
 
-          wp_mail($email, $subjectEmail, $content, $headers);
+            wp_mail($email, $subjectEmail, $content, $headers);
 
-          $post_id = wp_insert_post(array(
-              'post_author' => 1,
-              'post_status' => 'publish',
-              'post_type' => 'contacts',
-          ));
-          update_post_meta($post_id, 'mb_name', $name);
-          update_post_meta($post_id, 'mb_email', $email);
-          // Falta subject
-          update_post_meta($post_id, 'mb_message', $message);
+            $post_id = wp_insert_post(array(
+                'post_author' => 1,
+                'post_status' => 'publish',
+                'post_type' => 'contacts',
+            ));
+            update_post_meta($post_id, 'mb_name', $name);
+            update_post_meta($post_id, 'mb_email', $email);
+            update_post_meta($post_id, 'mb_message', $message);
+            wp_set_object_terms($post_id, $subject, 'subjects');
 
-          $result['result'] = true;
+            $result['result'] = true;
+          } else {
+            $result['error'] = 'Plantilla email no encontrada.';
+            ob_get_clean();
+          }
         } else {
-          $result['error'] = 'Plantilla email no encontrada.';
-          ob_get_clean();
+          $result['error'] = 'No se puedo enviar el email.';
         }
       } else {
-        $result['error'] = 'No se puedo enviar el email.';
+        $result['error'] = 'Plantilla email no encontrada.';
+        ob_get_clean();
       }
     } else {
-      $result['error'] = 'Plantilla email no encontrada.';
-      ob_get_clean();
+      $result['error'] = 'Debe seleccionar el asunto o tipo de consulta.';
     }
   } else {
     $result['error'] = 'Verifique que ha ingresado los datos correctamente.';

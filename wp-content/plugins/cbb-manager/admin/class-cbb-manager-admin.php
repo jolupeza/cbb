@@ -1430,4 +1430,43 @@ class Cbb_Manager_Admin
 
         register_taxonomy('levels', 'prestudents', $args);
     }
+    
+    /**
+     * Add custom taxonomies areas to post type contacts.
+     */
+    public function add_taxonomies_contacts()
+    {
+        $labels = array(
+            'name' => _x('Asuntos', 'Taxonomy plural name', THEMEDOMAIN),
+            'singular_name' => _x('Asunto', 'Taxonomy singular name', THEMEDOMAIN),
+            'search_items' => __('Buscar Asunto', THEMEDOMAIN),
+            'popular_items' => __('Asuntos Populares', THEMEDOMAIN),
+            'all_items' => __('Todos los Asuntos', THEMEDOMAIN),
+            'parent_item' => __('Asunto Padre', THEMEDOMAIN),
+            'parent_item_colon' => __('Asunto Padre', THEMEDOMAIN),
+            'edit_item' => __('Editar Asunto', THEMEDOMAIN),
+            'update_item' => __('Actualizar Asunto', THEMEDOMAIN),
+            'add_new_item' => __('Añadir nuevo Asunto', THEMEDOMAIN),
+            'new_item_name' => __('Nuevo Asunto', THEMEDOMAIN),
+            'add_or_remove_items' => __('Añadir o eliminar Asunto', THEMEDOMAIN),
+            'choose_from_most_used' => __('Choose from most used text-domain', THEMEDOMAIN),
+            'menu_name' => __('Asuntos', THEMEDOMAIN),
+        );
+
+        $args = array(
+            'labels' => $labels,
+            'public' => false,
+            'show_in_nav_menus' => false,
+            'show_in_menu' => true,
+            'show_admin_column' => true,
+            'hierarchical' => true,
+            'show_tagcloud' => false,
+            'show_ui' => true,
+            'query_var' => true,
+            'rewrite' => false,
+//            'capabilities' => array(),
+        );
+
+        register_taxonomy('subjects', 'contacts', $args);
+    }
 }

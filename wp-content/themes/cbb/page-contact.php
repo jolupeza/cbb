@@ -107,10 +107,6 @@
       $i = 0;
   ?>
     <section id="carousel-infraestructura" class="carousel slide Carousel Carousel--home">
-      <!-- <ol class="carousel-indicators">
-        <li data-target="#carousel-infraestructura" data-slide-to="0" class="active"></li>
-      </ol> -->
-
       <div class="carousel-inner" role="listbox">
         <?php while ($the_query->have_posts()) : ?>
           <?php $the_query->the_post(); ?>
@@ -203,12 +199,26 @@
             <label for="contact_email" class="sr-only">Correo electrónico</label>
             <input type="email" class="form-control" name="contact_email" placeholder="Correo electrónico" autocomplete="off" required />
           </div>
-          <div class="form-group">
-            <label for="contact_subject" class="sr-only">Asunto</label>
-            <select name="contact_subject" class="form-control" data-fv-notempty-message="Debe seleccionar el asunto">
-              <option value="">-- Elije el asunto o el tipo de consulta --</option>
-            </select>
-          </div>
+          <?php
+            $subjects = get_terms([
+              'taxonomy' => 'subjects',
+              'hide_empty' => false,
+              'orderby' => 'term_id',
+              'order' => 'ASC'
+            ]);
+
+            if (count($subjects)) :
+          ?>
+            <div class="form-group">
+              <label for="contact_subject" class="sr-only">Asunto</label>
+              <select name="contact_subject" class="form-control" required data-fv-notempty-message="Debe seleccionar el asunto">
+                <option value="">-- Elije el asunto o el tipo de consulta --</option>
+                <?php foreach ($subjects as $subject) : ?>
+                  <option value="<?php echo $subject->term_id ?>"><?php echo $subject->name; ?></option>
+                <?php endforeach; ?>
+              </select>
+            </div>
+          <?php endif; ?>
           <div class="form-group">
             <label for="contact_message" class="sr-only">Mensaje</label>
             <textarea name="contact_message" rows="6" class="form-control" placeholder="Mensaje" required></textarea>

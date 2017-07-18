@@ -113,7 +113,7 @@
                             <td class="bodycopy" style="padding: 10px 10px 10px 10px; font-size: 14px; line-height: 18px; color: #484848; font-family: Arial;"><?php echo $email; ?></td>
                           </tr>
                           <tr>
-                            <td class="bodycopy" style="padding: 10px 10px 10px 10px; font-size: 14px; line-height: 18px; color: #484848; font-family: Arial;"><?php echo 'Asunto'; ?></td>
+                            <td class="bodycopy" style="padding: 10px 10px 10px 10px; font-size: 14px; line-height: 18px; color: #484848; font-family: Arial;"><?php echo $dataSubject->name; ?></td>
                           </tr>
                         </table>
                       </td>

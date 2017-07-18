@@ -230,7 +230,7 @@ var j = jQuery.noConflict();
       });
     });
 
-    j('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
+    /*j('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
       // console.log(j(e.target));
       // console.log(e.relatedTarget);
 
@@ -261,7 +261,7 @@ var j = jQuery.noConflict();
       var currentCenter = map.getCenter();
       google.maps.event.trigger(map, "resize");
       map.setCenter(currentCenter);
-    })
+    })*/
 
     // j('.grid').isotope({
     //   itemSelector: '.grid-item',
