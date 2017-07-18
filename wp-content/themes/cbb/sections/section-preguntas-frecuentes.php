@@ -11,59 +11,50 @@
         <h2 class="Page-title text-azul"><?php the_title(); ?></h2>
         <?php the_excerpt(); ?>
 
-        <div class="panel-group Accordion" id="accordion-questions" role="tablist" aria-multiselectable="true">
-          <div class="panel panel-default">
-            <div class="panel-heading" role="tab" id="heading-1">
-              <h4 class="panel-title">
-                <a role="button" data-toggle="collapse" data-parent="#accordion-questions" href="#collapse-1" aria-expanded="true" aria-controls="collapse-1">
-                  ¿Cuáles son los horarios de atención?
-                </a>
-              </h4>
-            </div>
-            <div id="collapse-1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-1">
-              <div class="panel-body">
-                El horario de atención es de lunes a viernes de 9:00 am. a 1:00 pm.
+        <?php
+          $arguments = [
+            'post_type' => 'questions',
+            'posts_per_page' => -1,
+            'orderby' => 'menu_order',
+            'order' => 'ASC'
+          ];
+
+          $questions = new WP_Query($arguments);
+
+          if ($questions->have_posts()) :
+            $i = 1;
+        ?>
+          <div class="panel-group Accordion" id="accordion-questions" role="tablist" aria-multiselectable="true">
+            <?php while ($questions->have_posts()) : ?>
+              <?php $questions->the_post(); ?>
+              <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="heading-<?php echo $i; ?>">
+                  <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#accordion-questions" href="#collapse-<?php echo $i; ?>" aria-expanded="true" aria-controls="collapse-<?php echo $i; ?>">
+                      <?php the_title(); ?>
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapse-<?php echo $i; ?>" class="panel-collapse collapse<?php echo ($i === 1) ? ' in' : ''; ?>" role="tabpanel" aria-labelledby="heading-<?php echo $i; ?>">
+                  <div class="panel-body">
+                    <?php the_content(); ?>
+                  </div>
+                </div>
               </div>
-            </div>
+              <?php $i++; ?>
+            <?php endwhile; ?>
           </div>
-          <div class="panel panel-default">
-            <div class="panel-heading" role="tab" id="heading-2">
-              <h4 class="panel-title">
-                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion-questions" href="#collapse-2" aria-expanded="false" aria-controls="collapse-2">
-                  ¿En qué bancos puedo pagar la pensión?
-                </a>
-              </h4>
-            </div>
-            <div id="collapse-2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-2">
-              <div class="panel-body">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos modi dolorem non odit est, nisi, pariatur officia harum dolor ut consequuntur quibusdam, neque ab quia quis blanditiis reiciendis omnis error!
-              </div>
-            </div>
-          </div>
-          <div class="panel panel-default">
-            <div class="panel-heading" role="tab" id="heading-3">
-              <h4 class="panel-title">
-                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion-questions" href="#collapse-3" aria-expanded="false" aria-controls="collapse-3">
-                  ¿Cuáles son los horarios de atención?
-                </a>
-              </h4>
-            </div>
-            <div id="collapse-3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-3">
-              <div class="panel-body">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero magnam soluta sit neque, facere porro alias nobis ea, libero totam, debitis nisi iste. Commodi illo dolore voluptatibus impedit, ad alias.
-              </div>
-            </div>
-          </div>
-        </div>
+        <?php endif; ?>
+        <?php wp_reset_postdata(); ?>
 
         <?php the_content(); ?>
 
         <p class="text-center"><a class="Button Button--blue Button--medium" href="<?php echo home_url('contactanos') ?>">Contáctanos</a></p>
       </div>
       <div class="col-md-6">
-        <?php if (has_post_thumbnail()) : ?>
+        <?php if (has_post_thumbnail($pageParent)) : ?>
           <figure class="Page-figure">
-            <?php the_post_thumbnail('full', [
+            <?php echo get_the_post_thumbnail($pageParent, 'full', [
                 'class' => 'img-responsive center-block',
                 'alt' => get_the_title()
               ]);

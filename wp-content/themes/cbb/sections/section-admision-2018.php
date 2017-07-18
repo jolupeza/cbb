@@ -1,4 +1,5 @@
 <section class="Page Page--contact" id="<?php echo $post->post_name; ?>">
+  <?php $pageParent = get_the_id(); ?>
   <div class="container">
     <div class="row">
       <div class="col-md-6">
@@ -95,9 +96,9 @@
         </form>
       </div>
       <div class="col-md-6">
-        <?php if (has_post_thumbnail()) : ?>
+        <?php if (has_post_thumbnail($pageParent)) : ?>
           <figure class="Page-figure text-center">
-            <?php the_post_thumbnail('full', [
+            <?php echo get_the_post_thumbnail($pageParent, 'full', [
                 'class' => 'img-responsive center-block',
                 'alt' => get_the_title()
               ]);
