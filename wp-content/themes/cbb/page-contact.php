@@ -325,7 +325,8 @@
                     phone: '<?php echo $phone; ?>',
                     map: {},
                     marker: {},
-                    infowindow: {}
+                    infowindow: {},
+                    load: false
                   });
                 </script>
 

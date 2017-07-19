@@ -47,30 +47,25 @@ var j = jQuery.noConflict();
     });
   }
 
-  function loadMap(latPriv, longPriv, idPriv, contentString) {
-    var mapCoord = new google.maps.LatLng(latPriv, longPriv);
-    var opciones = {
+  function loadMap(info) {
+    var mapCoord = new google.maps.LatLng(info.lat, info.long);
+    var options = {
       zoom: 16,
       center: mapCoord,
       scrollwheel: false,
     };
 
-    infowindow = new google.maps.InfoWindow({
-      content: contentString,
-      maxWidth: 300
-    });
+    info.map = new google.maps.Map(document.getElementById(info.id), options);
 
-    map = new google.maps.Map(document.getElementById(idPriv), opciones);
-
-    marker = new google.maps.Marker({
+    info.marker = new google.maps.Marker({
       position: mapCoord,
-      map: map,
+      map: info.map,
       title: 'Colegio Bertolt Brecht'
     });
 
-    marker.addListener('click', function() {
-      infowindow.open(map, marker);
-    });
+    var currentCenter = info.map.getCenter();
+    google.maps.event.trigger(info.map, "resize");
+    info.map.setCenter(currentCenter);
   }
 
   $win.on('scroll resize', checkIfInView);
@@ -298,38 +293,23 @@ var j = jQuery.noConflict();
       });
     });
 
-    /*j('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
-      // console.log(j(e.target));
-      // console.log(e.relatedTarget);
-
+    j('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
       var tab = j(e.target),
-          info = j(tab.attr('href') + ' figure.Contact-map');
+        id = tab.attr('aria-controls') + '-map';
 
-      lat = parseFloat(info.data('lat'));
-      long = parseFloat(info.data('long'));
-      idMap = info.attr('id');
+      for (var i in infoMaps) {
+        if (infoMaps[i].id === id) {
+          if (!infoMaps[i].load) {
+            setTimeout(function(){
+              loadMap(infoMaps[i]);
+            }, 50);
 
-      var address = info.data('address'),
-          phone = info.data('phone');
-
-      var contentString = '<div id="content" class="Marker">'+
-            '<div id="siteNotice">'+
-            '</div>'+
-            '<h1 id="firstHeading" class="firstHeading Marker-title text-center">Colegio Bertolt Brecht</h1>'+
-            '<div id="bodyContent" class="Marker-body">'+
-            '<ul class="Marker-list">'+
-            '<li><strong>Dirección: </strong>' + address + '</li>'+
-            '<li><strong>Teléfono: </strong>' + phone + '</li>'+
-            '</ul>'+
-            '</div>'+
-            '</div>';
-
-      loadMap(lat, long, idMap, contentString);
-
-      var currentCenter = map.getCenter();
-      google.maps.event.trigger(map, "resize");
-      map.setCenter(currentCenter);
-    })*/
+            infoMaps[i].load = true;
+            return;
+          }
+        }
+      }
+    });
 
     // j('.grid').isotope({
     //   itemSelector: '.grid-item',

@@ -98,8 +98,8 @@
       <script>
         if (infoMaps.length) {
           function initMap() {
-            infoMaps.forEach( function(info) {
-              contentString = '<div id="content" class="Marker">'+
+            // infoMaps.forEach( function(info) {
+              /*contentString = '<div id="content" class="Marker">'+
                     '<div id="siteNotice">'+
                     '</div>'+
                     '<h1 id="firstHeading" class="firstHeading Marker-title text-center">Colegio Bertolt Brecht</h1>'+
@@ -109,36 +109,38 @@
                     '<li><strong>Teléfono: </strong>' + info.phone + '</li>'+
                     '</ul>'+
                     '</div>'+
-                    '</div>';
+                    '</div>';*/
 
-              var mapCoord = new google.maps.LatLng(info.lat, info.long);
+              var mapCoord = new google.maps.LatLng(infoMaps[0].lat, infoMaps[0].long);
               var options = {
                 zoom: 16,
                 center: mapCoord,
                 scrollwheel: false,
               };
 
-              info.infowindow = new google.maps.InfoWindow({
+              /*info.infowindow = new google.maps.InfoWindow({
                 content: contentString,
                 maxWidth: 300
-              });
+              });*/
 
-              info.map = new google.maps.Map(document.getElementById(info.id), options);
+              infoMaps[0].map = new google.maps.Map(document.getElementById(infoMaps[0].id), options);
 
-              info.marker = new google.maps.Marker({
+              infoMaps[0].marker = new google.maps.Marker({
                 position: mapCoord,
-                map: info.map,
+                map: infoMaps[0].map,
                 title: 'Colegio Bertolt Brecht'
               });
 
-              info.marker.addListener('click', function() {
+              infoMaps[0].load = true;
+
+              /*info.marker.addListener('click', function() {
                 info.infowindow.open(info.map, info.marker);
-              });
+              });*/
 
               // var currentCenter = info.map.getCenter();
               // google.maps.event.trigger(info.map, "resize");
               // info.map.setCenter(currentCenter);
-            });
+            // });
           }
         }
       </script>
