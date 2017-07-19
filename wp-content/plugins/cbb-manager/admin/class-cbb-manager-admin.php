@@ -169,6 +169,13 @@ class Cbb_Manager_Admin
         } else {
             delete_post_meta($post_id, 'mb_page');
         }
+        
+        // Align
+        if (isset($_POST['mb_align']) && !empty($_POST['mb_align'])) {
+            update_post_meta($post_id, 'mb_align', esc_attr($_POST['mb_align']));
+        } else {
+            delete_post_meta($post_id, 'mb_align');
+        }
 
        /* // Image Responsive
         if (isset($_POST['mb_responsive']) && !empty($_POST['mb_responsive'])) {

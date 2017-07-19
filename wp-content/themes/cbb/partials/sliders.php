@@ -74,6 +74,7 @@
       <?php if ($the_query->post_count > 1) : ?>
         <ol class="carousel-indicators">
           <?php while ($the_query->have_posts()) : ?>
+            <?php $the_query->the_post(); ?>
             <li data-target="#carousel-home" data-slide-to="<?php echo $i; ?>"<?php echo ($i === 0) ? 'class="active"' : ''; ?>></li>
             <?php $i++ ?>
           <?php endwhile; ?>
@@ -93,6 +94,7 @@
             $pageLink = isset($values['mb_page']) ? (int)esc_attr($values['mb_page'][0]) : 0;
             $target = isset($values['mb_target']) ? esc_attr($values['mb_target'][0]) : '';
             $target = (!empty($target) && $target === 'on') ? ' target="_blank" rel="noopener noreferrer"' : '';
+            $align = isset($values['mb_align']) ? esc_attr($values['mb_align'][0]) : 'left';
           ?>
 
           <div class="item<?php echo ($j === 0) ? ' active' : ''; ?>">
@@ -105,7 +107,7 @@
               ?>
             <?php endif; ?>
 
-            <div class="carousel-caption">
+            <div class="carousel-caption carousel-caption--<?php echo $align; ?>">
               <?php if (!empty($subtitle)) : ?><h3><?php echo $subtitle; ?></h3><?php endif; ?>
               <?php if (!empty($title)) : ?><h2><?php echo $title ?></h2><?php endif; ?>
               <?php the_content(); ?>

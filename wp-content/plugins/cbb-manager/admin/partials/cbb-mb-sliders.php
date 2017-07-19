@@ -18,6 +18,7 @@
         $page = isset($values['mb_page']) ? (int)esc_attr($values['mb_page'][0]) : '';
         $text = isset($values['mb_text']) ? esc_attr($values['mb_text'][0]) : '';
         $target = isset($values['mb_target']) ? esc_attr($values['mb_target'][0]) : '';
+        $align = isset($values['mb_align']) ? esc_attr($values['mb_align'][0]) : '';
 
         wp_nonce_field( 'sliders_meta_box_nonce', 'meta_box_nonce' );
     ?>
@@ -76,6 +77,16 @@
     </p>
 <?php endif; ?>
 <?php wp_reset_postdata(); ?>
+    
+    <p class="content-mb">
+        <label for="mb_align">Alineación texto:</label>
+        <select name="mb_align" id="mb_align">
+            <option value="" <?php selected($align, ''); ?>>-- Seleccione alineación --</option>            
+            <option value="left" <?php selected($align, 'left'); ?>>Izquierda</option>
+            <option value="center" <?php selected($align, 'center'); ?>>Centrado</option>
+            <option value="right" <?php selected($align, 'right'); ?>>Derecha</option>
+        </select>
+    </p>
 
 <?php /*
     <fieldset class="GroupForm">

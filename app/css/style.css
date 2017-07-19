@@ -550,9 +550,7 @@ a {
   flex-wrap: wrap;
   bottom: auto;
   height: 100%;
-  left: 10%;
   padding: 0;
-  right: auto;
   text-align: left;
   top: 0;
   width: 40%;
@@ -581,6 +579,14 @@ a {
 .Carousel--home .carousel-caption--right {
   left: auto;
   right: 10%;
+}
+.Carousel--home .carousel-caption--left {
+  left: 10%;
+}
+.Carousel--home .carousel-caption--center {
+  left: 20%;
+  text-align: center;
+  width: 60%;
 }
 .Carousel--page .carousel-content {
   display: -webkit-flex;

@@ -6,9 +6,7 @@
       @include flex-wrap(wrap);
       bottom: auto;
       height: 100%;
-      left: 10%;
       padding: 0;
-      right: auto;
       text-align: left;
       top: 0;
       width: 40%;
@@ -35,6 +33,14 @@
       &--right {
         left: auto;
         right: 10%;
+      }
+      &--left {
+        left: 10%;
+      }
+      &--center {
+        left: 20%;
+        text-align: center;
+        width: 60%;
       }
     }
   }
