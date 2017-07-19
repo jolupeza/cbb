@@ -80,6 +80,14 @@
               </select>
             </div>
           <?php endif; ?>
+
+          <div class="form-group">
+            <label for="schedule" class="sr-only">Horario</label>
+            <select name="schedule" class="form-control" required data-fv-notempty-message="Debe seleccionar horario">
+              <option value="">-- Seleccione el horario que mejor le convenga --</option>
+            </select>
+          </div>
+
           <div class="form-group">
             <div class="checkbox">
               <label>

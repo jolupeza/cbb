@@ -18,6 +18,7 @@
         $email = isset($values['mb_email']) ? esc_attr($values['mb_email'][0]) : '';
         $sede = isset($values['mb_sede']) ? esc_attr($values['mb_sede'][0]) : '';
         $sonName = isset($values['mb_sonName']) ? esc_attr($values['mb_sonName'][0]) : '';
+        $schedule = isset($values['mb_schedule']) ? esc_attr($values['mb_schedule'][0]) : '';
         $year = isset($values['mb_year']) ? esc_attr($values['mb_year'][0]) : '';
 
         wp_nonce_field( 'prestudents_meta_box_nonce', 'meta_box_nonce' );
@@ -72,6 +73,32 @@
                 <?php while ($the_query->have_posts()) : ?>
                     <?php $the_query->the_post(); ?>
                     <option value="<?php echo get_the_ID(); ?>" <?php selected($sede, get_the_ID()); ?>><?php the_title(); ?></option>
+                <?php endwhile; ?>
+            </select>
+        </p>
+    <?php
+        endif;
+        wp_reset_postdata();
+    ?>
+        
+    <!-- Schedule -->
+    <?php
+        $args = [
+            'post_type' => 'schedules',
+            'posts_per_page' => -1,
+            'post_parent' => 0,
+            'orderby' => 'menu_order',
+            'order' => 'ASC'
+        ];
+        $the_query = new WP_Query($args);
+        if ($the_query->have_posts()) :
+    ?>
+        <p class="content-mb">
+            <label for="mb_schedule">Horario: </label>
+            <select name="mb_schedule" id="mb_schedule">
+                <?php while ($the_query->have_posts()) : ?>
+                    <?php $the_query->the_post(); ?>
+                <option value="<?php echo get_the_ID(); ?>" <?php selected($schedule, get_the_ID()); ?>><?php echo get_the_excerpt(); ?></option>
                 <?php endwhile; ?>
             </select>
         </p>

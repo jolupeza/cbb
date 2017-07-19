@@ -192,6 +192,74 @@ var j = jQuery.noConflict();
           }
         }
       }
+    }).on('change', '[name="parent_sede"]', function (e) {
+      var $this = j(this),
+          local = parseInt($this.val()),
+          fv = j('#js-frm-admision').data('formValidation'),
+          level = parseInt(j('select[name="son_level"]').val()),
+          schedule = j('select[name="schedule"]');
+
+      if (!level) {
+        fv.revalidateField('son_level');
+        return;
+      }
+
+      if (local) {
+        j.post(CbbAjax.url, {
+          nonce: CbbAjax.nonce,
+          action: 'load_schedule',
+          local: local,
+          level: level
+        }, function(data) {
+          if (data.result) {
+            var options = '<option value="">-- Seleccione el horario que mejor le convenga --</option>';
+            data.posts.forEach(function (item) {
+              options += '<option value="' + item.ID + '">' + item.post_excerpt + '</option>';
+            });
+
+            schedule.html(options);
+          } else {
+            fv.revalidateField('parent_sede');
+            fv.revalidateField('son_level');
+          }
+        }, 'json').fail(function() {
+          alert('No se pudo realizar la operación solicitada. Por favor vuelva a intentarlo.');
+        });
+      }
+    }).on('change', '[name="son_level"]', function (e) {
+      var $this = j(this),
+          level = parseInt($this.val()),
+          fv = j('#js-frm-admision').data('formValidation'),
+          local = parseInt(j('select[name="parent_sede"]').val()),
+          schedule = j('select[name="schedule"]');
+
+      if (!local) {
+        fv.revalidateField('parent_sede');
+        return;
+      }
+
+      if (level) {
+        j.post(CbbAjax.url, {
+          nonce: CbbAjax.nonce,
+          action: 'load_schedule',
+          local: local,
+          level: level
+        }, function(data) {
+          if (data.result) {
+            var options = '<option value="">-- Seleccione el horario que mejor le convenga --</option>';
+            data.posts.forEach(function (item) {
+              options += '<option value="' + item.ID + '">' + item.post_excerpt + '</option>';
+            });
+
+            schedule.html(options);
+          } else {
+            fv.revalidateField('parent_sede');
+            fv.revalidateField('son_level');
+          }
+        }, 'json').fail(function() {
+          alert('No se pudo realizar la operación solicitada. Por favor vuelva a intentarlo.');
+        });
+      }
     }).on('err.field.fv', function(e, data){
       var field = e.target;
       j('small.help-block[data-bv-result="INVALID"]').addClass('hide');

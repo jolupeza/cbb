@@ -114,6 +114,9 @@
             <tr>
               <td class="bodycopy" align="right" style="padding: 10px 10px 10px 10px; font-size: 14px; line-height: 18px; color: #484848; font-family: Arial; font-weight: bold;">Sede:</td>
             </tr>
+            <tr>
+              <td class="bodycopy" align="right" style="padding: 10px 10px 10px 10px; font-size: 14px; line-height: 18px; color: #484848; font-family: Arial; font-weight: bold;">Horario:</td>
+            </tr>
           </table>
           <!--[if (gte mso 9)|(IE)]>
             <table width="315" align="left" cellpadding="0" cellspacing="0" border="0">
@@ -138,6 +141,9 @@
                           </tr>
                           <tr>
                             <td class="bodycopy" style="padding: 10px 10px 10px 10px; font-size: 14px; line-height: 18px; color: #484848; font-family: Arial;"><?php echo $dataSede->post_title; ?></td>
+                          </tr>
+                          <tr>
+                            <td class="bodycopy" style="padding: 10px 10px 10px 10px; font-size: 14px; line-height: 18px; color: #484848; font-family: Arial;"><?php echo $dataSchedule->post_excerpt; ?></td>
                           </tr>
                         </table>
                       </td>
