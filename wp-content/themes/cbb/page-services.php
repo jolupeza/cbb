@@ -183,23 +183,24 @@
       while ($mainQuery->have_posts()) {
         $mainQuery->the_post();
 ?>
-        <section class="Page" id="page-<?php echo $i; ?>">
-          <?php
-            $values = get_post_custom(get_the_id());
-            $text = isset($values['mb_text']) ? esc_attr($values['mb_text'][0]) : '';
-            $url = isset($values['mb_url']) ? esc_attr($values['mb_url'][0]) : '';
-            $pageLink = isset($values['mb_page']) ? (int)esc_attr($values['mb_page'][0]) : 0;
-            $target = isset($values['mb_target']) ? esc_attr($values['mb_target'][0]) : '';
-            $target = (!empty($target) && $target === 'on') ? ' target="_blank" rel="noopener noreferrer"' : '';
+        <?php
+          $values = get_post_custom(get_the_id());
+          $text = isset($values['mb_text']) ? esc_attr($values['mb_text'][0]) : '';
+          $url = isset($values['mb_url']) ? esc_attr($values['mb_url'][0]) : '';
+          $pageLink = isset($values['mb_page']) ? (int)esc_attr($values['mb_page'][0]) : 0;
+          $target = isset($values['mb_target']) ? esc_attr($values['mb_target'][0]) : '';
+          $target = (!empty($target) && $target === 'on') ? ' target="_blank" rel="noopener noreferrer"' : '';
+          $parallax = isset($values['mb_parallax']) ? esc_attr($values['mb_parallax'][0]) : '';
 
-            if ($i % 2 == 0) {
-              $color[0] = 'azul';
-              $color[1] = 'blue';
-            } else {
-              $color[0] = 'red';
-              $color[1] = 'red';
-            }
-          ?>
+          if ($i % 2 == 0) {
+            $color[0] = 'azul';
+            $color[1] = 'blue';
+          } else {
+            $color[0] = 'red';
+            $color[1] = 'red';
+          }
+        ?>
+        <section class="Page Page--pb" id="page-<?php echo $i; ?>">
           <div class="container">
             <div class="row">
               <div class="col-md-6">
@@ -226,6 +227,33 @@
             </div>
           </div>
         </section>
+
+        <?php
+          if (!empty($parallax)) :
+            $arguments = [
+              'post_type' => 'parallaxs',
+              'p' => (int)$parallax
+            ];
+
+            $parallaxData = new WP_Query($arguments);
+            if ($parallaxData->have_posts()) :
+              while ($parallaxData->have_posts()) :
+                $parallaxData->the_post();
+
+                $val = get_post_custom(get_the_id());
+                $title = isset($val['mb_title']) ? esc_attr($val['mb_title'][0]) : '';
+                $backgroundUrl = wp_get_attachment_url(get_post_thumbnail_id(get_the_id()));
+        ?>
+              <section class="Parallax" style="background-image: url('<?php echo $backgroundUrl; ?>');">
+                <article class="animation-element Parallax-caption Parallax-caption--left animated" data-animation="fadeInLeft">
+                  <h2 class="Parallax-caption-title text-right"><?php echo $title; ?></h2>
+                  <?php the_content(); ?>
+                </article>
+              </section>
+            <?php endwhile; ?>
+          <?php endif; ?>
+          <?php wp_reset_postdata(); ?>
+        <?php endif; ?>
 <?php
         $i++;
       }
@@ -234,5 +262,6 @@
     wp_reset_query();
   ?>
 <?php endif; ?>
+
 
 <?php get_footer(); ?>
