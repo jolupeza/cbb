@@ -22,8 +22,8 @@
   }
 
   if (!is_null($keyCurrentItem)) {
-    $prevMenuItem = $menuItems[$keyCurrentItem - 1];
-    $nextMenuItem = $menuItems[$keyCurrentItem + 1];
+    $prevMenuItem = (array_key_exists($keyCurrentItem - 1, $menuItems)) ? $menuItems[$keyCurrentItem - 1] : null;
+    $nextMenuItem = (array_key_exists($keyCurrentItem + 1, $menuItems)) ? $menuItems[$keyCurrentItem + 1] : null;
   }
 ?>
 
@@ -199,6 +199,31 @@
             <label for="contact_email" class="sr-only">Correo electrónico</label>
             <input type="email" class="form-control" name="contact_email" placeholder="Correo electrónico" autocomplete="off" required />
           </div>
+
+          <?php
+            $args = [
+              'post_type' => 'locals',
+              'posts_per_page' => -1,
+              'post_parent' => 0,
+              'orderby' => 'menu_order',
+              'order' => 'ASC'
+            ];
+            $the_query = new WP_Query($args);
+            if ($the_query->have_posts()) :
+          ?>
+            <div class="form-group">
+              <label for="contact_local" class="sr-only">Sede</label>
+              <select name="contact_local" class="form-control">
+                <option value="">-- Indicar Sede si lo necesita --</option>
+                <?php while ($the_query->have_posts()) : ?>
+                  <?php $the_query->the_post(); ?>
+                  <option value="<?php echo get_the_ID(); ?>"><?php echo get_the_excerpt(); ?></option>
+                <?php endwhile; ?>
+              </select>
+            </div>
+          <?php endif; ?>
+          <?php wp_reset_postdata(); ?>
+
           <?php
             $subjects = get_terms([
               'taxonomy' => 'subjects',

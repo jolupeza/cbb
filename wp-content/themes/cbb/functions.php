@@ -200,6 +200,7 @@ function register_contact_callback()
   $email = trim($_POST['contact_email']);
   $subject = (int)trim($_POST['contact_subject']);
   $message = trim($_POST['contact_message']);
+  $local = (int)trim($_POST['contact_local']);
 
   if (!empty($name) && !empty($email) && is_email($email) && !empty($message) && $subject > 0) {
     $options = get_option('cbb_custom_settings');
@@ -212,10 +213,18 @@ function register_contact_callback()
     $dataSubject = get_term_by('id', $subject, 'subjects');
 
     if (is_object($dataSubject)) {
+      // Get data Local
+      $dataLocal = ($local > 0) ? get_post($local) : null;
+
       $receiverEmail = $options['email'];
 
       if (!isset($receiverEmail) || empty($receiverEmail)) {
         $receiverEmail = get_option('admin_email');
+      }
+
+      if (!is_null($dataLocal)) {
+        $values = get_post_custom($dataLocal->ID);
+        $receiverEmail = isset($values['mb_email']) ? esc_attr($values['mb_email'][0]) : $receiverEmail;
       }
 
       $subjectEmail = "Consulta Web Colegio Bertolt Brecht";
@@ -260,6 +269,9 @@ function register_contact_callback()
             update_post_meta($post_id, 'mb_name', $name);
             update_post_meta($post_id, 'mb_email', $email);
             update_post_meta($post_id, 'mb_message', $message);
+            if (!is_null($dataLocal)) {
+              update_post_meta($post_id, 'mb_local', $local);
+            }
             wp_set_object_terms($post_id, $subject, 'subjects');
 
             $result['result'] = true;

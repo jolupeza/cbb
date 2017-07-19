@@ -94,6 +94,9 @@
               <td class="bodycopy" align="right" style="padding: 10px 10px 10px 10px; font-size: 14px; line-height: 18px; color: #484848; font-family: Arial; font-weight: bold;">Correo electrónico:</td>
             </tr>
             <tr>
+              <td class="bodycopy" align="right" style="padding: 10px 10px 10px 10px; font-size: 14px; line-height: 18px; color: #484848; font-family: Arial; font-weight: bold;">Sede:</td>
+            </tr>
+            <tr>
               <td class="bodycopy" align="right" style="padding: 10px 10px 10px 10px; font-size: 14px; line-height: 18px; color: #484848; font-family: Arial; font-weight: bold;">Asunto:</td>
             </tr>
           </table>
@@ -111,6 +114,9 @@
                           </tr>
                           <tr>
                             <td class="bodycopy" style="padding: 10px 10px 10px 10px; font-size: 14px; line-height: 18px; color: #484848; font-family: Arial;"><?php echo $email; ?></td>
+                          </tr>
+                          <tr>
+                            <td class="bodycopy" style="padding: 10px 10px 10px 10px; font-size: 14px; line-height: 18px; color: #484848; font-family: Arial;"><?php echo (!is_null($dataLocal)) ? $dataLocal->post_title : '&nbsp;'; ?></td>
                           </tr>
                           <tr>
                             <td class="bodycopy" style="padding: 10px 10px 10px 10px; font-size: 14px; line-height: 18px; color: #484848; font-family: Arial;"><?php echo $dataSubject->name; ?></td>

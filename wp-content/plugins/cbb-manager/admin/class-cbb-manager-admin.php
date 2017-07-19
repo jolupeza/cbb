@@ -276,6 +276,13 @@ class Cbb_Manager_Admin
             delete_post_meta($post_id, 'mb_phone');
         }
         
+        // Email
+        if (isset($_POST['mb_email']) && !empty($_POST['mb_email'])) {
+            update_post_meta($post_id, 'mb_email', esc_attr($_POST['mb_email']));
+        } else {
+            delete_post_meta($post_id, 'mb_email');
+        }
+        
         // Latitud
         if (isset($_POST['mb_lat']) && !empty($_POST['mb_lat'])) {
             update_post_meta($post_id, 'mb_lat', esc_attr($_POST['mb_lat']));

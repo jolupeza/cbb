@@ -13,6 +13,7 @@
         $values = get_post_custom( get_the_ID() );
         $address = isset($values['mb_address']) ? esc_attr($values['mb_address'][0]) : '';
         $phone = isset($values['mb_phone']) ? esc_attr($values['mb_phone'][0]) : '';
+        $email = isset($values['mb_email']) ? esc_attr($values['mb_email'][0]) : '';
         $lat = isset($values['mb_lat']) ? esc_attr($values['mb_lat'][0]) : '';
         $long = isset($values['mb_long']) ? esc_attr($values['mb_long'][0]) : '';
 
@@ -29,6 +30,12 @@
     <p class="content-mb">
         <label for="mb_phone">Teléfono: </label>
         <input type="text" name="mb_phone" id="mb_phone" value="<?php echo $phone; ?>" />
+    </p>
+    
+    <!-- Email -->
+    <p class="content-mb">
+        <label for="mb_email">Correo electrónico Formulario de Contacto: </label>
+        <input type="email" name="mb_email" id="mb_email" value="<?php echo $email; ?>" />
     </p>
     
     <!-- Latitud -->
