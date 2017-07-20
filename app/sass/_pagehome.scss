@@ -18,10 +18,10 @@
 }
 .PageHome-cols {
   @include display-flex();
-  @include justify-content(space-around);
+  @include justify-content(flex-start);
 }
 .PageHome-item {
-  @include flex(1 1 100%);
+  @include flex(0 1 25%);
   padding: 0 25px;
 }
 .PageHome-info {

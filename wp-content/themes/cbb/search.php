@@ -133,32 +133,10 @@
       wp_nav_menu($args);
     ?>
 
-    <?php
-      $categoryId = get_query_var('cat');
-      $category = get_category($categoryId);
-      $categoryParent = ($category->category_parent > 0) ? get_category($category->category_parent) : null;
-      $categoryGrand = (!is_null($categoryParent)) ? get_category($categoryParent->category_parent) : null;
-    ?>
-
-    <?php if ($category->category_parent > 0) : ?>
-      <?php $themeLocation = ($categoryGrand instanceof WP_Term && $categoryGrand->category_parent === 0) ? "categories-{$categoryParent->category_nicename}-menu" : "categories-{$category->category_nicename}-menu"; ?>
-
-      <?php
-        $args = [
-          'theme_location' => $themeLocation,
-          'container' => 'nav',
-          'container_class' => 'MenuCategories',
-          'menu_class' => 'MenuCategories-list',
-        ];
-
-        wp_nav_menu($args);
-      ?>
-    <?php endif; ?>
-
     <div class="row">
       <div class="col-md-6">
-        <h2 class="Page-title Page-title--nmb text-azul">Lo más reciente</h2>
-        <p class="text-resalt text-gray">Entérate de nuestras actividades y más</p>
+        <h2 class="Page-title Page-title--nmb text-azul">Resultados de su búsqueda:</h2>
+        <h3 class="Page-subtitle text-gray">"<?php echo get_search_query(); ?>"</h3>
       </div>
       <div class="col-md-3 col-md-offset-3">
         <?php get_sidebar('main-sidebar'); ?>

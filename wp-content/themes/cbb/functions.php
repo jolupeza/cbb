@@ -151,6 +151,25 @@ class CBB_Walker_Nav_Menu extends Walker_Nav_Menu
 }
 
 /****************************************/
+/* Add Sidebar Support */
+/****************************************/
+if (function_exists('register_sidebar')) {
+    $args = array(
+      'name'          => __('Main Sidebar', THEMEDOMAIN),
+      'id'            => 'main-sidebar',
+      'description'   => __('Área sidebar buscador en Vida Escolar', THEMEDOMAIN),
+      // 'class'         => '',
+      'before_widget' => '<div class="Sidebar-widget">',
+      'after_widget'  => '</div>',
+      // 'before_title'  => '<h2 class="widgettitle">',
+      // 'after_title'   => '</h2>'
+    );
+
+    register_sidebar($args);
+
+}
+
+/****************************************/
 /* Add Excerpt to Page */
 /****************************************/
 function cbb_add_excerpts_to_pages() {
@@ -158,6 +177,19 @@ function cbb_add_excerpts_to_pages() {
 }
 
 add_action('init', 'cbb_add_excerpts_to_pages');
+
+/****************************************/
+/* Search only Posts */
+/****************************************/
+function cbb_search_only_posts($query) {
+  if ($query->is_search()) {
+    $query->set('post_type', 'post');
+  }
+
+  return $query;
+}
+
+add_filter('pre_get_posts', 'cbb_search_only_posts');
 
 /****************************************/
 /* Setting Mailtrap */
