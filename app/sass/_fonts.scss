@@ -15,11 +15,11 @@
 
 @font-face {
   font-family: 'icomoon';
-  src:  url('./../fonts/icomoon.eot?j3i2dl');
-  src:  url('./../fonts/icomoon.eot?j3i2dl#iefix') format('embedded-opentype'),
-    url('./../fonts/icomoon.ttf?j3i2dl') format('truetype'),
-    url('./../fonts/icomoon.woff?j3i2dl') format('woff'),
-    url('./../fonts/icomoon.svg?j3i2dl#icomoon') format('svg');
+  src:  url('./../fonts/icomoon.eot?5x3n6u');
+  src:  url('./../fonts/icomoon.eot?5x3n6u#iefix') format('embedded-opentype'),
+    url('./../fonts/icomoon.ttf?5x3n6u') format('truetype'),
+    url('./../fonts/icomoon.woff?5x3n6u') format('woff'),
+    url('./../fonts/icomoon.svg?5x3n6u#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -60,6 +60,9 @@
 .icon-search:before {
   content: "\e986";
 }
+.icon-cross:before {
+  content: "\ea0f";
+}
 .icon-play2:before {
   content: "\ea15";
 }
@@ -69,10 +72,12 @@
 .icon-flickr2:before {
   content: "\eaa4";
 }
+.icon-bars:before {
+  content: "\e907";
+}
 .icon-commenting-o:before {
   content: "\e902";
 }
 .icon-youtube:before {
   content: "\e900";
 }
-

@@ -27,13 +27,13 @@
     <header class="Header">
       <div class="container">
         <div class="row">
-          <div class="col-md-3">
+          <div class="col-md-3 col-sm-10 col-xs-10">
             <h1 class="Header-logo">
               <a href="index.html" title="Colegio Bertolt Brecht"><img class="img-responsive center-block" src="images/logo.png" alt="Colegio Bertolt Brecht" /></a>
             </h1>
           </div>
-          <div class="col-md-9 Grid-positionStatic">
-            <menu class="Header-menu">
+          <div class="col-md-9 Grid-positionStatic hidden-sm hidden-xs">
+            <nav class="Header-menu">
               <ul class="MainMenu">
                 <li class="menu-item-has-children">
                   <a href="nosotros.html">Nosotros</a>
@@ -59,11 +59,49 @@
                 <li><a href="">Repositorio</a></li>
                 <li><a href="admision.html">Admisión</a></li>
               </ul>
-            </menu>
+            </nav>
+          </div>
+          <div class="col-xs-2 visible-sm-block visible-xs-block">
+            <aside class="Header-toggle text-right"><i class="icon-bars"></i></aside>
           </div>
         </div>
       </div>
     </header>
+
+    <section class="Slidebar">
+      <aside class="Slidebar-close js-toglle-slidebar">
+        <i class="icon-cross"></i>
+      </aside>
+
+      <article class="Slidebar-content">
+        <nav class="Header-menu">
+          <ul class="MainMenu">
+            <li class="menu-item-has-children">
+              <a href="nosotros.html">Nosotros</a>
+              <ul class="sub-menu">
+                <li><a href="">Bertolt Brecht</a></li>
+                <li><a href="">¿Por qué elegirnos?</a></li>
+                <li><a href="">Reseña histórica</a></li>
+                <li><a href="">Logros</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="propuesta.html">Propuesta educativa</a>
+              <ul class="sub-menu">
+                <li><a href="">Educación Inicial</a></li>
+                <li><a href="">Educación Primaria</a></li>
+                <li><a href="">Educación Secundaria</a></li>
+                <li><a href="">Integración Educativa</a></li>
+              </ul>
+            </li>
+            <li><a href="infraestructura.html">Infraestructura</a></li>
+            <li><a href="blog.html">Vida Escolar</a></li>
+            <li><a href="contactanos.html">Contáctanos</a></li>
+            <li><a href="">Repositorio</a></li>
+            <li><a href="admision.html">Admisión</a></li>
+          </ul>
+        </nav>
+    </section>
 
     <section id="carousel-home" class="carousel slide Carousel Carousel--home" data-ride="carousel">
       <!-- <ol class="carousel-indicators">
@@ -72,8 +110,11 @@
 
       <div class="carousel-inner" role="listbox">
         <div class="item active">
-          <img src="images/slide-home01.jpg" alt="Slide Home 01" />
-          <div class="carousel-caption">
+          <picture>
+            <source class="img-responsive center-block" media="(max-width: 767px) and (orientation: portrait)" srcset="./images/slide-home01-responsive.jpg" />
+            <img class="img-responsive center-block" src="images/slide-home01.jpg" alt="Slide Home 01" />
+          </picture>
+          <div class="carousel-caption carousel-caption--left">
             <h3>aprendes más</h3>
             <h2>estando feliz</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae natus deserunt perspiciatis possimus.</p>
@@ -144,8 +185,8 @@
 
     <section class="Parallax" style="background-image: url('./images/parallax01.jpg');">
       <article class="Parallax-caption Parallax-caption--left">
-        <h2 class="Parallax-caption-title text-right">+ 10mil alumnos</h2>
-        <p class="text-right">aprendiendo a ser mejores</p>
+        <h2 class="Parallax-caption-title">+ 10mil alumnos</h2>
+        <p>aprendiendo a ser mejores</p>
       </article>
     </section>
 
@@ -182,8 +223,10 @@
                 <span class="month">Mar</span>
               </aside>
             </figure>
-            <h4 class="PageHome-info-title"><a href="">Inicio de Clases 2016</a></h4>
-            <p class="PageHome-info-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic voluptas in saepe nesciunt nihil, voluptates vitae voluptatum. Magni quasi debitis aperiam, neque fugiat, dignissimos eum dolores at illo quisquam quam.</p>
+            <div class="PageHome-info-desc">
+              <h4 class="PageHome-info-title"><a href="">Inicio de Clases 2016</a></h4>
+              <p class="PageHome-info-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic voluptas in saepe nesciunt nihil, voluptates vitae voluptatum. Magni quasi debitis aperiam, neque fugiat, dignissimos eum dolores at illo quisquam quam.</p>
+            </div>
           </article>
           <article class="PageHome-item">
             <figure class="PageHome-info-figure">
@@ -193,8 +236,10 @@
                 <span class="month">Mar</span>
               </aside>
             </figure>
-            <h4 class="PageHome-info-title"><a href="">Inicio de Clases 2016</a></h4>
-            <p class="PageHome-info-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias blanditiis, totam at iure voluptatem itaque porro laborum architecto quae ex voluptates aut soluta sit accusamus perferendis possimus sequi fugit quaerat!</p>
+            <div class="PageHome-info-desc">
+              <h4 class="PageHome-info-title"><a href="">Inicio de Clases 2016</a></h4>
+              <p class="PageHome-info-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias blanditiis, totam at iure voluptatem itaque porro laborum architecto quae ex voluptates aut soluta sit accusamus perferendis possimus sequi fugit quaerat!</p>
+            </div>
           </article>
           <article class="PageHome-item">
             <figure class="PageHome-info-figure">
@@ -204,8 +249,10 @@
                 <span class="month">Mar</span>
               </aside>
             </figure>
-            <h4 class="PageHome-info-title"><a href="">Inicio de Clases 2016</a></h4>
-            <p class="PageHome-info-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur tempora nam dignissimos amet beatae vitae vero id veniam dolorem, molestias rem quo cumque. Accusamus aliquid pariatur, fugit ex commodi asperiores.</p>
+            <div class="PageHome-info-desc">
+              <h4 class="PageHome-info-title"><a href="">Inicio de Clases 2016</a></h4>
+              <p class="PageHome-info-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur tempora nam dignissimos amet beatae vitae vero id veniam dolorem, molestias rem quo cumque. Accusamus aliquid pariatur, fugit ex commodi asperiores.</p>
+            </div>
           </article>
           <article class="PageHome-item">
             <figure class="PageHome-info-figure">
@@ -215,8 +262,10 @@
                 <span class="month">Mar</span>
               </aside>
             </figure>
-            <h4 class="PageHome-info-title"><a href="">Inicio de Clases 2016</a></h4>
-            <p class="PageHome-info-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente fuga, omnis, alias laudantium eius quod doloribus labore, nisi, magni dolorem accusantium quo vitae repellendus rerum. Hic fuga, ad eaque expedita!</p>
+            <div class="PageHome-info-desc">
+              <h4 class="PageHome-info-title"><a href="">Inicio de Clases 2016</a></h4>
+              <p class="PageHome-info-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente fuga, omnis, alias laudantium eius quod doloribus labore, nisi, magni dolorem accusantium quo vitae repellendus rerum. Hic fuga, ad eaque expedita!</p>
+            </div>
           </article>
         </section>
 

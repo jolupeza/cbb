@@ -9,6 +9,10 @@
   line-height: 1.1em;
   padding: 15px 25px;
   @include transition(all 0.2s ease);
+  @media screen and (max-width: 991px) {
+    font-size: 24px;
+    padding: 10px 20px;
+  }
   &--icon {
     i {
       vertical-align: middle;
@@ -26,10 +30,18 @@
   &--medium {
     font-size: 24px;
     padding: 10px 20px;
+    @media screen and (max-width: 991px) {
+      font-size: 20px;
+      padding: 10px 15px;
+    }
   }
   &--small {
     font-size: 18px;
     padding: 10px 15px;
+    @media screen and (max-width: 991px) {
+      font-size: 16px;
+      padding: 10px 15px;
+    }
   }
   &:hover, &:focus {
     @include box-shadow(rgba(black, 0.15) 0 5px 2px 0 inset);
@@ -49,6 +61,10 @@
   i {
     display: block;
     font-size: 2em;
+  }
+  @media screen and (max-width: 991px) {
+    bottom: 10px;
+    left: 47%;
   }
 }
 .ArrowTop {

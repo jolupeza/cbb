@@ -6,6 +6,9 @@
   @include display-flex();
   @include align-items(center);
   padding: 120px 0;
+  @media screen and (max-width: 991px) {
+    padding: 80px 0;
+  }
   &--fixed {
     background-attachment: fixed;
     background-position: 0 70px;
@@ -29,6 +32,12 @@
   &--full {
     margin: 0 auto;
     width: 80%;
+  }
+  @media screen and (max-width: 991px) {
+    &--left, &--right, &--full {
+      margin: 0 auto 0 10%;
+      width: 80%;
+    }
   }
   p {
     color: $white;

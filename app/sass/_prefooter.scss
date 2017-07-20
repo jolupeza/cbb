@@ -7,6 +7,9 @@
   color: $white;
   font-family: "Reef";
   font-size: 1.625em;
+  @media screen and (max-width: 991px) {
+    text-align: center;
+  }
 }
 .Prefooter-subtitle {
   color: $white;

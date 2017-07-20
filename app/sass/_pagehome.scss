@@ -1,5 +1,8 @@
 .PageHome {
   padding: 120px 0 0;
+  @media screen and (max-width: 991px) {
+    padding: 90px 0 0;
+  }
 }
 .PageHome-subtitle {
   color: $gray;
@@ -15,27 +18,84 @@
 .PageHome-legend {
   margin: 0 auto 20px auto;
   width: 60%;
+  @media screen and (max-width: 991px) {
+    width: 100%;
+  }
 }
 .PageHome-cols {
   @include display-flex();
   @include justify-content(flex-start);
+  @include flex-wrap(wrap);
 }
 .PageHome-item {
   @include flex(0 1 25%);
   padding: 0 25px;
+  @media screen and (max-width: 991px) {
+    @include flex(0 1 50%);
+    margin-bottom: 15px;
+  }
+  @media screen and (max-width: 767px) {
+    margin-bottom: 0;
+    padding: 15px 25px;
+    &:nth-child(3n+1) {
+      background-color: $blue;
+    }
+    &:nth-child(3n+2) {
+      background-color: $blue2;
+    }
+    &:nth-child(3n+3) {
+      background-color: $blue3;
+    }
+    &:nth-child(3n+4) {
+      background-color: $blue4;
+    }
+  }
 }
 .PageHome-info {
   margin: 40px 0;
+  @media screen and (max-width: 991px) {
+    margin: 40px 0 0;
+  }
   &--blog {
+    @media screen and (max-width: 991px) {
+      @include justify-content(space-between);
+    }
     .PageHome-item {
       border-radius: 8px;
       @include box-shadow(0 5px 2px rgba(black, 0.3));
       margin: 0 5px;
       padding: 0;
+      @media screen and (max-width: 991px) {
+        @include flex(0 1 40%);
+        margin: 0 0 20px;
+      }
+      @media screen and (max-width: 767px) {
+        @include display-flex();
+        @include flex(0 1 auto);
+        &:nth-child(3n+1), &:nth-child(3n+2), &:nth-child(3n+3), &:nth-child(3n+4) {
+          background-color: transparent;
+        }
+      }
+      .PageHome-info-text {
+        @media screen and (max-width: 767px) {
+          color: $grayText;
+        }
+      }
     }
     .PageHome-info-figure {
       img {
         @include border-radius(8px 8px 0 0);
+        @media screen and (max-width: 991px) {
+          max-width: 100%;
+        }
+      }
+      @media screen and (max-width: 767px) {
+        @include align-self(center);
+        display: block;
+        margin-bottom: 0;
+        img {
+          @include border-radius(8px 0 0 8px);
+        }
       }
     }
     .PageHome-info-title {
@@ -65,15 +125,31 @@
     @include border-radius(8px);
     padding: 15px 0 0 15px;
   }
+  img {
+    @media screen and (max-width: 991px) {
+      max-width: 200px;
+    }
+  }
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
 }
 .PageHome-info-title {
   color: $blue;
   font-size: 1.5em;
   font-weight: 600;
+  @media screen and (max-width: 767px) {
+    color: white;
+    font-size: 1.25em;
+  }
 }
 .PageHome-info-text {
   color: $grayText;
   font-size: 1.25em;
+  @media screen and (max-width: 767px) {
+    color: white;
+    font-size: 1em;
+  }
 }
 .PageHome-info-date {
   background-color: #3a519c;
