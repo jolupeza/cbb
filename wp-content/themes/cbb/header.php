@@ -32,7 +32,7 @@
     <header class="Header">
       <div class="container">
         <div class="row">
-          <div class="col-md-3">
+          <div class="col-md-3 col-sm-10 col-xs-10">
             <?php
               $customLogoId = get_theme_mod('custom_logo');
               $logo = wp_get_attachment_image_src($customLogoId, 'full');
@@ -43,7 +43,7 @@
               </a>
             </h1>
           </div>
-          <div class="col-md-9 Grid-positionStatic">
+          <div class="col-md-9 Grid-positionStatic hidden-sm hidden-xs">
             <?php
               $args = [
                 'theme_location' => 'main-menu',
@@ -56,6 +56,29 @@
               wp_nav_menu($args);
             ?>
           </div>
+          <div class="col-xs-2 visible-sm-block visible-xs-block">
+            <aside class="Header-toggle text-right"><i class="icon-bars js-toggle-slidebar"></i></aside>
+          </div>
         </div>
       </div>
     </header>
+
+    <section class="Slidebar">
+      <aside class="Slidebar-close js-toglle-slidebar">
+        <i class="icon-cross js-toggle-slidebar"></i>
+      </aside>
+
+      <article class="Slidebar-content">
+        <?php
+          $args = [
+            'theme_location' => 'main-menu',
+            'container' => 'nav',
+            'container_class' => 'Header-menu',
+            'menu_class' => 'MainMenu nav',
+            'walker' => new CBB_Walker_Nav_menu()
+          ];
+
+          wp_nav_menu($args);
+        ?>
+      </article>
+    </section>

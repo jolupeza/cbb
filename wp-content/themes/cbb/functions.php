@@ -154,18 +154,18 @@ class CBB_Walker_Nav_Menu extends Walker_Nav_Menu
 /* Add Sidebar Support */
 /****************************************/
 if (function_exists('register_sidebar')) {
-    $args = array(
-      'name'          => __('Main Sidebar', THEMEDOMAIN),
-      'id'            => 'main-sidebar',
-      'description'   => __('Área sidebar buscador en Vida Escolar', THEMEDOMAIN),
-      // 'class'         => '',
-      'before_widget' => '<div class="Sidebar-widget">',
-      'after_widget'  => '</div>',
-      // 'before_title'  => '<h2 class="widgettitle">',
-      // 'after_title'   => '</h2>'
-    );
+  $args = array(
+    'name'          => __('Main Sidebar', THEMEDOMAIN),
+    'id'            => 'main-sidebar',
+    'description'   => __('Área sidebar buscador en Vida Escolar', THEMEDOMAIN),
+    // 'class'         => '',
+    'before_widget' => '<div class="Sidebar-widget">',
+    'after_widget'  => '</div>',
+    // 'before_title'  => '<h2 class="widgettitle">',
+    // 'after_title'   => '</h2>'
+  );
 
-    register_sidebar($args);
+  register_sidebar($args);
 
 }
 

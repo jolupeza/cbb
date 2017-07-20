@@ -132,6 +132,9 @@ $celeste: #0073aa;
 .GroupForm-flex {
     @include display-flex();
     @include justify-content(space-between);
+    &--center {
+        @include justify-content(center);
+    }
 }
 
 .GroupForm-wrapperImage {

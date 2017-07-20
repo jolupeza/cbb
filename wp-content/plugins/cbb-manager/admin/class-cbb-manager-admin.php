@@ -177,12 +177,12 @@ class Cbb_Manager_Admin
             delete_post_meta($post_id, 'mb_align');
         }
 
-       /* // Image Responsive
+        // Image Responsive
         if (isset($_POST['mb_responsive']) && !empty($_POST['mb_responsive'])) {
             update_post_meta($post_id, 'mb_responsive', esc_attr($_POST['mb_responsive']));
         } else {
             delete_post_meta($post_id, 'mb_responsive');
-        }*/
+        }
     }
 
     /**

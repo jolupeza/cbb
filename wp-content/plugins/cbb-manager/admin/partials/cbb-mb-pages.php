@@ -260,7 +260,7 @@
     <fieldset class="GroupForm">
         <legend class="GroupForm-legend">PDF</legend>
         
-        <section class="GroupForm-flex">
+        <section class="GroupForm-flex GroupForm-flex--center">
             <div class="container-upload-file GroupForm-wrapperImage">
                 <h4 class="Fieldset-subtitle">Enlace PDF</h4>
                 

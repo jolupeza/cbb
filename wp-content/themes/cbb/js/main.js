@@ -311,6 +311,17 @@ var j = jQuery.noConflict();
       }
     });
 
+    j('.js-toggle-slidebar').on('click', function(ev) {
+      ev.preventDefault();
+      var slidebar = j('.Slidebar');
+
+      if (slidebar.hasClass('active')) {
+        slidebar.removeClass('active');
+      } else {
+        slidebar.addClass('active');
+      }
+    });
+
     // j('.grid').isotope({
     //   itemSelector: '.grid-item',
     //   percentPosition: true,

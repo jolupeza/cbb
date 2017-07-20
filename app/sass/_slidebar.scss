@@ -2,12 +2,10 @@
   background-color: rgba($red, 0.9);
   height: 100%;
   left: 0;
-  // @include opacity(0);
-  @include opacity(1);
+  @include opacity(0);
   overflow-y: auto;
   position: fixed;
-  @include scale(1);
-  // @include scale(0);
+  @include scale(0);
   @include transition(all 0.2s ease-in-out);
   top: 0;
   width: 100%;

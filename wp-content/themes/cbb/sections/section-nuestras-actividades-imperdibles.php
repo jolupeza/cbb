@@ -41,9 +41,11 @@
                 </aside>
               </figure>
             <?php endif; ?>
-            <h4 class="PageHome-info-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
-            <div class="PageHome-info-text">
-              <?php the_content(' '); ?>
+            <div class="PageHome-info-desc">
+              <h4 class="PageHome-info-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
+              <div class="PageHome-info-text">
+                <?php the_content(' '); ?>
+              </div>
             </div>
           </article>
         <?php endwhile; ?>

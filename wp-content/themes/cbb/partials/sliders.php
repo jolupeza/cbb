@@ -95,16 +95,20 @@
             $target = isset($values['mb_target']) ? esc_attr($values['mb_target'][0]) : '';
             $target = (!empty($target) && $target === 'on') ? ' target="_blank" rel="noopener noreferrer"' : '';
             $align = isset($values['mb_align']) ? esc_attr($values['mb_align'][0]) : 'left';
+            $responsive = isset($values['mb_responsive']) ? esc_attr($values['mb_responsive'][0]) : '';
           ?>
 
           <div class="item<?php echo ($j === 0) ? ' active' : ''; ?>">
             <?php if (has_post_thumbnail()) : ?>
-              <?php
-                the_post_thumbnail('full', [
-                  'class' => 'img-responsive center-block',
-                  'alt' => get_the_title()
-                ]);
-              ?>
+              <picture>
+                <source class="img-responsive center-block" media="(max-width: 767px) and (orientation: portrait)" srcset="<?php echo $responsive; ?>" alt="<?php echo get_the_title(); ?>" />
+                <?php
+                  the_post_thumbnail('full', [
+                    'class' => 'img-responsive center-block',
+                    'alt' => get_the_title()
+                  ]);
+                ?>
+              </picture>
             <?php endif; ?>
 
             <div class="carousel-caption carousel-caption--<?php echo $align; ?>">
