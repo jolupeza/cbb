@@ -1039,6 +1039,20 @@ a {
   border: 5px solid #921eff;
 }
 
+.article-nav {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+}
+
+.article-nav-next a, .article-nav-prev a {
+  color: #004e94;
+}
+.article-nav-next a:hover, .article-nav-next a:focus, .article-nav-prev a:hover, .article-nav-prev a:focus {
+  color: #3c539a;
+}
+
 .Parallax {
   background-color: transparent;
   background-position: 0 0;

@@ -192,3 +192,15 @@
     border: 5px solid $purple;
   }
 }
+.article-nav {
+  @include display-flex();
+  @include justify-content(space-between);
+}
+.article-nav-next, .article-nav-prev {
+  a {
+    color: $blue;
+    &:hover, &:focus {
+      color: $azul;
+    }
+  }
+}

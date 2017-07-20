@@ -194,6 +194,13 @@
         <a href="" class="Button Button--blue Button--medium">ver más</a>
       </p> -->
     <?php endif; ?>
+
+    <div class="article-nav">
+
+      <p class="article-nav-next"><?php previous_posts_link(__('&laquo; Entradas recientes ', THEMEDOMAIN)); ?></p>
+      <p class="article-nav-prev"><?php next_posts_link(__('Entradas anteriores &raquo;', THEMEDOMAIN)); ?></p>
+
+    </div> <!-- end clearfix -->
   </div>
 </section>
 
