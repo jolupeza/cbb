@@ -131,29 +131,34 @@
             $target = isset($values['mb_target']) ? esc_attr($values['mb_target'][0]) : '';
             $target = (!empty($target) && $target === 'on') ? ' target="_blank" rel="noopener noreferrer"' : '';
             $align = isset($values['mb_align']) ? esc_attr($values['mb_align'][0]) : 'left';
+            $responsive = isset($values['mb_responsive']) ? esc_attr($values['mb_responsive'][0]) : '';
           ?>
 
-          <?php if (has_post_thumbnail()) : ?>
-            <div class="item<?php echo ($i === 0) ? ' active' : ''; ?>">
-              <?php the_post_thumbnail('full', [
-                  'class' => 'img-responsive center-block',
-                  'alt' => get_the_title()
-                ]);
-              ?>
-              <div class="carousel-caption carousel-caption--<?php echo $align; ?>">
-                <?php if (!empty($subtitle)) : ?><h3><?php echo $subtitle; ?></h3><?php endif; ?>
-                <?php if (!empty($title)) : ?><h2><?php echo $title; ?></h2><?php endif; ?>
-                <?php the_content(); ?>
+          <div class="item<?php echo ($i === 0) ? ' active' : ''; ?>">
+            <?php if (has_post_thumbnail()) : ?>
+              <picture>
+                <source class="img-responsive center-block" media="(max-width: 767px) and (orientation: portrait)" srcset="<?php echo $responsive; ?>" alt="<?php echo get_the_title(); ?>" />
+                <?php the_post_thumbnail('full', [
+                    'class' => 'img-responsive center-block',
+                    'alt' => get_the_title()
+                  ]);
+                ?>
+              </picture>
+            <?php endif; ?>
 
-                <?php if (!empty($url) || $pageLink > 0) : ?>
-                  <?php $link = ($pageLink > 0) ? get_page_link($pageLink) : $url; ?>
-                  <p>
-                    <a class="Button Button--red" href="<?php echo $link; ?>"<?php echo $target; ?>><?php echo $text; ?></a>
-                  </p>
-                <?php endif; ?>
-              </div>
+            <div class="carousel-caption carousel-caption--<?php echo $align; ?>">
+              <?php if (!empty($subtitle)) : ?><h3><?php echo $subtitle; ?></h3><?php endif; ?>
+              <?php if (!empty($title)) : ?><h2><?php echo $title; ?></h2><?php endif; ?>
+              <?php the_content(); ?>
+
+              <?php if (!empty($url) || $pageLink > 0) : ?>
+                <?php $link = ($pageLink > 0) ? get_page_link($pageLink) : $url; ?>
+                <p>
+                  <a class="Button Button--red" href="<?php echo $link; ?>"<?php echo $target; ?>><?php echo $text; ?></a>
+                </p>
+              <?php endif; ?>
             </div>
-          <?php endif; ?>
+          </div>
           <?php $i++; ?>
         <?php endwhile; ?>
       </div>

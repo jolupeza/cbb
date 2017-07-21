@@ -80,18 +80,16 @@ var j = jQuery.noConflict();
     }
   });
 
-  // $win.on('resize', function() {
-  //   if (map) {
-  //     var $map = j('#map');
-
-  //     if ($map.length) {
-  //       var lat = $map.data('lat'),
-  //           long = $map.data('long');
-
-  //       map.setCenter({lat: lat, lng: long});
-  //     }
-  //   }
-  // });
+  $win.on('resize', function() {
+    if (infoMaps.length > 0) {
+      infoMaps.forEach(function (info){
+        if (!j.isEmptyObject(info.map)) {
+          google.maps.event.trigger(info.map, "resize");
+          info.map.setCenter({lat: info.lat, lng: info.long});
+        }
+      });
+    }
+  });
 
   $doc.on('ready', function () {
     affixHeader();
@@ -299,7 +297,7 @@ var j = jQuery.noConflict();
 
       for (var i in infoMaps) {
         if (infoMaps[i].id === id) {
-          if (!infoMaps[i].load) {
+          // if (!infoMaps[i].load) {
             setTimeout(function(){
               loadMap(infoMaps[i]);
             }, 50);
@@ -307,7 +305,7 @@ var j = jQuery.noConflict();
             infoMaps[i].load = true;
             return;
           }
-        }
+        // }
       }
     });
 
