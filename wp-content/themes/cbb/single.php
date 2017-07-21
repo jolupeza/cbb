@@ -18,7 +18,7 @@
                 <h2 class="Single-title"><?php the_title(); ?></h2>
                 <?php the_content(); ?>
 
-                <p><a href="single.html" class="Button Button--small Button--yellow">Admisión 2016</a></p>
+                <!-- <p><a href="single.html" class="Button Button--small Button--yellow">Admisión 2016</a></p> -->
               </div>
             </article>
           <?php endwhile; ?>
@@ -79,6 +79,9 @@
       </div>
       <div class="col-md-4">
         <aside class="Sidebar">
+          <?php get_sidebar('single-sidebar'); ?>
+
+          <?php /*
           <div class="Sidebar-widget">
             <form class="Form Form--group Form--search">
               <div class="input-group">
@@ -97,6 +100,7 @@
               </a>
             </article>
           </div>
+          */ ?>
         </aside>
       </div>
     </div>

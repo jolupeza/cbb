@@ -21,7 +21,7 @@ add_action('wp_enqueue_scripts', 'load_custom_scripts');
 /* Add Theme Support */
 /****************************************/
 if ( function_exists('add_theme_support') ) {
-  add_theme_support('post-thumbnails', array('post', 'page', 'sliders', 'partners', 'parallaxs', 'achievements', 'locals'));
+  add_theme_support('post-thumbnails', array('post', 'page', 'sliders', 'partners', 'parallaxs', 'achievements', 'locals', 'banners'));
 }
 
 /****************************************/
@@ -167,6 +167,18 @@ if (function_exists('register_sidebar')) {
 
   register_sidebar($args);
 
+  $args = array(
+    'name'          => __('Entrada Sidebar', THEMEDOMAIN),
+    'id'            => 'single-sidebar',
+    'description'   => __('Área sidebar en detalle de noticias o entradas', THEMEDOMAIN),
+    // 'class'         => '',
+    'before_widget' => '<div class="Sidebar-widget">',
+    'after_widget'  => '</div>',
+    // 'before_title'  => '<h2 class="widgettitle">',
+    // 'after_title'   => '</h2>'
+  );
+
+  register_sidebar($args);
 }
 
 /****************************************/
@@ -532,6 +544,7 @@ function load_schedule_callback()
 /* Load Theme Options Page and Custom Widgets */
 /**********************************************/
 require_once(TEMPLATEPATH . '/functions/cbb-theme-customizer.php');
+require_once(TEMPLATEPATH . '/functions/widget-ad-320.php');
 
 /*
  * Dump helper. Functions to dump variables to the screen, in a nicley formatted manner.
