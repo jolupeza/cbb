@@ -17,6 +17,9 @@
   &--pages {
     @include align-items(start);
     padding: 50px 0;
+    @media screen and (max-width: 767px) {
+      @include flex-wrap(wrap);
+    }
   }
 }
 .Parallax-caption {
@@ -44,6 +47,9 @@
     @include flex-basis(100%);
     font-size: 2em;
     font-style: italic;
+    @media screen and (max-width: 767px) {
+      font-size: 1em;
+    }
   }
 }
 .Parallax-caption-title {
@@ -53,6 +59,9 @@
   margin-bottom: 0;
   margin-top: 0;
   @include flex-basis(100%);
+  @media screen and (max-width: 767px) {
+    font-size: 2.5em;
+  }
 }
 .Parallax-caption-author {
   color: $white;
@@ -65,9 +74,21 @@
 .Parallax-page {
   @include flex-basis(50%);
   padding: 0 60px;
+  @media screen and (max-width: 767px) {
+    padding: 0 25px;
+  }
+  @media screen and (max-width: 600px) {
+    @include flex-basis(100%);
+    &:first-child {
+      margin-bottom: 25px;
+    }
+  }
   p {
     color: $white;
     font-size: 1.25em;
+    @media screen and (max-width: 991px) {
+      font-size: 1em;
+    }
   }
   &:first-child {
     border-right: 1px solid $white;

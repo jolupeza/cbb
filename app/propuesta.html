@@ -27,13 +27,13 @@
     <header class="Header">
       <div class="container">
         <div class="row">
-          <div class="col-md-3">
+          <div class="col-md-3 col-sm-10 col-xs-10">
             <h1 class="Header-logo">
               <a href="index.html" title="Colegio Bertolt Brecht"><img class="img-responsive center-block" src="images/logo.png" alt="Colegio Bertolt Brecht" /></a>
             </h1>
           </div>
-          <div class="col-md-9 Grid-positionStatic">
-            <menu class="Header-menu">
+          <div class="col-md-9 Grid-positionStatic hidden-sm hidden-xs">
+            <nav class="Header-menu">
               <ul class="MainMenu">
                 <li class="menu-item-has-children">
                   <a href="nosotros.html">Nosotros</a>
@@ -59,11 +59,50 @@
                 <li><a href="">Repositorio</a></li>
                 <li><a href="admision.html">Admisión</a></li>
               </ul>
-            </menu>
+            </nav>
+          </div>
+          <div class="col-xs-2 visible-sm-block visible-xs-block">
+            <aside class="Header-toggle text-right"><i class="icon-bars"></i></aside>
           </div>
         </div>
       </div>
     </header>
+
+    <section class="Slidebar">
+      <aside class="Slidebar-close js-toglle-slidebar">
+        <i class="icon-cross"></i>
+      </aside>
+
+      <article class="Slidebar-content">
+        <nav class="Header-menu">
+          <ul class="MainMenu">
+            <li class="menu-item-has-children">
+              <a href="nosotros.html">Nosotros</a>
+              <ul class="sub-menu">
+                <li><a href="">Bertolt Brecht</a></li>
+                <li><a href="">¿Por qué elegirnos?</a></li>
+                <li><a href="">Reseña histórica</a></li>
+                <li><a href="">Logros</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="propuesta.html">Propuesta educativa</a>
+              <ul class="sub-menu">
+                <li><a href="">Educación Inicial</a></li>
+                <li><a href="">Educación Primaria</a></li>
+                <li><a href="">Educación Secundaria</a></li>
+                <li><a href="">Integración Educativa</a></li>
+              </ul>
+            </li>
+            <li><a href="infraestructura.html">Infraestructura</a></li>
+            <li><a href="blog.html">Vida Escolar</a></li>
+            <li><a href="contactanos.html">Contáctanos</a></li>
+            <li><a href="">Repositorio</a></li>
+            <li><a href="admision.html">Admisión</a></li>
+          </ul>
+        </nav>
+      </article>
+    </section>
 
     <section id="carousel-home" class="carousel slide Carousel Carousel--home" data-ride="carousel">
       <!-- <ol class="carousel-indicators">
@@ -72,8 +111,11 @@
 
       <div class="carousel-inner" role="listbox">
         <div class="item active">
-          <img src="images/slide-propuesta.jpg" alt="Slide Propuesta Educativa" />
-          <div class="carousel-caption">
+          <picture>
+            <source class="img-responsive center-block" media="(max-width: 767px) and (orientation: portrait)" srcset="./images/slide-home01-responsive.jpg" />
+            <img class="img-responsive center-block" src="images/slide-propuesta.jpg" alt="Slide Propuesta Educativa" />
+          </picture>
+          <div class="carousel-caption carousel-caption--left">
             <h3>aprendes más</h3>
             <h2>estando feliz</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae natus deserunt perspiciatis possimus.</p>

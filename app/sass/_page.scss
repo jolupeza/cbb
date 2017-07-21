@@ -1,5 +1,8 @@
 .Page {
   padding: 120px 0 0;
+  @media screen and (max-width: 991px) {
+    padding: 90px 0 0;
+  }
   p {
     margin-bottom: 15px;
   }
@@ -61,12 +64,21 @@
     .Page-cel {
       &:first-child {
         @include border-top-left-radius(15px);
+        @media screen and (max-width: 767px) and (orientation: portrait) {
+          @include border-top-right-radius(15px)
+        }
         & + .Page-cel {
           @include border-top-right-radius(15px);
+          @media screen and (max-width: 767px) and (orientation: portrait) {
+            @include border-top-right-radius(0);
+          }
         }
       }
       &:last-child {
         @include border-bottom-right-radius(15px);
+        @media screen and (max-width: 767px) and (orientation: portrait) {
+          @include border-bottom-left-radius(15px)
+        }
       }
       &:nth-child(3n+1) {
         background-color: $blue;
@@ -84,12 +96,21 @@
       padding-left: 62px;
       &:first-child {
         @include border-top-left-radius(15px);
+        @media screen and (max-width: 767px) and (orientation: portrait) {
+          @include border-top-right-radius(15px)
+        }
         & + .Page-cel {
           @include border-top-right-radius(15px);
+          @media screen and (max-width: 767px) and (orientation: portrait) {
+            @include border-top-right-radius(0);
+          }
         }
       }
       &:last-child {
         @include border-bottom-right-radius(15px);
+        @media screen and (max-width: 767px) and (orientation: portrait) {
+          @include border-bottom-left-radius(15px)
+        }
       }
       &:nth-child(3n+1) {
         background-color: #ba1919;
@@ -108,7 +129,7 @@
 }
 .Page-cel {
   color: $white;
-  @include flex(1 1 50%);
+  @include flex(0 1 50%);
   padding: 15px 15px 10px 50px;
   position: relative;
   i {
@@ -119,6 +140,9 @@
   }
   p {
     margin-bottom: 0;
+  }
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    @include flex(0 1 100%);
   }
 }
 .Page-cel-title {
