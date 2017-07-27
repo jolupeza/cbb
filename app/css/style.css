@@ -275,7 +275,7 @@ a {
 }
 .Header.affix .MainMenu .sub-menu {
   background-color: #004e94;
-  bottom: -50px;
+  bottom: -41px;
 }
 
 .Header-logo {
@@ -368,7 +368,7 @@ a {
   border-bottom: 10px solid #004e94;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  bottom: -12px;
+  bottom: -3px;
   content: "";
   display: none;
   left: 40%;
@@ -384,7 +384,7 @@ a {
 }
 .MainMenu .sub-menu {
   background-color: #004e94;
-  bottom: -45px;
+  bottom: -36px;
   display: none;
   -webkit-justify-content: center;
   justify-content: center;

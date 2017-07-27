@@ -54,7 +54,7 @@
         border-bottom: 10px solid $blue;
         border-left: 10px solid transparent;
         border-right: 10px solid transparent;
-        bottom: -12px;
+        bottom: -3px;
         content: "";
         display: none;
         left: 40%;
@@ -71,7 +71,7 @@
   }
   .sub-menu {
     background-color: $blue;
-    bottom: -45px;
+    bottom: -36px;
     display: none;
     @include justify-content(center);
     left: 0;
