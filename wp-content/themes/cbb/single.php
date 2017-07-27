@@ -80,27 +80,6 @@
       <div class="col-md-4">
         <aside class="Sidebar">
           <?php get_sidebar('single-sidebar'); ?>
-
-          <?php /*
-          <div class="Sidebar-widget">
-            <form class="Form Form--group Form--search">
-              <div class="input-group">
-                <input type="text" class="form-control" placeholder="Buscar">
-                <span class="input-group-btn">
-                  <button class="btn" type="submit"><i class="icon-search"></i></button>
-                </span>
-              </div><!-- /input-group -->
-            </form>
-          </div>
-
-          <div class="Sidebar-widget">
-            <article class="Ad Ad-320">
-              <a href="">
-                <img src="<?php echo IMAGES ?>/banners/banner-320x320.jpg" alt="" class="img-responsive center-block">
-              </a>
-            </article>
-          </div>
-          */ ?>
         </aside>
       </div>
     </div>

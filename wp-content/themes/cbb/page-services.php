@@ -198,7 +198,8 @@
         $mainQuery->the_post();
 ?>
         <?php
-          $values = get_post_custom(get_the_id());
+          $idParent = get_the_id();
+          $values = get_post_custom($idParent);
           $text = isset($values['mb_text']) ? esc_attr($values['mb_text'][0]) : '';
           $url = isset($values['mb_url']) ? esc_attr($values['mb_url'][0]) : '';
           $pageLink = isset($values['mb_page']) ? (int)esc_attr($values['mb_page'][0]) : 0;
@@ -242,32 +243,10 @@
           </div>
         </section>
 
-        <?php
-          if (!empty($parallax)) :
-            $arguments = [
-              'post_type' => 'parallaxs',
-              'p' => (int)$parallax
-            ];
-
-            $parallaxData = new WP_Query($arguments);
-            if ($parallaxData->have_posts()) :
-              while ($parallaxData->have_posts()) :
-                $parallaxData->the_post();
-
-                $val = get_post_custom(get_the_id());
-                $title = isset($val['mb_title']) ? esc_attr($val['mb_title'][0]) : '';
-                $backgroundUrl = wp_get_attachment_url(get_post_thumbnail_id(get_the_id()));
+        <?php if (file_exists(TEMPLATEPATH . '/partials/parallax.php')) {
+            include TEMPLATEPATH . '/partials/parallax.php';
+          }
         ?>
-              <section class="Parallax" style="background-image: url('<?php echo $backgroundUrl; ?>');">
-                <article class="animation-element Parallax-caption Parallax-caption--left animated" data-animation="fadeInLeft">
-                  <h2 class="Parallax-caption-title text-right"><?php echo $title; ?></h2>
-                  <?php the_content(); ?>
-                </article>
-              </section>
-            <?php endwhile; ?>
-          <?php endif; ?>
-          <?php wp_reset_postdata(); ?>
-        <?php endif; ?>
 <?php
         $i++;
       }

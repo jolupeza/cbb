@@ -39,32 +39,6 @@
 </section>
 
 <?php
-  $values = get_post_custom($idParent);
-  $parallax = isset($values['mb_parallax']) ? esc_attr($values['mb_parallax'][0]) : '';
-
-  if (!empty($parallax)) :
-    $arguments = [
-      'post_type' => 'parallaxs',
-      'p' => (int)$parallax
-    ];
-
-    $parallaxData = new WP_Query($arguments);
-    if ($parallaxData->have_posts()) :
-      while ($parallaxData->have_posts()) :
-        $parallaxData->the_post();
-
-        $val = get_post_custom(get_the_id());
-        $title = isset($val['mb_title']) ? esc_attr($val['mb_title'][0]) : '';
-        $legend = isset($val['mb_legend']) ? esc_attr($val['mb_legend'][0]) : '';
-        $backgroundUrl = wp_get_attachment_url(get_post_thumbnail_id(get_the_id()));
-?>
-      <section class="Parallax" style="background-image: url('<?php echo $backgroundUrl; ?>');">
-        <article class="Parallax-caption Parallax-caption--right animation-element animated" data-animation="fadeInRight">
-          <?php the_content(); ?>
-          <h2 class="Parallax-caption-title text-right"><?php echo $title; ?></h2>
-          <h4 class="Parallax-caption-author text-right"><?php echo $legend; ?></h4>
-        </article>
-      </section>
-    <?php endwhile; ?>
-  <?php endif; ?>
-<?php endif; ?>
+  if (file_exists(TEMPLATEPATH . '/partials/parallax.php')) {
+    include TEMPLATEPATH . '/partials/parallax.php';
+  }

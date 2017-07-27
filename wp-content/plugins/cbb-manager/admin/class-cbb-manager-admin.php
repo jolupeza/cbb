@@ -87,6 +87,8 @@ class Cbb_Manager_Admin
             $this->version,
             false
         );
+        
+        wp_enqueue_style('cbb-animate-admin', 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css', array(), '3.5.2', false);
     }
 
     /**
@@ -347,12 +349,58 @@ class Cbb_Manager_Admin
         } else {
             delete_post_meta($post_id, 'mb_title');
         }
+        
+        // AlignTitle
+        if (isset($_POST['mb_alignTitle']) && !empty($_POST['mb_alignTitle'])) {
+            update_post_meta($post_id, 'mb_alignTitle', esc_attr($_POST['mb_alignTitle']));
+        } else {
+            delete_post_meta($post_id, 'mb_alignTitle');
+        }
 
         // legend
         if (isset($_POST['mb_legend']) && !empty($_POST['mb_legend'])) {
             update_post_meta($post_id, 'mb_legend', esc_attr($_POST['mb_legend']));
         } else {
             delete_post_meta($post_id, 'mb_legend');
+        }
+        
+        // Align
+        if (isset($_POST['mb_align']) && !empty($_POST['mb_align'])) {
+            update_post_meta($post_id, 'mb_align', esc_attr($_POST['mb_align']));
+        } else {
+            delete_post_meta($post_id, 'mb_align');
+        }
+        
+        // Text Link
+        if (isset($_POST['mb_text']) && !empty($_POST['mb_text'])) {
+            update_post_meta($post_id, 'mb_text', esc_attr($_POST['mb_text']));
+        } else {
+            delete_post_meta($post_id, 'mb_text');
+        }
+
+        // URL
+        if (isset($_POST['mb_url']) && !empty($_POST['mb_url'])) {
+            update_post_meta($post_id, 'mb_url', esc_attr($_POST['mb_url']));
+        } else {
+            delete_post_meta($post_id, 'mb_url');
+        }
+
+        // Target
+        $target = isset($_POST['mb_target']) && $_POST['mb_target'] ? 'on' : 'off';
+        update_post_meta($post_id, 'mb_target', $target);
+
+        // Page
+        if (isset($_POST['mb_page']) && !empty($_POST['mb_page'])) {
+            update_post_meta($post_id, 'mb_page', esc_attr($_POST['mb_page']));
+        } else {
+            delete_post_meta($post_id, 'mb_page');
+        }
+        
+        // Animate
+        if (isset($_POST['mb_animate']) && !empty($_POST['mb_animate'])) {
+            update_post_meta($post_id, 'mb_animate', esc_attr($_POST['mb_animate']));
+        } else {
+            delete_post_meta($post_id, 'mb_animate');
         }
     }
 

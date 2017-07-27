@@ -1,7 +1,7 @@
 <section class="Page" id="<?php echo basename(get_permalink()); ?>">
   <?php
-    $pageParent = get_the_id();
-    $values = get_post_custom($pageParent);
+    $idParent = get_the_id();
+    $values = get_post_custom($idParent);
     $parallax = isset($values['mb_parallax']) ? esc_attr($values['mb_parallax'][0]) : '';
     $webm = isset($values['mb_webm']) ? esc_attr($values['mb_webm'][0]) : '';
     $mp4 = isset($values['mb_mp4']) ? esc_attr($values['mb_mp4'][0]) : '';
@@ -24,7 +24,7 @@
 
         <?php if (!empty($webm) || !empty($mp4) || !empty($ogv)) : ?>
           <p>
-            <a class="Button Button--red Button--icon" href="#" data-toggle="modal" data-target="#md-video-<?php echo $pageParent; ?>"><i class="icon-play2"></i> ver video</a>
+            <a class="Button Button--red Button--icon" href="#" data-toggle="modal" data-target="#md-video-<?php echo $idParent; ?>"><i class="icon-play2"></i> ver video</a>
           </p>
         <?php endif; ?>
 
@@ -34,7 +34,7 @@
             'posts_per_page' => -1,
             'orderby' => 'menu_order',
             'order' => 'ASC',
-            'post_parent' => $pageParent
+            'post_parent' => $idParent
           ];
 
           $pageChilds = new WP_Query($arguments);
@@ -64,37 +64,15 @@
   </div>
 </section>
 
-<?php if (!empty($parallax)) : ?>
-  <?php
-    $arguments = [
-      'post_type' => 'parallaxs',
-      'p' => (int)$parallax
-    ];
-
-    $parallaxData = new WP_Query($arguments);
-
-    if ($parallaxData->have_posts()) :
-      while ($parallaxData->have_posts()) :
-        $parallaxData->the_post();
-
-        $val = get_post_custom(get_the_id());
-        $title = isset($val['mb_title']) ? esc_attr($val['mb_title'][0]) : '';
-        $backgroundUrl = wp_get_attachment_url(get_post_thumbnail_id(get_the_id()));
-  ?>
-    <section class="Parallax" style="background-image: url('<?php echo $backgroundUrl; ?>');">
-      <article class="Parallax-caption Parallax-caption--left animation-element animated" data-animation="fadeInLeft">
-        <h2 class="Parallax-caption-title text-left"><?php the_title(); ?></h2>
-        <?php the_content(); ?>
-      </article>
-    </section>
-    <?php endwhile; ?>
-  <?php endif; ?>
-  <?php wp_reset_postdata(); ?>
-<?php endif; ?>
+<?php
+  if (file_exists(TEMPLATEPATH . '/partials/parallax.php')) {
+    include TEMPLATEPATH . '/partials/parallax.php';
+  }
+?>
 
 <!-- Modal Video -->
 <?php if (!empty($webm) || !empty($mp4) || !empty($ogv)) : ?>
-  <div class="modal fade Modal Modal--video Modal--red" id="md-video-<?php echo $pageParent; ?>" tabindex="-1" role="dialog">
+  <div class="modal fade Modal Modal--video Modal--red" id="md-video-<?php echo $idParent; ?>" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-body">

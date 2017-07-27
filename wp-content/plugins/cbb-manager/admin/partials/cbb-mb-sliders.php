@@ -87,31 +87,6 @@
             <option value="right" <?php selected($align, 'right'); ?>>Derecha</option>
         </select>
     </p>
-
-<?php /*
-    <fieldset class="GroupForm">
-        <legend class="GroupForm-legend">Imagen Responsive</legend>
-
-        <div class="container-upload-file GroupForm-wrapperImage">
-            <p class="btn-add-file">
-                <a title="Set Slider Image" href="javascript:;" class="set-file button button-primary">Añadir</a>
-            </p>
-
-            <div class="hidden media-container">
-                <img src="<?php echo $responsive; ?>" alt="<?php //echo get_post_meta( $post->ID, 'slider-1-alt', true ); ?>" title="<?php //echo get_post_meta( $post->ID, 'slider-1-title', true ); ?>" />
-            </div><!-- .media-container -->
-
-            <p class="hidden">
-                <a title="Qutar imagen" href="javascript:;" class="remove-file button button-secondary">Quitar</a>
-            </p>
-
-            <p class="media-info">
-                <input class="hd-src" type="hidden" name="mb_responsive" value="<?php echo $responsive; ?>" />
-            </p>
-        </div>
-
-    </fieldset>
- */ ?>
     
     <fieldset class="GroupForm">
         <legend class="GroupForm-legend">Imagen Responsive</legend>

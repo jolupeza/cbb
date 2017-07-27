@@ -2,6 +2,8 @@
     'use strict';
 
     $(function() {
+        var animate = '';
+        
         renderFeaturedImage( $ );
 
         $( '.set-file' ).on( 'click', function( evt ) {
@@ -22,6 +24,22 @@
 
             // Remove the image, toggle the anchors
             resetUploadForm( $, container_media );
+        });
+        
+        $('#mb_animate').on('change', function() {
+           var animation = $(this).val(),
+            text = $('#js-animate');
+           
+           if (animation.length === '') {
+               return;
+           }
+           
+           if (animate.length !== '') {
+               text.removeClass(animate);
+           }
+           
+           text.addClass(animation);
+           animate = animation;
         });
     });
 

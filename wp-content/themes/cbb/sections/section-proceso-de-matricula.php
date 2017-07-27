@@ -1,9 +1,5 @@
 <section class="Page Page--pb" id="<?php echo $post->post_name; ?>">
-  <?php
-    $pageParent = get_the_id();
-    $values = get_post_custom($pageParent);
-    $parallax = isset($values['mb_parallax']) ? esc_attr($values['mb_parallax'][0]) : '';
-  ?>
+  <?php $idParent = get_the_id(); ?>
   <div class="container">
     <div class="row">
       <div class="col-md-6">
@@ -16,7 +12,7 @@
             'posts_per_page' => -1,
             'orderby' => 'menu_order',
             'order' => 'ASC',
-            'post_parent' => $pageParent
+            'post_parent' => $idParent
           ];
 
           $pageChilds = new WP_Query($arguments);
@@ -47,11 +43,11 @@
         </p>
       </div>
       <div class="col-md-6">
-        <?php if (has_post_thumbnail($pageParent)) : ?>
+        <?php if (has_post_thumbnail($idParent)) : ?>
           <figure class="Page-figure">
-            <?php echo get_the_post_thumbnail($pageParent, 'full', [
+            <?php echo get_the_post_thumbnail($idParent, 'full', [
                 'class' => 'img-responsive center-block',
-                'alt' => get_the_title($pageParent)
+                'alt' => get_the_title($idParent)
               ]);
             ?>
           </figure>
@@ -61,30 +57,7 @@
   </div>
 </section>
 
-<?php if (!empty($parallax)) : ?>
-  <?php
-    $arguments = [
-      'post_type' => 'parallaxs',
-      'p' => (int)$parallax
-    ];
-
-    $parallaxData = new WP_Query($arguments);
-
-    if ($parallaxData->have_posts()) :
-      while ($parallaxData->have_posts()) :
-        $parallaxData->the_post();
-
-        $val = get_post_custom(get_the_id());
-        $title = isset($val['mb_title']) ? esc_attr($val['mb_title'][0]) : '';
-        $backgroundUrl = wp_get_attachment_url(get_post_thumbnail_id(get_the_id()));
-  ?>
-    <section class="Parallax" style="background-image: url('<?php echo $backgroundUrl; ?>');">
-      <article class="Parallax-caption Parallax-caption--left animation-element animated" data-animation="swing">
-        <h2 class="Parallax-caption-title text-center"><?php echo $title; ?></h2>
-        <?php the_content(); ?>
-      </article>
-    </section>
-    <?php endwhile; ?>
-  <?php endif; ?>
-  <?php wp_reset_postdata(); ?>
-<?php endif; ?>
+<?php
+  if (file_exists(TEMPLATEPATH . '/partials/parallax.php')) {
+    include TEMPLATEPATH . '/partials/parallax.php';
+  }
