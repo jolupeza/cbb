@@ -46,42 +46,56 @@
         $parallaxData->the_post();
 
         $val = get_post_custom(get_the_id());
-        $backgroundUrl = wp_get_attachment_url(get_post_thumbnail_id(get_the_id()));
+        $responsive = isset( $val['mb_responsive'] ) ? esc_attr($val['mb_responsive'][0]) : '';
 ?>
-  <section class="Parallax Parallax--pages" style="background-image: url('<?php echo $backgroundUrl; ?>');">
+      <section class="Parallax Parallax--pages">
+        <figure class="Parallax-figure">
+          <picture>
+            <?php if (!empty($responsive)) : ?>
+              <source class="img-responsive center-block" media="(max-width: 991px)" srcset="<?php echo $responsive; ?>" />
+            <?php endif; ?>
+            <?php the_post_thumbnail('full', [
+                'class' => 'img-responsive center-block'
+              ]);
+            ?>
+          </picture>
 
-  <?php
-    $objectsPage = get_page_by_title('Objetivos');
+          <?php
+            $objectsPage = get_page_by_title('Objetivos');
 
-    $params = [
-      'post_type' => 'page',
-      'post_parent' => $objectsPage->ID,
-      'orderby' => 'menu_order',
-      'order' => 'ASC',
-      'posts_per_page' => -1
-    ];
+            $params = [
+              'post_type' => 'page',
+              'post_parent' => $objectsPage->ID,
+              'orderby' => 'menu_order',
+              'order' => 'ASC',
+              'posts_per_page' => -1
+            ];
 
-    $childPages = new WP_Query($params);
+            $childPages = new WP_Query($params);
 
-    if ($childPages->have_posts()) :
-      while ($childPages->have_posts()) :
-        $childPages->the_post();
-  ?>
-    <article class="Parallax-page">
-      <?php if (has_post_thumbnail()) : ?>
-        <figure class="Parallax-page-figure animation-element animated" data-animation="swing">
-          <?php the_post_thumbnail('full', ['class' => 'img-responsive center-block']); ?>
+            if ($childPages->have_posts()) :
+              $i = 0;
+              while ($childPages->have_posts()) :
+                $childPages->the_post();
+                $alignPage = ($i === 0) ? 'left' : 'right';
+          ?>
+            <article class="Parallax-page Parallax-page--<?php echo $alignPage; ?>">
+              <?php if (has_post_thumbnail()) : ?>
+                <figure class="Parallax-page-figure animation-element animated" data-animation="swing">
+                  <?php the_post_thumbnail('full', ['class' => 'img-responsive center-block']); ?>
+                </figure>
+              <?php endif; ?>
+              <h3 class="Parallax-page-title text-center animation-element animated" data-animation="bounceInLeft"><?php the_title(); ?></h3>
+              <div class="animation-element animated" data-animation="flipInX">
+                <?php the_content(); ?>
+              </div>
+            </article>
+            <?php $i++; ?>
+          <?php endwhile; ?>
+          <?php endif; ?>
+          <?php wp_reset_postdata(); ?>
         </figure>
-      <?php endif; ?>
-      <h3 class="Parallax-page-title text-center animation-element animated" data-animation="bounceInLeft"><?php the_title(); ?></h3>
-      <div class="animation-element animated" data-animation="flipInX">
-        <?php the_content(); ?>
-      </div>
-    </article>
-  <?php endwhile; ?>
-  <?php endif; ?>
-  <?php wp_reset_postdata(); ?>
-  </section>
+      </section>
     <?php endwhile; ?>
   <?php endif; ?>
   <?php wp_reset_postdata(); ?>
