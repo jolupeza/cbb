@@ -1465,59 +1465,67 @@ a {
 }
 
 .Parallax {
-  background-color: transparent;
-  background-position: 0 0;
-  background-repeat: no-repeat;
-  background-size: cover;
   display: -webkit-flex;
   display: flex;
   -webkit-align-items: center;
   align-items: center;
-  padding: 120px 0;
-}
-@media screen and (max-width: 991px) {
-  .Parallax {
-    padding: 80px 0;
-  }
 }
 .Parallax--fixed {
   background-attachment: fixed;
   background-position: 0 70px;
   background-size: contain;
 }
-.Parallax--pages {
-  -webkit-align-items: start;
-  align-items: start;
-  padding: 50px 0;
-}
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 767px) and (orientation: portrait) {
   .Parallax--pages {
-    -webkit-flex-wrap: wrap;
-    flex-wrap: wrap;
+    background-color: #ce0321;
+  }
+  .Parallax--pages .Parallax-figure {
+    display: block;
+    padding: 30px 0;
+  }
+  .Parallax--pages .Parallax-figure picture source, .Parallax--pages .Parallax-figure picture img {
+    display: none;
   }
 }
 
+.Parallax-figure {
+  display: -webkit-flex;
+  display: flex;
+  position: relative;
+}
+
 .Parallax-caption {
+  -webkit-align-content: center;
+  align-content: center;
   display: -webkit-flex;
   display: flex;
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
+  height: 100%;
+  position: absolute;
+  top: 0;
   width: 45%;
 }
 .Parallax-caption--left {
-  margin: 0 auto 0 10%;
+  left: 10%;
 }
 .Parallax-caption--right {
-  margin: 0 10% 0 auto;
+  right: 10%;
 }
 .Parallax-caption--full {
-  margin: 0 auto;
+  left: 10%;
   width: 80%;
 }
 @media screen and (max-width: 991px) {
   .Parallax-caption--left, .Parallax-caption--right, .Parallax-caption--full {
-    margin: 0 auto 0 10%;
     width: 80%;
+  }
+}
+@media screen and (max-width: 767px) and (orientation: portrait) {
+  .Parallax-caption--left, .Parallax-caption--right, .Parallax-caption--full {
+    left: 5%;
+    right: auto;
+    width: 90%;
   }
 }
 .Parallax-caption p {
@@ -1526,8 +1534,14 @@ a {
   flex-basis: 100%;
   font-size: 2em;
   font-style: italic;
+  margin-bottom: 0;
 }
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 991px) {
+  .Parallax-caption p {
+    font-size: 1.25em;
+  }
+}
+@media screen and (max-width: 767px) and (orientation: portrait) {
   .Parallax-caption p {
     font-size: 1em;
   }
@@ -1542,9 +1556,14 @@ a {
   -webkit-flex-basis: 100%;
   flex-basis: 100%;
 }
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 991px) {
   .Parallax-caption-title {
     font-size: 2.5em;
+  }
+}
+@media screen and (max-width: 767px) and (orientation: portrait) {
+  .Parallax-caption-title {
+    font-size: 2em;
   }
 }
 
@@ -1559,25 +1578,44 @@ a {
 }
 
 .Parallax-page {
-  -webkit-flex-basis: 50%;
-  flex-basis: 50%;
+  -webkit-align-content: center;
+  align-content: center;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  height: 100%;
   padding: 0 60px;
+  position: absolute;
+  top: 0;
+  width: 50%;
+}
+.Parallax-page--left {
+  border-right: 1px solid rgba(255, 255, 255, 0.3);
+  left: 0;
+}
+.Parallax-page--right {
+  border-left: 1px solid rgba(0, 0, 0, 0.2);
+  right: 0;
 }
 @media screen and (max-width: 767px) {
   .Parallax-page {
     padding: 0 25px;
   }
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 767px) and (orientation: portrait) {
   .Parallax-page {
-    -webkit-flex-basis: 100%;
-    flex-basis: 100%;
-  }
-  .Parallax-page:first-child {
-    margin-bottom: 25px;
+    border: none;
+    display: block;
+    left: auto;
+    position: relative;
+    right: auto;
+    width: 100%;
   }
 }
 .Parallax-page p {
+  -webkit-flex: 0 1 100%;
+  flex: 0 1 100%;
   color: #fcfbfb;
   font-size: 1.25em;
 }
@@ -1586,14 +1624,28 @@ a {
     font-size: 1em;
   }
 }
-.Parallax-page:first-child {
-  border-right: 1px solid #fcfbfb;
-}
 
 .Parallax-page-title {
+  -webkit-flex: 0 1 100%;
+  flex: 0 1 100%;
   color: #fcfbfb;
   font-family: "reef";
   font-size: 2.625em;
+}
+@media screen and (max-width: 767px) {
+  .Parallax-page-title {
+    font-size: 2em;
+  }
+}
+
+.Parallax-page-figure {
+  -webkit-flex: 0 1 100%;
+  flex: 0 1 100%;
+}
+@media screen and (max-width: 767px) {
+  .Parallax-page-figure {
+    display: none;
+  }
 }
 
 .Cards {

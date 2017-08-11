@@ -1,45 +1,58 @@
 .Parallax {
-  background-color: transparent;
-  background-position: 0 0;
-  background-repeat: no-repeat;
-  background-size: cover;
   @include display-flex();
   @include align-items(center);
-  padding: 120px 0;
-  @media screen and (max-width: 991px) {
-    padding: 80px 0;
-  }
   &--fixed {
     background-attachment: fixed;
     background-position: 0 70px;
     background-size: contain;
   }
   &--pages {
-    @include align-items(start);
-    padding: 50px 0;
-    @media screen and (max-width: 767px) {
-      @include flex-wrap(wrap);
+    @media screen and (max-width: 767px) and (orientation: portrait) {
+      background-color: $redSoft;
+      .Parallax-figure {
+        display: block;
+        padding: 30px 0;
+        picture {
+          source, img {
+            display: none;
+          }
+        }
+      }
     }
   }
 }
+.Parallax-figure {
+  @include display-flex();
+  position: relative;
+}
 .Parallax-caption {
+  @include align-content(center);
   @include display-flex();
   @include flex-wrap(wrap);
+  height: 100%;
+  position: absolute;
+  top: 0;
   width: 45%;
   &--left {
-    margin: 0 auto 0 10%;
+    left: 10%;
   }
   &--right {
-    margin: 0 10% 0 auto;
+    right: 10%;
   }
   &--full {
-    margin: 0 auto;
+    left: 10%;
     width: 80%;
   }
   @media screen and (max-width: 991px) {
     &--left, &--right, &--full {
-      margin: 0 auto 0 10%;
       width: 80%;
+    }
+  }
+  @media screen and (max-width: 767px) and (orientation: portrait){
+    &--left, &--right, &--full {
+      left: 5%;
+      right: auto;
+      width: 90%;
     }
   }
   p {
@@ -47,7 +60,11 @@
     @include flex-basis(100%);
     font-size: 2em;
     font-style: italic;
-    @media screen and (max-width: 767px) {
+    margin-bottom: 0;
+    @media screen and (max-width: 991px) {
+      font-size: 1.25em;
+    }
+    @media screen and (max-width: 767px) and (orientation: portrait) {
       font-size: 1em;
     }
   }
@@ -59,8 +76,11 @@
   margin-bottom: 0;
   margin-top: 0;
   @include flex-basis(100%);
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: 991px) {
     font-size: 2.5em;
+  }
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    font-size: 2em;
   }
 }
 .Parallax-caption-author {
@@ -72,30 +92,54 @@
   @include flex-basis(100%);
 }
 .Parallax-page {
-  @include flex-basis(50%);
+  @include align-content(center);
+  @include display-flex();
+  @include flex-wrap(wrap);
+  height: 100%;
   padding: 0 60px;
+  position: absolute;
+  top: 0;
+  width: 50%;
+  &--left {
+    border-right: 1px solid rgba(white, 0.3);
+    left: 0;
+  }
+  &--right {
+    border-left: 1px solid rgba(black, 0.2);
+    right: 0;
+  }
   @media screen and (max-width: 767px) {
     padding: 0 25px;
   }
-  @media screen and (max-width: 600px) {
-    @include flex-basis(100%);
-    &:first-child {
-      margin-bottom: 25px;
-    }
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    border: none;
+    display: block;
+    left: auto;
+    position: relative;
+    right: auto;
+    width: 100%;
   }
   p {
+    @include flex(0 1 100%);
     color: $white;
     font-size: 1.25em;
     @media screen and (max-width: 991px) {
       font-size: 1em;
     }
   }
-  &:first-child {
-    border-right: 1px solid $white;
-  }
 }
 .Parallax-page-title {
+  @include flex(0 1 100%);
   color: $white;
   font-family: "reef";
   font-size: 2.625em;
+  @media screen and (max-width: 767px) {
+    font-size: 2em;
+  }
+}
+.Parallax-page-figure {
+  @include flex(0 1 100%);
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
 }
