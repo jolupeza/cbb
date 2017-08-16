@@ -194,7 +194,7 @@ add_action('init', 'cbb_add_excerpts_to_pages');
 /* Search only Posts */
 /****************************************/
 function cbb_search_only_posts($query) {
-  if ($query->is_search()) {
+  if ($query->is_search() && !is_admin()) {
     $query->set('post_type', 'post');
   }
 
@@ -206,7 +206,7 @@ add_filter('pre_get_posts', 'cbb_search_only_posts');
 /****************************************/
 /* Setting Mailtrap */
 /****************************************/
-/*function mailtrap($phpmailer) {
+function mailtrap($phpmailer) {
   $phpmailer->isSMTP();
   $phpmailer->Host = 'smtp.mailtrap.io';
   $phpmailer->SMTPAuth = true;
@@ -215,7 +215,7 @@ add_filter('pre_get_posts', 'cbb_search_only_posts');
   $phpmailer->Password = 'f1ea173da928d9';
 }
 
-add_action('phpmailer_init', 'mailtrap');*/
+// add_action('phpmailer_init', 'mailtrap');
 
 // Bugs send emails WP 4.6.1
 add_filter('wp_mail_from', function() {

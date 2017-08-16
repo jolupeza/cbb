@@ -135,8 +135,10 @@ class Cbb_Manager
         $this->loader->add_action('add_meta_boxes', $admin, 'cd_mb_prestudents_add');
         $this->loader->add_filter('manage_edit-prestudents_columns', $admin, 'custom_columns_prestudents');
         $this->loader->add_action('manage_prestudents_posts_custom_column', $admin, 'custom_column_prestudents');
-//        $this->loader->add_filter('views_edit-contacts', $admin, 'contacts_button_view_edit');
+        $this->loader->add_filter('views_edit-prestudents', $admin, 'prestudents_button_view_edit');
         $this->loader->add_action('init', $admin, 'add_taxonomies_prestudents');
+        $this->loader->add_action('restrict_manage_posts', $admin, 'prestudents_table_filtering');
+        $this->loader->add_filter('parse_query', $admin, 'prestudents_table_filter');
         
         $this->loader->add_action('add_meta_boxes', $admin, 'cd_mb_schedules_add');
         $this->loader->add_action('save_post', $admin, 'cd_mb_schedules_save' );

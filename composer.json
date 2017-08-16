@@ -1,0 +1,14 @@
+{
+    "name": "watson/cbb",
+    "description": "Website Colegio Bertolt Brecht",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jose Perez",
+            "email": "joseluis@watson.pe"
+        }
+    ],
+    "require": {
+        "endroid/simple-excel": "^1.1"
+    }
+}

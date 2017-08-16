@@ -758,6 +758,9 @@ class Cbb_Manager_Admin
             'cb' => '<input type="checkbox" />',
             'name' => __('Nombre'),
             'email' => __('Correo electrónico'),
+            'local' => __('Sede', $this->domain),
+            'grade' => __('Grado', $this->domain),
+            'year' => __('Año', $this->domain),
             'date' => __('Fecha'),
         );
 
@@ -826,7 +829,167 @@ class Cbb_Manager_Admin
                 $email = isset($values['mb_email']) ? esc_attr($values['mb_email'][0]) : '';
                 echo $email;
                 break;
+            case 'local':
+                $sede = isset($values['mb_sede']) ? (int)esc_attr($values['mb_sede'][0], $this->domain) : false;
+                
+                if ($sede) {
+                    $dataSede = get_post($sede);
+                    echo $dataSede->post_title;
+                }
+                
+                break;
+            case 'grade':
+                $levels = wp_get_post_terms($post->ID, 'levels');
+                
+                if (count($levels)) {
+                    $level = $levels[0];
+                    
+                    if (is_object($level)) {
+                        echo $level->name;
+                    }
+                }
+                break;
+            case 'year':
+                $year = isset($values['mb_year']) ? esc_attr($values['mb_year'][0], $this->domain) : '';
+                
+                echo $year;
+                break;
         }
+    }
+    
+    /**
+     * Display Filter by Sede in Post Type Prestudents.
+     *
+     * @global type $typenow
+     */
+    public function prestudents_table_filtering()
+    {
+        global $typenow;
+        
+        $postType = 'prestudents';
+        $taxonomy = 'levels';
+                
+        if ($typenow === $postType) {
+            $sede = isset($_GET['mb_sede']) ? esc_attr($_GET['mb_sede']) : '';
+            $year = isset($_GET['mb_year']) ? esc_attr($_GET['mb_year']) : '';            
+            $level = isset($_GET['mb_level']) ? esc_attr($_GET['mb_level']) : '';
+            
+            // Sede
+            echo '<select name="mb_sede" id="filter-by-sede">';
+            echo '<option value=""' . selected($sede, '') . '>'.__('Todos las sedes').'</option>';
+            
+            $args = [
+              'post_type' => 'locals',
+              'posts_per_page' => -1,
+              'post_parent' => 0,
+              'orderby' => 'menu_order',
+              'order' => 'ASC'
+            ];
+            $the_query = new WP_Query($args);
+            if ($the_query->have_posts()) {
+                while ($the_query->have_posts()) {
+                    $the_query->the_post();
+                    $id = get_the_ID();
+                    
+                    echo '<option value="' . $id . '"' . selected($sede, $id) . '>' . get_the_title() . '</option>';
+                }
+            }
+            wp_reset_postdata();
+            
+            echo '</select>';
+            
+            // Levels
+            $levels = get_terms([
+              'taxonomy' => $taxonomy,
+              'orderby' => 'term_id',
+              'order' => 'ASC'
+            ]);
+
+            if (count($levels)) {
+                echo '<select name="mb_level" id="filter-by-level">';
+                echo '<option value=""' . selected($level, '') . '>'.__('Todos los Grados').'</option>';
+                foreach ($levels as $l) {
+                    echo '<option value="' . $l->term_id . '"' . selected($level, $l->term_id) . '>' . $l->name . '</option>';
+                }
+                
+                echo '</select>';
+            }
+            
+            // Year
+            echo '<select name="mb_year" id="filter-by-year">';
+            echo '<option value=""' . selected($year, '') . '>'.__('Todos los años').'</option>';
+            
+            $yearNow = intval(date('Y'));
+            for ($i = 2018; $i <= $yearNow + 1; $i++) {
+                echo '<option value="' . $i . '"' . selected($year, $i) . '>' . $i . '</option>';
+            }
+            
+            echo '</select>';
+        }
+
+    }
+    
+    /**
+     * Filter prestudents by sede
+     *
+     * @param arr $query
+     *
+     * @return type
+     */
+    public function prestudents_table_filter($query)
+    {
+        if (!current_user_can('manage_options')) {
+            return;
+        }
+        
+        global $pagenow;
+
+        $postType = 'prestudents';
+        $taxonomy = 'levels';
+        $qv = &$query->query_vars;
+        
+        if ($pagenow == 'edit.php' && isset($qv['post_type']) && $qv['post_type'] == $postType) {
+            if (isset($_GET['mb_sede']) && !empty($_GET['mb_sede'])) {
+                $value = (int)$_GET['mb_sede'];
+                
+                $qv['meta_query'][] = [
+                    'key' => 'mb_sede',
+                    'value' => $value
+                ];
+            }
+            
+            if (isset($_GET['mb_year']) && !empty($_GET['mb_year'])) {
+                $value = $_GET['mb_year'];
+            
+                $qv['meta_query'][] = array(
+                    'key' => 'mb_year',
+                    'value' => $value
+                );
+            }
+            
+            if (isset($_GET['mb_level']) && $_GET['mb_level'] != 0) {
+                $value = (int)$_GET['mb_level'];
+                
+                $qv['tax_query'][] = [
+                    'taxonomy' => $taxonomy,
+                    'field' => 'term_id',
+                    'terms' => $value
+                ];
+            }
+        }
+    }
+    
+    public function prestudents_button_view_edit($views)
+    {
+        $sede = (isset($_GET['mb_sede']) && !empty($_GET['mb_sede'])) ? esc_attr($_GET['mb_sede']) : 'all';
+        $level = (isset($_GET['mb_level']) && !empty($_GET['mb_level'])) ? esc_attr($_GET['mb_level']) : 'all';
+        $year = (isset($_GET['mb_year']) && !empty($_GET['mb_year'])) ? esc_attr($_GET['mb_year']) : 'all';
+        
+        echo '<p>'
+        . '<a href="' . plugin_dir_url(dirname(__FILE__)) . 'prestudents/generateExcel/' . $sede . '/' . $level . '/' . $year . '" class="button button-primary">Generar excel</a>'
+        . '</p>';
+
+        return $views;
     }
     
     /**
