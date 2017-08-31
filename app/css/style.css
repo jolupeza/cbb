@@ -638,9 +638,10 @@ a {
 }
 .NavMenu span {
   display: block;
+  visibility: hidden;
 }
 .NavMenu i.glyphicon {
-  border: 1px solid #fcfbfb;
+  border: 1px solid transparent;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   border-radius: 3px;
@@ -649,6 +650,10 @@ a {
   font-size: 2em;
   margin-top: 5px;
   padding: 25px 10px;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 .NavMenu:hover, .NavMenu:focus {
   color: #b00725;
@@ -657,6 +662,9 @@ a {
 .NavMenu:hover i.glyphicon, .NavMenu:focus i.glyphicon {
   border-color: #b00725;
   color: #b00725;
+}
+.NavMenu:hover span, .NavMenu:focus span {
+  visibility: visible;
 }
 @media screen and (max-width: 991px) {
   .NavMenu {

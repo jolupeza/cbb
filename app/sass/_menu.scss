@@ -275,15 +275,17 @@
   }
   span {
     display: block;
+    visibility: hidden;
   }
   i.glyphicon {
-    border: 1px solid $white;
+    border: 1px solid transparent;
     @include border-radius(3px);
     color: $white;
     display: inline-block;
     font-size: 2em;
     margin-top: 5px;
     padding: 25px 10px;
+    @include transition(all 0.3s ease);
   }
   &:hover, &:focus {
     color: $red;
@@ -291,6 +293,9 @@
     i.glyphicon {
       border-color: $red;
       color: $red;
+    }
+    span {
+      visibility: visible;
     }
   }
   @media screen and (max-width: 991px) {
