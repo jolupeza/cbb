@@ -232,7 +232,7 @@
                 <?php if (has_post_thumbnail()) : ?>
                 <figure class="Page-figure">
                   <?php the_post_thumbnail('full', [
-                      'class' => 'img-responsive center-block img-circle',
+                      'class' => 'img-responsive center-block',
                       'alt' => get_the_title()
                     ]);
                   ?>
