@@ -5,7 +5,7 @@
 
   <div class="container">
     <div class="row">
-      <div class="col-md-6">
+      <?php /* <div class="col-md-6"> */ ?>
         <h2 class="Page-title text-azul"><?php the_title(); ?></h2>
         <?php the_excerpt(); ?>
 
@@ -48,8 +48,9 @@
         <?php the_content(); ?>
 
         <p class="text-center"><a class="Button Button--blue Button--medium" href="<?php echo home_url('contactanos') ?>">Contáctanos</a></p>
-      </div>
-      <div class="col-md-6">
+      <?php /* </div> */?>
+
+      <?php /* <div class="col-md-6">
         <?php if (has_post_thumbnail($idParent)) : ?>
           <figure class="Page-figure">
             <?php echo get_the_post_thumbnail($idParent, 'full', [
@@ -59,7 +60,7 @@
             ?>
           </figure>
         <?php endif; ?>
-      </div>
+      </div> */?>
     </div>
   </div>
 </section>
