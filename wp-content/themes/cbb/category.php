@@ -105,7 +105,7 @@
       <span class="sr-only">Next</span>
     </a> -->
 
-    <button class="Arrow js-move-scroll" data-href="js-page">ir abajo <i class="glyphicon glyphicon-chevron-down"></i></button>
+    <button class="Arrow js-move-scroll" data-href="content">ir abajo <i class="glyphicon glyphicon-chevron-down"></i></button>
 
     <?php if (is_object($prevMenuItem)) : ?>
       <a href="<?php echo $prevMenuItem->url; ?>" class="left NavMenu">
@@ -124,14 +124,15 @@
   <?php wp_reset_postdata(); ?>
 <?php endif; ?>
 
-<section class="Page" id="js-page">
+<section class="Page" id="content">
   <div class="container">
     <?php
       $args = [
         'theme_location' => 'categories-zone-menu',
         'container' => 'nav',
         'container_class' => 'MenuZone',
-        'menu_class' => 'MenuZone-list'
+        'menu_class' => 'MenuZone-list',
+        'walker' => new CBB_Walker_Nav_Menu_Hashtag()
       ];
 
       wp_nav_menu($args);

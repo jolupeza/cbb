@@ -187,14 +187,15 @@
   <?php endif; ?>
 
   <?php if ($idSede > 0) : ?>
-    <section class="Page">
+    <section class="Page" id="content">
       <div class="container">
         <?php
           $args = [
             'theme_location' => 'locals-menu',
             'container' => 'nav',
             'container_class' => 'MenuZone',
-            'menu_class' => 'MenuZone-list MenuZone-list--blue'
+            'menu_class' => 'MenuZone-list MenuZone-list--blue',
+            'walker' => new CBB_Walker_Nav_Menu_Hashtag()
           ];
 
           wp_nav_menu($args);
