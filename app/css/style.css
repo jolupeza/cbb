@@ -844,6 +844,13 @@ a {
 }
 .Carousel--sedes {
   margin-bottom: 30px;
+  min-height: 500px;
+}
+.Carousel--sedes .carousel-inner {
+  min-height: 500px;
+}
+.Carousel--sedes .item {
+  min-height: 500px;
 }
 .Carousel--sedes .item img {
   margin-bottom: 15px;

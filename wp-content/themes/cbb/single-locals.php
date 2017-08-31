@@ -206,7 +206,9 @@
           $args = [
             'post_type' => 'locals',
             'posts_per_page' => -1,
-            'post_parent' => (int)$idSede
+            'post_parent' => (int)$idSede,
+            'orderby' => 'menu_order',
+            'order' => 'ASC'
           ];
 
           $the_query = new WP_Query($args);
@@ -241,7 +243,7 @@
                       <?php the_content(); ?>
                     </div>
                   <?php endif; ?>
-                  <p><a class="Button Button--small Button--red" href="">Tour Virtual</a></p>
+                  <?php /* <p><a class="Button Button--small Button--red" href="">Tour Virtual</a></p> */ ?>
                 </div>
                 <?php $j++; ?>
               <?php endwhile; ?>

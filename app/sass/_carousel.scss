@@ -143,7 +143,12 @@
   }
   &--sedes {
     margin-bottom: 30px;
+    min-height: 500px;
+    .carousel-inner {
+      min-height: 500px;
+    }
     .item {
+      min-height: 500px;
       img {
         margin-bottom: 15px;
         width: 90%;
