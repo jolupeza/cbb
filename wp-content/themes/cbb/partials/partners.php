@@ -8,7 +8,7 @@
 
   if ($the_query->have_posts()) :
 ?>
-<h2 class="Footer-title">Instituciones Asociadas</h2>
+<!-- <h2 class="Footer-title">Instituciones Asociadas</h2> -->
 
 <aside class="Footer-logos">
   <?php while ($the_query->have_posts()) : ?>

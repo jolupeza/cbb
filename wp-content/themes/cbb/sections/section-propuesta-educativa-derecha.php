@@ -72,7 +72,7 @@
 
 <!-- Modal Video -->
 <?php if (!empty($webm) || !empty($mp4) || !empty($ogv)) : ?>
-  <div class="modal fade Modal Modal--video Modal--red" id="md-video-<?php echo $idParent; ?>" tabindex="-1" role="dialog">
+  <div class="modal fade Modal Modal--video Modal--white" id="md-video-<?php echo $idParent; ?>" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-body">

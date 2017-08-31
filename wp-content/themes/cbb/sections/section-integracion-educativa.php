@@ -12,13 +12,15 @@
 
   if ($childs->have_posts()) :
     $i = 0; $j = 0;
+
+    $idCarousel = basename(get_permalink());
 ?>
-  <section id="carouse-integracion" class="Page Page--noPaddingTop Page--redSoft carousel slide Carousel Carousel--page" data-ride="carousel">
+  <section id="<?php echo $idCarousel; ?>" class="Page Page--noPaddingTop Page--redSoft carousel slide Carousel Carousel--page" data-ride="carousel">
     <?php if ($childs->post_count > 1) : ?>
       <ol class="carousel-indicators">
         <?php while ($childs->have_posts()) : ?>
           <?php $childs->the_post(); ?>
-          <li data-target="#carouse-integracion" data-slide-to="<?php echo $i; ?>"<?php echo ($i === 0) ? ' class="active"' : ''; ?>></li>
+          <li data-target="#<?php echo $idCarousel; ?>" data-slide-to="<?php echo $i; ?>"<?php echo ($i === 0) ? ' class="active"' : ''; ?>></li>
           <?php $i++; ?>
         <?php endwhile; ?>
       </ol>

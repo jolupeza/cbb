@@ -1742,7 +1742,12 @@ a {
 
 .Footer {
   background-color: #222222;
-  padding: 35px 0;
+  padding: 35px 0 65px;
+}
+@media screen and (max-width: 991px) {
+  .Footer {
+    padding: 35px 0 80px;
+  }
 }
 
 .Footer-title {
@@ -1820,6 +1825,15 @@ a {
   right: 0;
   z-index: 99;
 }
+@media screen and (max-width: 991px) {
+  .Social {
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    padding: 20px 0;
+    width: 100%;
+  }
+}
 
 .Social-list {
   display: -webkit-flex;
@@ -1828,12 +1842,24 @@ a {
   margin-bottom: 0;
   padding-left: 0;
 }
+@media screen and (max-width: 991px) {
+  .Social-list {
+    -webkit-justify-content: space-around;
+    justify-content: space-around;
+    width: 100%;
+  }
+}
 .Social-list li {
   font-size: 1.5em;
   margin-right: 15px;
 }
 .Social-list li:last-child {
   margin-right: 0;
+}
+@media screen and (max-width: 991px) {
+  .Social-list li {
+    margin-right: 0;
+  }
 }
 .Social-list li a {
   color: #fcfbfb;
@@ -2137,7 +2163,7 @@ a {
 }
 
 .Modal--video .modal-dialog {
-  margin-bottom: 0;
+  margin: 100px auto 0;
   width: 660px;
 }
 @media screen and (max-width: 767px) {
@@ -2151,13 +2177,20 @@ a {
   padding: 0;
 }
 .Modal--video .modal-body .close {
+  background-color: white;
+  border: 4px solid #b00725;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
   color: #b00725;
-  font-size: 4em;
+  font-size: 3em;
+  height: 52px;
   filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
   opacity: 1;
   position: absolute;
-  right: 0;
-  top: 0;
+  right: -52px;
+  top: -52px;
+  width: 52px;
   z-index: 99;
 }
 .Modal--video .Page-video {
@@ -2168,8 +2201,13 @@ a {
     margin-top: 0;
   }
 }
-.Modal--red .modal-content {
-  border: 10px solid #b00725;
+.Modal--white .modal-content {
+  border: 10px solid #fcfbfb;
+}
+
+.modal-backdrop.in {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
+  opacity: 0.7;
 }
 
 .Slidebar {

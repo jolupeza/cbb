@@ -1,6 +1,9 @@
 .Footer {
   background-color: $brown;
-  padding: 35px 0;
+  padding: 35px 0 65px;
+  @media screen and (max-width: 991px) {
+    padding: 35px 0 80px;
+  }
 }
 .Footer-title {
   color: $white;
