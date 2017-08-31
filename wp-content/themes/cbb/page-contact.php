@@ -272,7 +272,7 @@
       <div class="col-md-6">
         <h2 class="Page-title text-right text-celeste">Nuestras sedes</h2>
         <div class="text-right">
-          <p>Conoce nuestras sedes y visítanos</p>
+          <?php /* <p>Conoce nuestras sedes y visítanos</p>*/ ?>
         </div>
 
         <?php
