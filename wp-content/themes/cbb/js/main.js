@@ -297,15 +297,13 @@ var j = jQuery.noConflict();
 
       for (var i in infoMaps) {
         if (infoMaps[i].id === id) {
-          // if (!infoMaps[i].load) {
-            setTimeout(function(){
-              loadMap(infoMaps[i]);
-            }, 50);
+          setTimeout(function(){
+            loadMap(infoMaps[i]);
+          }, 50);
 
-            infoMaps[i].load = true;
-            return;
-          }
-        // }
+          infoMaps[i].load = true;
+          return;
+        }
       }
     });
 
@@ -320,13 +318,20 @@ var j = jQuery.noConflict();
       }
     });
 
-    // j('.grid').isotope({
-    //   itemSelector: '.grid-item',
-    //   percentPosition: true,
-    //   mansory: {
-    //     columnWidth: '.grid-sizer',
-    //     gutter: 15
-    //   }
-    // });
+    /*j('.Accordion-button').on('click', function() {
+      var $this = j(this);
+
+      j('.Accordion-button').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+    });*/
+
+    j('#accordion-questions').on('hide.bs.collapse', function(e) {
+      j('.Accordion-button').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+    });
+
+    j('#accordion-questions').on('shown.bs.collapse', function(e) {
+      var collapse = j(e.target);
+
+      collapse.prev().find('.Accordion-button').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
+    });
   });
 })(jQuery);

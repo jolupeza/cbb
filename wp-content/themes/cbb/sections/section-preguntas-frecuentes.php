@@ -30,6 +30,7 @@
                   <h4 class="panel-title">
                     <a role="button" data-toggle="collapse" data-parent="#accordion-questions" href="#collapse-<?php echo $i; ?>" aria-expanded="true" aria-controls="collapse-<?php echo $i; ?>">
                       <?php the_title(); ?>
+                      <i class="Accordion-button glyphicon glyphicon-chevron-<?php echo ($i === 1) ? 'up' : 'down'; ?>"></i>
                     </a>
                   </h4>
                 </div>

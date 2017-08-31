@@ -1,0 +1,17 @@
+.Accordion {
+  .panel-title {
+    a {
+      display: block;
+    }
+  }
+  .panel-heading {
+    position: relative;
+  }
+}
+.Accordion-button {
+  cursor: pointer;
+  font-size: 1.25em;
+  padding: 10px;
+  position: absolute;
+  right: 10px;
+}
