@@ -2114,12 +2114,18 @@ a {
 }
 
 .Sidebar-widget {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 @media screen and (max-width: 991px) {
   .Sidebar-widget .Form--search {
     display: none;
   }
+}
+.Sidebar-widget ul li a {
+  color: #415cb0;
+}
+.Sidebar-widget ul li a:hover {
+  color: #004e94;
 }
 
 .Contact-title {

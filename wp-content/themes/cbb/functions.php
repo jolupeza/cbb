@@ -174,8 +174,8 @@ if (function_exists('register_sidebar')) {
     // 'class'         => '',
     'before_widget' => '<div class="Sidebar-widget">',
     'after_widget'  => '</div>',
-    // 'before_title'  => '<h2 class="widgettitle">',
-    // 'after_title'   => '</h2>'
+    'before_title'  => '<h4 class="Sidebar-title Single-related-title">',
+    'after_title'   => '</h4>'
   );
 
   register_sidebar($args);

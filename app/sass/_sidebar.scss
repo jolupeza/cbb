@@ -2,10 +2,23 @@
 
 }
 .Sidebar-widget {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   .Form--search {
     @media screen and (max-width: 991px) {
       display: none;
     }
   }
+  ul {
+    li {
+      a {
+        color: $blueSoft;
+        &:hover {
+          color: $blue;
+        }
+      }
+    }
+  }
+}
+.Sidebar-title {
+
 }

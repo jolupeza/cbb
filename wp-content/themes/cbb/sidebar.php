@@ -2,7 +2,7 @@
 
   <div class="Sidebar-widget">
 
-    <h4><?php bloginfo('title'); ?></h4>
+    <h2 class="Sidebar-title Single-related-title"><?php bloginfo('title'); ?></h2>
     <p><?php bloginfo('description'); ?></p>
 
   </div>
