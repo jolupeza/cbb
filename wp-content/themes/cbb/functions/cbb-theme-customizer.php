@@ -231,6 +231,19 @@ function cbb_customize_register($wp_customize) {
     'settings' => 'cbb_custom_settings[infraestructura_video_ogv]'
   )));
 
+  // Id Youtube
+  $wp_customize->add_setting('cbb_custom_settings[infraestructura_youtube]', [
+    'default' => '',
+    'type' => 'option'
+  ]);
+
+  $wp_customize->add_control('cbb_custom_settings[infraestructura_youtube]', [
+    'label' => __('Id video Youtube', THEMEDOMAIN),
+    'section' => 'cbb_locals',
+    'settings' => 'cbb_custom_settings[infraestructura_youtube]',
+    'type' => 'text'
+  ]);
+
   // Description
   $wp_customize->add_setting('cbb_custom_settings[infraestructura_desc]', [
     'default' => '',

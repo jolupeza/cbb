@@ -26,6 +26,7 @@
     <?php wp_head(); ?>
     <script>
       var infoMaps = [];
+      var player;
     </script>
   </head>
   <body <?php body_class(); ?> data-spy="scroll" data-target=".Header-menu">

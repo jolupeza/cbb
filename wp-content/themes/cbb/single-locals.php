@@ -182,6 +182,71 @@
   <section class="Page" id="locals">
     <div class="container">
       <p><?php echo $desc; ?></p>
+
+      <?php
+        $video = isset($options['infraestructura_youtube']) ? esc_attr($options['infraestructura_youtube']) : '';
+      ?>
+      <?php if (!empty($video)) : ?>
+        <figure class="Page-youtube text-center">
+          <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
+          <div id="player"></div>
+
+          <script>
+            // 2. This code loads the IFrame Player API code asynchronously.
+            var tag = document.createElement('script');
+            var height = '360',
+                width = '640';  // 854x480
+
+            if (window.innerWidth < 768) {
+              height = '240';
+              width = '426';
+            }
+
+            if (window.innerWidth < 450) {
+              height = '240';
+              width = '320';
+            }
+
+            tag.src = "https://www.youtube.com/iframe_api";
+            var firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+            // 3. This function creates an <iframe> (and YouTube player)
+            //    after the API code downloads.
+            // var player;
+            function onYouTubeIframeAPIReady() {
+              player = new YT.Player('player', {
+                height: height,
+                width: width,
+                videoId: '<?php echo $video; ?>',
+                events: {
+                  // 'onReady': onPlayerReady,
+                  'onStateChange': onPlayerStateChange
+                }
+              });
+            }
+
+            // 4. The API will call this function when the video player is ready.
+            function onPlayerReady(event) {
+              event.target.playVideo();
+            }
+
+            // 5. The API calls this function when the player's state changes.
+            //    The function indicates that when playing a video (state=1),
+            //    the player should play for six seconds and then stop.
+            var done = false;
+            function onPlayerStateChange(event) {
+              if (event.data == YT.PlayerState.PLAYING && !done) {
+                setTimeout(stopVideo, 6000);
+                done = true;
+              }
+            }
+            function stopVideo() {
+              player.stopVideo();
+            }
+          </script>
+        </figure>
+      <?php endif; ?>
     </div>
   </section>
   <?php endif; ?>

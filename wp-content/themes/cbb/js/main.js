@@ -90,6 +90,20 @@ var j = jQuery.noConflict();
         }
       });
     }
+
+    if (player) {
+      if (j(window).width() >= 768) {
+        player.setSize('640', '360');
+      }
+
+      if (j(window).width() < 768) {
+        player.setSize('426', '240');
+      }
+
+      if (j(window).width() < 450) {
+        player.setSize('320', '240');
+      }
+    }
   });
 
   $doc.on('ready', function () {
