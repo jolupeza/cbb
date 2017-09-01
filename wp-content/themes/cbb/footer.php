@@ -72,28 +72,33 @@
     <?php if ($options['display_social_link'] && !is_null($options['display_social_link'])) : ?>
       <aside class="Social">
         <ul class="Social-list">
+          <?php if (isset($options['display_admision_link']) && $options['display_admision_link'] && !is_null($options['display_admision_link'])) : ?>
+            <li class="Social-item Social-item--text">
+              <a href="<?php echo home_url('admision/#formulario-admision'); ?>" title="Ir a Admisión">Admisión <span><?php echo date('Y') + 1; ?></span></a>
+            </li>
+          <?php endif; ?>
           <?php if (!empty($options['alexia'])) : ?>
-            <li>
+            <li class="Social-item">
               <a href="<?php echo $options['alexia']; ?>" title="Ir a Alexia" target="_blank" rel="noopener noreferrer"><i class="icon-alexia"></i></a>
             </li>
           <?php endif; ?>
           <?php if (!empty($options['whatsapp'])) : ?>
-            <li>
+            <li class="Social-item">
               <a href="" title="Ir a Whatsapp" target="_blank" rel="noopener noreferrer"><i class="icon-phone"></i></a>
             </li>
           <?php endif; ?>
           <?php if (!empty($options['facebook'])) : ?>
-            <li>
+            <li class="Social-item">
               <a href="https://www.facebook.com/<?php echo $options['facebook']; ?>" title="Ir a Facebook" target="_blank" rel="noopener noreferrer"><i class="icon-facebook"></i></a>
             </li>
           <?php endif; ?>
           <?php if (!empty($options['flickr'])) : ?>
-            <li>
+            <li class="Social-item">
               <a href="https://www.flickr.com/<?php echo $options['flickr']; ?>" title="Ir a Flickr" target="_blank" rel="noopener noreferrer"><i class="icon-flickr2"></i></a>
             </li>
           <?php endif; ?>
           <?php if (!empty($options['youtube'])) : ?>
-            <li>
+            <li class="Social-item">
               <a href="https://www.youtube.com/<?php echo $options['youtube']; ?>" title="Ir a Youtube" target="_blank" rel="noopener noreferrer"><i class="icon-youtube"></i></a>
             </li>
           <?php endif; ?>

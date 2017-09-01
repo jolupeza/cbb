@@ -1765,7 +1765,7 @@ a {
 }
 @media screen and (max-width: 991px) {
   .Footer {
-    padding: 35px 0 80px;
+    padding: 35px 0 90px;
   }
 }
 
@@ -1828,6 +1828,10 @@ a {
   }
 }
 
+.Footer-menu {
+  margin-bottom: 10px;
+}
+
 .FooterMenu {
   margin-bottom: 0;
   padding-left: 0;
@@ -1858,7 +1862,7 @@ a {
   bottom: 0;
   display: -webkit-flex;
   display: flex;
-  padding: 15px 20px;
+  padding: 8px 20px;
   position: fixed;
   right: 0;
   z-index: 99;
@@ -1868,12 +1872,14 @@ a {
     -moz-border-radius: 0;
     -webkit-border-radius: 0;
     border-radius: 0;
-    padding: 20px 0;
+    padding: 15px 0;
     width: 100%;
   }
 }
 
 .Social-list {
+  -webkit-align-items: center;
+  align-items: center;
   display: -webkit-flex;
   display: flex;
   list-style: none;
@@ -1887,30 +1893,38 @@ a {
     width: 100%;
   }
 }
-.Social-list li {
-  font-size: 1.5em;
-  margin-right: 15px;
-}
-.Social-list li:last-child {
-  margin-right: 0;
-}
-@media screen and (max-width: 991px) {
-  .Social-list li {
-    margin-right: 0;
-  }
-}
-.Social-list li a {
-  color: #fcfbfb;
-}
-.Social-list li a:hover, .Social-list li a:focus {
-  color: #222222;
-  text-decoration: none;
-}
 .Social-list .icon-alexia {
   background: transparent url("./../images/alexia-icon.png") 0 0 no-repeat;
   display: block;
   height: 32px;
   width: 32px;
+}
+
+.Social-item {
+  font-size: 1.5em;
+  margin-right: 15px;
+  text-align: center;
+}
+.Social-item:last-child {
+  margin-right: 0;
+}
+@media screen and (max-width: 991px) {
+  .Social-item {
+    margin-right: 0;
+  }
+}
+.Social-item a {
+  color: #fcfbfb;
+}
+.Social-item a:hover, .Social-item a:focus {
+  color: #222222;
+  text-decoration: none;
+}
+.Social-item--text {
+  font-size: 1em;
+}
+.Social-item--text span {
+  display: block;
 }
 
 @media screen and (max-width: 767px) {

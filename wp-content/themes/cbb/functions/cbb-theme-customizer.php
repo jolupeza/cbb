@@ -111,6 +111,18 @@ function cbb_customize_register($wp_customize) {
     'type' => 'text'
   ]);
 
+  $wp_customize->add_setting('cbb_custom_settings[display_admision_link]', [
+    'default' => 0,
+    'type' => 'option'
+  ]);
+
+  $wp_customize->add_control('cbb_custom_settings[display_admision_link]', [
+    'label' => __('¿Mostrar enlace Admisión?', THEMEDOMAIN),
+    'section' => 'cbb_social',
+    'settings' => 'cbb_custom_settings[display_admision_link]',
+    'type' => 'checkbox'
+  ]);
+
   // Homepage
   $wp_customize->add_section('cbb_home', [
     'title' => __('Página de Inicio', THEMEDOMAIN),
