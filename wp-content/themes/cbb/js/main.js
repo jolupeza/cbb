@@ -5,12 +5,13 @@ var j = jQuery.noConflict();
 (function ($) {
   var $win = j(window),
       $doc = j(document),
+      $body = j('body'),
       $animationElements = j('.animation-element');
 
   function affixHeader() {
     var noAffix = false;
 
-    if (j('body').hasClass('single-post')) {
+    if ($body.hasClass('single-post') || $body.hasClass('page-template-default')) {
       noAffix = true;
     }
 
@@ -317,12 +318,6 @@ var j = jQuery.noConflict();
         slidebar.addClass('active');
       }
     });
-
-    /*j('.Accordion-button').on('click', function() {
-      var $this = j(this);
-
-      j('.Accordion-button').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
-    });*/
 
     j('#accordion-questions').on('hide.bs.collapse', function(e) {
       j('.Accordion-button').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');

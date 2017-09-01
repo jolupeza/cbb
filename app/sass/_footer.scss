@@ -47,3 +47,26 @@
     }
   }
 }
+.Footer-menu {
+
+}
+.FooterMenu {
+  margin-bottom: 0;
+  padding-left: 0;
+  list-style: none;
+  li {
+    font-size: 0.875em;
+    font-weight: 300;
+    a {
+      color: $white;
+      &:hover {
+        color: $white;
+      }
+    }
+    &.current-menu-item, &:focus {
+      a {
+        text-decoration: underline;
+      }
+    }
+  }
+}

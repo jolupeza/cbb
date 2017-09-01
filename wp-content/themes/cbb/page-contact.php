@@ -264,6 +264,13 @@
             <label for="contact_message" class="sr-only">Mensaje</label>
             <textarea name="contact_message" rows="6" class="form-control" placeholder="Mensaje" required></textarea>
           </div>
+          <div class="form-group">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" name="contact_terms" required data-fv-notempty-message="Debe aceptar los Términos y Condiciones"> Acepto los <a href="<?php echo home_url('terminos-y-condiciones'); ?>" target="_blank" rel="noopener noreferrer">Términos y Condiciones</a>
+              </label>
+            </div>
+          </div>
           <p class="text-center">
             <button type="submit" class="btn Button Button--blue Button--medium">enviar <span class="Form-loader rotateIn hidden" id="js-form-contact-loader"><i class="glyphicon glyphicon-refresh"></i></span></button>
           </p>

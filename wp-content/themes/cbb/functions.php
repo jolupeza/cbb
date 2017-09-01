@@ -48,6 +48,7 @@ function register_my_menus() {
     'categories-lima-centro-menu' => __('Categorías Lima Centro Menu', THEMEDOMAIN),
     'categories-lima-este-menu' => __('Categorías Lima Este Menu', THEMEDOMAIN),
     'locals-menu' => __('Infraestructura Menu', THEMEDOMAIN),
+    'footer-menu' => __('Footer Menu', THEMEDOMAIN),
   ]);
 }
 

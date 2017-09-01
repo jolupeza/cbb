@@ -1824,6 +1824,25 @@ a {
   }
 }
 
+.FooterMenu {
+  margin-bottom: 0;
+  padding-left: 0;
+  list-style: none;
+}
+.FooterMenu li {
+  font-size: 0.875em;
+  font-weight: 300;
+}
+.FooterMenu li a {
+  color: #fcfbfb;
+}
+.FooterMenu li a:hover {
+  color: #fcfbfb;
+}
+.FooterMenu li.current-menu-item a, .FooterMenu li:focus a {
+  text-decoration: underline;
+}
+
 .Social {
   background-color: #004e94;
   -moz-border-radius: 15px 15px 0 0;

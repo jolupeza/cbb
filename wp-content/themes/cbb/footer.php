@@ -48,6 +48,18 @@
 
         <div class="Footer-copy">
           <p>Copyright &copy; <?php echo date('Y') ?>. Derechos Reservados</p>
+
+          <?php
+              $args = [
+                'theme_location' => 'footer-menu',
+                'container' => 'nav',
+                'container_class' => 'Footer-menu',
+                'menu_class' => 'FooterMenu',
+              ];
+
+              wp_nav_menu($args);
+            ?>
+
           <p>Desarrollado por <a href="http://watson.pe" target="_blank" rel="noopener noreferrer">Agencia Watson.</a></p>
         </div>
       </div>
