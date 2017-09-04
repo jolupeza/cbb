@@ -1,9 +1,11 @@
+<?php $options = get_option('cbb_custom_settings'); ?>
+
 <section class="Page Page--contact" id="<?php echo $post->post_name; ?>">
   <?php $pageParent = get_the_id(); ?>
   <div class="container">
     <div class="row">
       <div class="col-md-6">
-        <h2 class="Page-title text-celeste">Admisión <?php echo get_the_excerpt(); ?></h2>
+        <h2 class="Page-title text-celeste">Admisión <?php echo has_excerpt() ? get_the_excerpt() : date('Y') + 1; ?></h2>
         <?php the_content(); ?>
 
         <form class="Form Form--fields" action="" method="POST" id="js-frm-admision">
@@ -91,7 +93,7 @@
           <div class="form-group">
             <div class="checkbox">
               <label>
-                <input type="checkbox" name="parent_terms" required data-fv-notempty-message="Debe aceptar las condiciones del proceso de admisión"> Acepto las <a href="<?php echo home_url('condiciones-del-proceso-de-admision'); ?>" target="_blank" rel="noopener noreferrer">condiciones del proceso de admisión <?php echo date("Y") + 1; ?></a>
+                <input type="checkbox" name="parent_terms" required data-fv-notempty-message="Debe aceptar las condiciones del proceso de admisión"> Acepto las <a href="<?php echo home_url('condiciones-del-proceso-de-admision'); ?>" target="_blank" rel="noopener noreferrer">condiciones del proceso de admisión <?php echo isset($options['admision_year']) && !empty($options['admision_year']) ? $options['admision_year'] : date("Y") + 1; ?></a>
               </label>
             </div>
           </div>

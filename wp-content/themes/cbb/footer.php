@@ -74,7 +74,7 @@
         <ul class="Social-list">
           <?php if (isset($options['display_admision_link']) && $options['display_admision_link'] && !is_null($options['display_admision_link'])) : ?>
             <li class="Social-item Social-item--text">
-              <a href="<?php echo home_url('admision/#formulario-admision'); ?>" title="Ir a Admisión">Admisión <span><?php echo date('Y') + 1; ?></span></a>
+              <a href="<?php echo home_url('admision/#formulario-admision'); ?>" title="Ir a Admisión">Admisión <span><?php echo isset($options['admision_year']) && !empty($options['admision_year']) ? $options['admision_year'] : date('Y') + 1; ?></span></a>
             </li>
           <?php endif; ?>
           <?php if (!empty($options['alexia'])) : ?>

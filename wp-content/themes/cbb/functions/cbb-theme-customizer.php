@@ -288,4 +288,24 @@ function cbb_customize_register($wp_customize) {
     'settings' => 'cbb_custom_settings[email]',
     'type' => 'text'
   ]);
+
+  // Admisión
+  $wp_customize->add_section('cbb_admision', [
+    'title' => __('Admisión', THEMEDOMAIN),
+    'description' => __('Configuración de parámetros de la sección de Admisión', THEMEDOMAIN),
+    'priority' => 38
+  ]);
+
+  // Email Contact
+  $wp_customize->add_setting('cbb_custom_settings[admision_year]', [
+    'default' => '',
+    'type' => 'option'
+  ]);
+
+  $wp_customize->add_control('cbb_custom_settings[admision_year]', [
+    'label' => __('Año Admisión', THEMEDOMAIN),
+    'section' => 'cbb_admision',
+    'settings' => 'cbb_custom_settings[admision_year]',
+    'type' => 'text'
+  ]);
 }

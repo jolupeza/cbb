@@ -20,18 +20,17 @@
   margin-top: 0;
 }
 .Single-related {
+  @include display-flex();
+  @include flex-wrap(wrap);
+  @include justify-content(space-between);
   margin: 25px 0;
   .Box-item {
-    display: inline-block;
-    margin-right: 15px;
-    vertical-align: top;
-    width: 45%;
-    @media screen and (max-width: 500px) {
-      display: block;
-      width: 100%;
+    @include flex(0 1 45%);
+    @media screen and (max-width: 991px) {
+      @include flex(0 1 48%);
     }
-    &:last-child {
-      margin-right: 0;
+    @media screen and (max-width: 500px) {
+      @include flex(0 1 100%);
     }
     .Box-content {
       text-align: left;
@@ -43,4 +42,5 @@
   font-family: "reef";
   font-size: 1.5em;
   margin-top: 0;
+  width: 100%;
 }

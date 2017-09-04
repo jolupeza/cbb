@@ -522,7 +522,7 @@ function register_admision_callback()
                 update_post_meta($post_id, 'mb_sede', $sede);
                 update_post_meta($post_id, 'mb_sonName', $sonName);
                 update_post_meta($post_id, 'mb_schedule', $schedule);
-                update_post_meta($post_id, 'mb_year', date("Y") + 1);
+                update_post_meta($post_id, 'mb_year', isset($options['admision_year']) && !empty($options['admision_year']) ? $options['admision_year'] : date("Y") + 1);
                 wp_set_object_terms($post_id, $level, 'levels');
 
                 $result['result'] = true;

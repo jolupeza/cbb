@@ -2130,22 +2130,29 @@ a {
 }
 
 .Single-related {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
   margin: 25px 0;
 }
 .Single-related .Box-item {
-  display: inline-block;
-  margin-right: 15px;
-  vertical-align: top;
-  width: 45%;
+  -webkit-flex: 0 1 45%;
+  flex: 0 1 45%;
+}
+@media screen and (max-width: 991px) {
+  .Single-related .Box-item {
+    -webkit-flex: 0 1 48%;
+    flex: 0 1 48%;
+  }
 }
 @media screen and (max-width: 500px) {
   .Single-related .Box-item {
-    display: block;
-    width: 100%;
+    -webkit-flex: 0 1 100%;
+    flex: 0 1 100%;
   }
-}
-.Single-related .Box-item:last-child {
-  margin-right: 0;
 }
 .Single-related .Box-item .Box-content {
   text-align: left;
@@ -2156,6 +2163,7 @@ a {
   font-family: "reef";
   font-size: 1.5em;
   margin-top: 0;
+  width: 100%;
 }
 
 .Sidebar-widget {
