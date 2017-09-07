@@ -1923,4 +1923,43 @@ class Cbb_Manager_Admin
 
         register_taxonomy('subjects', 'contacts', $args);
     }
+    
+    /**
+     * Add custom taxonomies areas to post type questions.
+     */
+    public function add_taxonomies_questions()
+    {
+        $labels = array(
+            'name' => _x('Categorías', 'Taxonomy plural name', THEMEDOMAIN),
+            'singular_name' => _x('Categoría', 'Taxonomy singular name', THEMEDOMAIN),
+            'search_items' => __('Buscar Categoría', THEMEDOMAIN),
+            'popular_items' => __('Categprías Populares', THEMEDOMAIN),
+            'all_items' => __('Todas las Categorías', THEMEDOMAIN),
+            'parent_item' => __('Categoría Padre', THEMEDOMAIN),
+            'parent_item_colon' => __('Categoría Padre', THEMEDOMAIN),
+            'edit_item' => __('Editar Categoría', THEMEDOMAIN),
+            'update_item' => __('Actualizar Categoría', THEMEDOMAIN),
+            'add_new_item' => __('Añadir nueva Categoría', THEMEDOMAIN),
+            'new_item_name' => __('Nueva Categoría', THEMEDOMAIN),
+            'add_or_remove_items' => __('Añadir o eliminar Categoría', THEMEDOMAIN),
+            'choose_from_most_used' => __('Choose from most used text-domain', THEMEDOMAIN),
+            'menu_name' => __('Categorías Preguntas', THEMEDOMAIN),
+        );
+
+        $args = array(
+            'labels' => $labels,
+            'public' => false,
+            'show_in_nav_menus' => false,
+            'show_in_menu' => true,
+            'show_admin_column' => true,
+            'hierarchical' => true,
+            'show_tagcloud' => false,
+            'show_ui' => true,
+            'query_var' => true,
+            'rewrite' => false,
+//            'capabilities' => array(),
+        );
+
+        register_taxonomy('categories_questions', 'questions', $args);
+    }
 }

@@ -372,11 +372,11 @@ var j = jQuery.noConflict();
       }
     });
 
-    j('#accordion-questions').on('hide.bs.collapse', function(e) {
+    j('.Accordion--child').on('hide.bs.collapse', function(e) {
       j('.Accordion-button').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
     });
 
-    j('#accordion-questions').on('shown.bs.collapse', function(e) {
+    j('.Accordion--child').on('shown.bs.collapse', function(e) {
       var collapse = j(e.target);
 
       collapse.prev().find('.Accordion-button').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');

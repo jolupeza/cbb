@@ -2351,6 +2351,37 @@ a {
   }
 }
 
+.Accordion--parent > .panel-default {
+  border: none;
+}
+.Accordion--parent > .panel-default > .panel-heading {
+  background-color: #3c539a;
+  border: none;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+}
+.Accordion--parent > .panel-default > .panel-heading > .panel-title {
+  font-family: "reef";
+  font-size: 1.5em;
+}
+.Accordion--parent > .panel-default > .panel-heading > .panel-title a {
+  color: white;
+}
+.Accordion--parent > .panel-default > .panel-heading > .panel-title a .Accordion-button {
+  font-size: 0.833em;
+}
+.Accordion--parent > .panel-default > .panel-collapse > .panel-body {
+  border: none;
+  padding: 5px 0;
+}
+.Accordion--child .panel-default > .panel-heading {
+  background-color: transparent;
+}
+.Accordion--child .panel-default .panel-title {
+  font-family: "reef";
+  font-size: 1.25;
+}
 .Accordion .panel-title a {
   display: block;
 }

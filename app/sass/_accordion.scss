@@ -1,4 +1,41 @@
 .Accordion {
+  &--parent {
+    > .panel-default {
+      border: none;
+      > .panel-heading {
+        background-color: $azul;
+        border: none;
+        @include border-radius(0);
+        > .panel-title {
+          font-family: "reef";
+          font-size: 1.5em;
+          a {
+            color: white;
+            .Accordion-button {
+              font-size: 0.833em;
+            }
+          }
+        }
+      }
+      > .panel-collapse {
+        > .panel-body {
+          border: none;
+          padding: 5px 0;
+        }
+      }
+    }
+  }
+  &--child {
+    .panel-default {
+      > .panel-heading {
+        background-color: transparent;
+      }
+      .panel-title {
+        font-family: "reef";
+        font-size: 1.25;
+      }
+    }
+  }
   .panel-title {
     a {
       display: block;
