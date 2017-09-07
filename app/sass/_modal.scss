@@ -1,11 +1,14 @@
 .Modal {
   &--video {
+    &.in {
+      @include display-flex(flex !important);
+      @include justify-content(center);
+      @include align-items(center);
+    }
     .modal-dialog {
-      margin: 100px auto 0;
-      width: 660px;
+      margin: 0;
+      width: 60%;
       @media screen and (max-width: 767px) {
-        margin-left: auto;
-        margin-right: auto;
         width: 90%;
       }
     }

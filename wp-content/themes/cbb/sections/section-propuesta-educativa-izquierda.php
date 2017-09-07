@@ -44,7 +44,7 @@
 
               <article class="Page-cel">
                 <?php if (!empty($icon)) : ?>
-                  <i class="<?php echo $icon; ?>"></i>
+                  <i class="Icons Icons--<?php echo $icon; ?>"></i>
                 <?php endif; ?>
                 <h3 class="Page-cel-title"><?php the_title(); ?></h3>
                 <?php the_content(); ?>

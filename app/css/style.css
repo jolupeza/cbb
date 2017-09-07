@@ -1700,29 +1700,13 @@ a {
 .Cards--logos {
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
 }
 .Cards--logos .Cards-item {
-  -webkit-flex-basis: 25%;
-  flex-basis: 25%;
+  -webkit-flex-basis: 30%;
+  flex-basis: 30%;
   margin-bottom: 25px;
-}
-
-.Cards-item {
-  -webkit-flex: 1 1 20%;
-  flex: 1 1 20%;
-}
-@media screen and (max-width: 991px) {
-  .Cards-item {
-    -webkit-flex: 0 1 25%;
-    flex: 0 1 25%;
-    margin-bottom: 15px;
-  }
-}
-@media screen and (max-width: 767px) and (orientation: portrait) {
-  .Cards-item {
-    -webkit-flex: 0 1 50%;
-    flex: 0 1 50%;
-  }
 }
 
 .Cards-title {
@@ -1761,11 +1745,11 @@ a {
 
 .Footer {
   background-color: #222222;
-  padding: 35px 0 65px;
+  padding: 0 0 65px;
 }
 @media screen and (max-width: 991px) {
   .Footer {
-    padding: 35px 0 90px;
+    padding: 0 0 90px;
   }
 }
 
@@ -2228,14 +2212,20 @@ a {
   position: relative;
 }
 
+.Modal--video.in {
+  display: -webkit-flex !important;
+  display: flex !important;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
 .Modal--video .modal-dialog {
-  margin: 100px auto 0;
-  width: 660px;
+  margin: 0;
+  width: 60%;
 }
 @media screen and (max-width: 767px) {
   .Modal--video .modal-dialog {
-    margin-left: auto;
-    margin-right: auto;
     width: 90%;
   }
 }
@@ -2374,4 +2364,52 @@ a {
   padding: 10px;
   position: absolute;
   right: 10px;
+}
+
+.bx-wrapper {
+  background-color: transparent;
+  border: none;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  margin-bottom: 0;
+}
+
+.Icons::before {
+  background-image: url("./../images/icons.png");
+  background-repeat: no-repeat;
+  content: "";
+  display: block;
+  height: 20px;
+  width: 20px;
+}
+.Icons--actividad-ludica::before {
+  background-position: 0 0;
+}
+.Icons--autonomia::before {
+  background-position: -20px 0;
+}
+.Icons--desarrollo-academico::before {
+  background-position: -40px 0;
+}
+.Icons--desarrollo-cientifico::before {
+  background-position: -60px 0;
+}
+.Icons--desarrollo-vocacional::before {
+  background-position: -80px 0;
+}
+.Icons--ejercicio-de-ciudadania::before {
+  background-position: 0 -20px;
+}
+.Icons--formacion-de-sentimientos::before {
+  background-position: -20px -20px;
+}
+.Icons--habilidad-investigativa::before {
+  background-position: -40px -20px;
+}
+.Icons--protagonismo::before {
+  background-position: -60px -20px;
+}
+.Icons--trabajo-cooperativo::before {
+  background-position: -80px -20px;
 }

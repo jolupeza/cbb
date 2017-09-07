@@ -1,0 +1,60 @@
+.Icons {
+  &::before {
+    background-image: url('./../images/icons.png');
+    background-repeat: no-repeat;
+    content: "";
+    display: block;
+    height: 20px;
+    width: 20px;
+  }
+  &--actividad-ludica {
+    &::before {
+      background-position: 0 0;
+    }
+  }
+  &--autonomia {
+    &::before {
+      background-position: -20px 0;
+    }
+  }
+  &--desarrollo-academico {
+    &::before {
+      background-position: -40px 0;
+    }
+  }
+  &--desarrollo-cientifico {
+    &::before {
+      background-position: -60px 0;
+    }
+  }
+  &--desarrollo-vocacional {
+    &::before {
+      background-position: -80px 0;
+    }
+  }
+  &--ejercicio-de-ciudadania {
+    &::before {
+      background-position: 0 -20px;
+    }
+  }
+  &--formacion-de-sentimientos {
+    &::before {
+      background-position: -20px -20px;
+    }
+  }
+  &--habilidad-investigativa {
+    &::before {
+      background-position: -40px -20px;
+    }
+  }
+  &--protagonismo {
+    &::before {
+      background-position: -60px -20px;
+    }
+  }
+  &--trabajo-cooperativo {
+    &::before {
+      background-position: -80px -20px;
+    }
+  }
+}

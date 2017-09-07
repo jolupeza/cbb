@@ -27,21 +27,14 @@
   }
   &--logos {
     @include flex-wrap(wrap);
+    @include justify-content(space-between);
     .Cards-item {
-      @include flex-basis(25%);
+      @include flex-basis(30%);
       margin-bottom: 25px;
     }
   }
 }
 .Cards-item {
-  @include flex(1 1 20%);
-  @media screen and (max-width: 991px) {
-    @include flex(0 1 25%);
-    margin-bottom: 15px;
-  }
-  @media screen and (max-width: 767px) and (orientation: portrait) {
-    @include flex(0 1 50%);
-  }
 }
 .Cards-title {
   font-family: "reef";

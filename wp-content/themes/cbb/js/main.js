@@ -6,6 +6,7 @@ var j = jQuery.noConflict();
   var $win = j(window),
       $doc = j(document),
       $body = j('body'),
+      sldHistory,
       $animationElements = j('.animation-element');
 
   function affixHeader() {
@@ -103,6 +104,44 @@ var j = jQuery.noConflict();
       if (j(window).width() < 450) {
         player.setSize('320', '240');
       }
+    }
+
+    if (j('.Cards--history').length) {
+      var bx = j('.Cards--history'),
+          bxWiewport = bx.parent(),
+          widthBxSlider = parseInt(bxWiewport.width()),
+          slides = 0;
+
+      if ($win.width() > 991) {
+        widthBxSlider = widthBxSlider / 5;
+        slides = 5;
+      } else if ($win.width() > 600) {
+        widthBxSlider = widthBxSlider / 2;
+        slides = 2;
+      } else {
+        widthBxSlider = 0;
+        slides = 1;
+      }
+
+      sldHistory.reloadSlider({
+        auto: true,
+        autoHover: true,
+        minSlides: slides,
+        maxSlides: slides,
+        moveSlides: 1,
+        slideWidth: widthBxSlider,
+        pager: false,
+        // controls: false,
+        onSliderLoad: function () {
+          j('.bx-controls-direction a').on('click', function(){
+            var i = $(this).attr('data-slide-index');
+              sldHistory.goToSlide(i);
+              sldHistory.stopAuto();
+              sldHistory.startAuto();
+              return false;
+          });
+        }
+      });
     }
   });
 
@@ -342,5 +381,43 @@ var j = jQuery.noConflict();
 
       collapse.prev().find('.Accordion-button').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
     });
+
+    if (j('.Cards--history').length) {
+      var bx = j('.Cards--history'),
+          bxWiewport = bx.parent(),
+          widthBxSlider = parseInt(bxWiewport.width()),
+          slides = 0;
+
+      if ($win.width() > 991) {
+        widthBxSlider = widthBxSlider / 5;
+        slides = 5;
+      } else if ($win.width() > 600) {
+        widthBxSlider = widthBxSlider / 2;
+        slides = 2;
+      } else {
+        widthBxSlider = 0;
+        slides = 1;
+      }
+
+      sldHistory = j('.Cards--history').bxSlider({
+        auto: true,
+        autoHover: true,
+        minSlides: slides,
+        maxSlides: slides,
+        moveSlides: 1,
+        slideWidth: widthBxSlider,
+        pager: false,
+        // controls: false,
+        onSliderLoad: function () {
+          j('.bx-controls-direction a').on('click', function(){
+            var i = $(this).attr('data-slide-index');
+              sldHistory.goToSlide(i);
+              sldHistory.stopAuto();
+              sldHistory.startAuto();
+              return false;
+          });
+        }
+      });
+    }
   });
 })(jQuery);

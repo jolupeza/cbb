@@ -288,8 +288,16 @@
         <label for="mb_icon">Seleccionar Ícono: </label>
         <select name="mb_icon" id="mb_icon">
             <option value="" <?php selected($icon, ''); ?>>-- Seleccione ícono --</option>
-            <option value="icon-commenting-o" <?php selected($icon, 'icon-commenting-o'); ?>>Comentario</option>
-            <option value="icon-brush-alt" <?php selected($icon, 'icon-brush-alt'); ?>>Lapiz</option>
+            <option value="actividad-ludica" <?php selected($icon, 'actividad-ludica'); ?>>Actividad lúdica</option>
+            <option value="autonomia" <?php selected($icon, 'autonomia'); ?>>Autonomía</option>
+            <option value="desarrollo-academico" <?php selected($icon, 'desarrollo-academico'); ?>>Desarrollo académico</option>
+            <option value="desarrollo-cientifico" <?php selected($icon, 'desarrollo-cientifico'); ?>>Desarrollo científico</option>
+            <option value="desarrollo-vocacional" <?php selected($icon, 'desarrollo-vocacional'); ?>>Desarrollo vocacional</option>
+            <option value="ejercicio-de-ciudadania" <?php selected($icon, 'ejercicio-de-ciudadania'); ?>>Ejercicio de ciudadania</option>
+            <option value="formacion-de-sentimientos" <?php selected($icon, 'formacion-de-sentimientos'); ?>>Formación de sentimientos</option>
+            <option value="habilidad-investigativa" <?php selected($icon, 'habilidad-investigativa'); ?>>Habilidad investigativa</option>
+            <option value="protagonismo" <?php selected($icon, 'protagonismo'); ?>>Protagonismo</option>
+            <option value="trabajo-cooperativo" <?php selected($icon, 'trabajo-cooperativo'); ?>>Trabajo cooperativo</option>
         </select>
     </p>
     
