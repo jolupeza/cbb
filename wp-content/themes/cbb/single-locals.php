@@ -219,6 +219,9 @@
                 height: height,
                 width: width,
                 videoId: '<?php echo $video; ?>',
+                playerVars: {
+                  'rel': 0
+                },
                 events: {
                   // 'onReady': onPlayerReady,
                   'onStateChange': onPlayerStateChange

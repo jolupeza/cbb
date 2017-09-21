@@ -51,7 +51,7 @@
         <?php endwhile; ?>
       </section>
 
-      <p class="text-center"><a class="Button Button--blue" href="<?php echo home_url('vida-escolar'); ?>">ver agenda escolar</a></p>
+      <p class="text-center"><a class="Button Button--blue" href="<?php echo home_url('vida-escolar'); ?>">Vida Escolar</a></p>
     </div>
   </section>
 <?php endif; ?>
