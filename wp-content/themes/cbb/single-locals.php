@@ -220,6 +220,7 @@
                 width: width,
                 videoId: '<?php echo $video; ?>',
                 playerVars: {
+                  'loop': 1,
                   'rel': 0
                 },
                 events: {
