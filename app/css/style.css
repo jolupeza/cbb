@@ -379,6 +379,9 @@ a {
   -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
 }
+.MainMenu > li > a {
+  border-bottom: 3px solid transparent;
+}
 .MainMenu > li > a:focus {
   background-color: transparent;
 }
@@ -1026,8 +1029,8 @@ a {
 }
 @media screen and (max-width: 991px) {
   .PageHome-item {
-    -webkit-flex: 0 1 50%;
-    flex: 0 1 50%;
+    -webkit-flex: 1 1 50%;
+    flex: 1 1 50%;
     margin-bottom: 15px;
   }
 }
@@ -2291,7 +2294,7 @@ a {
   transition: all 0.2s ease-in-out;
   top: 0;
   width: 100%;
-  z-index: 99;
+  z-index: 999;
 }
 .Slidebar.active {
   filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);

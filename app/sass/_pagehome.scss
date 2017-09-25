@@ -31,7 +31,7 @@
   @include flex(0 1 25%);
   padding: 0 25px;
   @media screen and (max-width: 991px) {
-    @include flex(0 1 50%);
+    @include flex(1 1 50%);
     margin-bottom: 15px;
   }
   @media screen and (max-width: 767px) {
