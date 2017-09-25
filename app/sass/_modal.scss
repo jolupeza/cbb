@@ -32,6 +32,11 @@
     .Page-video {
       margin-bottom: 0;
     }
+    &--youtube {
+      .modal-dialog {
+        width: auto;
+      }
+    }
     @media screen and (max-width: 991px) {
       .Page-video {
         margin-top: 0;

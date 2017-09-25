@@ -6,6 +6,9 @@
     $webm = isset($values['mb_webm']) ? esc_attr($values['mb_webm'][0]) : '';
     $mp4 = isset($values['mb_mp4']) ? esc_attr($values['mb_mp4'][0]) : '';
     $ogv = isset($values['mb_ogv']) ? esc_attr($values['mb_ogv'][0]) : '';
+
+    $youtube = isset($values['mb_youtube']) ? esc_attr($values['mb_youtube'][0]) : '';
+    $classModal = !empty($youtube) ? ' Modal--video--youtube' : '';
   ?>
   <div class="container">
     <div class="row">
@@ -22,7 +25,7 @@
         <h2 class="Page-title text-red"><?php the_title(); ?></h2>
         <?php the_content(); ?>
 
-        <?php if (!empty($webm) || !empty($mp4) || !empty($ogv)) : ?>
+        <?php if (!empty($webm) || !empty($mp4) || !empty($ogv) || !empty($youtube)) : ?>
           <p>
             <a class="Button Button--red Button--icon" href="#" data-toggle="modal" data-target="#md-video-<?php echo $idParent; ?>"><i class="icon-play2"></i> ver video</a>
           </p>
@@ -71,36 +74,70 @@
 ?>
 
 <!-- Modal Video -->
-<?php if (!empty($webm) || !empty($mp4) || !empty($ogv)) : ?>
-  <div class="modal fade Modal Modal--video Modal--white" id="md-video-<?php echo $idParent; ?>" tabindex="-1" role="dialog">
+<?php if (!empty($webm) || !empty($mp4) || !empty($ogv) || !empty($youtube)) : ?>
+  <div class="modal fade Modal Modal--video Modal--white<?php echo $classModal; ?>" id="md-video-<?php echo $idParent; ?>" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-body">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <figure class="Page-video text-center">
-            <!-- <video controls poster="<?php // echo IMAGES; ?>/video-about.jpg"> -->
 
-            <video controls>
-              <?php if (!empty($webm)) : ?>
-                <source
-                  src="<?php echo $webm; ?>"
-                  type="video/webm">
-              <?php endif; ?>
+          <?php if (!empty($youtube)) : ?>
+            <section class="Videos Videos--modal">
+              <script>
+                var height = '480',
+                width = '854';  // 854x480
 
-              <?php if (!empty($mp4)) : ?>
-                <source
-                  src="<?php echo $mp4; ?>"
-                  type="video/mp4">
-              <?php endif; ?>
+                if (window.innerWidth < 992) {
+                  height = '360';
+                  width = '640';
+                }
 
-              <?php if (!empty($ogv)) : ?>
-                <source
-                  src="<?php echo $ogv; ?>"
-                  type="video/ogg">
-              <?php endif; ?>
-              Su navegador no admite etiquetas de video HTML5.
-            </video>
-          </figure>
+                if (window.innerWidth < 768) {
+                  height = '240';
+                  width = '426';
+                }
+
+                if (window.innerWidth < 450) {
+                  height = '240';
+                  width = '320';
+                }
+
+                playerInfoList.push({
+                  id: '<?php echo $idParent; ?>',
+                  idPlayer: 'player<?php echo $idParent; ?>',
+                  height: height,
+                  width: width,
+                  videoId: '<?php echo $youtube; ?>'
+                });
+              </script>
+              <figure class="Modal-video" id="player<?php echo $idParent; ?>"></figure>
+            </section>
+          <?php else : ?>
+            <figure class="Page-video text-center">
+              <!-- <video controls poster="<?php // echo IMAGES; ?>/video-about.jpg"> -->
+
+              <video controls>
+                <?php if (!empty($webm)) : ?>
+                  <source
+                    src="<?php echo $webm; ?>"
+                    type="video/webm">
+                <?php endif; ?>
+
+                <?php if (!empty($mp4)) : ?>
+                  <source
+                    src="<?php echo $mp4; ?>"
+                    type="video/mp4">
+                <?php endif; ?>
+
+                <?php if (!empty($ogv)) : ?>
+                  <source
+                    src="<?php echo $ogv; ?>"
+                    type="video/ogg">
+                <?php endif; ?>
+                Su navegador no admite etiquetas de video HTML5.
+              </video>
+            </figure>
+          <?php endif; ?>
         </div>
       </div>
     </div>

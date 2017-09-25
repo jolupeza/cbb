@@ -107,6 +107,24 @@ var j = jQuery.noConflict();
             resizeVideoPlayer(players[i], '320', '240');
           }
         }
+
+        if (players[i].a.className === 'Modal-video') {
+          if (j(window).width() >= 992) {
+            resizeVideoPlayer(players[i], '854', '480');
+          }
+
+          if (j(window).width() < 992) {
+            resizeVideoPlayer(players[i], '640', '360');
+          }
+
+          if (j(window).width() < 768) {
+            resizeVideoPlayer(players[i], '426', '240');
+          }
+
+          if (j(window).width() < 450) {
+            resizeVideoPlayer(players[i], '320', '240');
+          }
+        }
       }
     }
 
@@ -436,5 +454,13 @@ var j = jQuery.noConflict();
         }*/
       });
     }
+
+    j('.Modal--video').on('hidden.bs.modal', function(e) {
+      for (var i in players) {
+        if (players[i].a.className === 'Modal-video') {
+          stopVideoPlayer(players[i]);
+        }
+      }
+    });
   });
 })(jQuery);

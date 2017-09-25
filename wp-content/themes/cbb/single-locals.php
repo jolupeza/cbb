@@ -192,7 +192,7 @@
 
           <script>
             // 2. This code loads the IFrame Player API code asynchronously.
-            var tag = document.createElement('script');
+            //var tag = document.createElement('script');
             var height = '360',
                 width = '640';  // 854x480
 

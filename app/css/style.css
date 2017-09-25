@@ -2256,6 +2256,9 @@ a {
 .Modal--video .Page-video {
   margin-bottom: 0;
 }
+.Modal--video--youtube .modal-dialog {
+  width: auto;
+}
 @media screen and (max-width: 991px) {
   .Modal--video .Page-video {
     margin-top: 0;
@@ -2475,6 +2478,12 @@ a {
     -webkit-justify-content: space-between;
     justify-content: space-between;
   }
+}
+.Videos--modal {
+  margin: 0;
+}
+.Videos--modal .Modal-video {
+  margin-bottom: 0;
 }
 .Videos .Page-video {
   margin-bottom: 25px;
