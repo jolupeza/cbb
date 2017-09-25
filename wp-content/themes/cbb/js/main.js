@@ -92,17 +92,21 @@ var j = jQuery.noConflict();
       });
     }
 
-    if (player) {
-      if (j(window).width() >= 768) {
-        player.setSize('640', '360');
-      }
+    if (playerInfoList.length) {
+      for (var i in players) {
+        if (players[i].a.className === 'Single-video') {
+          if (j(window).width() >= 768) {
+            resizeVideoPlayer(players[i], '640', '360');
+          }
 
-      if (j(window).width() < 768) {
-        player.setSize('426', '240');
-      }
+          if (j(window).width() < 768) {
+            resizeVideoPlayer(players[i], '426', '240');
+          }
 
-      if (j(window).width() < 450) {
-        player.setSize('320', '240');
+          if (j(window).width() < 450) {
+            resizeVideoPlayer(players[i], '320', '240');
+          }
+        }
       }
     }
 

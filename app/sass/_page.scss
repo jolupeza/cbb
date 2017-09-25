@@ -229,5 +229,7 @@
   }
 }
 .Page-youtube {
+  @include display-flex();
+  @include justify-content(center);
   margin-top: 25px;
 }

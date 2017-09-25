@@ -466,6 +466,13 @@ class Cbb_Manager_Admin
             delete_post_meta($post_id, 'mb_parallax');
         }
         
+        // Youtube
+        if (isset($_POST['mb_youtube']) && !empty($_POST['mb_youtube'])) {
+            update_post_meta($post_id, 'mb_youtube', esc_attr($_POST['mb_youtube']));
+        } else {
+            delete_post_meta($post_id, 'mb_youtube');
+        }
+        
         // Poster
         if (isset($_POST['mb_poster']) && !empty($_POST['mb_poster'])) {
             update_post_meta($post_id, 'mb_poster', esc_attr($_POST['mb_poster']));
@@ -520,6 +527,34 @@ class Cbb_Manager_Admin
             update_post_meta($post_id, 'mb_ogv2', esc_attr($_POST['mb_ogv2']));
         } else {
             delete_post_meta($post_id, 'mb_ogv2');
+        }
+        
+        // Poster3
+        if (isset($_POST['mb_poster3']) && !empty($_POST['mb_poster3'])) {
+            update_post_meta($post_id, 'mb_poster3', esc_attr($_POST['mb_poster3']));
+        } else {
+            delete_post_meta($post_id, 'mb_poster3');
+        }
+        
+        // Webm
+        if (isset($_POST['mb_webm3']) && !empty($_POST['mb_webm3'])) {
+            update_post_meta($post_id, 'mb_webm3', esc_attr($_POST['mb_webm3']));
+        } else {
+            delete_post_meta($post_id, 'mb_webm3');
+        }
+        
+        // MP4
+        if (isset($_POST['mb_mp43']) && !empty($_POST['mb_mp43'])) {
+            update_post_meta($post_id, 'mb_mp43', esc_attr($_POST['mb_mp43']));
+        } else {
+            delete_post_meta($post_id, 'mb_mp43');
+        }
+        
+        // OGV
+        if (isset($_POST['mb_ogv3']) && !empty($_POST['mb_ogv3'])) {
+            update_post_meta($post_id, 'mb_ogv3', esc_attr($_POST['mb_ogv3']));
+        } else {
+            delete_post_meta($post_id, 'mb_ogv3');
         }
         
         // PDF
