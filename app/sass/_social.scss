@@ -54,4 +54,13 @@
       display: block;
     }
   }
+  button {
+    background-color: transparent;
+    border: none;
+    color: $white;
+    padding: 0;
+    &:hover {
+      color: $brown;
+    }
+  }
 }

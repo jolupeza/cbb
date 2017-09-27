@@ -71,8 +71,8 @@ a {
 }
 @font-face {
   font-family: 'icomoon';
-  src: url("./../fonts/icomoon.eot?5x3n6u");
-  src: url("./../fonts/icomoon.eot?5x3n6u#iefix") format("embedded-opentype"), url("./../fonts/icomoon.ttf?5x3n6u") format("truetype"), url("./../fonts/icomoon.woff?5x3n6u") format("woff"), url("./../fonts/icomoon.svg?5x3n6u#icomoon") format("svg");
+  src: url("./../fonts/icomoon.eot?iq7jut");
+  src: url("./../fonts/icomoon.eot?iq7jut#iefix") format("embedded-opentype"), url("./../fonts/icomoon.ttf?iq7jut") format("truetype"), url("./../fonts/icomoon.woff?iq7jut") format("woff"), url("./../fonts/icomoon.svg?iq7jut#icomoon") format("svg");
   font-weight: normal;
   font-style: normal;
 }
@@ -126,8 +126,28 @@ a {
   content: "\ea15";
 }
 
+.icon-arrow-up2:before {
+  content: "\ea3a";
+}
+
+.icon-arrow-right2:before {
+  content: "\ea3c";
+}
+
+.icon-arrow-down2:before {
+  content: "\ea3e";
+}
+
+.icon-arrow-left2:before {
+  content: "\ea40";
+}
+
 .icon-facebook:before {
   content: "\ea90";
+}
+
+.icon-whatsapp:before {
+  content: "\ea93";
 }
 
 .icon-flickr2:before {
@@ -1917,6 +1937,15 @@ a {
 .Social-item--text span {
   display: block;
 }
+.Social-item button {
+  background-color: transparent;
+  border: none;
+  color: #fcfbfb;
+  padding: 0;
+}
+.Social-item button:hover {
+  color: #222222;
+}
 
 @media screen and (max-width: 767px) {
   .Form--search {
@@ -2508,4 +2537,8 @@ a {
   .Videos .Page-video--html {
     width: 100%;
   }
+}
+
+.tooltip-inner {
+  font-size: 2em;
 }

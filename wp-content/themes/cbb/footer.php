@@ -84,7 +84,7 @@
           <?php endif; ?>
           <?php if (!empty($options['whatsapp'])) : ?>
             <li class="Social-item">
-              <a href="" title="Ir a Whatsapp" target="_blank" rel="noopener noreferrer"><i class="icon-phone"></i></a>
+              <button type="button" data-toggle="tooltip" data-placement="top" title="<?php echo $options['whatsapp']; ?>"><i class="icon-whatsapp"></i></button>
             </li>
           <?php endif; ?>
           <?php if (!empty($options['facebook'])) : ?>

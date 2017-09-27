@@ -465,5 +465,7 @@ var j = jQuery.noConflict();
         }
       }
     });
+
+    j('[data-toggle="tooltip"]').tooltip();
   });
 })(jQuery);
