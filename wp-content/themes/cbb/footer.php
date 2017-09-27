@@ -140,12 +140,15 @@
                 maxWidth: 300
               });*/
 
+              var icon = 'http://cbb.edu.pe/sitio/icon/iconcbb.png';
+
               infoMaps[0].map = new google.maps.Map(document.getElementById(infoMaps[0].id), options);
 
               infoMaps[0].marker = new google.maps.Marker({
                 position: mapCoord,
                 map: infoMaps[0].map,
-                title: 'Colegio Bertolt Brecht'
+                title: 'Colegio Bertolt Brecht',
+                icon: icon
               });
 
               infoMaps[0].load = true;

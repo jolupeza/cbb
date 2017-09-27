@@ -57,12 +57,15 @@ var j = jQuery.noConflict();
       scrollwheel: false,
     };
 
+    var icon = 'http://cbb.edu.pe/sitio/icon/iconcbb.png';
+
     info.map = new google.maps.Map(document.getElementById(info.id), options);
 
     info.marker = new google.maps.Marker({
       position: mapCoord,
       map: info.map,
-      title: 'Colegio Bertolt Brecht'
+      title: 'Colegio Bertolt Brecht',
+      icon: icon
     });
 
     var currentCenter = info.map.getCenter();
