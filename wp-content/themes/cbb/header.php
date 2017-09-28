@@ -26,7 +26,8 @@
     <?php wp_head(); ?>
     <script>
       var infoMaps = [];
-      var player;
+      //var player;
+      var players = new Array();
       var playerInfoList = [];
 
       var tag = document.createElement('script');

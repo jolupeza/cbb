@@ -169,15 +169,12 @@
     <?php endif; ?>
 
     <script>
-      var players = new Array();
-
       // 3. This function creates an <iframe> (and YouTube player)
       //    after the API code downloads.
       function onYouTubeIframeAPIReady() {
         if (typeof playerInfoList === 'undefined') return;
         for (var i = 0; i < playerInfoList.length; i++) {
-          var curplayer = createPlayer(playerInfoList[i]);
-          players[i] = curplayer;
+          players[i] = createPlayer(playerInfoList[i]);
         }
       }
 
