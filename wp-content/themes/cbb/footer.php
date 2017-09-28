@@ -172,9 +172,13 @@
       // 3. This function creates an <iframe> (and YouTube player)
       //    after the API code downloads.
       function onYouTubeIframeAPIReady() {
-        if (typeof playerInfoList === 'undefined') return;
-        for (var i = 0; i < playerInfoList.length; i++) {
-          players[i] = createPlayer(playerInfoList[i]);
+        //if (typeof playerInfoList === 'undefined') return;
+
+        if (playerInfoList.length) {
+          for (var i = 0; i < playerInfoList.length; i++) {
+            console.log('entre en for ' + i);
+            players[i] = createPlayer(playerInfoList[i]);
+          }
         }
       }
 
