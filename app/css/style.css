@@ -1331,6 +1331,18 @@ a {
   padding: 15px 15px 10px 50px;
   position: relative;
 }
+.Page-cel--borderLeftRadius {
+  -moz-border-radius-bottomleft: 15px;
+  -webkit-border-bottom-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+}
+@media screen and (max-width: 767px) and (orientation: portrait) {
+  .Page-cel--borderLeftRadius {
+    -moz-border-radius-bottomleft: 0;
+    -webkit-border-bottom-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}
 .Page-cel:first-child {
   -moz-border-radius-topleft: 15px;
   -webkit-border-top-left-radius: 15px;
@@ -1366,11 +1378,6 @@ a {
     -webkit-border-bottom-left-radius: 15px;
     border-bottom-left-radius: 15px;
   }
-}
-.Page-cel--borderLeftRadius {
-  -moz-border-radius-bottomleft: 15px;
-  -webkit-border-bottom-left-radius: 15px;
-  border-bottom-left-radius: 15px;
 }
 .Page-cel i {
   font-size: 1.25em;
@@ -2253,6 +2260,12 @@ a {
   top: -52px;
   width: 52px;
   z-index: 99;
+}
+@media screen and (max-width: 430px) {
+  .Modal--video .modal-body .close {
+    right: -14px;
+    top: -62px;
+  }
 }
 .Modal--video .Page-video {
   margin-bottom: 0;
