@@ -73,6 +73,23 @@ var j = jQuery.noConflict();
     info.map.setCenter(currentCenter);
   }
 
+  function borderRadiusTable() {
+    var table = j('.Page-table');
+
+    if (table.length) {
+      table.each(function(index) {
+        var $this = j(this),
+            cel = $this.children('.Page-cel');
+
+        if (cel.length % 2 == 0) {
+          cel.last().prev().addClass('Page-cel--borderLeftRadius');
+        } else {
+          cel.last().addClass('Page-cel--borderLeftRadius');
+        }
+      });
+    }
+  }
+
   $win.on('scroll resize', checkIfInView);
 
   $win.on('scroll', function(event) {
@@ -174,6 +191,8 @@ var j = jQuery.noConflict();
 
   $doc.on('ready', function () {
     affixHeader();
+
+    borderRadiusTable();
 
     j('.ArrowTop').on('click', function(ev){
       ev.preventDefault();

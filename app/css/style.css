@@ -1299,42 +1299,6 @@ a {
   flex-wrap: wrap;
   margin: 30px 0;
 }
-.Page-table--blue .Page-cel:first-child {
-  -moz-border-radius-topleft: 15px;
-  -webkit-border-top-left-radius: 15px;
-  border-top-left-radius: 15px;
-}
-@media screen and (max-width: 767px) and (orientation: portrait) {
-  .Page-table--blue .Page-cel:first-child {
-    -moz-border-radius-topright: 15px;
-    -webkit-border-top-right-radius: 15px;
-    border-top-right-radius: 15px;
-  }
-}
-.Page-table--blue .Page-cel:first-child + .Page-cel {
-  -moz-border-radius-topright: 15px;
-  -webkit-border-top-right-radius: 15px;
-  border-top-right-radius: 15px;
-}
-@media screen and (max-width: 767px) and (orientation: portrait) {
-  .Page-table--blue .Page-cel:first-child + .Page-cel {
-    -moz-border-radius-topright: 0;
-    -webkit-border-top-right-radius: 0;
-    border-top-right-radius: 0;
-  }
-}
-.Page-table--blue .Page-cel:last-child {
-  -moz-border-radius-bottomright: 15px;
-  -webkit-border-bottom-right-radius: 15px;
-  border-bottom-right-radius: 15px;
-}
-@media screen and (max-width: 767px) and (orientation: portrait) {
-  .Page-table--blue .Page-cel:last-child {
-    -moz-border-radius-bottomleft: 15px;
-    -webkit-border-bottom-left-radius: 15px;
-    border-bottom-left-radius: 15px;
-  }
-}
 .Page-table--blue .Page-cel:nth-child(3n+1) {
   background-color: #004e94;
 }
@@ -1346,42 +1310,6 @@ a {
 }
 .Page-table--red .Page-cel {
   padding-left: 62px;
-}
-.Page-table--red .Page-cel:first-child {
-  -moz-border-radius-topleft: 15px;
-  -webkit-border-top-left-radius: 15px;
-  border-top-left-radius: 15px;
-}
-@media screen and (max-width: 767px) and (orientation: portrait) {
-  .Page-table--red .Page-cel:first-child {
-    -moz-border-radius-topright: 15px;
-    -webkit-border-top-right-radius: 15px;
-    border-top-right-radius: 15px;
-  }
-}
-.Page-table--red .Page-cel:first-child + .Page-cel {
-  -moz-border-radius-topright: 15px;
-  -webkit-border-top-right-radius: 15px;
-  border-top-right-radius: 15px;
-}
-@media screen and (max-width: 767px) and (orientation: portrait) {
-  .Page-table--red .Page-cel:first-child + .Page-cel {
-    -moz-border-radius-topright: 0;
-    -webkit-border-top-right-radius: 0;
-    border-top-right-radius: 0;
-  }
-}
-.Page-table--red .Page-cel:last-child {
-  -moz-border-radius-bottomright: 15px;
-  -webkit-border-bottom-right-radius: 15px;
-  border-bottom-right-radius: 15px;
-}
-@media screen and (max-width: 767px) and (orientation: portrait) {
-  .Page-table--red .Page-cel:last-child {
-    -moz-border-radius-bottomleft: 15px;
-    -webkit-border-bottom-left-radius: 15px;
-    border-bottom-left-radius: 15px;
-  }
 }
 .Page-table--red .Page-cel:nth-child(3n+1) {
   background-color: #ba1919;
@@ -1402,6 +1330,47 @@ a {
   flex: 1 1 50%;
   padding: 15px 15px 10px 50px;
   position: relative;
+}
+.Page-cel:first-child {
+  -moz-border-radius-topleft: 15px;
+  -webkit-border-top-left-radius: 15px;
+  border-top-left-radius: 15px;
+}
+@media screen and (max-width: 767px) and (orientation: portrait) {
+  .Page-cel:first-child {
+    -moz-border-radius-topright: 15px;
+    -webkit-border-top-right-radius: 15px;
+    border-top-right-radius: 15px;
+  }
+}
+.Page-cel:first-child + .Page-cel {
+  -moz-border-radius-topright: 15px;
+  -webkit-border-top-right-radius: 15px;
+  border-top-right-radius: 15px;
+}
+@media screen and (max-width: 767px) and (orientation: portrait) {
+  .Page-cel:first-child + .Page-cel {
+    -moz-border-radius-topright: 0;
+    -webkit-border-top-right-radius: 0;
+    border-top-right-radius: 0;
+  }
+}
+.Page-cel:last-child {
+  -moz-border-radius-bottomright: 15px;
+  -webkit-border-bottom-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+@media screen and (max-width: 767px) and (orientation: portrait) {
+  .Page-cel:last-child {
+    -moz-border-radius-bottomleft: 15px;
+    -webkit-border-bottom-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+  }
+}
+.Page-cel--borderLeftRadius {
+  -moz-border-radius-bottomleft: 15px;
+  -webkit-border-bottom-left-radius: 15px;
+  border-bottom-left-radius: 15px;
 }
 .Page-cel i {
   font-size: 1.25em;
