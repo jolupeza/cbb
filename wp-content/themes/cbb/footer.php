@@ -174,12 +174,14 @@
       function onYouTubeIframeAPIReady() {
         setTimeout(function() {
           if (playerInfoList.length) {
+            console.log('si tengo items');
+
             for (var i = 0; i < playerInfoList.length; i++) {
               console.log('entre en for ' + i);
               players[i] = createPlayer(playerInfoList[i]);
             }
           }
-        }, 3000);
+        }, 5000);
       }
 
       function createPlayer(playerInfo) {
