@@ -26,14 +26,8 @@
     <?php wp_head(); ?>
     <script>
       var infoMaps = [];
-      //var player;
       var players = new Array();
       var playerInfoList = [];
-
-      var tag = document.createElement('script');
-      tag.src = "https://www.youtube.com/iframe_api";
-      var firstScriptTag = document.getElementsByTagName('script')[0];
-      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
     </script>
   </head>
   <body <?php body_class(); ?> data-spy="scroll" data-target=".Header-menu">
