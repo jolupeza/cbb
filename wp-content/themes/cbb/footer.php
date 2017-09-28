@@ -172,6 +172,8 @@
       // 3. This function creates an <iframe> (and YouTube player)
       //    after the API code downloads.
       function onYouTubeIframeAPIReady() {
+        console.log('llame a youtubeiframeapiready');
+
         setTimeout(function() {
           if (playerInfoList.length) {
             console.log('si tengo items');
@@ -180,6 +182,8 @@
               console.log('entre en for ' + i);
               players[i] = createPlayer(playerInfoList[i]);
             }
+          } else {
+            console.log('no tengo items');
           }
         }, 5000);
       }
