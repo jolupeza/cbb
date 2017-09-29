@@ -1486,6 +1486,29 @@ a {
   margin-top: 25px;
 }
 
+.Page-wrapper {
+  -webkit-align-items: center;
+  align-items: center;
+  display: -webkit-flex;
+  display: flex;
+}
+@media screen and (max-width: 767px) {
+  .Page-wrapper {
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+}
+
+.Page-wrapper-item {
+  padding: 0 15px;
+  width: 50%;
+}
+@media screen and (max-width: 767px) {
+  .Page-wrapper-item {
+    width: 100%;
+  }
+}
+
 .Parallax {
   display: -webkit-flex;
   display: flex;

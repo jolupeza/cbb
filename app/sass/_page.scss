@@ -221,3 +221,17 @@
   @include justify-content(center);
   margin-top: 25px;
 }
+.Page-wrapper {
+  @include align-items(center);
+  @include display-flex();
+  @media screen and (max-width: 767px) {
+    @include flex-wrap(wrap);
+  }
+}
+.Page-wrapper-item {
+  padding: 0 15px;
+  width: 50%;
+  @media screen and (max-width: 767px) {
+    width: 100%;
+  }
+}

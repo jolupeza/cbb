@@ -57,11 +57,6 @@
           <?php endif; ?>
           <?php wp_reset_postdata(); ?>
 
-          <h3 class="Form-title">2. Datos del hijo a postular</h3>
-          <div class="form-group">
-            <label for="son_name" class="sr-only">Nombre completo</label>
-            <input type="text" class="form-control" name="son_name" placeholder="Nombre completo" autocomplete="off" required>
-          </div>
           <?php
             $levels = get_terms([
               'taxonomy' => 'levels',
@@ -82,6 +77,12 @@
               </select>
             </div>
           <?php endif; ?>
+
+          <h3 class="Form-title">2. Datos del hijo a postular</h3>
+          <div class="form-group">
+            <label for="son_name" class="sr-only">Nombre completo</label>
+            <input type="text" class="form-control" name="son_name" placeholder="Nombre completo" autocomplete="off" required>
+          </div>
 
           <div class="form-group">
             <label for="schedule" class="sr-only">Horario</label>

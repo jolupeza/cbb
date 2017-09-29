@@ -195,11 +195,19 @@
     if ($mainQuery->have_posts()) {
       while ($mainQuery->have_posts()) {
         $mainQuery->the_post();
-
         global $post;
         $postName = $post->post_name;
 
-        get_template_part('sections/section', $postName);
+        $template = get_post_meta(get_the_ID(), '_wp_page_template', true);
+
+        if ($template === 'default') {
+          get_template_part('sections/section', $postName);
+        } else {
+          if (file_exists(TEMPLATEPATH . '/' . $template)) {
+            $isChildTemplate = true;
+            include TEMPLATEPATH . '/' . $template;
+          }
+        }
 
         $i++;
       }
