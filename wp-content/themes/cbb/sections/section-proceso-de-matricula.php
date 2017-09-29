@@ -34,13 +34,18 @@
         <?php endif; ?>
 
         <?php setup_postdata($post); ?>
-        <div class="Page-asterisc">
-          <?php the_content(); ?>
-        </div>
+        <?php $content = get_the_content(); ?>
+        <?php if (!empty($content)) : ?>
+          <div class="Page-asterisc">
+            <?php the_content(); ?>
+          </div>
+        <?php endif; ?>
 
+        <?php /*
         <p class="text-center">
           <a class="Button Button--red Button--medium js-move-scroll" href="#admision-2018">Matricularme ahora</a>
         </p>
+        */ ?>
       </div>
       <div class="col-md-6">
         <?php if (has_post_thumbnail($idParent)) : ?>
