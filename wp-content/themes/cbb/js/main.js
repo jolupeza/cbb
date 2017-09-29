@@ -289,37 +289,34 @@ var j = jQuery.noConflict();
       var $this = j(this),
           local = parseInt($this.val()),
           fv = j('#js-frm-admision').data('formValidation'),
-          level = parseInt(j('select[name="son_level"]').val()),
           schedule = j('select[name="schedule"]');
 
-      if (!level) {
-        fv.revalidateField('son_level');
-        return;
+      var options = '<option value="">-- Seleccione el horario que mejor le convenga --</option>';
+
+      if (!local) {
+        schedule.html(options);
+        fv.revalidateField('schedule');
+        return false;
       }
 
-      if (local) {
-        j.post(CbbAjax.url, {
-          nonce: CbbAjax.nonce,
-          action: 'load_schedule',
-          local: local,
-          level: level
-        }, function(data) {
-          if (data.result) {
-            var options = '<option value="">-- Seleccione el horario que mejor le convenga --</option>';
-            data.posts.forEach(function (item) {
-              options += '<option value="' + item.ID + '">' + item.post_excerpt + '</option>';
-            });
+      j.post(CbbAjax.url, {
+        nonce: CbbAjax.nonce,
+        action: 'load_schedule',
+        local: local,
+      }, function(data) {
+        if (data.result) {
+          data.posts.forEach(function (item) {
+            options += '<option value="' + item.ID + '">' + item.post_excerpt + '</option>';
+          });
+        }
 
-            schedule.html(options);
-          } else {
-            fv.revalidateField('parent_sede');
-            fv.revalidateField('son_level');
-          }
-        }, 'json').fail(function() {
-          alert('No se pudo realizar la operación solicitada. Por favor vuelva a intentarlo.');
-        });
-      }
-    }).on('change', '[name="son_level"]', function (e) {
+        schedule.html(options);
+        fv.revalidateField('schedule');
+      }, 'json').fail(function() {
+        alert('No se pudo realizar la operación solicitada. Por favor vuelva a intentarlo.');
+      });
+    })
+    /*.on('change', '[name="son_level"]', function (e) {
       var $this = j(this),
           level = parseInt($this.val()),
           fv = j('#js-frm-admision').data('formValidation'),
@@ -353,7 +350,8 @@ var j = jQuery.noConflict();
           alert('No se pudo realizar la operación solicitada. Por favor vuelva a intentarlo.');
         });
       }
-    }).on('err.field.fv', function(e, data){
+    })*/
+    .on('err.field.fv', function(e, data){
       var field = e.target;
       j('small.help-block[data-bv-result="INVALID"]').addClass('hide');
     }).on('success.form.fv', function(e){

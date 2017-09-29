@@ -12,7 +12,7 @@
     <?php
         $values = get_post_custom( get_the_ID() );
         $local = isset($values['mb_local']) ? (int)esc_attr($values['mb_local'][0]) : '';
-        $grade = isset($values['mb_grade']) ? (int)esc_attr($values['mb_grade'][0]) : '';
+//        $grade = isset($values['mb_grade']) ? (int)esc_attr($values['mb_grade'][0]) : '';
 
         wp_nonce_field( 'schedules_meta_box_nonce', 'meta_box_nonce' );
     ?>
@@ -44,7 +44,7 @@
     wp_reset_postdata();
 ?>
     
-    <?php
+    <?php /*
         $levels = get_terms([
           'taxonomy' => 'levels',
           'hide_empty' => false,
@@ -63,5 +63,5 @@
                 <?php endforeach; ?>
             </select>
         </p>
-    <?php endif; ?>
+    <?php endif; */?>
 </div><!-- #single-post-meta-manager -->

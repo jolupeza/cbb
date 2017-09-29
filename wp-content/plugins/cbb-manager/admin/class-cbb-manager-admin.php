@@ -1054,13 +1054,6 @@ class Cbb_Manager_Admin
         if (!current_user_can('edit_post', $post_id)) {
             return;
         }
-        
-        // Date
-        if (isset($_POST['mb_date']) && !empty($_POST['mb_date'])) {
-            update_post_meta($post_id, 'mb_date', esc_attr($_POST['mb_date']));
-        } else {
-            delete_post_meta($post_id, 'mb_date');
-        }
 
         // Local
         if (isset($_POST['mb_local']) && !empty($_POST['mb_local'])) {
@@ -1070,11 +1063,11 @@ class Cbb_Manager_Admin
         }
         
         // Grade
-        if (isset($_POST['mb_grade']) && !empty($_POST['mb_grade'])) {
-            update_post_meta($post_id, 'mb_grade', esc_attr($_POST['mb_grade']));
-        } else {
-            delete_post_meta($post_id, 'mb_grade');
-        }
+//        if (isset($_POST['mb_grade']) && !empty($_POST['mb_grade'])) {
+//            update_post_meta($post_id, 'mb_grade', esc_attr($_POST['mb_grade']));
+//        } else {
+//            delete_post_meta($post_id, 'mb_grade');
+//        }
     }
 
     /**

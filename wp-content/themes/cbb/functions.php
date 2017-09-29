@@ -298,7 +298,7 @@ function mailtrap($phpmailer) {
   $phpmailer->Password = 'f1ea173da928d9';
 }
 
-// add_action('phpmailer_init', 'mailtrap');
+//add_action('phpmailer_init', 'mailtrap');
 
 // Bugs send emails WP 4.6.1
 add_filter('wp_mail_from', function() {
@@ -574,15 +574,16 @@ function load_schedule_callback()
   }
 
   $local = (int)trim($_POST['local']);
-  $level = (int)trim($_POST['level']);
+  //$level = (int)trim($_POST['level']);
 
-  if ($local > 0 && $level > 0) {
+  //if ($local > 0 && $level > 0) {
+  if ($local > 0) {
     // Validate Local
     $dataLocal = get_post($local);
     if (!is_null($dataLocal)) {
       // Validate Level
-      $dataLevel = get_term_by('id', $level, 'levels');
-      if (is_object($dataLevel)) {
+      //$dataLevel = get_term_by('id', $level, 'levels');
+      //if (is_object($dataLevel)) {
         // Get schedules y retornar como json
         $args = [
           'post_type' => 'schedules',
@@ -594,10 +595,10 @@ function load_schedule_callback()
               'key' => 'mb_local',
               'value' => $local,
             ],
-            [
+            /*[
               'key' => 'mb_grade',
               'value' => $level
-            ]
+            ]*/
           ]
         ];
         $schedules = new WP_Query($args);
@@ -609,9 +610,9 @@ function load_schedule_callback()
           $result['error'] = 'No existen horarios';
         }
         wp_reset_postdata();
-      } else {
+      /*} else {
         $result['error'] = 'Debe seleccionar el grado al que desea postular.';
-      }
+      }*/
     } else {
       $result['error'] = 'Debe seleccionar la sede de su interés.';
     }

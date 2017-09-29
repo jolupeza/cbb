@@ -79,7 +79,7 @@
           <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
               <td class="bodycopy" align="center" style="color: #484848; font-family: Arial; font-size: 14px; line-height: 18px;">
-                Nueva registro para el proceso de Admisión:
+                Nuevo registro para el proceso de Admisión:
               </td>
             </tr>
           </table>
