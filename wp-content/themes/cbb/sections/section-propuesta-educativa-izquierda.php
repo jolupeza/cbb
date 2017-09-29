@@ -119,7 +119,7 @@
             <figure class="Page-video text-center">
               <!-- <video controls poster="<?php // echo IMAGES; ?>/video-about.jpg"> -->
 
-              <video controls>
+              <video controls id="video-<?php echo $idParent; ?>">
                 <?php if (!empty($webm)) : ?>
                   <source
                     src="<?php echo $webm; ?>"

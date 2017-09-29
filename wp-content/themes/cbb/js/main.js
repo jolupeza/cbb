@@ -478,10 +478,19 @@ var j = jQuery.noConflict();
     }
 
     j('.Modal--video').on('hidden.bs.modal', function(e) {
-      for (var i in players) {
-        if (players[i].a.className === 'Modal-video') {
-          stopVideoPlayer(players[i]);
+      if (players.length) {
+        for (var i in players) {
+          if (players[i].a.className === 'Modal-video') {
+            stopVideoPlayer(players[i]);
+          }
         }
+      }
+
+      var videos = j('video[id^="video-"]');
+      if (videos.length) {
+        videos.each(function(index) {
+          j(this)[0].pause();
+        });
       }
     });
 
