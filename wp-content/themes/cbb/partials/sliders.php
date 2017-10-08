@@ -21,17 +21,17 @@
 
 <?php if (!empty($webm) || !empty($mp4) || !empty($ogv)) : ?>
   <section class="Video text-center">
-    <video class="img-responsive" autoplay="true" loop="true" poster="<?php echo $poster; ?>">
-      <?php if (!empty($webm)) : ?>
-        <source
-          src="<?php echo $webm; ?>"
-          type="video/webm">
-      <?php endif; ?>
-
+    <video class="img-responsive" autoplay="true" loop="true" preload="auto" poster="<?php echo $poster; ?>">
       <?php if (!empty($mp4)) : ?>
         <source
           src="<?php echo $mp4; ?>"
           type="video/mp4">
+      <?php endif; ?>
+
+      <?php if (!empty($webm)) : ?>
+        <source
+          src="<?php echo $webm; ?>"
+          type="video/webm">
       <?php endif; ?>
 
       <?php if (!empty($ogv)) : ?>
