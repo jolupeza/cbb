@@ -51,7 +51,7 @@
     ?>
         <p class="content-mb">
             <label for="mb_local">Sede: </label>
-            <select name="mb_local" id="mb_sede">
+            <select name="mb_local" id="mb_local">
                 <option value="">-- No ha seleccionado Sede --</option>
                 <?php while ($the_query->have_posts()) : ?>
                     <?php $the_query->the_post(); ?>
