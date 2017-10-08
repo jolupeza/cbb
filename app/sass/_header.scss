@@ -26,7 +26,7 @@
       }
       .sub-menu {
         background-color: $blue;
-        bottom: -41px;
+        bottom: -49px;
       }
     }
   }
@@ -50,11 +50,18 @@
 .Header-menu {
   @include display-flex();
   margin: 0;
-  padding-top: 25px;
+  padding-top: 10px;
   padding-left: 0;
 }
 .Header-toggle {
   color: white;
   cursor: pointer;
   font-size: 2.5em;
+}
+.Header-central {
+  color: $white;
+  span {
+    font-size: 1.125em;
+    font-weight: 600;
+  }
 }

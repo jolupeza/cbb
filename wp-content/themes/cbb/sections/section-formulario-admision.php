@@ -57,6 +57,19 @@
           <?php endif; ?>
           <?php wp_reset_postdata(); ?>
 
+          <div class="form-group">
+            <label for="schedule" class="sr-only">Horario</label>
+            <select name="schedule" class="form-control" required data-fv-notempty-message="Debe seleccionar horario">
+              <option value="">-- Seleccione el horario que mejor le convenga --</option>
+            </select>
+          </div>
+
+          <h3 class="Form-title">2. Datos del hijo a postular</h3>
+          <div class="form-group">
+            <label for="son_name" class="sr-only">Nombre completo</label>
+            <input type="text" class="form-control" name="son_name" placeholder="Nombre completo" autocomplete="off" required>
+          </div>
+
           <?php
             $levels = get_terms([
               'taxonomy' => 'levels',
@@ -77,19 +90,6 @@
               </select>
             </div>
           <?php endif; ?>
-
-          <h3 class="Form-title">2. Datos del hijo a postular</h3>
-          <div class="form-group">
-            <label for="son_name" class="sr-only">Nombre completo</label>
-            <input type="text" class="form-control" name="son_name" placeholder="Nombre completo" autocomplete="off" required>
-          </div>
-
-          <div class="form-group">
-            <label for="schedule" class="sr-only">Horario</label>
-            <select name="schedule" class="form-control" required data-fv-notempty-message="Debe seleccionar horario">
-              <option value="">-- Seleccione el horario que mejor le convenga --</option>
-            </select>
-          </div>
 
           <div class="form-group">
             <div class="checkbox">

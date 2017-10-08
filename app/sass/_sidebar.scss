@@ -19,6 +19,14 @@
     }
   }
 }
-.Sidebar-title {
-
+.Sidebar-central {
+  color: $white;
+  font-size: 1.25em;
+  @media screen and (max-width: 767px) {
+    font-size: 1.125em;
+  }
+  span {
+    font-weight: 600;
+    font-size: 1.2em;
+  }
 }

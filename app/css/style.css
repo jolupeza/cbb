@@ -295,7 +295,7 @@ a {
 }
 .Header.affix .MainMenu .sub-menu {
   background-color: #004e94;
-  bottom: -41px;
+  bottom: -49px;
 }
 
 .Header-logo {
@@ -319,7 +319,7 @@ a {
   display: -webkit-flex;
   display: flex;
   margin: 0;
-  padding-top: 25px;
+  padding-top: 10px;
   padding-left: 0;
 }
 
@@ -327,6 +327,14 @@ a {
   color: white;
   cursor: pointer;
   font-size: 2.5em;
+}
+
+.Header-central {
+  color: #fcfbfb;
+}
+.Header-central span {
+  font-size: 1.125em;
+  font-weight: 600;
 }
 
 .MainMenu {
@@ -407,7 +415,7 @@ a {
 }
 .MainMenu .sub-menu {
   background-color: #004e94;
-  bottom: -36px;
+  bottom: -44px;
   display: none;
   -webkit-justify-content: center;
   justify-content: center;
@@ -2198,6 +2206,20 @@ a {
 }
 .Sidebar-widget ul li a:hover {
   color: #004e94;
+}
+
+.Sidebar-central {
+  color: #fcfbfb;
+  font-size: 1.25em;
+}
+@media screen and (max-width: 767px) {
+  .Sidebar-central {
+    font-size: 1.125em;
+  }
+}
+.Sidebar-central span {
+  font-weight: 600;
+  font-size: 1.2em;
 }
 
 .Contact-title {

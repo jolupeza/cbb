@@ -289,6 +289,19 @@ function cbb_customize_register($wp_customize) {
     'type' => 'text'
   ]);
 
+  // Central phone
+  $wp_customize->add_setting('cbb_custom_settings[phone]', [
+    'default' => '',
+    'type' => 'option'
+  ]);
+
+  $wp_customize->add_control('cbb_custom_settings[phone]', [
+    'label' => __('Central Telefónica', THEMEDOMAIN),
+    'section' => 'cbb_info',
+    'settings' => 'cbb_custom_settings[phone]',
+    'type' => 'text'
+  ]);
+
   // Admisión
   $wp_customize->add_section('cbb_admision', [
     'title' => __('Admisión', THEMEDOMAIN),

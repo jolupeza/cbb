@@ -31,6 +31,7 @@
     </script>
   </head>
   <body <?php body_class(); ?> data-spy="scroll" data-target=".Header-menu">
+    <?php $options = get_option('cbb_custom_settings'); ?>
     <header class="Header">
       <div class="container">
         <div class="row">
@@ -46,6 +47,11 @@
             </h1>
           </div>
           <div class="col-md-9 Grid-positionStatic hidden-sm hidden-xs">
+            <?php if (isset($options['phone']) && !empty($options['phone'])) : ?>
+              <aside class="Header-central text-right">
+                Central Telefónica: <span><?php echo $options['phone']; ?></span>
+              </aside>
+            <?php endif; ?>
             <?php
               $args = [
                 'theme_location' => 'main-menu',
@@ -82,5 +88,11 @@
 
           wp_nav_menu($args);
         ?>
+        <?php if (isset($options['phone']) && !empty($options['phone'])) : ?>
+          <aside class="Sidebar-central">
+            Central Telefónica: <span><?php echo $options['phone']; ?></span>
+          </aside>
+        <?php endif; ?>
       </article>
+
     </section>
