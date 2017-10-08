@@ -4,7 +4,9 @@
     <div class="row">
       <div class="col-md-6">
         <h2 class="Page-title text-red"><?php the_title(); ?></h2>
-        <?php the_excerpt(); ?>
+        <?php the_content(); ?>
+
+        <?php $excerpt = get_the_excerpt(); ?>
 
         <?php
           $arguments = [
@@ -32,20 +34,15 @@
             <?php endwhile; ?>
           </section>
         <?php endif; ?>
+        <?php wp_reset_postdata(); ?>
 
         <?php setup_postdata($post); ?>
-        <?php $content = get_the_content(); ?>
-        <?php if (!empty($content)) : ?>
+
+        <?php if (!empty($excerpt)) : ?>
           <div class="Page-asterisc">
-            <?php the_content(); ?>
+            <p><?php echo $excerpt; ?></p>
           </div>
         <?php endif; ?>
-
-        <?php /*
-        <p class="text-center">
-          <a class="Button Button--red Button--medium js-move-scroll" href="#admision-2018">Matricularme ahora</a>
-        </p>
-        */ ?>
       </div>
       <div class="col-md-6">
         <?php if (has_post_thumbnail($idParent)) : ?>
