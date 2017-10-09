@@ -44,6 +44,7 @@
       $webm = isset($values['mb_webm']) ? esc_attr($values['mb_webm'][0]) : $webm;
       $mp4 = isset($values['mb_mp4']) ? esc_attr($values['mb_mp4'][0]) : $mp4;
       $ogv = isset($values['mb_ogv']) ? esc_attr($values['mb_ogv'][0]) : $ogv;
+      $youtube = isset($values['mb_youtube']) ? esc_attr($values['mb_youtube'][0]) : '';
     }
   }
 ?>
@@ -179,6 +180,22 @@
     </section>
   <?php endif; ?>
   <?php wp_reset_postdata(); ?>
+<?php endif; ?>
+
+<?php if (!empty($youtube)) : ?>
+  <?php if (have_posts()) : ?>
+    <?php while (have_posts()) : ?>
+      <?php the_post(); ?>
+
+      <?php
+        $filename = TEMPLATEPATH . '/partials/video.php';
+
+        if (file_exists($filename)) {
+          include $filename;
+        }
+      ?>
+    <?php endwhile; ?>
+  <?php endif; ?>
 <?php endif; ?>
 
 <?php if ($idPage > 0) : ?>

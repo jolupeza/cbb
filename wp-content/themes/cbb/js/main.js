@@ -493,5 +493,9 @@ var j = jQuery.noConflict();
     });
 
     j('[data-toggle="tooltip"]').tooltip();
+
+    j('#my-video').on('click', function () {
+      j(this)[0].play();
+    });
   });
 })(jQuery);
