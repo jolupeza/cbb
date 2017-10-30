@@ -140,7 +140,7 @@
                 maxWidth: 300
               });*/
 
-              var icon = 'http://cbb.edu.pe/sitio/icon/iconcbb.png';
+              var icon = 'http://cbb.edu.pe/wp-content/uploads/2017/10/iconcbb.png';
 
               infoMaps[0].map = new google.maps.Map(document.getElementById(infoMaps[0].id), options);
 

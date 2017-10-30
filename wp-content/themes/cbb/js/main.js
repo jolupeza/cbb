@@ -57,7 +57,7 @@ var j = jQuery.noConflict();
       scrollwheel: false,
     };
 
-    var icon = 'http://cbb.edu.pe/sitio/icon/iconcbb.png';
+    var icon = 'http://cbb.edu.pe/wp-content/uploads/2017/10/iconcbb.png';
 
     info.map = new google.maps.Map(document.getElementById(info.id), options);
 
