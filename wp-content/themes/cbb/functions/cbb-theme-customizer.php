@@ -127,7 +127,7 @@ function cbb_customize_register($wp_customize) {
   $wp_customize->add_section('cbb_home', [
     'title' => __('Página de Inicio', THEMEDOMAIN),
     'description' => __('Configuración página de Inicio', THEMEDOMAIN),
-    'priority' => 37
+    'priority' => 36
   ]);
 
   $wp_customize->add_setting('cbb_custom_settings[home_video_img]', array(
@@ -174,7 +174,7 @@ function cbb_customize_register($wp_customize) {
   $wp_customize->add_section('cbb_locals', [
     'title' => __('Infraestructura', THEMEDOMAIN),
     'description' => __('Configuración página Infraestructura', THEMEDOMAIN),
-    'priority' => 38
+    'priority' => 37
   ]);
 
   $sections = get_terms('sections');
@@ -306,7 +306,7 @@ function cbb_customize_register($wp_customize) {
   $wp_customize->add_section('cbb_admision', [
     'title' => __('Admisión', THEMEDOMAIN),
     'description' => __('Configuración de parámetros de la sección de Admisión', THEMEDOMAIN),
-    'priority' => 38
+    'priority' => 39
   ]);
 
   // Email Contact
@@ -320,5 +320,38 @@ function cbb_customize_register($wp_customize) {
     'section' => 'cbb_admision',
     'settings' => 'cbb_custom_settings[admision_year]',
     'type' => 'text'
+  ]);
+
+  // Text Emails
+  $wp_customize->add_section('cbb_response_email', [
+    'title' => __('Mensajes Emails', THEMEDOMAIN),
+    'description' => __('Configurar los mensajes de respuesta a los formulario de contacto y registro de admisión', THEMEDOMAIN),
+    'priority' => 40
+  ]);
+
+  // Response Contact
+  $wp_customize->add_setting('cbb_custom_settings[response_contact]', [
+    'default' => '',
+    'type' => 'option'
+  ]);
+
+  $wp_customize->add_control('cbb_custom_settings[response_contact]', [
+    'label' => __('Mensaje de respuesta al formulario de contacto', THEMEDOMAIN),
+    'section' => 'cbb_response_email',
+    'settings' => 'cbb_custom_settings[response_contact]',
+    'type' => 'textarea'
+  ]);
+
+  // Response Admition
+  $wp_customize->add_setting('cbb_custom_settings[response_admision]', [
+    'default' => '',
+    'type' => 'option'
+  ]);
+
+  $wp_customize->add_control('cbb_custom_settings[response_admision]', [
+    'label' => __('Mensaje de respuesta al formulario de admisión', THEMEDOMAIN),
+    'section' => 'cbb_response_email',
+    'settings' => 'cbb_custom_settings[response_admision]',
+    'type' => 'textarea'
   ]);
 }

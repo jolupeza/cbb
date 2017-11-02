@@ -305,6 +305,13 @@ add_filter('wp_mail_from', function() {
   return 'no-reply@cbb.edu.pe';
 });
 
+// Function to change sender name
+function cbb_sender_name($originalEmailFrom) {
+  return 'Colegio Bertolt Brecht';
+}
+
+add_filter('wp_mail_from_name', 'cbb_sender_name');
+
 /***********************************************************/
 /* Register subscriptor via ajax */
 /***********************************************************/
@@ -375,7 +382,7 @@ function register_contact_callback()
           ob_start();
           $filename = TEMPLATEPATH . '/templates/email-gratitude.php';
           if (file_exists($filename)) {
-            $textEmail = 'Ya tenemos su consulta. En breve nos pondremos en contacto con usted.';
+            $textEmail = (isset($options['response_contact']) && !empty($options['response_contact'])) ? esc_attr($options['response_contact']) : "Ya tenemos su consulta. En breve nos pondremos en contacto con usted.";
 
             include $filename;
 
@@ -497,7 +504,7 @@ function register_admision_callback()
               ob_start();
               $filename = TEMPLATEPATH . '/templates/email-gratitude.php';
               if (file_exists($filename)) {
-                $textEmail = 'Gracias por registrarse. En breve nos pondremos en contacto con usted.';
+                $textEmail = (isset($options['response_admision']) && !empty($options['response_admision'])) ? esc_attr($options['response_admision']) : "Gracias por registrarse. En breve nos pondremos en contacto con usted.";
 
                 include $filename;
 
