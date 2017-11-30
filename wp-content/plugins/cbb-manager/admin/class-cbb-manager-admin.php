@@ -305,6 +305,13 @@ class Cbb_Manager_Admin
         } else {
             delete_post_meta($post_id, 'mb_long');
         }
+        
+        // Parallax
+        if (isset($_POST['mb_parallax']) && !empty($_POST['mb_parallax'])) {
+            update_post_meta($post_id, 'mb_parallax', esc_attr($_POST['mb_parallax']));
+        } else {
+            delete_post_meta($post_id, 'mb_parallax');
+        }
     }
 
     /**
@@ -1302,7 +1309,8 @@ class Cbb_Manager_Admin
             // 'taxonomies'  => array('post_tag', 'category'),
              'has_archive' => true,
              'rewrite'     => [
-                 'slug' => 'infraestructura'
+                 'slug' => 'infraestructura',
+                'with_front' => false
              ]
         );
         register_post_type('locals', $args);

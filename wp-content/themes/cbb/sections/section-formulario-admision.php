@@ -1,7 +1,7 @@
 <?php $options = get_option('cbb_custom_settings'); ?>
 
 <section class="Page Page--contact" id="<?php echo $post->post_name; ?>">
-  <?php $pageParent = get_the_id(); ?>
+  <?php $idParent = get_the_id(); ?>
   <div class="container">
     <div class="row">
       <div class="col-md-6">
@@ -107,9 +107,9 @@
         </form>
       </div>
       <div class="col-md-6">
-        <?php if (has_post_thumbnail($pageParent)) : ?>
+        <?php if (has_post_thumbnail($idParent)) : ?>
           <figure class="Page-figure text-center">
-            <?php echo get_the_post_thumbnail($pageParent, 'full', [
+            <?php echo get_the_post_thumbnail($idParent, 'full', [
                 'class' => 'img-responsive center-block',
                 'alt' => get_the_title()
               ]);
@@ -120,3 +120,8 @@
     </div>
   </div>
 </section>
+
+<?php
+  if (file_exists(TEMPLATEPATH . '/partials/parallax.php')) {
+    include TEMPLATEPATH . '/partials/parallax.php';
+  }

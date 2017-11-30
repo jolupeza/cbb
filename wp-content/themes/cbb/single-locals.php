@@ -172,11 +172,13 @@
 
 <?php
   $idSede = 0;
+  $idParent = 0;
 
   if (have_posts()) {
     while (have_posts()){
       the_post();
       $idSede = get_the_id();
+      $idParent = get_the_ID();
 ?>
   <?php if (!empty($desc)) : ?>
   <section class="Page" id="locals">
@@ -300,6 +302,12 @@
   <?php endif; ?>
 <?php
     }
+  }
+?>
+
+<?php
+  if (file_exists(TEMPLATEPATH . '/partials/parallax.php')) {
+    include TEMPLATEPATH . '/partials/parallax.php';
   }
 ?>
 

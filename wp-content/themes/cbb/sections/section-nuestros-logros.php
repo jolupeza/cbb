@@ -5,6 +5,7 @@
         <?php
           $title = get_the_excerpt();
           $titleArr = explode('/', $title);
+          $idParent = get_the_ID();
         ?>
         <h3 class="Page-subtitle text-center text-gray"><?php echo $titleArr[0]; ?></h3>
         <h2 class="Page-title text-center text-red"><?php echo $titleArr[1]; ?></h2>
@@ -50,3 +51,8 @@
     </div>
   </div>
 </section>
+
+<?php
+  if (file_exists(TEMPLATEPATH . '/partials/parallax.php')) {
+    include TEMPLATEPATH . '/partials/parallax.php';
+  }

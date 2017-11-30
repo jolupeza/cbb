@@ -209,4 +209,17 @@
   </div>
 </section>
 
+<?php $options = get_option('cbb_custom_settings'); ?>
+
+<?php
+  $idParent = 0;
+  $idParallax = (int)$options['blog_parallax'];
+?>
+
+<?php
+  if (file_exists(TEMPLATEPATH . '/partials/parallax.php')) {
+    include TEMPLATEPATH . '/partials/parallax.php';
+  }
+?>
+
 <?php get_footer(); ?>

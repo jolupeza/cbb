@@ -1,4 +1,6 @@
 <?php
+  $idParent = get_the_ID();
+
   $args = [
     'post_type' => 'post',
     'posts_per_page' => 4
@@ -56,3 +58,8 @@
   </section>
 <?php endif; ?>
 <?php wp_reset_postdata(); ?>
+
+<?php
+  if (file_exists(TEMPLATEPATH . '/partials/parallax.php')) {
+    include TEMPLATEPATH . '/partials/parallax.php';
+  }

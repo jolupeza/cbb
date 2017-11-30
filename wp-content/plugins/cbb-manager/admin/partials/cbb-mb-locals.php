@@ -11,6 +11,7 @@
 
     <?php
         $values = get_post_custom( get_the_ID() );
+        $parallax = isset($values['mb_parallax']) ? esc_attr($values['mb_parallax'][0]) : '';
         $address = isset($values['mb_address']) ? esc_attr($values['mb_address'][0]) : '';
         $phone = isset($values['mb_phone']) ? esc_attr($values['mb_phone'][0]) : '';
         $email = isset($values['mb_email']) ? esc_attr($values['mb_email'][0]) : '';
@@ -48,5 +49,32 @@
     <p class="content-mb">
         <label for="mb_long">Google Map Longitud: </label>
         <input type="text" name="mb_long" id="mb_long" value="<?php echo $long; ?>" />
+    </p>
+    
+    <!-- Parallax-->
+    <p class="content-mb">
+        <label for="mb_parallax">Seleccionar Parallax: </label>
+        <select name="mb_parallax" id="mb_parallax">
+            <option value="" <?php selected($parallax, ''); ?>>-- Seleccione parallax --</option>
+
+        <?php
+            $args = array(
+                'post_type' => 'parallaxs',
+                'posts_per_page' => -1
+            );
+            $parallaxs = new WP_Query($args);
+            if ($parallaxs->have_posts()) :
+                while ($parallaxs->have_posts()) :
+                    $parallaxs->the_post();
+                    $id = get_the_ID();
+        ?>
+            <option value="<?php echo $id; ?>" <?php selected($parallax, $id); ?>><?php the_title(); ?></option>
+        <?php
+                endwhile;
+            endif;
+            wp_reset_postdata();
+        ?>
+
+        </select>
     </p>
 </div><!-- #mb-locals-id -->

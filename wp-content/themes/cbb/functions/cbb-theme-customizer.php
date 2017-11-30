@@ -387,4 +387,42 @@ function cbb_customize_register($wp_customize) {
     'settings' => 'cbb_custom_settings[response_admision_forms]',
     'type' => 'textarea'
   ]);
+
+  // Information
+  $wp_customize->add_section('cbb_blog', [
+    'title' => __('Configuración Vida Escolar', THEMEDOMAIN),
+    'description' => __('Configuración de opciones para la sección Vida Escolar', THEMEDOMAIN),
+    'priority' => 42
+  ]);
+
+  $parallaxs = [];
+  $args = array(
+    'post_type' => 'parallaxs',
+    'posts_per_page' => -1
+  );
+
+  $the_query = new WP_Query($args);
+  if ($the_query->have_posts()) {
+    while ($the_query->have_posts()) {
+      $the_query->the_post();
+      $id = get_the_ID();
+      $title = get_the_title();
+
+      $parallaxs[$id] = $title;
+    }
+  }
+  wp_reset_postdata();
+
+  $wp_customize->add_setting('cbb_custom_settings[blog_parallax]', [
+    'default' => '',
+    'type' => 'option'
+  ]);
+
+  $wp_customize->add_control('cbb_custom_settings[blog_parallax]', array(
+    'label'      => __('Parallax', THEMEDOMAIN),
+    'section'    => 'cbb_blog',
+    'settings'   => 'cbb_custom_settings[blog_parallax]',
+    'type'       => 'select',
+    'choices'    => $parallaxs,
+  ));
 }

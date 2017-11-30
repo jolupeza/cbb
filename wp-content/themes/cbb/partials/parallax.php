@@ -1,6 +1,10 @@
 <?php
-  $values = get_post_custom($idParent);
-  $parallax = isset($values['mb_parallax']) ? esc_attr($values['mb_parallax'][0]) : '';
+  if (isset($idParent) && $idParent > 0) {
+    $values = get_post_custom($idParent);
+    $parallax = isset($values['mb_parallax']) ? esc_attr($values['mb_parallax'][0]) : '';
+  } else if (isset($idParallax) && $idParallax > 0) {
+    $parallax = $idParallax;
+  }
 
   if (!empty($parallax)) :
     $arguments = [

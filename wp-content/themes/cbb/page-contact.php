@@ -29,6 +29,7 @@
 
 <?php
   $idPage = 0;
+  $idParent = 0;
   $poster = '';
   $webm = '';
   $mp4 = '';
@@ -38,6 +39,7 @@
     while (have_posts()) {
       the_post();
       $idPage = get_the_id();
+      $idParent = get_the_id();
 
       $values = get_post_custom($idPage);
       $poster = isset($values['mb_poster']) ? esc_attr($values['mb_poster'][0]) : $poster;
@@ -380,5 +382,11 @@
     </div>
   </div>
 </section>
+
+<?php
+  if (file_exists(TEMPLATEPATH . '/partials/parallax.php')) {
+    include TEMPLATEPATH . '/partials/parallax.php';
+  }
+?>
 
 <?php get_footer(); ?>
