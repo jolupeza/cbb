@@ -242,18 +242,18 @@ var j = jQuery.noConflict();
         $form.data('formValidation').resetForm(true);
 
         if (data.result) {
-          msg.text('Ya tenemos su consulta. En breve nos pondremos en contacto con usted.');
+          msg.addClass('alert-success').text(data.msg);
         } else {
-          msg.text(data.error);
+          msg.addClass('alert-danger').text(data.error);
         }
 
         loader.addClass('hidden').removeClass('infinite animated');
         msg.fadeIn('slow');
         setTimeout(function(){
           msg.fadeOut('slow', function(){
-              j(this).text('');
+            j(this).text('').removeClass('alert-success alert-danger');
           });
-        }, 5000);
+        }, 15000);
       }, 'json').fail(function(){
         alert('No se pudo realizar la operación solicitada. Por favor vuelva a intentarlo.');
       });
@@ -372,18 +372,18 @@ var j = jQuery.noConflict();
         $form.data('formValidation').resetForm(true);
 
         if (data.result) {
-          msg.text('Se registró correctamente. En breve nos estaremos poniendo en contacto con usted.');
+          msg.addClass('alert-success').text(data.msg);
         } else {
-          msg.text(data.error);
+          msg.addClass('alert-danger').text(data.error);
         }
 
         loader.addClass('hidden').removeClass('infinite animated');
         msg.fadeIn('slow');
         setTimeout(function(){
           msg.fadeOut('slow', function(){
-              j(this).text('');
+              j(this).text('').removeClass('alert-success alert-danger');
           });
-        }, 5000);
+        }, 15000);
       }, 'json').fail(function(){
         alert('No se pudo realizar la operación solicitada. Por favor vuelva a intentarlo.');
       });

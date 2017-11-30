@@ -221,8 +221,6 @@
           <?php endwhile; ?>
         <?php endif; ?>
 
-        <p class="text-center" id="js-form-contact-msg"></p>
-
         <form class="Form Form--fields" action="" method="POST" id="js-frm-contact">
           <div class="form-group">
             <label for="contact_name" class="sr-only">Nombre completo</label>
@@ -291,6 +289,8 @@
           <p class="text-center">
             <button type="submit" class="btn Button Button--blue Button--medium">enviar <span class="Form-loader rotateIn hidden" id="js-form-contact-loader"><i class="glyphicon glyphicon-refresh"></i></span></button>
           </p>
+
+          <div class="alert text-center h4" id="js-form-contact-msg"></div>
         </form>
       </div>
       <div class="col-md-6">

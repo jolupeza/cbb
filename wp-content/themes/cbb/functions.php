@@ -323,6 +323,7 @@ function register_contact_callback()
   $nonce = $_POST['nonce'];
   $result = array(
     'result' => false,
+    'msg' => '',
     'error' => ''
   );
 
@@ -409,6 +410,7 @@ function register_contact_callback()
             wp_set_object_terms($post_id, $subject, 'subjects');
 
             $result['result'] = true;
+            $result['msg'] = $options['response_contact_forms'];
           } else {
             $result['error'] = 'Plantilla email no encontrada.';
             ob_get_clean();
@@ -442,6 +444,7 @@ function register_admision_callback()
   $nonce = $_POST['nonce'];
   $result = array(
     'result' => false,
+    'msg' => '',
     'error' => ''
   );
 
@@ -533,6 +536,7 @@ function register_admision_callback()
                 wp_set_object_terms($post_id, $level, 'levels');
 
                 $result['result'] = true;
+                $result['msg'] = $options['response_admision_forms'];
               } else {
                 $result['error'] = 'Plantilla email no encontrada.';
                 ob_get_clean();

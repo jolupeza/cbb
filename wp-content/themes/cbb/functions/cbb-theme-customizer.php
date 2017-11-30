@@ -354,4 +354,37 @@ function cbb_customize_register($wp_customize) {
     'settings' => 'cbb_custom_settings[response_admision]',
     'type' => 'textarea'
   ]);
+
+  // Messages user forms
+  $wp_customize->add_section('cbb_response_forms', [
+    'title' => __('Mensajes Respuesta Formularios', THEMEDOMAIN),
+    'description' => __('Configurar los mensajes de respuesta al usuario de los formulario de contacto y registro de admisión', THEMEDOMAIN),
+    'priority' => 41
+  ]);
+
+  // Response Contact
+  $wp_customize->add_setting('cbb_custom_settings[response_contact_forms]', [
+    'default' => '',
+    'type' => 'option'
+  ]);
+
+  $wp_customize->add_control('cbb_custom_settings[response_contact_forms]', [
+    'label' => __('Mensaje de respuesta del formulario de contacto', THEMEDOMAIN),
+    'section' => 'cbb_response_forms',
+    'settings' => 'cbb_custom_settings[response_contact_forms]',
+    'type' => 'textarea'
+  ]);
+
+  // Response Admition
+  $wp_customize->add_setting('cbb_custom_settings[response_admision_forms]', [
+    'default' => '',
+    'type' => 'option'
+  ]);
+
+  $wp_customize->add_control('cbb_custom_settings[response_admision_forms]', [
+    'label' => __('Mensaje de respuesta del formulario de admisión', THEMEDOMAIN),
+    'section' => 'cbb_response_forms',
+    'settings' => 'cbb_custom_settings[response_admision_forms]',
+    'type' => 'textarea'
+  ]);
 }

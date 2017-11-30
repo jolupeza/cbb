@@ -99,11 +99,11 @@
             </div>
           </div>
 
-          <p class="text-center" id="js-form-admision-msg"></p>
-
           <p class="text-center">
             <button type="submit" class="btn Button Button--blue Button--medium">enviar <span class="Form-loader rotateIn hidden" id="js-form-admision-loader"><i class="glyphicon glyphicon-refresh"></i></span></button>
           </p>
+
+          <div class="alert text-center h4" id="js-form-admision-msg"></div>
         </form>
       </div>
       <div class="col-md-6">
