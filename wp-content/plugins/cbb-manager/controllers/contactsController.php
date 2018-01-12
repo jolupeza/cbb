@@ -37,7 +37,7 @@ class contactsController extends Controller
         $objPHPExcel->getActiveSheet()->setCellValue('A1', $title);
         $objPHPExcel->getActiveSheet()->getStyle('A1')->getFont()->setSize(18);
         $objPHPExcel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);
-        $objPHPExcel->getActiveSheet()->mergeCells('A1:E1');
+        $objPHPExcel->getActiveSheet()->mergeCells('A1:F1');
         $objPHPExcel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
         $objPHPExcel->getActiveSheet()->getRowDimension(1)->setRowHeight(30);
@@ -47,6 +47,7 @@ class contactsController extends Controller
         $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(15);
         $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(20);
         $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(40);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(20);
 
         $this->generateHeaderExcel($objPHPExcel);
         $this->generateCellsExcel($objPHPExcel);
@@ -84,7 +85,8 @@ class contactsController extends Controller
             'B3' => 'Correo electrónico',
             'C3' => 'Sede',
             'D3' => 'Asunto',
-            'E3' => 'Mensaje'
+            'E3' => 'Mensaje',
+            'F3' => 'Fecha',
         );
 
         return $this->headers;
@@ -137,6 +139,9 @@ class contactsController extends Controller
 
                 $excel->getActiveSheet()->setCellValue('E'.$i, $message);
                 $excel->getActiveSheet()->getStyle('E'.$i)->getFont()->setSize(10);
+                
+                $excel->getActiveSheet()->setCellValue('F'.$i, get_the_time('d-m-Y'));
+                $excel->getActiveSheet()->getStyle('F'.$i)->getFont()->setSize(10);
 
 //                $excel->getActiveSheet()->setCellValue('G'.$i, $datePostulation);
 //                $excel->getActiveSheet()->getStyle('G'.$i)->getFont()->setSize(10);
