@@ -2268,6 +2268,49 @@ a {
   position: relative;
 }
 
+.Video-caption {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-content: center;
+  align-content: center;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+.Video-caption h2, .Video-caption h3, .Video-caption p {
+  width: 100%;
+}
+.Video-caption h2, .Video-caption h3 {
+  color: white;
+  font-family: "reef";
+  margin: 0 0 15px 0;
+}
+.Video-caption h2 {
+  font-size: 7em;
+}
+@media screen and (max-width: 767px) {
+  .Video-caption h2 {
+    font-size: 3em;
+  }
+}
+.Video-caption h3 {
+  font-size: 5em;
+}
+@media screen and (max-width: 767px) {
+  .Video-caption h3 {
+    font-size: 2.5em;
+  }
+}
+.Video-caption p {
+  margin-bottom: 0;
+}
+
 .Modal--video.in {
   display: -webkit-flex !important;
   display: flex !important;

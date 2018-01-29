@@ -1,3 +1,37 @@
 .Video {
   position: relative;
 }
+.Video-caption {
+  @include display-flex();
+  @include justify-content(center);
+  @include align-content(center);
+  @include flex-wrap(wrap);
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  h2, h3, p {
+    width: 100%;
+  }
+  h2, h3 {
+    color: white;
+    font-family: "reef";
+    margin: 0 0 15px 0;
+  }
+  h2 {
+    font-size: 7em;
+    @media screen and (max-width: 767px) {
+      font-size: 3em;
+    }
+  }
+  h3 {
+    font-size: 5em;
+    @media screen and (max-width: 767px) {
+      font-size: 2.5em;
+    }
+  }
+  p {
+    margin-bottom: 0;
+  }
+}

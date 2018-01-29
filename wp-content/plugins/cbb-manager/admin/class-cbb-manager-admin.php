@@ -578,6 +578,20 @@ class Cbb_Manager_Admin
             delete_post_meta($post_id, 'mb_icon');
         }
         
+        // Title
+        if (isset($_POST['mb_title']) && !empty($_POST['mb_title'])) {
+            update_post_meta($post_id, 'mb_title', esc_attr($_POST['mb_title']));
+        } else {
+            delete_post_meta($post_id, 'mb_title');
+        }
+        
+        // SubTitle
+        if (isset($_POST['mb_subtitle']) && !empty($_POST['mb_subtitle'])) {
+            update_post_meta($post_id, 'mb_subtitle', esc_attr($_POST['mb_subtitle']));
+        } else {
+            delete_post_meta($post_id, 'mb_subtitle');
+        }
+        
         // Text Link
         if (isset($_POST['mb_text']) && !empty($_POST['mb_text'])) {
             update_post_meta($post_id, 'mb_text', esc_attr($_POST['mb_text']));

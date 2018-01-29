@@ -1,13 +1,15 @@
 <?php get_header(); ?>
 
 <?php
+  $homePage = get_page_by_title('Homepage');
+  $idPage = $homePage->ID;
+?>
+
+<?php
   if (file_exists(TEMPLATEPATH . '/partials/sliders.php')) {
     include TEMPLATEPATH . '/partials/sliders.php';
   }
 
-  $homePage = get_page_by_title('Homepage');
-
-  $idPage = $homePage->ID;
   $values = get_post_custom($idPage);
   $youtube = isset($values['mb_youtube']) ? esc_attr($values['mb_youtube'][0]) : '';
 ?>

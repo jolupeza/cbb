@@ -32,6 +32,8 @@
         $page = isset($values['mb_page']) ? (int)esc_attr($values['mb_page'][0]) : '';
         $text = isset($values['mb_text']) ? esc_attr($values['mb_text'][0]) : '';
         $target = isset($values['mb_target']) ? esc_attr($values['mb_target'][0]) : '';
+        $title = isset($values['mb_title']) ? esc_attr($values['mb_title'][0]) : '';
+        $subtitle = isset($values['mb_subtitle']) ? esc_attr($values['mb_subtitle'][0]) : '';
         
         wp_nonce_field('pages_meta_box_nonce', 'meta_box_nonce');
     ?>
@@ -396,6 +398,18 @@
             <option value="protagonismo" <?php selected($icon, 'protagonismo'); ?>>Protagonismo</option>
             <option value="trabajo-cooperativo" <?php selected($icon, 'trabajo-cooperativo'); ?>>Trabajo cooperativo</option>
         </select>
+    </p>
+    
+    <!-- Texto principal -->
+    <p class="content-mb">
+        <label for="mb_title">Texto principal: </label>
+        <input type="text" name="mb_title" id="mb_title" value="<?php echo $title; ?>" />
+    </p>
+    
+    <!-- Texto secundario -->
+    <p class="content-mb">
+        <label for="mb_subtitle">Texto secundario: </label>
+        <input type="text" name="mb_subtitle" id="mb_subtitle" value="<?php echo $subtitle; ?>" />
     </p>
     
     <!-- Texto enlace-->

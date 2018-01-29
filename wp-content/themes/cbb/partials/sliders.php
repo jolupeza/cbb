@@ -21,7 +21,17 @@
 
 <?php if (!empty($webm) || !empty($mp4) || !empty($ogv)) : ?>
   <section class="Video text-center">
-    <video id="my-video" class="img-responsive" autoplay="true" loop="true" preload="auto" poster="<?php echo $poster; ?>">
+    <?php
+      $values = get_post_custom($idPage);
+      $title = isset($values['mb_title']) ? esc_attr($values['mb_title'][0]) : '';
+      $subtitle = isset($values['mb_subtitle']) ? esc_attr($values['mb_subtitle'][0]) : '';
+      $text = isset($values['mb_text']) ? esc_attr($values['mb_text'][0]) : '';
+      $url = isset($values['mb_url']) ? esc_attr($values['mb_url'][0]) : '';
+      $pageLink = isset($values['mb_page']) ? (int)esc_attr($values['mb_page'][0]) : 0;
+      $target = isset($values['mb_target']) ? esc_attr($values['mb_target'][0]) : '';
+      $target = (!empty($target) && $target === 'on') ? ' target="_blank" rel="noopener noreferrer"' : '';
+    ?>
+    <video id="my-video" class="img-responsive center-block" autoplay="true" loop="true" preload="auto" poster="<?php echo $poster; ?>">
       <?php if (!empty($mp4)) : ?>
         <source
           src="<?php echo $mp4; ?>"
@@ -40,7 +50,21 @@
           type="video/ogg">
       <?php endif; ?>
       Su navegador no admite etiquetas de video HTML5.
+
     </video>
+    <?php if (!empty($url) || $pageLink > 0) : ?>
+      <aside class="Video-caption">
+        <?php if (!empty($title)) : ?><h2 class="text-uppercase"><?php echo $title ?></h2><?php endif; ?>
+        <?php if (!empty($subtitle)) : ?><h3><?php echo $subtitle; ?></h3><?php endif; ?>
+
+        <?php if (!empty($url) || $pageLink > 0) : ?>
+          <?php $link = ($pageLink > 0) ? get_page_link($pageLink) : $url; ?>
+          <p>
+            <a class="Button Button--red" href="<?php echo $link; ?>"<?php echo $target; ?>><?php echo $text; ?></a>
+          </p>
+        <?php endif; ?>
+      </aside>
+    <?php endif; ?>
 
     <?php if (count($dataMenuNext)) : ?>
       <a href="<?php echo $dataMenuNext['url']; ?>" class="right NavMenu">
