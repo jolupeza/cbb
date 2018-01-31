@@ -11,6 +11,9 @@
   position: absolute;
   top: 0;
   width: 100%;
+  @media screen and (max-width: 767px) and (orientation: portrait) {
+    @include align-content(flex-end);
+  }
   h2, h3, p {
     width: 100%;
   }
@@ -21,17 +24,28 @@
   }
   h2 {
     font-size: 7em;
+    @media screen and (max-width: 991px) {
+      font-size: 5em;
+    }
     @media screen and (max-width: 767px) {
-      font-size: 3em;
+      font-size: 2em;
+      margin: 0 0 5px 0;
     }
   }
   h3 {
     font-size: 5em;
+    @media screen and (max-width: 991px) {
+      font-size: 3em;
+    }
     @media screen and (max-width: 767px) {
-      font-size: 2.5em;
+      font-size: 1.5em;
+      margin: 0 0 5px 0;
     }
   }
   p {
     margin-bottom: 0;
+    @media screen and (max-width: 767px) {
+      margin-bottom: 5px;
+    }
   }
 }

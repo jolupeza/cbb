@@ -2283,6 +2283,12 @@ a {
   top: 0;
   width: 100%;
 }
+@media screen and (max-width: 767px) and (orientation: portrait) {
+  .Video-caption {
+    -webkit-align-content: flex-end;
+    align-content: flex-end;
+  }
+}
 .Video-caption h2, .Video-caption h3, .Video-caption p {
   width: 100%;
 }
@@ -2294,21 +2300,38 @@ a {
 .Video-caption h2 {
   font-size: 7em;
 }
+@media screen and (max-width: 991px) {
+  .Video-caption h2 {
+    font-size: 5em;
+  }
+}
 @media screen and (max-width: 767px) {
   .Video-caption h2 {
-    font-size: 3em;
+    font-size: 2em;
+    margin: 0 0 5px 0;
   }
 }
 .Video-caption h3 {
   font-size: 5em;
 }
+@media screen and (max-width: 991px) {
+  .Video-caption h3 {
+    font-size: 3em;
+  }
+}
 @media screen and (max-width: 767px) {
   .Video-caption h3 {
-    font-size: 2.5em;
+    font-size: 1.5em;
+    margin: 0 0 5px 0;
   }
 }
 .Video-caption p {
   margin-bottom: 0;
+}
+@media screen and (max-width: 767px) {
+  .Video-caption p {
+    margin-bottom: 5px;
+  }
 }
 
 .Modal--video.in {
