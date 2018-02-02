@@ -68,8 +68,8 @@
   }
   &--page {
     .carousel-content {
+      background-color: $redSoft;
       @include display-flex();
-      @include align-items(center);
       @media screen and (max-width: 767px) {
         @include flex-wrap(wrap);
       }
@@ -84,15 +84,24 @@
       }
     }
     .carousel-caption {
-      bottom: 0;
-      @include flex-basis(30%);
-      left: 0;
+      bottom: auto;
+      @include display-flex();
+      @include flex-direction(column);
+      @include justify-content(center);
+      @include flex-basis(50%);
+      left: auto;
       padding: 0 25px;
       position: relative;
-      right: 0;
+      right: auto;
       text-align: left;
       @include text-shadow(none);
-      top: 0;
+      top: auto;
+      h3, p {
+        width: 50%;
+        @media screen and (max-width: 1400px) {
+          width: 100%;
+        }
+      }
       h3 {
         font-family: "reef";
         font-size: 2.625em;

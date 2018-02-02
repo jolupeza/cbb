@@ -7,7 +7,6 @@
     margin-bottom: 15px;
   }
   &--red, &--redSoft {
-    background-color: $red;
     p {
       color: $white;
     }
@@ -15,6 +14,9 @@
       color: $white;
       margin-bottom: 0;
     }
+  }
+  &--red {
+    background-color: $red;
   }
   &--redSoft {
     background-color: $redSoft;

@@ -783,10 +783,9 @@ a {
   }
 }
 .Carousel--page .carousel-content {
+  background-color: #ce0321;
   display: -webkit-flex;
   display: flex;
-  -webkit-align-items: center;
-  align-items: center;
 }
 @media screen and (max-width: 767px) {
   .Carousel--page .carousel-content {
@@ -811,16 +810,30 @@ a {
   }
 }
 .Carousel--page .carousel-caption {
-  bottom: 0;
-  -webkit-flex-basis: 30%;
-  flex-basis: 30%;
-  left: 0;
+  bottom: auto;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-flex-basis: 50%;
+  flex-basis: 50%;
+  left: auto;
   padding: 0 25px;
   position: relative;
-  right: 0;
+  right: auto;
   text-align: left;
   text-shadow: none;
-  top: 0;
+  top: auto;
+}
+.Carousel--page .carousel-caption h3, .Carousel--page .carousel-caption p {
+  width: 50%;
+}
+@media screen and (max-width: 1400px) {
+  .Carousel--page .carousel-caption h3, .Carousel--page .carousel-caption p {
+    width: 100%;
+  }
 }
 .Carousel--page .carousel-caption h3 {
   font-family: "reef";
@@ -1249,15 +1262,15 @@ a {
 .Page p {
   margin-bottom: 15px;
 }
-.Page--red, .Page--redSoft {
-  background-color: #b00725;
-}
 .Page--red p, .Page--redSoft p {
   color: #fcfbfb;
 }
 .Page--red .Page-title, .Page--redSoft .Page-title {
   color: #fcfbfb;
   margin-bottom: 0;
+}
+.Page--red {
+  background-color: #b00725;
 }
 .Page--redSoft {
   background-color: #ce0321;

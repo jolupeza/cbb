@@ -15,7 +15,7 @@
 
     $idCarousel = basename(get_permalink());
 ?>
-  <section id="<?php echo $idCarousel; ?>" class="Page Page--noPaddingTop Page--redSoft carousel slide Carousel Carousel--page" data-ride="carousel">
+  <section id="<?php echo $idCarousel; ?>" class="Page carousel slide Carousel Carousel--page" data-ride="carousel">
     <?php if ($childs->post_count > 1) : ?>
       <ol class="carousel-indicators">
         <?php while ($childs->have_posts()) : ?>
