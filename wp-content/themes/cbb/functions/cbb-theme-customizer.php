@@ -425,4 +425,58 @@ function cbb_customize_register($wp_customize) {
     'type'       => 'select',
     'choices'    => $parallaxs,
   ));
+
+  // Pixel Facebook
+  $wp_customize->add_section('cbb_pixel', [
+    'title' => __('Configuración Pixel de Facebook', THEMEDOMAIN),
+    'description' => __('Configuración de opciones para el funcionamiento de Pixel de Facebook', THEMEDOMAIN),
+    'priority' => 43
+  ]);
+
+  // pixel code
+  $wp_customize->add_setting('cbb_custom_settings[pixel_code]', [
+    'default' => '',
+    'type' => 'option'
+  ]);
+
+  $wp_customize->add_control('cbb_custom_settings[pixel_code]', [
+    'label' => __('Código', THEMEDOMAIN),
+    'section' => 'cbb_pixel',
+    'settings' => 'cbb_custom_settings[pixel_code]',
+    'type' => 'textarea'
+  ]);
+
+  $wp_customize->add_setting('cbb_custom_settings[pixel_all]', [
+    'default' => 0,
+    'type' => 'option'
+  ]);
+
+  $wp_customize->add_control('cbb_custom_settings[pixel_all]', [
+    'label' => __('¿Mostrar en todas las páginas?', THEMEDOMAIN),
+    'section' => 'cbb_pixel',
+    'settings' => 'cbb_custom_settings[pixel_all]',
+    'type' => 'checkbox'
+  ]);
+
+  $pages = get_pages([
+    'parent' => 0
+  ]);
+  $pagesArr = [];
+
+  foreach ($pages as $page) {
+    $pagesArr[$page->ID] = $page->post_title;
+  }
+
+  $wp_customize->add_setting('cbb_custom_settings[pixel_page]', [
+    'default' => '',
+    'type' => 'option'
+  ]);
+
+  $wp_customize->add_control('cbb_custom_settings[pixel_page]', array(
+    'label'      => __('En página específica:', THEMEDOMAIN),
+    'section'    => 'cbb_pixel',
+    'settings'   => 'cbb_custom_settings[pixel_page]',
+    'type'       => 'select',
+    'choices'    => $pagesArr,
+  ));
 }

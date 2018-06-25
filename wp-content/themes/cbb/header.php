@@ -1,3 +1,5 @@
+<?php $options = get_option('cbb_custom_settings'); ?>
+
 <!DOCTYPE html>
 <html <?php language_attributes(); ?> class="no-js">
   <head>
@@ -28,6 +30,17 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <?php
+      $pixelCode = !empty($options['pixel_code']) ? $options['pixel_code'] : '';
+      $pixelAll = !empty($options['pixel_all']) ? $options['pixel_all'] : false;
+      $pixelPage = !empty($options['pixel_page']) ? $options['pixel_page'] : 0;
+    ?>
+    <?php if (!empty($pixelCode)) : ?>
+      <?php if ($pixelAll || is_page($pixelPage)) : ?>
+        <?php echo $pixelCode; ?>
+      <?php endif; ?>
+    <?php endif; ?>
+
     <!-- Script required for extra functionality on the comment form -->
     <?php if (is_singular()) wp_enqueue_script( 'comment-reply' ); ?>
 
@@ -43,7 +56,6 @@
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WC5QLQ8" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
-    <?php $options = get_option('cbb_custom_settings'); ?>
     <header class="Header">
       <div class="container">
         <div class="row">
