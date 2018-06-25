@@ -220,6 +220,16 @@ var j = jQuery.noConflict();
         valid: 'glyphicon glyphicon-ok',
         invalid: 'glyphicon glyphicon-remove',
         validating: 'glyphicon glyphicon-refresh'
+      },
+      fields: {
+        'contact_phone': {
+          validators: {
+            regexp: {
+              regexp: /^[0-9]+$/i,
+              message: 'Ingresar sólo dígitos'
+            }
+          }
+        }
       }
     }).on('err.field.fv', function(e, data){
       var field = e.target;

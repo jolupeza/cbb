@@ -94,10 +94,13 @@
               <td class="bodycopy" align="right" style="padding: 10px 10px 10px 10px; font-size: 14px; line-height: 18px; color: #484848; font-family: Arial; font-weight: bold;">Correo electrónico:</td>
             </tr>
             <tr>
+              <td class="bodycopy" align="right" style="padding: 10px 10px 10px 10px; font-size: 14px; line-height: 18px; color: #484848; font-family: Arial; font-weight: bold;">Teléfono:</td>
+            </tr>
+            <tr>
               <td class="bodycopy" align="right" style="padding: 10px 10px 10px 10px; font-size: 14px; line-height: 18px; color: #484848; font-family: Arial; font-weight: bold;">Sede:</td>
             </tr>
             <tr>
-              <td class="bodycopy" align="right" style="padding: 10px 10px 10px 10px; font-size: 14px; line-height: 18px; color: #484848; font-family: Arial; font-weight: bold;">Asunto:</td>
+              <td class="bodycopy" align="right" style="padding: 10px 10px 10px 10px; font-size: 14px; line-height: 18px; color: #484848; font-family: Arial; font-weight: bold;">Grado:</td>
             </tr>
           </table>
           <!--[if (gte mso 9)|(IE)]>
@@ -116,10 +119,13 @@
                             <td class="bodycopy" style="padding: 10px 10px 10px 10px; font-size: 14px; line-height: 18px; color: #484848; font-family: Arial;"><?php echo $email; ?></td>
                           </tr>
                           <tr>
+                            <td class="bodycopy" style="padding: 10px 10px 10px 10px; font-size: 14px; line-height: 18px; color: #484848; font-family: Arial;"><?php echo $phone; ?></td>
+                          </tr>
+                          <tr>
                             <td class="bodycopy" style="padding: 10px 10px 10px 10px; font-size: 14px; line-height: 18px; color: #484848; font-family: Arial;"><?php echo (!is_null($dataLocal)) ? $dataLocal->post_title : '&nbsp;'; ?></td>
                           </tr>
                           <tr>
-                            <td class="bodycopy" style="padding: 10px 10px 10px 10px; font-size: 14px; line-height: 18px; color: #484848; font-family: Arial;"><?php echo $dataSubject->name; ?></td>
+                            <td class="bodycopy" style="padding: 10px 10px 10px 10px; font-size: 14px; line-height: 18px; color: #484848; font-family: Arial;"><?php echo $dataLevel->name; ?></td>
                           </tr>
                         </table>
                       </td>

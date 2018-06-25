@@ -723,6 +723,7 @@ class Cbb_Manager_Admin
             'cb' => '<input type="checkbox" />',
             'name' => __('Nombre'),
             'email' => __('Correo electrónico'),
+            'phone' => __('Teléfono'),
             'date' => __('Fecha'),
         );
 
@@ -790,6 +791,10 @@ class Cbb_Manager_Admin
             case 'email':
                 $email = isset($values['mb_email']) ? esc_attr($values['mb_email'][0]) : '';
                 echo $email;
+                break;
+            case 'phone':
+                $phone = !empty($values['mb_phone']) ? esc_attr($values['mb_phone'][0]) : '';
+                echo $phone;
                 break;
         }
     }
@@ -1990,7 +1995,40 @@ class Cbb_Manager_Admin
 //            'capabilities' => array(),
         );
 
-        register_taxonomy('subjects', 'contacts', $args);
+//        register_taxonomy('subjects', 'contacts', $args);
+        
+        $labels = array(
+            'name' => _x('Grados', 'Taxonomy plural name', THEMEDOMAIN),
+            'singular_name' => _x('Grado', 'Taxonomy singular name', THEMEDOMAIN),
+            'search_items' => __('Buscar Grado', THEMEDOMAIN),
+            'popular_items' => __('Grados Populares', THEMEDOMAIN),
+            'all_items' => __('Todos los Grados', THEMEDOMAIN),
+            'parent_item' => __('Grado Padre', THEMEDOMAIN),
+            'parent_item_colon' => __('Grado Padre', THEMEDOMAIN),
+            'edit_item' => __('Editar Grado', THEMEDOMAIN),
+            'update_item' => __('Actualizar Grado', THEMEDOMAIN),
+            'add_new_item' => __('Añadir nuevo Grado', THEMEDOMAIN),
+            'new_item_name' => __('Nuevo Grado', THEMEDOMAIN),
+            'add_or_remove_items' => __('Añadir o eliminar Grado', THEMEDOMAIN),
+            'choose_from_most_used' => __('Choose from most used text-domain', THEMEDOMAIN),
+            'menu_name' => __('Grados', THEMEDOMAIN),
+        );
+
+        $args = array(
+            'labels' => $labels,
+            'public' => false,
+            'show_in_nav_menus' => false,
+            'show_in_menu' => true,
+            'show_admin_column' => true,
+            'hierarchical' => true,
+            'show_tagcloud' => false,
+            'show_ui' => true,
+            'query_var' => true,
+            'rewrite' => false,
+//            'capabilities' => array(),
+        );
+
+        register_taxonomy('levels_contact', 'contacts', $args);
     }
     
     /**

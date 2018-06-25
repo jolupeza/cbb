@@ -232,6 +232,10 @@
             <label for="contact_email" class="sr-only">Correo electrónico</label>
             <input type="email" class="form-control" name="contact_email" placeholder="Correo electrónico" autocomplete="off" required />
           </div>
+          <div class="form-group">
+            <label for="contact_phone" class="sr-only">Teléfono / Celular</label>
+            <input type="text" class="form-control" name="contact_phone" placeholder="Teléfono / Celular" autocomplete="off" minlength="7" maxlength="9" data-fv-stringlength-message="Debe contener 7 ó 9 dígitos" required>
+          </div>
 
           <?php
             $args = [
@@ -247,7 +251,7 @@
             <div class="form-group">
               <label for="contact_local" class="sr-only">Sede</label>
               <select name="contact_local" class="form-control">
-                <option value="">-- Indicar Sede si lo necesita --</option>
+                <option value="">-- Seleccione la sede de interés --</option>
                 <?php while ($the_query->have_posts()) : ?>
                   <?php $the_query->the_post(); ?>
                   <option value="<?php echo get_the_ID(); ?>"><?php echo get_the_excerpt(); ?></option>
@@ -258,6 +262,27 @@
           <?php wp_reset_postdata(); ?>
 
           <?php
+            $levels = get_terms([
+              'taxonomy' => 'levels_contact',
+              'hide_empty' => false,
+              'orderby' => 'term_id',
+              'order' => 'ASC'
+            ]);
+
+            if (count($levels)) :
+          ?>
+            <div class="form-group">
+              <label for="contact_level" class="sr-only">Grado</label>
+              <select name="contact_level" class="form-control" required data-fv-notempty-message="Debe seleccionar el grado">
+                <option value="">-- Seleccione el grado al que postula --</option>
+                <?php foreach ($levels as $level) : ?>
+                  <option value="<?php echo $level->term_id ?>"><?php echo $level->name; ?></option>
+                <?php endforeach; ?>
+              </select>
+            </div>
+          <?php endif; ?>
+
+          <?php /*
             $subjects = get_terms([
               'taxonomy' => 'subjects',
               'hide_empty' => false,
@@ -276,7 +301,8 @@
                 <?php endforeach; ?>
               </select>
             </div>
-          <?php endif; ?>
+          <?php endif; */ ?>
+
           <div class="form-group">
             <label for="contact_message" class="sr-only">Mensaje</label>
             <textarea name="contact_message" rows="6" class="form-control" placeholder="Mensaje" required></textarea>

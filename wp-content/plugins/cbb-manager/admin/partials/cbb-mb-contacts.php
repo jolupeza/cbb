@@ -13,6 +13,7 @@
 
         $name = isset($values['mb_name']) ? esc_attr($values['mb_name'][0]) : '';
         $email = isset($values['mb_email']) ? esc_attr($values['mb_email'][0]) : '';
+        $phone = !empty($values['mb_phone']) ? esc_attr($values['mb_phone'][0]) : '';
         $message = isset($values['mb_message']) ? esc_attr($values['mb_message'][0]) : '';
         $local = isset($values['mb_local']) ? esc_attr($values['mb_local'][0]) : '';
         
@@ -29,6 +30,12 @@
     <p class="content-mb">
         <label for="mb_email">Correo electrónico: </label>
         <input type="text" name="mb_email" id="mb_email" value="<?php echo $email; ?>" />
+    </p>
+    
+    <!-- Phone -->
+    <p class="content-mb">
+        <label for="mb_phone">Teléfono: </label>
+        <input type="text" name="mb_phone" id="mb_phone" value="<?php echo $phone; ?>" />
     </p>
     
     <!-- Message-->

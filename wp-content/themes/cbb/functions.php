@@ -298,7 +298,7 @@ function mailtrap($phpmailer) {
   $phpmailer->Password = 'f1ea173da928d9';
 }
 
-//add_action('phpmailer_init', 'mailtrap');
+// add_action('phpmailer_init', 'mailtrap');
 
 // Bugs send emails WP 4.6.1
 add_filter('wp_mail_from', function() {
@@ -333,21 +333,25 @@ function register_contact_callback()
 
   $name = trim($_POST['contact_name']);
   $email = trim($_POST['contact_email']);
-  $subject = (int)trim($_POST['contact_subject']);
+  $phone = trim($_POST['contact_phone']);
+  $level = (int)trim($_POST['contact_level']);
+  // $subject = (int)trim($_POST['contact_subject']);
   $message = trim($_POST['contact_message']);
   $local = (int)trim($_POST['contact_local']);
 
-  if (!empty($name) && !empty($email) && is_email($email) && !empty($message) && $subject > 0) {
+  if (!empty($name) && !empty($email) && is_email($email) && !empty($phone) && preg_match('/^[0-9]+$/', $phone) && (strlen($phone) > 6 || strlen($phone) < 10) && !empty($message) && $level > 0) {
     $options = get_option('cbb_custom_settings');
 
     $name = sanitize_text_field($name);
     $email = sanitize_email($email);
+    $phone = sanitize_text_field($phone);
     $message = sanitize_text_field($message);
 
-    // Validate Subject
-    $dataSubject = get_term_by('id', $subject, 'subjects');
+    // Validate Level
+    // $dataSubject = get_term_by('id', $subject, 'subjects');
+    $dataLevel = get_term_by('id', $level, 'levels_contact');
 
-    if (is_object($dataSubject)) {
+    if (is_object($dataLevel)) {
       // Get data Local
       $dataLocal = ($local > 0) ? get_post($local) : null;
 
@@ -403,11 +407,12 @@ function register_contact_callback()
             ));
             update_post_meta($post_id, 'mb_name', $name);
             update_post_meta($post_id, 'mb_email', $email);
+            update_post_meta($post_id, 'mb_phone', $phone);
             update_post_meta($post_id, 'mb_message', $message);
             if (!is_null($dataLocal)) {
               update_post_meta($post_id, 'mb_local', $local);
             }
-            wp_set_object_terms($post_id, $subject, 'subjects');
+            wp_set_object_terms($post_id, $level, 'levels_contact');
 
             $result['result'] = true;
             $result['msg'] = $options['response_contact_forms'];
@@ -423,7 +428,7 @@ function register_contact_callback()
         ob_get_clean();
       }
     } else {
-      $result['error'] = 'Debe seleccionar el asunto o tipo de consulta.';
+      $result['error'] = 'Debe seleccionar el grado al que postula.';
     }
   } else {
     $result['error'] = 'Verifique que ha ingresado los datos correctamente.';

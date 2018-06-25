@@ -37,17 +37,18 @@ class contactsController extends Controller
         $objPHPExcel->getActiveSheet()->setCellValue('A1', $title);
         $objPHPExcel->getActiveSheet()->getStyle('A1')->getFont()->setSize(18);
         $objPHPExcel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);
-        $objPHPExcel->getActiveSheet()->mergeCells('A1:F1');
+        $objPHPExcel->getActiveSheet()->mergeCells('A1:G1');
         $objPHPExcel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
         $objPHPExcel->getActiveSheet()->getRowDimension(1)->setRowHeight(30);
         $objPHPExcel->getActiveSheet()->getRowDimension(3)->setRowHeight(20);
         $objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(20);
         $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(20);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(15);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(20);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(40);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(20);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(20);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(15);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(20);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(40);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('G')->setWidth(20);
 
         $this->generateHeaderExcel($objPHPExcel);
         $this->generateCellsExcel($objPHPExcel);
@@ -83,10 +84,11 @@ class contactsController extends Controller
         $this->headers = array(
             'A3' => 'Nombre',
             'B3' => 'Correo electrónico',
-            'C3' => 'Sede',
-            'D3' => 'Asunto',
-            'E3' => 'Mensaje',
-            'F3' => 'Fecha',
+            'C3' => 'Teléfono',
+            'D3' => 'Sede',
+            'E3' => 'Grado',
+            'F3' => 'Mensaje',
+            'G3' => 'Fecha',
         );
 
         return $this->headers;
@@ -111,6 +113,7 @@ class contactsController extends Controller
 
                 $name = (isset($values['mb_name'])) ? esc_attr($values['mb_name'][0]) : '';
                 $email = (isset($values['mb_email'])) ? esc_attr($values['mb_email'][0]) : '';
+                $phone = (isset($values['mb_phone'])) ? esc_attr($values['mb_phone'][0]) : '';
                 $sedeRow = isset($values['mb_local']) ? esc_attr($values['mb_local'][0]) : '';
                 $message = isset($values['mb_message']) ? esc_attr($values['mb_message'][0]) : '';
                 
@@ -119,10 +122,10 @@ class contactsController extends Controller
                     $dataSedeRow = get_post($sedeRow);
                 }
                 
-                $subjects = get_the_terms($id, 'subjects');
-                $subject = '';
-                if (count($subjects)) {
-                    $subject = $subjects[0];
+                $levels = get_the_terms($id, 'levels_contact');
+                $level = '';                                
+                if ($levels) {
+                    $level = $levels[0];
                 }
 
                 $excel->getActiveSheet()->setCellValue('A'.$i, $name);
@@ -130,18 +133,21 @@ class contactsController extends Controller
 
                 $excel->getActiveSheet()->setCellValue('B'.$i, $email);
                 $excel->getActiveSheet()->getStyle('B'.$i)->getFont()->setSize(10);
-
-                $excel->getActiveSheet()->setCellValue('C'.$i, is_object($dataSedeRow) ? $dataSedeRow->post_title : $dataSedeRow);
+                
+                $excel->getActiveSheet()->setCellValue('C'.$i, $phone);
                 $excel->getActiveSheet()->getStyle('C'.$i)->getFont()->setSize(10);
 
-                $excel->getActiveSheet()->setCellValue('D'.$i, is_object($subject) ? $subject->name : $subject);
+                $excel->getActiveSheet()->setCellValue('D'.$i, is_object($dataSedeRow) ? $dataSedeRow->post_title : $dataSedeRow);
                 $excel->getActiveSheet()->getStyle('D'.$i)->getFont()->setSize(10);
 
-                $excel->getActiveSheet()->setCellValue('E'.$i, $message);
+                $excel->getActiveSheet()->setCellValue('E'.$i, is_object($level) ? $level->name : $level);
                 $excel->getActiveSheet()->getStyle('E'.$i)->getFont()->setSize(10);
-                
-                $excel->getActiveSheet()->setCellValue('F'.$i, get_the_time('d-m-Y'));
+
+                $excel->getActiveSheet()->setCellValue('F'.$i, $message);
                 $excel->getActiveSheet()->getStyle('F'.$i)->getFont()->setSize(10);
+                
+                $excel->getActiveSheet()->setCellValue('G'.$i, get_the_time('d-m-Y'));
+                $excel->getActiveSheet()->getStyle('G'.$i)->getFont()->setSize(10);
 
 //                $excel->getActiveSheet()->setCellValue('G'.$i, $datePostulation);
 //                $excel->getActiveSheet()->getStyle('G'.$i)->getFont()->setSize(10);
