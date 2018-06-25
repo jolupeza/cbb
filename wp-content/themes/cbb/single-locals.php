@@ -179,6 +179,11 @@
       the_post();
       $idSede = get_the_id();
       $idParent = get_the_ID();
+
+      $valuesLocal = get_post_custom($idSede);
+      $tourButton = !empty($valuesLocal['mb_tourButton']) ? esc_attr($valuesLocal['mb_tourButton'][0]) : 'off';
+      $tourLink = !empty($valuesLocal['mb_tourLink']) ? esc_attr($valuesLocal['mb_tourLink'][0]) : '';
+      $tourTarget = !empty($valuesLocal['mb_tourTarget']) ? esc_attr($valuesLocal['mb_tourTarget'][0]) : 'off';
 ?>
   <?php if (!empty($desc)) : ?>
   <section class="Page" id="locals">
@@ -280,11 +285,17 @@
                       <?php the_content(); ?>
                     </div>
                   <?php endif; ?>
-                  <?php /* <p><a class="Button Button--small Button--red" href="">Tour Virtual</a></p> */ ?>
                 </div>
                 <?php $j++; ?>
               <?php endwhile; ?>
             </div>
+
+            <?php if ($tourButton === 'on') : ?>
+              <p>
+                <?php $target = $tourTarget === 'on' ? ' target="_blank" rel="noopener noreferrer"' : ''; ?>
+                <a class="Button Button--medium Button--red" href="<?php echo $tourLink; ?>"<?php echo $target; ?>>Tour Virtual 360</a>
+              </p>
+            <?php endif; ?>
 
             <?php if ($the_query->post_count > 1) : ?>
               <a class="left carousel-control" href="#carousel-sedes" role="button" data-slide="prev">

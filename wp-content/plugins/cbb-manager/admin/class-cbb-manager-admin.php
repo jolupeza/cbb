@@ -312,6 +312,21 @@ class Cbb_Manager_Admin
         } else {
             delete_post_meta($post_id, 'mb_parallax');
         }
+        
+        // TourButton
+        $tourButton = !empty(filter_input(INPUT_POST, 'mb_tourButton')) ? 'on' : 'off';
+        update_post_meta($post_id, 'mb_tourButton', $tourButton);
+        
+        // TourTarget
+        $tourTarget = !empty(filter_input(INPUT_POST, 'mb_tourTarget')) ? 'on' : 'off';
+        update_post_meta($post_id, 'mb_tourTarget', $tourTarget);
+        
+        // TourLink
+        if (!empty(filter_input(INPUT_POST, 'mb_tourLink'))) {
+            update_post_meta($post_id, 'mb_tourLink', esc_attr(filter_input(INPUT_POST, 'mb_tourLink')));
+        } else {
+            delete_post_meta($post_id, 'mb_tourLink');
+        }
     }
 
     /**

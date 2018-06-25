@@ -17,6 +17,10 @@
         $email = isset($values['mb_email']) ? esc_attr($values['mb_email'][0]) : '';
         $lat = isset($values['mb_lat']) ? esc_attr($values['mb_lat'][0]) : '';
         $long = isset($values['mb_long']) ? esc_attr($values['mb_long'][0]) : '';
+        
+        $tourButton = !empty($values['mb_tourButton']) ? esc_attr($values['mb_tourButton'][0]) : 'off';
+        $tourLink = !empty($values['mb_tourLink']) ? esc_attr($values['mb_tourLink'][0]) : '';
+        $tourTarget = isset($values['mb_tourTarget']) ? esc_attr($values['mb_tourTarget'][0]) : '';
 
         wp_nonce_field( 'locals_meta_box_nonce', 'meta_box_nonce' );
     ?>
@@ -76,5 +80,23 @@
         ?>
 
         </select>
+    </p>
+    
+    <!-- tour_button -->
+    <p class="content-mb">
+        <label for="mb_tourButton">Mostrar botón Tour Virtual:</label>
+        <input type="checkbox" name="mb_tourButton" id="mb_tourButton" <?php checked($tourButton, 'on'); ?> />
+    </p>
+    
+    <!-- Tour Link -->
+    <p class="content-mb">
+        <label for="mb_tourLink">Link Tour Virtual: </label>
+        <input type="text" name="mb_tourLink" id="mb_tourLink" value="<?php echo $tourLink; ?>" />
+    </p>
+    
+    <!-- Target-->
+    <p class="content-mb">
+        <label for="mb_tourTarget">Mostrar en otra pestaña:</label>
+        <input type="checkbox" name="mb_tourTarget" id="mb_tourTarget" <?php checked($tourTarget, 'on'); ?> />
     </p>
 </div><!-- #mb-locals-id -->
