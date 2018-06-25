@@ -35,6 +35,8 @@
         $title = isset($values['mb_title']) ? esc_attr($values['mb_title'][0]) : '';
         $subtitle = isset($values['mb_subtitle']) ? esc_attr($values['mb_subtitle'][0]) : '';
         
+        $more = !empty($values['mb_more']) ? esc_attr($values['mb_more'][0]) : 'off';
+        
         wp_nonce_field('pages_meta_box_nonce', 'meta_box_nonce');
     ?>
     
@@ -96,6 +98,12 @@
     <p class="content-mb">
         <label for="mb_youtube">Ids vídeo youtube (si son más de dos separarlos con ";"): </label>
         <input type="text" name="mb_youtube" id="mb_youtube" value="<?php echo $youtube; ?>" />
+    </p>
+    
+    <!-- More -->
+    <p class="content-mb">
+        <label for="mb_more">Mostrar información adicional:</label>
+        <input type="checkbox" name="mb_more" id="mb_more" <?php checked($more, 'on'); ?> />
     </p>
     
     <fieldset class="GroupForm">

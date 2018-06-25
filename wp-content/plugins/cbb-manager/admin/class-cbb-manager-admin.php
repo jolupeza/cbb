@@ -616,6 +616,10 @@ class Cbb_Manager_Admin
         } else {
             delete_post_meta($post_id, 'mb_page');
         }
+        
+        // More
+        $more = !empty(filter_input(INPUT_POST, 'mb_more')) ? 'on' : 'off';
+        update_post_meta($post_id, 'mb_more', $more);
     }
 
     /**
