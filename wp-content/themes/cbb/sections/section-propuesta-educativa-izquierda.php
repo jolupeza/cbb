@@ -11,6 +11,7 @@
     $classModal = !empty($youtube) ? ' Modal--video--youtube' : '';
     $more = !empty($values['mb_more']) ? esc_attr($values['mb_more'][0]) : 'off';
     $title = !empty($values['mb_title']) ? esc_attr($values['mb_title'][0]) : '';
+    $url = !empty($values['mb_url']) ? esc_attr($values['mb_url'][0]) : '';
   ?>
   <div class="container">
     <div class="row">
@@ -72,7 +73,7 @@
   </div>
 </section>
 
-<?php if($more === 'on') : ?>
+<?php if($more === 'on' && !empty($url)) : ?>
   <?php
     $filename = TEMPLATEPATH . '/partials/video-interno.php';
 

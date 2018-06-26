@@ -30,7 +30,7 @@
           idPlayer: 'player<?php echo $idParent; ?>',
           height: height,
           width: width,
-          videoId: '<?php echo $youtube; ?>'
+          videoId: '<?php echo $url; ?>'
         });
       </script>
     </figure>
