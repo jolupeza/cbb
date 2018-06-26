@@ -70,6 +70,14 @@
     .carousel-content {
       background-color: $redSoft;
       @include display-flex();
+      &--youtube {
+        @media screen and (max-width: 991px) {
+          @include flex-wrap(wrap);
+        }
+        .Page-youtube {
+          margin-top: 0;
+        }
+      }
       @media screen and (max-width: 767px) {
         @include flex-wrap(wrap);
       }
@@ -132,6 +140,13 @@
         @include flex(0 1 100%);
         padding: 15px;
         position: relative;
+      }
+      &--youtube {
+        @media screen and (max-width: 991px) {
+          flex-basis: 100%;
+          padding: 1rem;
+          position: relative;
+        }
       }
     }
     .carousel-indicators {

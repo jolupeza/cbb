@@ -222,6 +222,14 @@
   @include display-flex();
   @include justify-content(center);
   margin-top: 25px;
+  + .carousel-caption {
+    h3, p {
+      width: 100%;
+    }
+  }
+  @media screen and (max-width: 991px) {
+    width: 100%;
+  }
 }
 .Page-wrapper {
   @include align-items(center);

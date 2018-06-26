@@ -128,6 +128,28 @@ var j = jQuery.noConflict();
           }
         }
 
+        if (players[i].a.className === 'Propuesta-video') {
+          if (j(window).width() >= 1600) {
+            resizeVideoPlayer(players[i], '1280', '720');
+          }
+
+          if (j(window).width() < 1600) {
+            resizeVideoPlayer(players[i], '854', '480');
+          }
+
+          if (j(window).width() < 1199) {
+            resizeVideoPlayer(players[i], '640', '360');
+          }
+
+          if (j(window).width() < 768) {
+            resizeVideoPlayer(players[i], '426', '240');
+          }
+
+          if (j(window).width() < 450) {
+            resizeVideoPlayer(players[i], '320', '240');
+          }
+        }
+
         if (players[i].a.className === 'Modal-video') {
           if (j(window).width() >= 992) {
             resizeVideoPlayer(players[i], '854', '480');
