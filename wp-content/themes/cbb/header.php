@@ -11,6 +11,17 @@
     })(window,document,'script','dataLayer','GTM-WC5QLQ8');</script>
     <!-- End Google Tag Manager -->
 
+    <?php
+      $googleAdsCode = !empty($options['google_ads_code']) ? $options['google_ads_code'] : '';
+      $googleAdsAll = !empty($options['google_ads_all']) ? $options['google_ads_all'] : false;
+      $googleAdsPage = !empty($options['google_ads_page']) ? $options['google_ads_page'] : null;
+    ?>
+    <?php if ($googleAdsAll || (!is_null($googleAdsPage) && is_page($googleAdsPage))) : ?>
+      <?php if (!empty($googleAdsCode)) : ?>
+        <?php echo $googleAdsCode; ?>
+      <?php endif; ?>
+    <?php endif; ?>
+
     <meta charset="<?php bloginfo('charset') ?>" />
     <title><?php wp_title('|', true, 'right'); ?><?php bloginfo('name'); ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -33,10 +44,10 @@
     <?php
       $pixelCode = !empty($options['pixel_code']) ? $options['pixel_code'] : '';
       $pixelAll = !empty($options['pixel_all']) ? $options['pixel_all'] : false;
-      $pixelPage = !empty($options['pixel_page']) ? $options['pixel_page'] : 0;
+      $pixelPage = !empty($options['pixel_page']) ? $options['pixel_page'] : null;
     ?>
-    <?php if (!empty($pixelCode)) : ?>
-      <?php if ($pixelAll || is_page($pixelPage)) : ?>
+    <?php if ($pixelAll || (!is_null($pixelPage) && is_page($pixelPage))) : ?>
+      <?php if (!empty($pixelCode)) : ?>
         <?php echo $pixelCode; ?>
       <?php endif; ?>
     <?php endif; ?>
@@ -118,5 +129,4 @@
           </aside>
         <?php endif; ?>
       </article>
-
     </section>

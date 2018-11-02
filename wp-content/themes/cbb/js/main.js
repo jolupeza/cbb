@@ -421,6 +421,13 @@ var j = jQuery.noConflict();
       });
     });
 
+    j('select[name="contact_local"]').on('change', function () {
+      var $this = j(this),
+          option = $this.find(':selected').data('local');
+
+      j('.MenuSedes-list a[href="#' + option + '"]').tab('show')
+    });
+
     j('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
       var tab = j(e.target),
         id = tab.attr('aria-controls') + '-map';

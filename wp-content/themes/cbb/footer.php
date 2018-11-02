@@ -69,7 +69,7 @@
 
     <?php $options = get_option('cbb_custom_settings'); ?>
 
-    <?php if ($options['display_social_link'] && !is_null($options['display_social_link'])) : ?>
+    <?php if (!empty($options['display_social_link'])) : ?>
       <aside class="Social">
         <ul class="Social-list">
           <?php if (isset($options['display_admision_link']) && $options['display_admision_link'] && !is_null($options['display_admision_link'])) : ?>
