@@ -143,7 +143,7 @@
                             <td class="bodycopy" style="padding: 10px 10px 10px 10px; font-size: 14px; line-height: 18px; color: #484848; font-family: Arial;"><?php echo $dataSede->post_title; ?></td>
                           </tr>
                           <tr>
-                            <td class="bodycopy" style="padding: 10px 10px 10px 10px; font-size: 14px; line-height: 18px; color: #484848; font-family: Arial;"><?php echo $dataSchedule->post_excerpt; ?></td>
+                            <td class="bodycopy" style="padding: 10px 10px 10px 10px; font-size: 14px; line-height: 18px; color: #484848; font-family: Arial;"><?php !is_null($dataSchedule) ? _e($dataSchedule->post_excerpt) : _e($scheduleCustom); ?></td>
                           </tr>
                         </table>
                       </td>

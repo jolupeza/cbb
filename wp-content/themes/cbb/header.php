@@ -25,6 +25,7 @@
     <meta charset="<?php bloginfo('charset') ?>" />
     <title><?php wp_title('|', true, 'right'); ?><?php bloginfo('name'); ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="csrf-token" content="<?php echo wp_create_nonce('axios-vuejs'); ?>" />
 
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,600,700" rel="stylesheet" />
 

@@ -1349,7 +1349,8 @@ class Cbb_Manager_Admin
              'rewrite'     => [
                  'slug' => 'infraestructura',
                 'with_front' => false
-             ]
+             ],
+            'show_in_rest' => true
         );
         register_post_type('locals', $args);
         
@@ -1953,6 +1954,8 @@ class Cbb_Manager_Admin
             'show_ui' => true,
             'query_var' => true,
             'rewrite' => false,
+            'show_in_rest' => true,
+            'rest_base' => 'levels',
 //            'capabilities' => array(),
         );
 
@@ -2068,5 +2071,52 @@ class Cbb_Manager_Admin
         );
 
         register_taxonomy('categories_questions', 'questions', $args);
+    }
+    
+    public function rest_filter_add_filters()
+    {
+        foreach ( get_post_types( array( 'show_in_rest' => true ), 'objects' ) as $post_type ) {
+            add_filter( 'rest_' . $post_type->name . '_query', array($this, 'wp_rest_filter_add_filter_param'), 10, 2 );
+        }
+    }
+
+    /**
+      * Add the filter parameter
+      *
+      * @param  array           $args    The query arguments.
+      * @param  WP_REST_Request $request Full details about the request.
+      * @return array $args.
+    **/
+    public function wp_rest_filter_add_filter_param( $args, $request )
+    {
+       // Bail out if no filter parameter is set.
+       if ( empty( $request['filter'] ) || ! is_array( $request['filter'] ) ) {
+           return $args;
+       }
+
+       $filter = $request['filter'];
+       if ( isset( $filter['posts_per_page'] ) && ( (int) $filter['posts_per_page'] >= 1 && (int) $filter['posts_per_page'] <= 100 ) ) {
+           $args['posts_per_page'] = $filter['posts_per_page'];
+       }
+
+       global $wp;
+       $vars = apply_filters( 'rest_query_vars', $wp->public_query_vars );
+
+       $vars = $this->allow_meta_query($vars);
+
+       foreach ( $vars as $var ) {
+           if ( isset( $filter[ $var ] ) ) {
+               $args[ $var ] = $filter[ $var ];
+           }
+       }
+
+       return $args;
+    }
+
+    private function allow_meta_query( $valid_vars )
+    {
+        $valid_vars = array_merge( $valid_vars, array( 'meta_query', 'meta_key', 'meta_value', 'meta_compare' ) );
+
+        return $valid_vars;
     }
 }

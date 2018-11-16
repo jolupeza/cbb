@@ -213,7 +213,7 @@
 
 <?php
   $idParent = 0;
-  $idParallax = (int)$options['blog_parallax'];
+  $idParallax = !empty($options['blog_parallax']) ? (int)$options['blog_parallax'] : 0;
 ?>
 
 <?php

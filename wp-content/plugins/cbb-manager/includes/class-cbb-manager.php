@@ -97,6 +97,7 @@ class Cbb_Manager
         $admin = new Cbb_Manager_Admin($this->get_version());
         
         $this->loader->add_action('init', $admin, 'add_post_type');
+        $this->loader->add_action('rest_api_init', $admin, 'rest_filter_add_filters');
 //        $this->loader->add_action('init', $admin, 'unregister_post_type');
         
         $this->loader->add_action('admin_enqueue_scripts', $admin, 'enqueue_styles');

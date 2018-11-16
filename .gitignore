@@ -24,5 +24,6 @@ wp-content/plugins/hello.php
 /nbproject
 
 wp-content/plugins/cbb-manager/admin/.sass-cache/
+wp-content/themes/cbb/node_modules/
 
 /vendor/

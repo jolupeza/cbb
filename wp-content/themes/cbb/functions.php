@@ -12,6 +12,7 @@ define('THEMEDOMAIN', 'cbb-framework');
 function load_custom_scripts() {
   wp_enqueue_script('vendor_script', THEMEROOT . '/js/vendor.min.js', array('jquery'), false, true);
   wp_enqueue_script('main_script', THEMEROOT . '/js/main.js', array('jquery'), false, true);
+  wp_enqueue_script('app_script', THEMEROOT.'/js/app.js', array(), false, true);
   wp_localize_script('main_script', 'CbbAjax', array('url' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('cbbajax-nonce')));
 }
 
@@ -298,7 +299,7 @@ function mailtrap($phpmailer) {
   $phpmailer->Password = 'f1ea173da928d9';
 }
 
-// add_action('phpmailer_init', 'mailtrap');
+add_action('phpmailer_init', 'mailtrap');
 
 // Bugs send emails WP 4.6.1
 add_filter('wp_mail_from', function() {
@@ -453,20 +454,27 @@ function register_admision_callback()
     'error' => ''
   );
 
-  if (!wp_verify_nonce($nonce, 'cbbajax-nonce')) {
+  if (!wp_verify_nonce($nonce, 'axios-vuejs')) {
       die('¡Acceso denegado!');
   }
 
-  $name = trim($_POST['parent_name']);
-  $dni = trim($_POST['parent_dni']);
-  $phone = trim($_POST['parent_phone']);
-  $email = trim($_POST['parent_email']);
-  $sede = (int)trim($_POST['parent_sede']);
-  $sonName = trim($_POST['son_name']);
-  $level = (int)trim($_POST['son_level']);
-  $schedule = (int)trim($_POST['schedule']);
+  $name = trim($_POST['fields']['parent_name']);
+  $dni = trim($_POST['fields']['parent_dni']);
+  $phone = trim($_POST['fields']['parent_phone']);
+  $email = trim($_POST['fields']['parent_email']);
+  $sede = (int)trim($_POST['fields']['parent_sede']);
+  $sonName = trim($_POST['fields']['son_name']);
+  $level = (int)trim($_POST['fields']['son_level']);
+  $schedule = (int)trim($_POST['fields']['schedule']);
+  $scheduleCustom = !empty($_POST['fields']['schedule_custom']) ? $_POST['fields']['schedule_custom'] : '';
 
-  if (!empty($name) && !empty($dni) && preg_match('/^[0-9]+$/', $dni) && strlen($dni) === 8 && !empty($phone) && preg_match('/^[0-9]+$/', $phone) && (strlen($phone) > 6 || strlen($phone) < 10) && !empty($email) && is_email($email) && $sede > 0 && !empty($sonName) && $level > 0 && $schedule > 0) {
+  if (!empty($name) && !empty($dni) && preg_match('/^[0-9]+$/', $dni) && strlen($dni) === 8 && !empty($phone) && preg_match('/^[0-9]+$/', $phone) && (strlen($phone) > 6 || strlen($phone) < 10) && !empty($email) && is_email($email) && $sede > 0 && !empty($sonName) && $level > 0) {
+    if (!$schedule && empty($scheduleCustom)) {
+      $result['error'] = 'Por favor indica una fecha personalizada.';
+      echo json_encode($result);
+      die();
+    }
+
     $options = get_option('cbb_custom_settings');
 
     $name = sanitize_text_field($name);
@@ -483,78 +491,75 @@ function register_admision_callback()
 
       if (is_object($dataLevel)) {
         // Validate Schedule
-        $dataSchedule = get_post($schedule);
-        if (is_object($dataSchedule)) {
-          $receiverEmail = $options['email'];
+        $dataSchedule = ($schedule) ? get_post($schedule) : null;
+        $receiverEmail = $options['email'];
 
-          if (!isset($receiverEmail) || empty($receiverEmail)) {
-            $receiverEmail = get_option('admin_email');
-          }
+        if (!isset($receiverEmail) || empty($receiverEmail)) {
+          $receiverEmail = get_option('admin_email');
+        }
 
-          $subjectEmail = "Admisión Colegio Bertolt Brecht";
+        $subjectEmail = "Admisión Colegio Bertolt Brecht";
 
-          ob_start();
-          $filename = TEMPLATEPATH . '/templates/email-admision.php';
-          if (file_exists($filename)) {
-            include $filename;
+        ob_start();
+        $filename = TEMPLATEPATH . '/templates/email-admision.php';
+        if (file_exists($filename)) {
+          include $filename;
 
-            $content = ob_get_contents();
-            ob_get_clean();
+          $content = ob_get_contents();
+          ob_get_clean();
 
-            $headers[] = 'From: Colegio Bertolt Brecht';
-            //$headers[] = 'Reply-To: jolupeza@icloud.com';
-            $headers[] = 'Content-type: text/html; charset=utf-8';
+          $headers[] = 'From: Colegio Bertolt Brecht';
+          //$headers[] = 'Reply-To: jolupeza@icloud.com';
+          $headers[] = 'Content-type: text/html; charset=utf-8';
 
-            if (wp_mail($receiverEmail, $subjectEmail, $content, $headers)) {
-              // Send email to customer
-              $subjectEmail = "Formulario de Admisión enviada al Colegio Bertolt Brecht";
+          if (wp_mail($receiverEmail, $subjectEmail, $content, $headers)) {
+            // Send email to customer
+            $subjectEmail = "Formulario de Admisión enviada al Colegio Bertolt Brecht";
 
-              ob_start();
-              $filename = TEMPLATEPATH . '/templates/email-gratitude.php';
-              if (file_exists($filename)) {
-                $textEmail = (isset($options['response_admision']) && !empty($options['response_admision'])) ? esc_attr($options['response_admision']) : "Gracias por registrarse. En breve nos pondremos en contacto con usted.";
+            ob_start();
+            $filename = TEMPLATEPATH . '/templates/email-gratitude.php';
+            if (file_exists($filename)) {
+              $textEmail = (isset($options['response_admision']) && !empty($options['response_admision'])) ? esc_attr($options['response_admision']) : "Gracias por registrarse. En breve nos pondremos en contacto con usted.";
 
-                include $filename;
+              include $filename;
 
-                $content = ob_get_contents();
-                ob_get_clean();
+              $content = ob_get_contents();
+              ob_get_clean();
 
-                $headers[] = 'From: Colegio Bertolt Brecht';
-                //$headers[] = 'Reply-To: jolupeza@icloud.com';
-                $headers[] = 'Content-type: text/html; charset=utf-8';
+              $headers[] = 'From: Colegio Bertolt Brecht';
+              //$headers[] = 'Reply-To: jolupeza@icloud.com';
+              $headers[] = 'Content-type: text/html; charset=utf-8';
 
-                wp_mail($email, $subjectEmail, $content, $headers);
+              wp_mail($email, $subjectEmail, $content, $headers);
 
-                $post_id = wp_insert_post(array(
-                    'post_author' => 1,
-                    'post_status' => 'publish',
-                    'post_type' => 'prestudents',
-                ));
-                update_post_meta($post_id, 'mb_name', $name);
-                update_post_meta($post_id, 'mb_dni', $dni);
-                update_post_meta($post_id, 'mb_phone', $phone);
-                update_post_meta($post_id, 'mb_email', $email);
-                update_post_meta($post_id, 'mb_sede', $sede);
-                update_post_meta($post_id, 'mb_sonName', $sonName);
-                update_post_meta($post_id, 'mb_schedule', $schedule);
-                update_post_meta($post_id, 'mb_year', isset($options['admision_year']) && !empty($options['admision_year']) ? $options['admision_year'] : date("Y") + 1);
-                wp_set_object_terms($post_id, $level, 'levels');
+              $post_id = wp_insert_post(array(
+                  'post_author' => 1,
+                  'post_status' => 'publish',
+                  'post_type' => 'prestudents',
+              ));
+              update_post_meta($post_id, 'mb_name', $name);
+              update_post_meta($post_id, 'mb_dni', $dni);
+              update_post_meta($post_id, 'mb_phone', $phone);
+              update_post_meta($post_id, 'mb_email', $email);
+              update_post_meta($post_id, 'mb_sede', $sede);
+              update_post_meta($post_id, 'mb_sonName', $sonName);
+              update_post_meta($post_id, 'mb_schedule', $schedule);
+              update_post_meta($post_id, 'mb_scheduleCustom', $scheduleCustom);
+              update_post_meta($post_id, 'mb_year', isset($options['admision_year']) && !empty($options['admision_year']) ? $options['admision_year'] : date("Y") + 1);
+              wp_set_object_terms($post_id, $level, 'levels');
 
-                $result['result'] = true;
-                $result['msg'] = $options['response_admision_forms'];
-              } else {
-                $result['error'] = 'Plantilla email no encontrada.';
-                ob_get_clean();
-              }
+              $result['result'] = true;
+              $result['msg'] = $options['response_admision_forms'];
             } else {
-              $result['error'] = 'No se puedo enviar el email.';
+              $result['error'] = 'Plantilla email no encontrada.';
+              ob_get_clean();
             }
           } else {
-            $result['error'] = 'Plantilla email no encontrada.';
-            ob_get_clean();
+            $result['error'] = 'No se puedo enviar el email.';
           }
         } else {
-          $result['error'] = 'Debe seleccionar el horario.';
+          $result['error'] = 'Plantilla email no encontrada.';
+          ob_get_clean();
         }
       } else {
         $result['error'] = 'Debe seleccionar el grado al que desea postular.';
@@ -585,55 +590,47 @@ function load_schedule_callback()
     'error' => ''
   );
 
-  if (!wp_verify_nonce($nonce, 'cbbajax-nonce')) {
+  if (!wp_verify_nonce($nonce, 'axios-vuejs')) {
       die('¡Acceso denegado!');
   }
 
   $local = (int)trim($_POST['local']);
-  //$level = (int)trim($_POST['level']);
 
-  //if ($local > 0 && $level > 0) {
   if ($local > 0) {
     // Validate Local
     $dataLocal = get_post($local);
     if (!is_null($dataLocal)) {
-      // Validate Level
-      //$dataLevel = get_term_by('id', $level, 'levels');
-      //if (is_object($dataLevel)) {
-        // Get schedules y retornar como json
-        $args = [
-          'post_type' => 'schedules',
-          'posts_per_page' => -1,
-          'orderby' => 'menu_order',
-          'order' => 'ASC',
-          'meta_query' => [
-            [
-              'key' => 'mb_local',
-              'value' => $local,
-            ],
-            /*[
-              'key' => 'mb_grade',
-              'value' => $level
-            ]*/
-          ]
-        ];
-        $schedules = new WP_Query($args);
+      // Get schedules y retornar como json
+      $args = [
+        'post_type' => 'schedules',
+        'posts_per_page' => -1,
+        'orderby' => 'menu_order',
+        'order' => 'ASC',
+        'meta_query' => [
+          [
+            'key' => 'mb_local',
+            'value' => $local,
+          ],
+          /*[
+            'key' => 'mb_grade',
+            'value' => $level
+          ]*/
+        ]
+      ];
+      $schedules = new WP_Query($args);
 
-        if ($schedules->have_posts()) {
-          $result['posts'] = $schedules->posts;
-          $result['result'] = true;
-        } else {
-          $result['error'] = 'No existen horarios';
-        }
-        wp_reset_postdata();
-      /*} else {
-        $result['error'] = 'Debe seleccionar el grado al que desea postular.';
-      }*/
+      if ($schedules->have_posts()) {
+        $result['posts'] = $schedules->posts;
+        $result['result'] = true;
+      } else {
+        $result['error'] = 'No existen horarios para la sede seleccionada.';
+      }
+      wp_reset_postdata();
     } else {
-      $result['error'] = 'Debe seleccionar la sede de su interés.';
+      $result['error'] = 'La sede seleccionada no es válida.';
     }
   } else {
-    $result['error'] = 'Verifique que ha ingresado los datos correctamente.';
+    $result['error'] = 'La sede seleccionada no es válida.';
   }
 
   echo json_encode($result);

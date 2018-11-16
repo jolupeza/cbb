@@ -11,50 +11,51 @@
 
     <?php
         $values = get_post_custom( get_the_ID() );
-        
+
         $name = isset($values['mb_name']) ? esc_attr($values['mb_name'][0]) : '';
         $dni = isset($values['mb_dni']) ? esc_attr($values['mb_dni'][0]) : '';
         $phone = isset($values['mb_phone']) ? esc_attr($values['mb_phone'][0]) : '';
         $email = isset($values['mb_email']) ? esc_attr($values['mb_email'][0]) : '';
         $sede = isset($values['mb_sede']) ? esc_attr($values['mb_sede'][0]) : '';
         $sonName = isset($values['mb_sonName']) ? esc_attr($values['mb_sonName'][0]) : '';
-        $schedule = isset($values['mb_schedule']) ? esc_attr($values['mb_schedule'][0]) : '';
+        $schedule = isset($values['mb_schedule']) ? esc_attr($values['mb_schedule'][0]) : 0;
+        $scheduleCustom = isset($values['mb_scheduleCustom']) ? esc_attr($values['mb_scheduleCustom'][0]) : '';
         $year = isset($values['mb_year']) ? esc_attr($values['mb_year'][0]) : '';
 
         wp_nonce_field( 'prestudents_meta_box_nonce', 'meta_box_nonce' );
-        
+
         $years = [];
         for ($i = 2017; $i <= 2100; $i++) {
             $years[$i] = $i;
         }
     ?>
-    
+
     <h3>Datos del padre de familia</h3>
-    
+
     <!-- Parent Name -->
     <p class="content-mb">
         <label for="mb_name">Nombre Completo: </label>
         <input type="text" name="mb_name" id="mb_name" value="<?php echo $name; ?>" />
     </p>
-    
+
     <!-- DNI / CE -->
     <p class="content-mb">
         <label for="mb_dni">D.N.I. / C.E.: </label>
         <input type="text" name="mb_dni" id="mb_dni" value="<?php echo $dni; ?>" />
     </p>
-    
+
     <!-- Teléfono / Celular -->
     <p class="content-mb">
         <label for="mb_phone">Teléfono / Celular: </label>
         <input type="text" name="mb_phone" id="mb_phone" value="<?php echo $phone; ?>" />
     </p>
-    
+
     <!-- Correo electrónico -->
     <p class="content-mb">
         <label for="mb_email">Correo electrónico: </label>
         <input type="email" name="mb_email" id="mb_email" value="<?php echo $email; ?>" />
     </p>
-    
+
     <!-- Sede -->
     <?php
         $args = [
@@ -80,7 +81,7 @@
         endif;
         wp_reset_postdata();
     ?>
-        
+
     <!-- Schedule -->
     <?php
         $args = [
@@ -98,7 +99,8 @@
             <select name="mb_schedule" id="mb_schedule">
                 <?php while ($the_query->have_posts()) : ?>
                     <?php $the_query->the_post(); ?>
-                <option value="<?php echo get_the_ID(); ?>" <?php selected($schedule, get_the_ID()); ?>><?php echo get_the_excerpt(); ?></option>
+                <option value="">-- Horario --</option>
+                <option value="<?php echo get_the_ID(); ?>" <?php if($schedule) selected($schedule, get_the_ID()); ?>><?php echo get_the_excerpt(); ?></option>
                 <?php endwhile; ?>
             </select>
         </p>
@@ -106,15 +108,21 @@
         endif;
         wp_reset_postdata();
     ?>
-    
+
+    <!-- Schedule Custom -->
+    <p class="content-mb">
+        <label for="mb_scheduleCustom">Horario personalizado: </label>
+        <input type="text" name="mb_scheduleCustom" id="mb_scheduleCustom" value="<?php echo $scheduleCustom; ?>" />
+    </p>
+
     <h3>Datos del hijo a postular</h3>
-    
+
     <!-- Son Name -->
     <p class="content-mb">
         <label for="mb_sonName">Nombre Completo: </label>
         <input type="text" name="mb_sonName" id="mb_sonName" value="<?php echo $sonName; ?>" />
     </p>
-    
+
     <!-- Year -->
     <p class="content-mb">
         <label for="mb_year">Año: </label>

@@ -71,8 +71,8 @@ a {
 }
 @font-face {
   font-family: 'icomoon';
-  src: url("./../fonts/icomoon.eot?iq7jut");
-  src: url("./../fonts/icomoon.eot?iq7jut#iefix") format("embedded-opentype"), url("./../fonts/icomoon.ttf?iq7jut") format("truetype"), url("./../fonts/icomoon.woff?iq7jut") format("woff"), url("./../fonts/icomoon.svg?iq7jut#icomoon") format("svg");
+  src: url("./../fonts/icomoon.eot?dupagg");
+  src: url("./../fonts/icomoon.eot?dupagg#iefix") format("embedded-opentype"), url("./../fonts/icomoon.ttf?dupagg") format("truetype"), url("./../fonts/icomoon.woff?dupagg") format("woff"), url("./../fonts/icomoon.svg?dupagg#icomoon") format("svg");
   font-weight: normal;
   font-style: normal;
 }
@@ -90,20 +90,12 @@ a {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-keyboard_arrow_up:before {
-  content: "\e903";
+.icon-calendar:before {
+  content: "\e909";
 }
 
-.icon-keyboard_arrow_right:before {
-  content: "\e904";
-}
-
-.icon-keyboard_arrow_left:before {
-  content: "\e905";
-}
-
-.icon-keyboard_arrow_down:before {
-  content: "\e906";
+.icon-spin-alt:before {
+  content: "\e908";
 }
 
 .icon-brush-alt:before {
@@ -152,6 +144,22 @@ a {
 
 .icon-flickr2:before {
   content: "\eaa4";
+}
+
+.icon-keyboard_arrow_up:before {
+  content: "\e903";
+}
+
+.icon-keyboard_arrow_right:before {
+  content: "\e904";
+}
+
+.icon-keyboard_arrow_left:before {
+  content: "\e905";
+}
+
+.icon-keyboard_arrow_down:before {
+  content: "\e906";
 }
 
 .icon-bars:before {

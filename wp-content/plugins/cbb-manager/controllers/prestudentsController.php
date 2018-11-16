@@ -29,24 +29,24 @@ class prestudentsController extends Controller
         $objPHPExcel = new PHPExcel();
 
         $filename = 'admision.xls';
-        
+
         $sede = ($sede === 'all') ? 0 : (int)$sede;
         $level = ($level === 'all') ? 0 : (int)$level;
         $year = ($year === 'all') ? 0 : (int)$year;
 
         $title = 'Admisión';
-        
+
         if ($sede) {
             $dataSede = get_post($sede);
             $title .= " - Sede: {$dataSede->post_title}";
         }
-        
+
         if ($level) {
             $dataLevel = get_term_by('id', $level, 'levels');
-            
+
             $title .= " - Grado: {$dataLevel->name}";
         }
-        
+
         if ($year) {
             $title .= " - Año: $year";
         }
@@ -132,15 +132,15 @@ class prestudentsController extends Controller
                 'value' => $sede
             ];
         }
-        
-        if ($level) {                    
+
+        if ($level) {
             $args['tax_query'][] = [
                 'taxonomy' => 'levels',
                 'field' => 'term_id',
                 'terms' => $level
             ];
         }
-        
+
         if ($year) {
             $args['meta_query'][] = [
                 'key' => 'mb_year',
@@ -164,17 +164,16 @@ class prestudentsController extends Controller
                 $email = isset($values['mb_email']) ? esc_attr($values['mb_email'][0]) : '';
                 $sedeRow = isset($values['mb_sede']) ? esc_attr($values['mb_sede'][0]) : '';
                 $sonName = isset($values['mb_sonName']) ? esc_attr($values['mb_sonName'][0]) : '';
-                $schedule = isset($values['mb_schedule']) ? esc_attr($values['mb_schedule'][0]) : '';
+                $schedule = isset($values['mb_schedule']) ? esc_attr($values['mb_schedule'][0]) : 0;
+                $scheduleCustom = isset($values['mb_scheduleCustom']) ? esc_attr($values['mb_scheduleCustom'][0]) : '';
                 $yearRow = isset($values['mb_year']) ? esc_attr($values['mb_year'][0]) : '';
                 $level = '';
-                
+
                 if (!empty($sedeRow)) {
                     $dataSedeRow = get_post($sedeRow);
                 }
-                
-                if (!empty($schedule)) {
-                    $dataSchedule = get_post($schedule);
-                }
+
+                $dataSchedule = $schedule ? get_post($schedule) : null;
 
                 $levels = get_the_terms($id, 'levels');
                 if (count($levels)) {
@@ -196,7 +195,7 @@ class prestudentsController extends Controller
                 $excel->getActiveSheet()->setCellValue('E'.$i, $dataSedeRow->post_title);
                 $excel->getActiveSheet()->getStyle('E'.$i)->getFont()->setSize(10);
 
-                $excel->getActiveSheet()->setCellValue('F'.$i, $dataSchedule->post_excerpt);
+                $excel->getActiveSheet()->setCellValue('F'.$i, !is_null($dataSchedule) ? $dataSchedule->post_excerpt : $scheduleCustom);
                 $excel->getActiveSheet()->getStyle('F'.$i)->getFont()->setSize(10);
 
                 $excel->getActiveSheet()->setCellValue('G'.$i, $sonName);
