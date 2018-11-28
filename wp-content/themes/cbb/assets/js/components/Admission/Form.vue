@@ -126,7 +126,7 @@
       TextInput,
       SelectInput
     },
-    props: ['yearAdmission', 'urlTerms'],
+    props: ['yearAdmission', 'urlTerms', 'placeholderDatepicker', 'hourStart', 'hourEnd', 'hourStep'],
     data() {
       return {
         loading: false,
@@ -139,13 +139,13 @@
           days: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
           months: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Set', 'Oct', 'Nov', 'Dic'],
           placeholder: {
-            date: 'Seleccionar horario'
+            date: this.placeholderDatepicker
           }
         },
         timePickerOptions: {
-          start: '08:00',
-          step: '00:15',
-          end: '17:00'
+          start: this.hourStart,
+          step: this.hourStep,
+          end: this.hourEnd
         },
         disabledDays: [
           '2018-11-18 00:00:00',

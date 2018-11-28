@@ -515,6 +515,65 @@ function cbb_customize_register($wp_customize) {
     'type'       => 'select',
     'choices'    => getPages(),
   ));
+
+  // Calendar Settings
+  $wp_customize->add_section('cbb_calendar', [
+    'title' => __('Configuración Calendario Admisión', THEMEDOMAIN),
+    'description' => __('Configuración de opciones para el calendario del formulario de Admisión', THEMEDOMAIN),
+    'priority' => 45
+  ]);
+
+  // Placeholder Calendar
+  $wp_customize->add_setting('cbb_custom_settings[placeholder_calendar]', [
+    'default' => '',
+    'type' => 'option'
+  ]);
+
+  $wp_customize->add_control('cbb_custom_settings[placeholder_calendar]', [
+    'label' => __('Texto Calendario', THEMEDOMAIN),
+    'section' => 'cbb_calendar',
+    'settings' => 'cbb_custom_settings[placeholder_calendar]',
+    'type' => 'text'
+  ]);
+
+  // Hour start
+  $wp_customize->add_setting('cbb_custom_settings[hour_start]', [
+    'default' => '',
+    'type' => 'option'
+  ]);
+
+  $wp_customize->add_control('cbb_custom_settings[hour_start]', [
+    'label' => __('Hora Inicial', THEMEDOMAIN),
+    'section' => 'cbb_calendar',
+    'settings' => 'cbb_custom_settings[hour_start]',
+    'type' => 'text'
+  ]);
+
+  // Hour end
+  $wp_customize->add_setting('cbb_custom_settings[hour_end]', [
+    'default' => '',
+    'type' => 'option'
+  ]);
+
+  $wp_customize->add_control('cbb_custom_settings[hour_end]', [
+    'label' => __('Hora Final', THEMEDOMAIN),
+    'section' => 'cbb_calendar',
+    'settings' => 'cbb_custom_settings[hour_end]',
+    'type' => 'text'
+  ]);
+
+  // Hour step
+  $wp_customize->add_setting('cbb_custom_settings[hour_step]', [
+    'default' => '',
+    'type' => 'option'
+  ]);
+
+  $wp_customize->add_control('cbb_custom_settings[hour_step]', [
+    'label' => __('Tiempo Saltos', THEMEDOMAIN),
+    'section' => 'cbb_calendar',
+    'settings' => 'cbb_custom_settings[hour_step]',
+    'type' => 'text'
+  ]);
 }
 
 function getPages() {
