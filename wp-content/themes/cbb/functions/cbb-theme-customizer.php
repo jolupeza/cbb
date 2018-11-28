@@ -574,6 +574,19 @@ function cbb_customize_register($wp_customize) {
     'settings' => 'cbb_custom_settings[hour_step]',
     'type' => 'text'
   ]);
+
+  // Disabled Days
+  $wp_customize->add_setting('cbb_custom_settings[disabled_days]', [
+    'default' => '',
+    'type' => 'option'
+  ]);
+
+  $wp_customize->add_control('cbb_custom_settings[disabled_days]', [
+    'label' => __('Días no hábiles, separar con comas cada fecha', THEMEDOMAIN),
+    'section' => 'cbb_calendar',
+    'settings' => 'cbb_custom_settings[disabled_days]',
+    'type' => 'textarea'
+  ]);
 }
 
 function getPages() {

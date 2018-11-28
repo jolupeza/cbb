@@ -126,7 +126,7 @@
       TextInput,
       SelectInput
     },
-    props: ['yearAdmission', 'urlTerms', 'placeholderDatepicker', 'hourStart', 'hourEnd', 'hourStep'],
+    props: ['yearAdmission', 'urlTerms', 'placeholderDatepicker', 'hourStart', 'hourEnd', 'hourStep', 'days'],
     data() {
       return {
         loading: false,
@@ -147,15 +147,7 @@
           step: this.hourStep,
           end: this.hourEnd
         },
-        disabledDays: [
-          '2018-11-18 00:00:00',
-          '2018-11-25 00:00:00',
-          '2018-12-02 00:00:00',
-          '2018-12-09 00:00:00',
-          '2018-12-16 00:00:00',
-          '2018-12-23 00:00:00',
-          '2018-12-30 00:00:00'
-        ],
+        disabledDays: [],
         draft: {},
         localsArr: [],
         levelsArr: [],
@@ -170,14 +162,14 @@
       ...mapState('levels', {
         levels: state => state.all
       }),
-      ...mapState('date', {
-        disabledDates: state => state.disabledDates
-      }),
       typeInfo() {
         return 'alert-' + this.info.type;
       },
       minDate() {
         return moment().format('YYYY-MM-DD');
+      },
+      prepareDisabledDays() {
+        return this.days.split(',');
       }
     },
     created() {
@@ -191,6 +183,7 @@
           return {id: level.id, title: level.name}
         })
       })
+      this.disabledDays = this.prepareDisabledDays;
     },
     methods: {
       checkOtherSchedule() {
