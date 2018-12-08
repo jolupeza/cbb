@@ -9,7 +9,7 @@
     <p><?php echo get_the_excerpt($idParent); ?></p>
 
     <figure class="Page-youtube text-center">
-      <div class="Single-video" id="player<?php echo $idParent; ?>"></div>
+      <div class="Single-video" id="player<?php echo $idParent; ?>2"></div>
 
       <script>
         var height = '360',
@@ -27,7 +27,7 @@
 
         playerInfoList.push({
           id: '<?php echo $idParent; ?>',
-          idPlayer: 'player<?php echo $idParent; ?>',
+          idPlayer: 'player<?php echo $idParent; ?>2',
           height: height,
           width: width,
           videoId: '<?php echo $url; ?>'
