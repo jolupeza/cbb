@@ -587,6 +587,19 @@ function cbb_customize_register($wp_customize) {
     'settings' => 'cbb_custom_settings[disabled_days]',
     'type' => 'textarea'
   ]);
+
+  // Disabled Days
+  $wp_customize->add_setting('cbb_custom_settings[calendar_other]', [
+    'default' => '',
+    'type' => 'option'
+  ]);
+
+  $wp_customize->add_control('cbb_custom_settings[calendar_other]', [
+    'label' => __('Texto Otro horario', THEMEDOMAIN),
+    'section' => 'cbb_calendar',
+    'settings' => 'cbb_custom_settings[calendar_other]',
+    'type' => 'text'
+  ]);
 }
 
 function getPages() {

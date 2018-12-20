@@ -54,6 +54,7 @@
       emit-method="resetScheduleCustom"
       @resetScheduleCustom="resetScheduleCustom"
       :with-other="true"
+      :text-other="calendarOther ? calendarOther : 'Otro'"
       :error="errors.first('schedule')" />
 
     <div class="row">
@@ -126,7 +127,7 @@
       TextInput,
       SelectInput
     },
-    props: ['yearAdmission', 'urlTerms', 'placeholderDatepicker', 'hourStart', 'hourEnd', 'hourStep', 'days'],
+    props: ['yearAdmission', 'urlTerms', 'placeholderDatepicker', 'hourStart', 'hourEnd', 'hourStep', 'days', 'calendarOther'],
     data() {
       return {
         loading: false,

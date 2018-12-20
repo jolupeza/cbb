@@ -7,7 +7,7 @@
       @change="updateValue">
       <option :value="null" :selected="!value">-- {{ defaultValueText }} --</option>
       <option v-for="item in items" :value="item.id">{{ item.title }}</option>
-      <option v-if="withOther" :value="'other'">Otro</option>
+      <option v-if="withOther" :value="'other'">{{ textOther }}</option>
     </select>
     <transition name="fade">
       <p v-if="error" class="text-danger Form__alert">{{ error }}</p>
@@ -44,6 +44,10 @@
       withOther: {
         type: Boolean,
         default: false
+      },
+      textOther: {
+        type: String,
+        default: 'Otro'
       },
       disabled: {
         type: Boolean,
