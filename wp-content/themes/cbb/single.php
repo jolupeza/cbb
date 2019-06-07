@@ -25,8 +25,8 @@
         <?php endif; ?>
 
         <?php
-          $prevPost = get_previous_post();
-          $nextPost = get_next_post();
+          $prevPost = get_previous_post(true);
+          $nextPost = get_next_post(true);
 
           if (is_object($prevPost) || is_object($nextPost)) :
         ?>

@@ -1,25 +1,16 @@
 <?php get_header(); ?>
 
 <?php
-  $mainMenu = wp_get_nav_menu_object('main-menu');
-  $menuItems = wp_get_nav_menu_items($mainMenu->term_id, [
-    'post_parent' => 0
-  ]);
+  $parentCategory = null;
+  $currentCategory = get_category(get_query_var('cat'));
+  $currentPageId = $currentCategory->cat_ID;
+  $parentCategory = $currentCategory->parent > 0 ? get_category($currentCategory->parent) : $parentCategory;
 
-  $keyCurrentItem = NULL;
-  $prevMenuItem; $nextMenuItem;
+  $previousNextItemMenu = getPreviousNextLinkItemMenu(!is_null($parentCategory) ? $parentCategory->cat_ID : $currentPageId, 'main-menu');
 
-  foreach ($menuItems as $key => $item) {
-    if ($item->object === 'category') {
-      $keyCurrentItem = $key;
-      break;
-    }
-  }
-
-  if (!is_null($keyCurrentItem)) {
-    $prevMenuItem = array_key_exists($keyCurrentItem - 1, $menuItems) ? $menuItems[$keyCurrentItem - 1] : null;
-    $nextMenuItem = array_key_exists($keyCurrentItem + 1, $menuItems) ? $menuItems[$keyCurrentItem + 1] : null;
-  }
+  $options = get_option('cbb_custom_settings');
+  $categoryZone = (!is_null($parentCategory) ? $parentCategory->slug : $currentCategory->slug) === 'vida-escolar'
+                    ? $options['blog_menu'] : $options['gallery_menu'];
 ?>
 
 <?php
@@ -32,7 +23,7 @@
       [
         'taxonomy' => 'sections',
         'field' => 'slug',
-        'terms' => 'vida-escolar'
+        'terms' => !is_null($parentCategory) ? $parentCategory->slug : $currentCategory->slug,
       ]
     ]
   ];
@@ -96,27 +87,20 @@
       <?php endwhile; ?>
     </div>
 
-    <!-- <a class="left carousel-control" href="#blog-body" role="button" data-slide="prev">
-      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#blog-body" role="button" data-slide="next">
-      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a> -->
-
     <button class="Arrow js-move-scroll" data-href="content">ir abajo <i class="glyphicon glyphicon-chevron-down"></i></button>
 
-    <?php if (is_object($prevMenuItem)) : ?>
-      <a href="<?php echo $prevMenuItem->url; ?>" class="left NavMenu">
-        <span><?php echo strtolower($prevMenuItem->title); ?></span>
+    <?php if (is_object($previousNextItemMenu['prev'])) : ?>
+      <?php $prev = $previousNextItemMenu['prev']; ?>
+      <a href="<?php echo $prev->url; ?>" class="left NavMenu">
+        <span><?php echo strtolower($prev->title); ?></span>
         <i class="glyphicon glyphicon-chevron-left"></i>
       </a>
     <?php endif; ?>
 
-    <?php if (is_object($nextMenuItem)) : ?>
-      <a href="<?php echo $nextMenuItem->url; ?>" class="right NavMenu">
-        <span><?php echo strtolower($nextMenuItem->title); ?></span>
+    <?php if (is_object($previousNextItemMenu['next'])) : ?>
+      <?php $next = $previousNextItemMenu['next']; ?>
+      <a href="<?php echo $next->url; ?>" class="right NavMenu">
+        <span><?php echo strtolower($next->title); ?></span>
         <i class="glyphicon glyphicon-chevron-right"></i>
       </a>
     <?php endif; ?>
@@ -128,7 +112,7 @@
   <div class="container">
     <?php
       $args = [
-        'theme_location' => 'categories-zone-menu',
+        'theme_location' => $categoryZone,
         'container' => 'nav',
         'container_class' => 'MenuZone',
         'menu_class' => 'MenuZone-list',
@@ -137,28 +121,6 @@
 
       wp_nav_menu($args);
     ?>
-
-    <?php
-      $categoryId = get_query_var('cat');
-      $category = get_category($categoryId);
-      $categoryParent = ($category->category_parent > 0) ? get_category($category->category_parent) : null;
-      $categoryGrand = (!is_null($categoryParent)) ? get_category($categoryParent->category_parent) : null;
-    ?>
-
-    <?php if ($category->category_parent > 0) : ?>
-      <?php $themeLocation = ($categoryGrand instanceof WP_Term && $categoryGrand->category_parent === 0) ? "categories-{$categoryParent->category_nicename}-menu" : "categories-{$category->category_nicename}-menu"; ?>
-
-      <?php
-        $args = [
-          'theme_location' => $themeLocation,
-          'container' => 'nav',
-          'container_class' => 'MenuCategories',
-          'menu_class' => 'MenuCategories-list',
-        ];
-
-        wp_nav_menu($args);
-      ?>
-    <?php endif; ?>
 
     <div class="row">
       <div class="col-md-6">
@@ -194,10 +156,6 @@
           </article>
         <?php endwhile; ?>
       </section>
-
-      <!-- <p class="text-center">
-        <a href="" class="Button Button--blue Button--medium">ver más</a>
-      </p> -->
     <?php endif; ?>
 
     <div class="article-nav">
@@ -208,8 +166,6 @@
     </div> <!-- end clearfix -->
   </div>
 </section>
-
-<?php $options = get_option('cbb_custom_settings'); ?>
 
 <?php
   $idParent = 0;

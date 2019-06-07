@@ -45,9 +45,7 @@ function register_my_menus() {
   register_nav_menus([
     'main-menu' => __('Main Menu', THEMEDOMAIN),
     'categories-zone-menu' => __('Categorías Zona Menu', THEMEDOMAIN),
-    'categories-lima-norte-menu' => __('Categorías Lima Norte Menu', THEMEDOMAIN),
-    'categories-lima-centro-menu' => __('Categorías Lima Centro Menu', THEMEDOMAIN),
-    'categories-lima-este-menu' => __('Categorías Lima Este Menu', THEMEDOMAIN),
+    'categories-zone-menu-galeria' => __('Categorías Zona Galería Menu', THEMEDOMAIN),
     'locals-menu' => __('Infraestructura Menu', THEMEDOMAIN),
     'footer-menu' => __('Footer Menu', THEMEDOMAIN),
   ]);
@@ -642,6 +640,30 @@ function load_schedule_callback()
 /**********************************************/
 require_once(TEMPLATEPATH . '/functions/cbb-theme-customizer.php');
 require_once(TEMPLATEPATH . '/functions/widget-ad-320.php');
+
+function getPreviousNextLinkItemMenu($currentItem, $locationMenu) {
+  $mainMenu = wp_get_nav_menu_object($locationMenu);
+  $menuItems = wp_get_nav_menu_items($mainMenu->term_id, [
+    'post_parent' => 0
+  ]);
+
+  $keyCurrentItem = NULL;
+  $result = [];
+
+  foreach ($menuItems as $key => $item) {
+    if ((int)$item->object_id === $currentItem) {
+      $keyCurrentItem = $key;
+      break;
+    }
+  }
+
+  if (!is_null($keyCurrentItem)) {
+    $result['prev'] = array_key_exists($keyCurrentItem - 1, $menuItems) ? $menuItems[$keyCurrentItem - 1] : null;
+    $result['next'] = array_key_exists($keyCurrentItem + 1, $menuItems) ? $menuItems[$keyCurrentItem + 1] : null;
+  }
+
+  return $result;
+}
 
 /*
  * Dump helper. Functions to dump variables to the screen, in a nicley formatted manner.

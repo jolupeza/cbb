@@ -389,10 +389,18 @@ function cbb_customize_register($wp_customize) {
   ]);
 
   // Information
+  $wp_customize->add_panel('cbb_categories', [
+    'title' => __('Categorías', THEMEDOMAIN),
+    'description' => esc_html__('COnfiguraciones Categorías', THEMEDOMAIN),
+    'priority' => 42,
+    'capability' => 'edit_theme_options',
+  ]);
+
   $wp_customize->add_section('cbb_blog', [
     'title' => __('Configuración Vida Escolar', THEMEDOMAIN),
     'description' => __('Configuración de opciones para la sección Vida Escolar', THEMEDOMAIN),
-    'priority' => 42
+    'panel' => 'cbb_categories',
+    'capability' => 'edit_theme_options',
   ]);
 
   $parallaxs = [];
@@ -424,6 +432,39 @@ function cbb_customize_register($wp_customize) {
     'settings'   => 'cbb_custom_settings[blog_parallax]',
     'type'       => 'select',
     'choices'    => $parallaxs,
+  ));
+
+  $wp_customize->add_setting('cbb_custom_settings[blog_menu]', [
+    'default' => '',
+    'type' => 'option'
+  ]);
+
+  $wp_customize->add_control('cbb_custom_settings[blog_menu]', array(
+    'label'      => __('Menú Zonas', THEMEDOMAIN),
+    'section'    => 'cbb_blog',
+    'settings'   => 'cbb_custom_settings[blog_menu]',
+    'type'       => 'select',
+    'choices'    => getMenus(),
+  ));
+
+  $wp_customize->add_section('cbb_gallery', [
+    'title' => __('Configuración Galería', THEMEDOMAIN),
+    'description' => __('Configuración de opciones para la categoría Galería', THEMEDOMAIN),
+    'panel' => 'cbb_categories',
+    'capability' => 'edit_theme_options',
+  ]);
+
+  $wp_customize->add_setting('cbb_custom_settings[gallery_menu]', [
+    'default' => '',
+    'type' => 'option'
+  ]);
+
+  $wp_customize->add_control('cbb_custom_settings[gallery_menu]', array(
+    'label'      => __('Menú Zonas', THEMEDOMAIN),
+    'section'    => 'cbb_gallery',
+    'settings'   => 'cbb_custom_settings[gallery_menu]',
+    'type'       => 'select',
+    'choices'    => getMenus(),
   ));
 
   // Pixel Facebook
@@ -611,4 +652,15 @@ function getPages() {
   }
 
   return $listPages;
+}
+
+function getMenus() {
+  $menus = get_registered_nav_menus();
+  $listMenus = ['' => 'Seleccione'];
+
+  foreach ($menus as $location => $description) {
+    $listMenus[$location] = $description;
+  }
+
+  return $listMenus;
 }

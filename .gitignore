@@ -7,9 +7,11 @@ wp-content/blogs.dir/
 wp-content/cache/
 wp-content/upgrade/
 #wp-content/uploads/
+wp-content/uploads/photo-gallery/
 wp-content/uploads/2018/
 wp-content/wp-cache-config.php
 wp-content/plugins/hello.php
+wp-content/plugins/duplicate-page/
 
 /license.txt
 /readme.html
@@ -22,6 +24,7 @@ wp-content/plugins/hello.php
 /resources
 /.sass-cache
 /nbproject
+/.idea
 
 wp-content/plugins/cbb-manager/admin/.sass-cache/
 wp-content/themes/cbb/node_modules/
