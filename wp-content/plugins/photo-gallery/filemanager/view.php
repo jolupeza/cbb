@@ -302,7 +302,7 @@ class FilemanagerView {
 		jQuery("#jQueryUploader").fileupload({
 		  dataType: "json",
 		  dropZone: jQuery("#uploader_hitter"),
-		  limitConcurrentUploads: 30, // upload step by step
+		  limitConcurrentUploads: 10, // upload step by step
 		  acceptFileTypes: /(\.|\/)(jpe?g|gif|png)$/i,
 		  submit: function (e, data) {
 			isUploading = true;
@@ -414,6 +414,7 @@ class FilemanagerView {
 			filetype="<?php echo strtoupper( $file['type'] ); ?>"
 			date_modified="<?php echo $file['date_modified']; ?>"
 			fileresolution="<?php echo $file['resolution']; ?>"
+			fileresolution_thumb="<?php echo $file['resolution_thumb']; ?>"
 			fileCredit="<?php echo isset( $file['credit'] ) ? $file['credit'] : ''; ?>"
 			fileAperture="<?php echo isset( $file['aperture'] ) ? $file['aperture'] : ''; ?>"
 			fileCamera="<?php echo isset( $file['camera'] ) ? $file['camera'] : ''; ?>"

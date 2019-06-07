@@ -427,7 +427,7 @@ class ShortcodeView_bwg extends AdminView_bwg {
             <?php if ( !BWG()->is_pro ) { ?>
               <div class="media-toolbar-primary search-form" style="float: left;">
             <span class="media-button button-large">
-              <a id="bwg_pro_version_link" class="bwg_link_shortcode" target="_blank" href="https://demo.10web.io/photo-gallery/"><?php _e('Please see ', BWG()->prefix) ?><span id="bwg_pro_version"><?php _e('Thumbnails', BWG()->prefix) ?></span> <?php _e('View in Premium version', BWG()->prefix) ?></a>
+              <a id="bwg_pro_version_link" class="bwg_link_shortcode" target="_blank" href="https://demo.10web.io/photo-gallery/<?php echo BWG()->utm_source; ?>"><?php _e('Please see ', BWG()->prefix) ?><span id="bwg_pro_version"><?php _e('Thumbnails', BWG()->prefix) ?></span> <?php _e('View in Premium version', BWG()->prefix) ?></a>
             </span>
               </div>
             <?php } ?>
@@ -1559,12 +1559,6 @@ class ShortcodeView_bwg extends AdminView_bwg {
               else {
                 jQuery("#popup_enable_twitter_0").attr('checked', 'checked');
               }
-              if (short_code['popup_enable_google'] == 1) {
-                jQuery("#popup_enable_google_1").attr('checked', 'checked');
-              }
-              else {
-                jQuery("#popup_enable_google_0").attr('checked', 'checked');
-              }
               if (short_code['popup_enable_pinterest'] == 1) {
                 jQuery("#popup_enable_pinterest_1").attr('checked', 'checked');
               }
@@ -1957,9 +1951,9 @@ class ShortcodeView_bwg extends AdminView_bwg {
             tagtext += ' extended_album_enable_page="' + jQuery("input[name=album_extended_enable_page]:checked").val() + '"';
             tagtext += ' extended_albums_per_page="' + jQuery("#albums_extended_per_page").val() + '"';
             tagtext += ' extended_album_images_per_page="' + jQuery("#album_extended_images_per_page").val() + '"';
-			tagtext += ' all_album_sort_by="' + jQuery("#extended_album_sort_by").val() + '"';
-			tagtext += ' all_album_order_by="' + jQuery("#extended_album_order_by").val() + '"';
-			tagtext += ' sort_by="' + jQuery("#album_extended_sort_by").val() + '"';
+            tagtext += ' all_album_sort_by="' + jQuery("#extended_album_sort_by").val() + '"';
+            tagtext += ' all_album_order_by="' + jQuery("#extended_album_order_by").val() + '"';
+            tagtext += ' sort_by="' + jQuery("#album_extended_sort_by").val() + '"';
             tagtext += ' order_by="' + jQuery("#album_extended_order_by").val() + '"';
             tagtext += ' show_search_box="' + jQuery("input[name=album_extended_show_search_box]:checked").val() + '"';
             tagtext += ' placeholder="' + jQuery("#album_extended_placeholder").val() + '"';
@@ -1967,7 +1961,7 @@ class ShortcodeView_bwg extends AdminView_bwg {
             tagtext += ' show_sort_images="' + jQuery("input[name=album_extended_show_sort_images]:checked").val() + '"';
             tagtext += ' show_tag_box="' + jQuery("input[name=album_extended_show_tag_box]:checked").val() + '"';
             tagtext += ' show_album_name="' + jQuery("input[name=show_album_extended_name]:checked").val() + '"';
-			tagtext += ' extended_album_description_enable="' + jQuery("input[name=extended_album_description_enable]:checked").val() + '"';
+			      tagtext += ' extended_album_description_enable="' + jQuery("input[name=extended_album_description_enable]:checked").val() + '"';
             tagtext += ' show_gallery_description="' + jQuery("input[name=album_extended_show_gallery_description]:checked").val() + '"';
             tagtext += ' extended_album_view_type="' + jQuery('#album_extended_view_type option:selected').val() + '"';
             tagtext += ' extended_album_image_title="' + jQuery("input[name=album_extended_image_title_show_hover]:checked").val() + '"';
@@ -1979,6 +1973,8 @@ class ShortcodeView_bwg extends AdminView_bwg {
             tagtext += ' ecommerce_icon="' + jQuery("input[name=album_extended_ecommerce_icon_show_hover]:checked").val() + '"';
             break;
           }
+          default:
+            break;
         }
         // Lightbox paramteres.
         tagtext += ' thumb_click_action="' + jQuery("input[name=thumb_click_action]:checked").val() + '"';
@@ -2012,7 +2008,6 @@ class ShortcodeView_bwg extends AdminView_bwg {
         tagtext += ' addthis_profile_id="' + jQuery("#addthis_profile_id").val() + '"';
         tagtext += ' popup_enable_facebook="' + jQuery("input[name=popup_enable_facebook]:checked").val() + '"';
         tagtext += ' popup_enable_twitter="' + jQuery("input[name=popup_enable_twitter]:checked").val() + '"';
-        tagtext += ' popup_enable_google="' + jQuery("input[name=popup_enable_google]:checked").val() + '"';
         tagtext += ' popup_enable_pinterest="' + jQuery("input[name=popup_enable_pinterest]:checked").val() + '"';
         tagtext += ' popup_enable_tumblr="' + jQuery("input[name=popup_enable_tumblr]:checked").val() + '"';
         tagtext += ' popup_enable_ecommerce="' + jQuery("input[name=popup_enable_ecommerce]:checked").val() + '"';
