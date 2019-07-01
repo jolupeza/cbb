@@ -1813,8 +1813,56 @@ class Cbb_Manager_Admin
              'rewrite'     => false
         );
         register_post_type('banners', $args);
+
+      $labels = array(
+        'name'               => __('Experiencias', $this->domain),
+        'singular_name'      => __('Experiencia', $this->domain),
+        'add_new'            => __('Nueva experiencia', $this->domain),
+        'add_new_item'       => __('Agregar nueva experiencia', $this->domain),
+        'edit_item'          => __('Editar experiencia', $this->domain),
+        'new_item'           => __('Nueva experiencia', $this->domain),
+        'view_item'          => __('Ver experiencia', $this->domain),
+        'search_items'       => __('Buscar experiencia', $this->domain),
+        'not_found'          => __('Experiencia no encontrado', $this->domain),
+        'not_found_in_trash' => __('Experiencia no encontrado en la papelera', $this->domain),
+        'all_items'          => __('Todos las experiencias', $this->domain),
+      );
+      $args = array(
+        'labels' => $labels,
+        'description' => 'Mostrar Experiencias Innovadoras',
+        'public' => true,
+        'exclude_from_search' => true,
+        // 'publicly_queryable' => false,
+        'show_ui' => true,
+        'show_in_nav_menus' => false,
+        'show_in_menu' => true,
+        'show_in_admin_bar' => true,
+        // 'menu_position'          => null,
+        'menu_icon' => 'dashicons-book-alt',
+        // 'hierarchical'        => false,
+        'supports' => array(
+          'title',
+          'editor',
+          'custom-fields',
+          'author',
+          'thumbnail',
+          'page-attributes',
+          'excerpt'
+          // 'trackbacks'
+          // 'comments',
+          // 'revisions',
+          // 'post-formats'
+        ),
+        // 'taxonomies'  => array('post_tag', 'category'),
+        // 'has_archive' => false,
+        'rewrite'     => [
+          'slug' => 'experiencias-innovadoras',
+          'with_front' => false
+        ]
+      );
+      register_post_type('experiences', $args);
         
-        flush_rewrite_rules();
+//      flush_rewrite_rules();
     }
 
     public function unregister_post_type()
