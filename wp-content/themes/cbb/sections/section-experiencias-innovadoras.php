@@ -22,7 +22,7 @@
               <article class="Experiences__item">
                 <?php if (has_post_thumbnail()) : ?>
                   <figure class="Experiences__figure">
-                    <a href="<?php the_permalink(); ?>" title="<?php _e(get_the_title()); ?>">
+                    <a href="<?php the_permalink(); ?>" title="<?php _e(get_the_title()); ?>" target="_blank" rel="noopener noreferrer">
                       <?php the_post_thumbnail('full', [
                         'class' => 'img-responsive',
                         'alt' => get_the_title()
