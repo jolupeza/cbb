@@ -87,7 +87,7 @@ class Cbb_Manager_Admin
             $this->version,
             false
         );
-        
+
         wp_enqueue_style('cbb-animate-admin', 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css', array(), '3.5.2', false);
     }
 
@@ -132,14 +132,14 @@ class Cbb_Manager_Admin
         if (!current_user_can('edit_post', $post_id)) {
             return;
         }
-        
+
         // Title
         if (isset($_POST['mb_title']) && !empty($_POST['mb_title'])) {
             update_post_meta($post_id, 'mb_title', esc_attr($_POST['mb_title']));
         } else {
             delete_post_meta($post_id, 'mb_title');
         }
-        
+
         // SubTitle
         if (isset($_POST['mb_subtitle']) && !empty($_POST['mb_subtitle'])) {
             update_post_meta($post_id, 'mb_subtitle', esc_attr($_POST['mb_subtitle']));
@@ -171,7 +171,7 @@ class Cbb_Manager_Admin
         } else {
             delete_post_meta($post_id, 'mb_page');
         }
-        
+
         // Align
         if (isset($_POST['mb_align']) && !empty($_POST['mb_align'])) {
             update_post_meta($post_id, 'mb_align', esc_attr($_POST['mb_align']));
@@ -194,7 +194,7 @@ class Cbb_Manager_Admin
     {
         require_once plugin_dir_path(__FILE__) . 'partials/cbb-mb-sliders.php';
     }
-    
+
     /**
      * Registers the meta box that will be used to display all of the post meta data
      * associated with post type sliders.
@@ -242,7 +242,7 @@ class Cbb_Manager_Admin
     {
         require_once plugin_dir_path(__FILE__) . 'partials/cbb-mb-partners.php';
     }
-    
+
     /**
      * Registers the meta box that will be used to display all of the post meta data
      * associated with post type locals.
@@ -284,46 +284,46 @@ class Cbb_Manager_Admin
         } else {
             delete_post_meta($post_id, 'mb_phone');
         }
-        
+
         // Email
         if (isset($_POST['mb_email']) && !empty($_POST['mb_email'])) {
             update_post_meta($post_id, 'mb_email', esc_attr($_POST['mb_email']));
         } else {
             delete_post_meta($post_id, 'mb_email');
         }
-        
+
         // Latitud
         if (isset($_POST['mb_lat']) && !empty($_POST['mb_lat'])) {
             update_post_meta($post_id, 'mb_lat', esc_attr($_POST['mb_lat']));
         } else {
             delete_post_meta($post_id, 'mb_lat');
         }
-        
+
         // Longitud
         if (isset($_POST['mb_long']) && !empty($_POST['mb_long'])) {
             update_post_meta($post_id, 'mb_long', esc_attr($_POST['mb_long']));
         } else {
             delete_post_meta($post_id, 'mb_long');
         }
-        
+
         // Parallax
         if (isset($_POST['mb_parallax']) && !empty($_POST['mb_parallax'])) {
             update_post_meta($post_id, 'mb_parallax', esc_attr($_POST['mb_parallax']));
         } else {
             delete_post_meta($post_id, 'mb_parallax');
         }
-        
+
         // TourButton
-        $tourButton = !empty(filter_input(INPUT_POST, 'mb_tourButton')) ? 'on' : 'off';
+        $tourButton = !empty($_POST['mb_tourButton']) ? 'on' : 'off';
         update_post_meta($post_id, 'mb_tourButton', $tourButton);
-        
+
         // TourTarget
-        $tourTarget = !empty(filter_input(INPUT_POST, 'mb_tourTarget')) ? 'on' : 'off';
+        $tourTarget = !empty($_POST['mb_tourTarget']) ? 'on' : 'off';
         update_post_meta($post_id, 'mb_tourTarget', $tourTarget);
-        
+
         // TourLink
-        if (!empty(filter_input(INPUT_POST, 'mb_tourLink'))) {
-            update_post_meta($post_id, 'mb_tourLink', esc_attr(filter_input(INPUT_POST, 'mb_tourLink')));
+        if (!empty($_POST['mb_tourLink'])) {
+            update_post_meta($post_id, 'mb_tourLink', esc_attr($_POST['mb_tourLink']));
         } else {
             delete_post_meta($post_id, 'mb_tourLink');
         }
@@ -336,7 +336,7 @@ class Cbb_Manager_Admin
     {
         require_once plugin_dir_path(__FILE__) . 'partials/cbb-mb-locals.php';
     }
-    
+
     /**
      * Registers the meta box that will be used to display all of the post meta data
      * associated with post type parallaxs.
@@ -371,7 +371,7 @@ class Cbb_Manager_Admin
         } else {
             delete_post_meta($post_id, 'mb_title');
         }
-        
+
         // AlignTitle
         if (isset($_POST['mb_alignTitle']) && !empty($_POST['mb_alignTitle'])) {
             update_post_meta($post_id, 'mb_alignTitle', esc_attr($_POST['mb_alignTitle']));
@@ -385,14 +385,14 @@ class Cbb_Manager_Admin
         } else {
             delete_post_meta($post_id, 'mb_legend');
         }
-        
+
         // Align
         if (isset($_POST['mb_align']) && !empty($_POST['mb_align'])) {
             update_post_meta($post_id, 'mb_align', esc_attr($_POST['mb_align']));
         } else {
             delete_post_meta($post_id, 'mb_align');
         }
-        
+
         // Text Link
         if (isset($_POST['mb_text']) && !empty($_POST['mb_text'])) {
             update_post_meta($post_id, 'mb_text', esc_attr($_POST['mb_text']));
@@ -417,14 +417,14 @@ class Cbb_Manager_Admin
         } else {
             delete_post_meta($post_id, 'mb_page');
         }
-        
+
         // Animate
         if (isset($_POST['mb_animate']) && !empty($_POST['mb_animate'])) {
             update_post_meta($post_id, 'mb_animate', esc_attr($_POST['mb_animate']));
         } else {
             delete_post_meta($post_id, 'mb_animate');
         }
-        
+
         // Image Responsive
         if (isset($_POST['mb_responsive']) && !empty($_POST['mb_responsive'])) {
             update_post_meta($post_id, 'mb_responsive', esc_attr($_POST['mb_responsive']));
@@ -440,7 +440,7 @@ class Cbb_Manager_Admin
     {
         require_once plugin_dir_path(__FILE__) . 'partials/cbb-mb-parallaxs.php';
     }
-    
+
     /**
      * Registers the meta box that will be used to display all of the post meta data
      * associated with post type page.
@@ -473,7 +473,7 @@ class Cbb_Manager_Admin
         if (!current_user_can('edit_post', $post_id)) {
             return;
         }
-        
+
         // Template
         if (isset($_POST['mb_template']) && !empty($_POST['mb_template'])) {
             update_post_meta($post_id, 'mb_template', esc_attr($_POST['mb_template']));
@@ -487,126 +487,126 @@ class Cbb_Manager_Admin
         } else {
             delete_post_meta($post_id, 'mb_parallax');
         }
-        
+
         // Youtube
         if (isset($_POST['mb_youtube']) && !empty($_POST['mb_youtube'])) {
             update_post_meta($post_id, 'mb_youtube', esc_attr($_POST['mb_youtube']));
         } else {
             delete_post_meta($post_id, 'mb_youtube');
         }
-        
+
         // Poster
         if (isset($_POST['mb_poster']) && !empty($_POST['mb_poster'])) {
             update_post_meta($post_id, 'mb_poster', esc_attr($_POST['mb_poster']));
         } else {
             delete_post_meta($post_id, 'mb_poster');
         }
-        
+
         // Webm
         if (isset($_POST['mb_webm']) && !empty($_POST['mb_webm'])) {
             update_post_meta($post_id, 'mb_webm', esc_attr($_POST['mb_webm']));
         } else {
             delete_post_meta($post_id, 'mb_webm');
         }
-        
+
         // MP4
         if (isset($_POST['mb_mp4']) && !empty($_POST['mb_mp4'])) {
             update_post_meta($post_id, 'mb_mp4', esc_attr($_POST['mb_mp4']));
         } else {
             delete_post_meta($post_id, 'mb_mp4');
         }
-        
+
         // OGV
         if (isset($_POST['mb_ogv']) && !empty($_POST['mb_ogv'])) {
             update_post_meta($post_id, 'mb_ogv', esc_attr($_POST['mb_ogv']));
         } else {
             delete_post_meta($post_id, 'mb_ogv');
         }
-        
+
         // Poster2
         if (isset($_POST['mb_poster2']) && !empty($_POST['mb_poster2'])) {
             update_post_meta($post_id, 'mb_poster2', esc_attr($_POST['mb_poster2']));
         } else {
             delete_post_meta($post_id, 'mb_poster2');
         }
-        
+
         // Webm
         if (isset($_POST['mb_webm2']) && !empty($_POST['mb_webm2'])) {
             update_post_meta($post_id, 'mb_webm2', esc_attr($_POST['mb_webm2']));
         } else {
             delete_post_meta($post_id, 'mb_webm2');
         }
-        
+
         // MP4
         if (isset($_POST['mb_mp42']) && !empty($_POST['mb_mp42'])) {
             update_post_meta($post_id, 'mb_mp42', esc_attr($_POST['mb_mp42']));
         } else {
             delete_post_meta($post_id, 'mb_mp42');
         }
-        
+
         // OGV
         if (isset($_POST['mb_ogv2']) && !empty($_POST['mb_ogv2'])) {
             update_post_meta($post_id, 'mb_ogv2', esc_attr($_POST['mb_ogv2']));
         } else {
             delete_post_meta($post_id, 'mb_ogv2');
         }
-        
+
         // Poster3
         if (isset($_POST['mb_poster3']) && !empty($_POST['mb_poster3'])) {
             update_post_meta($post_id, 'mb_poster3', esc_attr($_POST['mb_poster3']));
         } else {
             delete_post_meta($post_id, 'mb_poster3');
         }
-        
+
         // Webm
         if (isset($_POST['mb_webm3']) && !empty($_POST['mb_webm3'])) {
             update_post_meta($post_id, 'mb_webm3', esc_attr($_POST['mb_webm3']));
         } else {
             delete_post_meta($post_id, 'mb_webm3');
         }
-        
+
         // MP4
         if (isset($_POST['mb_mp43']) && !empty($_POST['mb_mp43'])) {
             update_post_meta($post_id, 'mb_mp43', esc_attr($_POST['mb_mp43']));
         } else {
             delete_post_meta($post_id, 'mb_mp43');
         }
-        
+
         // OGV
         if (isset($_POST['mb_ogv3']) && !empty($_POST['mb_ogv3'])) {
             update_post_meta($post_id, 'mb_ogv3', esc_attr($_POST['mb_ogv3']));
         } else {
             delete_post_meta($post_id, 'mb_ogv3');
         }
-        
+
         // PDF
         if (isset($_POST['mb_pdf']) && !empty($_POST['mb_pdf'])) {
             update_post_meta($post_id, 'mb_pdf', esc_attr($_POST['mb_pdf']));
         } else {
             delete_post_meta($post_id, 'mb_pdf');
         }
-        
+
         // Icon
         if (isset($_POST['mb_icon']) && !empty($_POST['mb_icon'])) {
             update_post_meta($post_id, 'mb_icon', esc_attr($_POST['mb_icon']));
         } else {
             delete_post_meta($post_id, 'mb_icon');
         }
-        
+
         // Title
         if (isset($_POST['mb_title']) && !empty($_POST['mb_title'])) {
             update_post_meta($post_id, 'mb_title', esc_attr($_POST['mb_title']));
         } else {
             delete_post_meta($post_id, 'mb_title');
         }
-        
+
         // SubTitle
         if (isset($_POST['mb_subtitle']) && !empty($_POST['mb_subtitle'])) {
             update_post_meta($post_id, 'mb_subtitle', esc_attr($_POST['mb_subtitle']));
         } else {
             delete_post_meta($post_id, 'mb_subtitle');
         }
-        
+
         // Text Link
         if (isset($_POST['mb_text']) && !empty($_POST['mb_text'])) {
             update_post_meta($post_id, 'mb_text', esc_attr($_POST['mb_text']));
@@ -631,9 +631,9 @@ class Cbb_Manager_Admin
         } else {
             delete_post_meta($post_id, 'mb_page');
         }
-        
+
         // More
-        $more = !empty(filter_input(INPUT_POST, 'mb_more')) ? 'on' : 'off';
+        $more = !empty($_POST['mb_more']) ? 'on' : 'off';
         update_post_meta($post_id, 'mb_more', $more);
     }
 
@@ -644,7 +644,7 @@ class Cbb_Manager_Admin
     {
         require_once plugin_dir_path(__FILE__).'partials/cbb-mb-pages.php';
     }
-    
+
     /**
      * Registers the meta box that will be used to display all of the post meta data
      * associated with post type achievements.
@@ -672,7 +672,7 @@ class Cbb_Manager_Admin
         if (!current_user_can('edit_post', $post_id)) {
             return;
         }
-        
+
         // URL
         if (isset($_POST['mb_url']) && !empty($_POST['mb_url'])) {
             update_post_meta($post_id, 'mb_url', esc_attr($_POST['mb_url']));
@@ -692,7 +692,7 @@ class Cbb_Manager_Admin
     {
         require_once plugin_dir_path(__FILE__) . 'partials/cbb-mb-achievements.php';
     }
-    
+
     /**
      * Registers the meta box that will be used to display all of the post meta data
      * associated with post type contacts.
@@ -807,7 +807,7 @@ class Cbb_Manager_Admin
 
         return $views;
     }
-    
+
     /**
      * Registers the meta box that will be used to display all of the post meta data
      * associated with post type prestudents.
@@ -846,7 +846,7 @@ class Cbb_Manager_Admin
 
         return $columns;
     }
-    
+
     public function custom_column_prestudents($column)
     {
         global $post;
@@ -911,19 +911,19 @@ class Cbb_Manager_Admin
                 break;
             case 'local':
                 $sede = isset($values['mb_sede']) ? (int)esc_attr($values['mb_sede'][0], $this->domain) : false;
-                
+
                 if ($sede) {
                     $dataSede = get_post($sede);
                     echo $dataSede->post_title;
                 }
-                
+
                 break;
             case 'grade':
                 $levels = wp_get_post_terms($post->ID, 'levels');
-                
+
                 if (count($levels)) {
                     $level = $levels[0];
-                    
+
                     if (is_object($level)) {
                         echo $level->name;
                     }
@@ -931,12 +931,12 @@ class Cbb_Manager_Admin
                 break;
             case 'year':
                 $year = isset($values['mb_year']) ? esc_attr($values['mb_year'][0], $this->domain) : '';
-                
+
                 echo $year;
                 break;
         }
     }
-    
+
     /**
      * Display Filter by Sede in Post Type Prestudents.
      *
@@ -945,19 +945,19 @@ class Cbb_Manager_Admin
     public function prestudents_table_filtering()
     {
         global $typenow;
-        
+
         $postType = 'prestudents';
         $taxonomy = 'levels';
-                
+
         if ($typenow === $postType) {
             $sede = isset($_GET['mb_sede']) ? esc_attr($_GET['mb_sede']) : '';
-            $year = isset($_GET['mb_year']) ? esc_attr($_GET['mb_year']) : '';            
+            $year = isset($_GET['mb_year']) ? esc_attr($_GET['mb_year']) : '';
             $level = isset($_GET['mb_level']) ? esc_attr($_GET['mb_level']) : '';
-            
+
             // Sede
             echo '<select name="mb_sede" id="filter-by-sede">';
             echo '<option value=""' . selected($sede, '') . '>'.__('Todos las sedes').'</option>';
-            
+
             $args = [
               'post_type' => 'locals',
               'posts_per_page' => -1,
@@ -970,14 +970,14 @@ class Cbb_Manager_Admin
                 while ($the_query->have_posts()) {
                     $the_query->the_post();
                     $id = get_the_ID();
-                    
+
                     echo '<option value="' . $id . '"' . selected($sede, $id) . '>' . get_the_title() . '</option>';
                 }
             }
             wp_reset_postdata();
-            
+
             echo '</select>';
-            
+
             // Levels
             $levels = get_terms([
               'taxonomy' => $taxonomy,
@@ -991,24 +991,24 @@ class Cbb_Manager_Admin
                 foreach ($levels as $l) {
                     echo '<option value="' . $l->term_id . '"' . selected($level, $l->term_id) . '>' . $l->name . '</option>';
                 }
-                
+
                 echo '</select>';
             }
-            
+
             // Year
             echo '<select name="mb_year" id="filter-by-year">';
             echo '<option value=""' . selected($year, '') . '>'.__('Todos los años').'</option>';
-            
+
             $yearNow = intval(date('Y'));
             for ($i = 2018; $i <= $yearNow + 1; $i++) {
                 echo '<option value="' . $i . '"' . selected($year, $i) . '>' . $i . '</option>';
             }
-            
+
             echo '</select>';
         }
 
     }
-    
+
     /**
      * Filter prestudents by sede
      *
@@ -1021,35 +1021,35 @@ class Cbb_Manager_Admin
         if (!current_user_can('manage_options')) {
             return;
         }
-        
+
         global $pagenow;
 
         $postType = 'prestudents';
         $taxonomy = 'levels';
         $qv = &$query->query_vars;
-        
+
         if ($pagenow == 'edit.php' && isset($qv['post_type']) && $qv['post_type'] == $postType) {
             if (isset($_GET['mb_sede']) && !empty($_GET['mb_sede'])) {
                 $value = (int)$_GET['mb_sede'];
-                
+
                 $qv['meta_query'][] = [
                     'key' => 'mb_sede',
                     'value' => $value
                 ];
             }
-            
+
             if (isset($_GET['mb_year']) && !empty($_GET['mb_year'])) {
                 $value = $_GET['mb_year'];
-            
+
                 $qv['meta_query'][] = array(
                     'key' => 'mb_year',
                     'value' => $value
                 );
             }
-            
+
             if (isset($_GET['mb_level']) && $_GET['mb_level'] != 0) {
                 $value = (int)$_GET['mb_level'];
-                
+
                 $qv['tax_query'][] = [
                     'taxonomy' => $taxonomy,
                     'field' => 'term_id',
@@ -1058,20 +1058,20 @@ class Cbb_Manager_Admin
             }
         }
     }
-    
+
     public function prestudents_button_view_edit($views)
     {
         $sede = (isset($_GET['mb_sede']) && !empty($_GET['mb_sede'])) ? esc_attr($_GET['mb_sede']) : 'all';
         $level = (isset($_GET['mb_level']) && !empty($_GET['mb_level'])) ? esc_attr($_GET['mb_level']) : 'all';
         $year = (isset($_GET['mb_year']) && !empty($_GET['mb_year'])) ? esc_attr($_GET['mb_year']) : 'all';
-        
+
         echo '<p>'
         . '<a href="' . plugin_dir_url(dirname(__FILE__)) . 'prestudents/generateExcel/' . $sede . '/' . $level . '/' . $year . '" class="button button-primary">Generar excel</a>'
         . '</p>';
 
         return $views;
     }
-    
+
     /**
      * Registers the meta box that will be used to display all of the post meta data
      * associated with post type schedules.
@@ -1106,7 +1106,7 @@ class Cbb_Manager_Admin
         } else {
             delete_post_meta($post_id, 'mb_local');
         }
-        
+
         // Grade
 //        if (isset($_POST['mb_grade']) && !empty($_POST['mb_grade'])) {
 //            update_post_meta($post_id, 'mb_grade', esc_attr($_POST['mb_grade']));
@@ -1122,7 +1122,7 @@ class Cbb_Manager_Admin
     {
         require_once plugin_dir_path(__FILE__) . 'partials/cbb-mb-schedules.php';
     }
-    
+
     /**
      * Registers the meta box that will be used to display all of the post meta data
      * associated with post type banners.
@@ -1189,7 +1189,7 @@ class Cbb_Manager_Admin
             'not_found_in_trash' => __('Slider no encontrado en la papelera', $this->domain),
             'all_items'          => __('Todos los sliders', $this->domain),
 //            'archives' - String for use with archives in nav menus. Default is Post Archives/Page Archives.
-//            'attributes' - Label for the attributes meta box. Default is 'Post Attributes' / 'Page Attributes'. 
+//            'attributes' - Label for the attributes meta box. Default is 'Post Attributes' / 'Page Attributes'.
 //            'insert_into_item' - String for the media frame button. Default is Insert into post/Insert into page.
 //            'uploaded_to_this_item' - String for the media frame filter. Default is Uploaded to this post/Uploaded to this page.
 //            'featured_image' - Default is Featured Image.
@@ -1200,7 +1200,7 @@ class Cbb_Manager_Admin
 //            'filter_items_list' - String for the table views hidden heading.
 //            'items_list_navigation' - String for the table pagination hidden heading.
 //            'items_list' - String for the table hidden heading.
-//            'name_admin_bar' - String for use in New in Admin menu bar. Default is the same as `singular_name`. 
+//            'name_admin_bar' - String for use in New in Admin menu bar. Default is the same as `singular_name`.
         );
         $args = array(
             'labels' => $labels,
@@ -1233,7 +1233,7 @@ class Cbb_Manager_Admin
              'rewrite'     => false
         );
         register_post_type('sliders', $args);
-        
+
         $labels = array(
             'name'               => __('Asociados', $this->domain),
             'singular_name'      => __('Asociado', $this->domain),
@@ -1247,7 +1247,7 @@ class Cbb_Manager_Admin
             'not_found_in_trash' => __('Asociado no encontrado en la papelera', $this->domain),
             'all_items'          => __('Todos los asociados', $this->domain),
 //            'archives' - String for use with archives in nav menus. Default is Post Archives/Page Archives.
-//            'attributes' - Label for the attributes meta box. Default is 'Post Attributes' / 'Page Attributes'. 
+//            'attributes' - Label for the attributes meta box. Default is 'Post Attributes' / 'Page Attributes'.
 //            'insert_into_item' - String for the media frame button. Default is Insert into post/Insert into page.
 //            'uploaded_to_this_item' - String for the media frame filter. Default is Uploaded to this post/Uploaded to this page.
 //            'featured_image' - Default is Featured Image.
@@ -1258,7 +1258,7 @@ class Cbb_Manager_Admin
 //            'filter_items_list' - String for the table views hidden heading.
 //            'items_list_navigation' - String for the table pagination hidden heading.
 //            'items_list' - String for the table hidden heading.
-//            'name_admin_bar' - String for use in New in Admin menu bar. Default is the same as `singular_name`. 
+//            'name_admin_bar' - String for use in New in Admin menu bar. Default is the same as `singular_name`.
         );
         $args = array(
             'labels' => $labels,
@@ -1291,7 +1291,7 @@ class Cbb_Manager_Admin
              'rewrite'     => false
         );
         register_post_type('partners', $args);
-        
+
         $labels = array(
             'name'               => __('Infraestructura', $this->domain),
             'singular_name'      => __('Sede', $this->domain),
@@ -1305,7 +1305,7 @@ class Cbb_Manager_Admin
             'not_found_in_trash' => __('Sede no encontrada en la papelera', $this->domain),
             'all_items'          => __('Todas las sedes', $this->domain),
 //            'archives' - String for use with archives in nav menus. Default is Post Archives/Page Archives.
-//            'attributes' - Label for the attributes meta box. Default is 'Post Attributes' / 'Page Attributes'. 
+//            'attributes' - Label for the attributes meta box. Default is 'Post Attributes' / 'Page Attributes'.
 //            'insert_into_item' - String for the media frame button. Default is Insert into post/Insert into page.
 //            'uploaded_to_this_item' - String for the media frame filter. Default is Uploaded to this post/Uploaded to this page.
 //            'featured_image' - Default is Featured Image.
@@ -1316,7 +1316,7 @@ class Cbb_Manager_Admin
 //            'filter_items_list' - String for the table views hidden heading.
 //            'items_list_navigation' - String for the table pagination hidden heading.
 //            'items_list' - String for the table hidden heading.
-//            'name_admin_bar' - String for use in New in Admin menu bar. Default is the same as `singular_name`. 
+//            'name_admin_bar' - String for use in New in Admin menu bar. Default is the same as `singular_name`.
         );
         $args = array(
             'labels' => $labels,
@@ -1353,7 +1353,7 @@ class Cbb_Manager_Admin
             'show_in_rest' => true
         );
         register_post_type('locals', $args);
-        
+
         $labels = array(
             'name'               => __('Parallaxs', $this->domain),
             'singular_name'      => __('Parallax', $this->domain),
@@ -1367,7 +1367,7 @@ class Cbb_Manager_Admin
             'not_found_in_trash' => __('Parallax no encontrado en la papelera', $this->domain),
             'all_items'          => __('Todos los parallaxs', $this->domain),
 //            'archives' - String for use with archives in nav menus. Default is Post Archives/Page Archives.
-//            'attributes' - Label for the attributes meta box. Default is 'Post Attributes' / 'Page Attributes'. 
+//            'attributes' - Label for the attributes meta box. Default is 'Post Attributes' / 'Page Attributes'.
 //            'insert_into_item' - String for the media frame button. Default is Insert into post/Insert into page.
 //            'uploaded_to_this_item' - String for the media frame filter. Default is Uploaded to this post/Uploaded to this page.
 //            'featured_image' - Default is Featured Image.
@@ -1378,7 +1378,7 @@ class Cbb_Manager_Admin
 //            'filter_items_list' - String for the table views hidden heading.
 //            'items_list_navigation' - String for the table pagination hidden heading.
 //            'items_list' - String for the table hidden heading.
-//            'name_admin_bar' - String for use in New in Admin menu bar. Default is the same as `singular_name`. 
+//            'name_admin_bar' - String for use in New in Admin menu bar. Default is the same as `singular_name`.
         );
         $args = array(
             'labels' => $labels,
@@ -1411,7 +1411,7 @@ class Cbb_Manager_Admin
              'rewrite'     => false
         );
         register_post_type('parallaxs', $args);
-        
+
         $labels = array(
             'name'               => __('Logros', $this->domain),
             'singular_name'      => __('Logro', $this->domain),
@@ -1425,7 +1425,7 @@ class Cbb_Manager_Admin
             'not_found_in_trash' => __('Logro no encontrado en la papelera', $this->domain),
             'all_items'          => __('Todos los logros', $this->domain),
 //            'archives' - String for use with archives in nav menus. Default is Post Archives/Page Archives.
-//            'attributes' - Label for the attributes meta box. Default is 'Post Attributes' / 'Page Attributes'. 
+//            'attributes' - Label for the attributes meta box. Default is 'Post Attributes' / 'Page Attributes'.
 //            'insert_into_item' - String for the media frame button. Default is Insert into post/Insert into page.
 //            'uploaded_to_this_item' - String for the media frame filter. Default is Uploaded to this post/Uploaded to this page.
 //            'featured_image' - Default is Featured Image.
@@ -1436,7 +1436,7 @@ class Cbb_Manager_Admin
 //            'filter_items_list' - String for the table views hidden heading.
 //            'items_list_navigation' - String for the table pagination hidden heading.
 //            'items_list' - String for the table hidden heading.
-//            'name_admin_bar' - String for use in New in Admin menu bar. Default is the same as `singular_name`. 
+//            'name_admin_bar' - String for use in New in Admin menu bar. Default is the same as `singular_name`.
         );
         $args = array(
             'labels' => $labels,
@@ -1469,7 +1469,7 @@ class Cbb_Manager_Admin
              'rewrite'     => false
         );
         register_post_type('achievements', $args);
-        
+
         $labels = array(
             'name'               => __('Plantillas', $this->domain),
             'singular_name'      => __('Plantilla', $this->domain),
@@ -1483,7 +1483,7 @@ class Cbb_Manager_Admin
             'not_found_in_trash' => __('Plantilla no encontrada en la papelera', $this->domain),
             'all_items'          => __('Todas las plantillas', $this->domain),
 //            'archives' - String for use with archives in nav menus. Default is Post Archives/Page Archives.
-//            'attributes' - Label for the attributes meta box. Default is 'Post Attributes' / 'Page Attributes'. 
+//            'attributes' - Label for the attributes meta box. Default is 'Post Attributes' / 'Page Attributes'.
 //            'insert_into_item' - String for the media frame button. Default is Insert into post/Insert into page.
 //            'uploaded_to_this_item' - String for the media frame filter. Default is Uploaded to this post/Uploaded to this page.
 //            'featured_image' - Default is Featured Image.
@@ -1494,7 +1494,7 @@ class Cbb_Manager_Admin
 //            'filter_items_list' - String for the table views hidden heading.
 //            'items_list_navigation' - String for the table pagination hidden heading.
 //            'items_list' - String for the table hidden heading.
-//            'name_admin_bar' - String for use in New in Admin menu bar. Default is the same as `singular_name`. 
+//            'name_admin_bar' - String for use in New in Admin menu bar. Default is the same as `singular_name`.
         );
         $args = array(
             'labels' => $labels,
@@ -1527,7 +1527,7 @@ class Cbb_Manager_Admin
              'rewrite'     => false
         );
         register_post_type('templates', $args);
-        
+
         $labels = array(
             'name'               => __('Contactos', $this->domain),
             'singular_name'      => __('Contacto', $this->domain),
@@ -1583,7 +1583,7 @@ class Cbb_Manager_Admin
              'rewrite'     => false
         );
         register_post_type('contacts', $args);
-        
+
         $labels = array(
             'name'               => __('Admisión', $this->domain),
             'singular_name'      => __('Registro', $this->domain),
@@ -1639,7 +1639,7 @@ class Cbb_Manager_Admin
              'rewrite'     => false
         );
         register_post_type('prestudents', $args);
-        
+
         $labels = array(
             'name'               => __('Preguntas frecuentes', $this->domain),
             'singular_name'      => __('Pregunta frecuente', $this->domain),
@@ -1653,7 +1653,7 @@ class Cbb_Manager_Admin
             'not_found_in_trash' => __('Pregunta no encontrada en la papelera', $this->domain),
             'all_items'          => __('Todas las preguntas', $this->domain),
 //            'archives' - String for use with archives in nav menus. Default is Post Archives/Page Archives.
-//            'attributes' - Label for the attributes meta box. Default is 'Post Attributes' / 'Page Attributes'. 
+//            'attributes' - Label for the attributes meta box. Default is 'Post Attributes' / 'Page Attributes'.
 //            'insert_into_item' - String for the media frame button. Default is Insert into post/Insert into page.
 //            'uploaded_to_this_item' - String for the media frame filter. Default is Uploaded to this post/Uploaded to this page.
 //            'featured_image' - Default is Featured Image.
@@ -1664,7 +1664,7 @@ class Cbb_Manager_Admin
 //            'filter_items_list' - String for the table views hidden heading.
 //            'items_list_navigation' - String for the table pagination hidden heading.
 //            'items_list' - String for the table hidden heading.
-//            'name_admin_bar' - String for use in New in Admin menu bar. Default is the same as `singular_name`. 
+//            'name_admin_bar' - String for use in New in Admin menu bar. Default is the same as `singular_name`.
         );
         $args = array(
             'labels' => $labels,
@@ -1697,7 +1697,7 @@ class Cbb_Manager_Admin
              'rewrite'     => false
         );
         register_post_type('questions', $args);
-        
+
         $labels = array(
             'name'               => __('Horarios', $this->domain),
             'singular_name'      => __('Horario', $this->domain),
@@ -1711,7 +1711,7 @@ class Cbb_Manager_Admin
             'not_found_in_trash' => __('Horario no encontrado en la papelera', $this->domain),
             'all_items'          => __('Todos los horarios', $this->domain),
 //            'archives' - String for use with archives in nav menus. Default is Post Archives/Page Archives.
-//            'attributes' - Label for the attributes meta box. Default is 'Post Attributes' / 'Page Attributes'. 
+//            'attributes' - Label for the attributes meta box. Default is 'Post Attributes' / 'Page Attributes'.
 //            'insert_into_item' - String for the media frame button. Default is Insert into post/Insert into page.
 //            'uploaded_to_this_item' - String for the media frame filter. Default is Uploaded to this post/Uploaded to this page.
 //            'featured_image' - Default is Featured Image.
@@ -1722,7 +1722,7 @@ class Cbb_Manager_Admin
 //            'filter_items_list' - String for the table views hidden heading.
 //            'items_list_navigation' - String for the table pagination hidden heading.
 //            'items_list' - String for the table hidden heading.
-//            'name_admin_bar' - String for use in New in Admin menu bar. Default is the same as `singular_name`. 
+//            'name_admin_bar' - String for use in New in Admin menu bar. Default is the same as `singular_name`.
         );
         $args = array(
             'labels' => $labels,
@@ -1755,7 +1755,7 @@ class Cbb_Manager_Admin
              'rewrite'     => false
         );
         register_post_type('schedules', $args);
-        
+
         $labels = array(
             'name'               => __('Banners', $this->domain),
             'singular_name'      => __('Banner', $this->domain),
@@ -1769,7 +1769,7 @@ class Cbb_Manager_Admin
             'not_found_in_trash' => __('Banner no encontrado en la papelera', $this->domain),
             'all_items'          => __('Todos los banners', $this->domain),
 //            'archives' - String for use with archives in nav menus. Default is Post Archives/Page Archives.
-//            'attributes' - Label for the attributes meta box. Default is 'Post Attributes' / 'Page Attributes'. 
+//            'attributes' - Label for the attributes meta box. Default is 'Post Attributes' / 'Page Attributes'.
 //            'insert_into_item' - String for the media frame button. Default is Insert into post/Insert into page.
 //            'uploaded_to_this_item' - String for the media frame filter. Default is Uploaded to this post/Uploaded to this page.
 //            'featured_image' - Default is Featured Image.
@@ -1780,7 +1780,7 @@ class Cbb_Manager_Admin
 //            'filter_items_list' - String for the table views hidden heading.
 //            'items_list_navigation' - String for the table pagination hidden heading.
 //            'items_list' - String for the table hidden heading.
-//            'name_admin_bar' - String for use in New in Admin menu bar. Default is the same as `singular_name`. 
+//            'name_admin_bar' - String for use in New in Admin menu bar. Default is the same as `singular_name`.
         );
         $args = array(
             'labels' => $labels,
@@ -1855,20 +1855,20 @@ class Cbb_Manager_Admin
         ),
         // 'taxonomies'  => array('post_tag', 'category'),
         // 'has_archive' => false,
-        'rewrite'     => [
-          'slug' => 'experiencias-innovadoras',
-          'with_front' => false
-        ]
-      );
-      register_post_type('experiences', $args);
-        
-//      flush_rewrite_rules();
+        'rewrite'     => array(
+            'slug' => 'experiencias-innovadoras',
+            'with_front' => false
+        ));
+
+        register_post_type('experiences', $args);
+
+        //flush_rewrite_rules();
     }
 
     public function unregister_post_type()
     {
         global $wp_post_types;
-        
+
         dump_exit($wp_post_types);
 
         if (isset($wp_post_types[ 'testimonials' ])) {
@@ -1879,7 +1879,7 @@ class Cbb_Manager_Admin
 
         return false;
     }
-    
+
     /**
      * Add custom taxonomies areas to post type post.
      */
@@ -1920,16 +1920,16 @@ class Cbb_Manager_Admin
 
         register_taxonomy('areas', 'post', $args);
     }
-    
+
     public function remove_taxonomies_post()
     {
         wp_delete_term(3, 'areas');
         wp_delete_term(4, 'areas');
         wp_delete_term(5, 'areas');
-        
+
         unregister_taxonomy('areas');
     }
-    
+
     /**
      * Add custom taxonomies areas to post type sliders.
      */
@@ -1968,7 +1968,7 @@ class Cbb_Manager_Admin
 
         register_taxonomy('sections', 'sliders', $args);
     }
-    
+
     /**
      * Add custom taxonomies areas to post type prestudents.
      */
@@ -2009,7 +2009,7 @@ class Cbb_Manager_Admin
 
         register_taxonomy('levels', 'prestudents', $args);
     }
-    
+
     /**
      * Add custom taxonomies areas to post type contacts.
      */
@@ -2047,7 +2047,7 @@ class Cbb_Manager_Admin
         );
 
 //        register_taxonomy('subjects', 'contacts', $args);
-        
+
         $labels = array(
             'name' => _x('Grados', 'Taxonomy plural name', THEMEDOMAIN),
             'singular_name' => _x('Grado', 'Taxonomy singular name', THEMEDOMAIN),
@@ -2081,7 +2081,7 @@ class Cbb_Manager_Admin
 
         register_taxonomy('levels_contact', 'contacts', $args);
     }
-    
+
     /**
      * Add custom taxonomies areas to post type questions.
      */
@@ -2120,7 +2120,7 @@ class Cbb_Manager_Admin
 
         register_taxonomy('categories_questions', 'questions', $args);
     }
-    
+
     public function rest_filter_add_filters()
     {
         foreach ( get_post_types( array( 'show_in_rest' => true ), 'objects' ) as $post_type ) {
