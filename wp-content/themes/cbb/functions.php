@@ -449,7 +449,9 @@ function register_admision_callback()
   $result = array(
     'result' => false,
     'msg' => '',
-    'error' => ''
+    'error' => '',
+    'redirect' => false,
+    'redirect_page' => ''
   );
 
   if (!wp_verify_nonce($nonce, 'axios-vuejs')) {
@@ -548,6 +550,11 @@ function register_admision_callback()
 
               $result['result'] = true;
               $result['msg'] = $options['response_admision_forms'];
+
+              if (!empty($options['admision_page'])) {
+                $result['redirect'] = true;
+                $result['redirect_page'] = get_permalink($options['admision_page']);
+              }              
             } else {
               $result['error'] = 'Plantilla email no encontrada.';
               ob_get_clean();
@@ -569,8 +576,7 @@ function register_admision_callback()
     $result['error'] = 'Verifique que ha ingresado los datos correctamente.';
   }
 
-  echo json_encode($result);
-  die();
+  wp_send_json($result);
 }
 
 /***********************************************************/

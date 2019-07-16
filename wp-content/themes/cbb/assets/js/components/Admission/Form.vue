@@ -226,6 +226,10 @@
                     this.info.status = false;
                     this.info.type = '';
                     this.info.text = '';
+
+                    if (response.redirect) {
+                      window.location.href = response.redirect_page;
+                    }
                   }, 5000);
                 }
               })

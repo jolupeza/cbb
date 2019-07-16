@@ -309,7 +309,7 @@ function cbb_customize_register($wp_customize) {
     'priority' => 39
   ]);
 
-  // Email Contact
+  // Year
   $wp_customize->add_setting('cbb_custom_settings[admision_year]', [
     'default' => '',
     'type' => 'option'
@@ -321,6 +321,19 @@ function cbb_customize_register($wp_customize) {
     'settings' => 'cbb_custom_settings[admision_year]',
     'type' => 'text'
   ]);
+
+  $wp_customize->add_setting('cbb_custom_settings[admision_page]', [
+    'default' => '',
+    'type' => 'option'
+  ]);
+
+  $wp_customize->add_control('cbb_custom_settings[admision_page]', array(
+    'label'      => __('Página de Agradecimiento:', THEMEDOMAIN),
+    'section'    => 'cbb_admision',
+    'settings'   => 'cbb_custom_settings[admision_page]',
+    'type'       => 'select',
+    'choices'    => getPages(),
+  ));
 
   // Text Emails
   $wp_customize->add_section('cbb_response_email', [
