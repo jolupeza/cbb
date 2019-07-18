@@ -218,19 +218,19 @@
                   this.$validator.reset();
                   this.draft = {};
 
-                  this.info.status = true;
-                  this.info.type = 'success';
-                  this.info.text = response.msg;
+                  if (response.redirect) {
+                    window.location.href = response.redirect_page;
+                  } else {
+                    this.info.status = true;
+                    this.info.type = 'success';
+                    this.info.text = response.msg;
 
-                  setTimeout(() => {
-                    this.info.status = false;
-                    this.info.type = '';
-                    this.info.text = '';
-
-                    if (response.redirect) {
-                      window.location.href = response.redirect_page;
-                    }
-                  }, 5000);
+                    setTimeout(() => {
+                      this.info.status = false;
+                      this.info.type = '';
+                      this.info.text = '';
+                    }, 5000);
+                  }
                 }
               })
           }
