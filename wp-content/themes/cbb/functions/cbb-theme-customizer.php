@@ -404,7 +404,7 @@ function cbb_customize_register($wp_customize) {
   // Information
   $wp_customize->add_panel('cbb_categories', [
     'title' => __('Categorías', THEMEDOMAIN),
-    'description' => esc_html__('COnfiguraciones Categorías', THEMEDOMAIN),
+    'description' => esc_html__('Configuraciones Categorías', THEMEDOMAIN),
     'priority' => 42,
     'capability' => 'edit_theme_options',
   ]);
@@ -571,10 +571,18 @@ function cbb_customize_register($wp_customize) {
   ));
 
   // Calendar Settings
-  $wp_customize->add_section('cbb_calendar', [
+  $wp_customize->add_panel('cbb_calendar_panel', [
     'title' => __('Configuración Calendario Admisión', THEMEDOMAIN),
-    'description' => __('Configuración de opciones para el calendario del formulario de Admisión', THEMEDOMAIN),
-    'priority' => 45
+    'description' => esc_html__('Configuración de opciones para el calendario del formulario de Admisión', THEMEDOMAIN),
+    'priority' => 45,
+    'capability' => 'edit_theme_options',
+  ]);
+
+  $wp_customize->add_section('cbb_calendar', [
+    'title' => __('Configuración General', THEMEDOMAIN),
+    'description' => __('Configuración opciones generales', THEMEDOMAIN),
+    'panel' => 'cbb_calendar_panel',
+    'capability' => 'edit_theme_options',
   ]);
 
   // Placeholder Calendar
@@ -590,59 +598,7 @@ function cbb_customize_register($wp_customize) {
     'type' => 'text'
   ]);
 
-  // Hour start
-  $wp_customize->add_setting('cbb_custom_settings[hour_start]', [
-    'default' => '',
-    'type' => 'option'
-  ]);
-
-  $wp_customize->add_control('cbb_custom_settings[hour_start]', [
-    'label' => __('Hora Inicial', THEMEDOMAIN),
-    'section' => 'cbb_calendar',
-    'settings' => 'cbb_custom_settings[hour_start]',
-    'type' => 'text'
-  ]);
-
-  // Hour end
-  $wp_customize->add_setting('cbb_custom_settings[hour_end]', [
-    'default' => '',
-    'type' => 'option'
-  ]);
-
-  $wp_customize->add_control('cbb_custom_settings[hour_end]', [
-    'label' => __('Hora Final', THEMEDOMAIN),
-    'section' => 'cbb_calendar',
-    'settings' => 'cbb_custom_settings[hour_end]',
-    'type' => 'text'
-  ]);
-
-  // Hour step
-  $wp_customize->add_setting('cbb_custom_settings[hour_step]', [
-    'default' => '',
-    'type' => 'option'
-  ]);
-
-  $wp_customize->add_control('cbb_custom_settings[hour_step]', [
-    'label' => __('Tiempo Saltos', THEMEDOMAIN),
-    'section' => 'cbb_calendar',
-    'settings' => 'cbb_custom_settings[hour_step]',
-    'type' => 'text'
-  ]);
-
-  // Disabled Days
-  $wp_customize->add_setting('cbb_custom_settings[disabled_days]', [
-    'default' => '',
-    'type' => 'option'
-  ]);
-
-  $wp_customize->add_control('cbb_custom_settings[disabled_days]', [
-    'label' => __('Días no hábiles, separar con comas cada fecha', THEMEDOMAIN),
-    'section' => 'cbb_calendar',
-    'settings' => 'cbb_custom_settings[disabled_days]',
-    'type' => 'textarea'
-  ]);
-
-  // Disabled Days
+  // Text Other schedule
   $wp_customize->add_setting('cbb_custom_settings[calendar_other]', [
     'default' => '',
     'type' => 'option'
@@ -654,6 +610,71 @@ function cbb_customize_register($wp_customize) {
     'settings' => 'cbb_custom_settings[calendar_other]',
     'type' => 'text'
   ]);
+
+  $locals = getLocals();
+
+  if (count($locals) > 0) {
+    foreach ($locals as $key => $local) {
+      $wp_customize->add_section("cbb_calendar_local_{$key}", [
+        'title' => __($local, THEMEDOMAIN),
+        'description' => __("Configuración sede {$local}", THEMEDOMAIN),
+        'panel' => 'cbb_calendar_panel',
+        'capability' => 'edit_theme_options'
+      ]);
+
+      // Hour start
+      $wp_customize->add_setting("cbb_custom_settings[hour_start_{$key}]", [
+        'default' => '',
+        'type' => 'option'
+      ]);
+
+      $wp_customize->add_control("cbb_custom_settings[hour_start_{$key}]", [
+        'label' => __('Hora Inicial', THEMEDOMAIN),
+        'section' => "cbb_calendar_local_{$key}",
+        'settings' => "cbb_custom_settings[hour_start_{$key}]",
+        'type' => 'text'
+      ]);
+
+      // Hour end
+      $wp_customize->add_setting("cbb_custom_settings[hour_end_{$key}]", [
+        'default' => '',
+        'type' => 'option'
+      ]);
+
+      $wp_customize->add_control("cbb_custom_settings[hour_end_{$key}]", [
+        'label' => __('Hora Final', THEMEDOMAIN),
+        'section' => "cbb_calendar_local_{$key}",
+        'settings' => "cbb_custom_settings[hour_end_{$key}]",
+        'type' => 'text'
+      ]);
+
+      // Hour step
+      $wp_customize->add_setting("cbb_custom_settings[hour_step_{$key}]", [
+        'default' => '',
+        'type' => 'option'
+      ]);
+
+      $wp_customize->add_control("cbb_custom_settings[hour_step_{$key}]", [
+        'label' => __('Tiempo Saltos', THEMEDOMAIN),
+        'section' => "cbb_calendar_local_{$key}",
+        'settings' => "cbb_custom_settings[hour_step_{$key}]",
+        'type' => 'text'
+      ]);
+
+      // Disabled Days
+      $wp_customize->add_setting("cbb_custom_settings[disabled_days_{$key}]", [
+        'default' => '',
+        'type' => 'option'
+      ]);
+
+      $wp_customize->add_control("cbb_custom_settings[disabled_days_{$key}]", [
+        'label' => __('Días no hábiles, separar con comas cada fecha', THEMEDOMAIN),
+        'section' => "cbb_calendar_local_{$key}",
+        'settings' => "cbb_custom_settings[disabled_days_{$key}]",
+        'type' => 'textarea'
+      ]);
+    }
+  }
 }
 
 function getPages() {
@@ -676,4 +697,27 @@ function getMenus() {
   }
 
   return $listMenus;
+}
+
+function getLocals() {
+  $locals = [];
+  $args = [
+    'post_type' => 'locals',
+    'posts_per_page' => -1,
+    'post_parent' => 0
+  ];
+
+  $the_query = new WP_Query($args);
+
+  if ($the_query->have_posts()) {
+    while ($the_query->have_posts()) {
+      $the_query->the_post();
+
+      $locals[get_the_ID()] = get_the_title();
+    }
+  }
+
+  wp_reset_postdata();
+
+  return $locals;
 }
