@@ -49,7 +49,7 @@ class AlbumsgalleriesController_bwg {
     $params = array();
     $params['page_title'] = __('Galleries / Gallery groups', BWG()->prefix);
     $params['page_url'] = $this->page;
-    $params['album_id'] = WDWLibrary::get('album_id', 0);
+    $params['album_id'] = WDWLibrary::get('album_id', 0, 'intval');
     $params['order'] = WDWLibrary::get('order', 'asc');
     $params['orderby'] = WDWLibrary::get('orderby', 'is_album');
     // To prevent SQL injections.

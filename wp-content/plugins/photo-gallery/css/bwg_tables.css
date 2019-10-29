@@ -2321,6 +2321,6 @@ li.tabs {
   display: none;
 }
 
-#screen-meta-links {
-  margin-bottom: 30px;
+.wd-notice.notice {
+  margin-top: 25px;
 }

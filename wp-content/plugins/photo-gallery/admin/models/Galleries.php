@@ -445,8 +445,9 @@ class GalleriesModel_bwg {
           continue;
         }
         $thumb_url = WDWLibrary::get('thumb_url_' . $image_id, '');
-        $description = str_replace(array('\\', '\t'), '', WDWLibrary::get('image_description_' . $image_id, ''));
-        $alt = esc_html(str_replace(array('<a>', '</a>', '\\', '\t'), '',  WDWLibrary::get('image_alt_text_' . $image_id, '', FALSE)));
+        $description = str_replace(array('\\', '\t'), '', WDWLibrary::get('image_description_' . $image_id, 'wp_filter_post_kses'));
+        $alt = str_replace(array('\\', '\t'), '',  WDWLibrary::get('image_alt_text_' . $image_id, '', 'wp_filter_post_kses'));
+        $alt = preg_replace("/<a[^>]*>|<\/a>/", '', $alt);
         $date = WDWLibrary::get('input_date_modified_' . $image_id, '');
         $size = WDWLibrary::get('input_size_' . $image_id, '');
         $filetype = WDWLibrary::get('input_filetype_' . $image_id, '');
@@ -501,8 +502,9 @@ class GalleriesModel_bwg {
           $image_id = $new_image_id;
         }
         else {
-          $resolution_thumb = WDWLibrary::get_thumb_size( $thumb_url );
-          $data['resolution_thumb'] = $resolution_thumb;
+          if($data['resolution_thumb'] == '') {
+            unset($data['resolution_thumb']);
+          }
           $save = $wpdb->update($wpdb->prefix . 'bwg_image', $data, array( 'id' => $image_id ));
         }
 
@@ -653,7 +655,7 @@ class GalleriesModel_bwg {
     if ( $search ) {
       $where .= ' AND `filename` LIKE "%' . $search . '%"';
     }
-    $image_where = ($all ? '' : ' WHERE image_id=' . $id);
+    $image_where = ($all ? 'WHERE gallery_id=' . $gallery_id : ' WHERE image_id=' . $id);
 
     $delete = $wpdb->query('DELETE FROM `' . $wpdb->prefix . 'bwg_image`' . $where);
     $wpdb->query('DELETE FROM `' . $wpdb->prefix . 'bwg_image_comment`' . $image_where);
@@ -1143,27 +1145,42 @@ class GalleriesModel_bwg {
       $gallery_id = (int) WDWLibrary::get('current_id', 0);
     }
     $tag_ids = WDWLibrary::get('added_tags_id', '');
+    $tag_act = WDWLibrary::get('added_tags_act', '');
     $tag_ids_array = explode(',', $tag_ids);
     global $wpdb;
     $where = ' WHERE gallery_id=' . $gallery_id;
     $where .= ($all ? '' : ' AND id=' . $id);
     $search = WDWLibrary::get('s', '');
     if ( $search ) {
-      $where .= ' AND `filename` LIKE "%' . $search . '%"';
+      $where .= ' AND (`alt` LIKE "%' . trim($search) . '%"';
+      $where .= ' OR `filename` LIKE "%' . trim($search) . '%"';
+      $where .= ' OR `description` LIKE "%' . trim($search) . '%")';
     }
     $images = $wpdb->get_results('SELECT * FROM `' . $wpdb->prefix . 'bwg_image`' . $where);
     foreach ( $images as $image ) {
       foreach ( $tag_ids_array as $tag_id ) {
         if ( $tag_id ) {
           $exist_tag = $wpdb->get_var($wpdb->prepare('SELECT id FROM ' . $wpdb->prefix . 'bwg_image_tag WHERE tag_id="%d" AND image_id="%d" AND gallery_id="%d"', $tag_id, $image->id, $gallery_id));
-          if ( $exist_tag == NULL ) {
-            $wpdb->insert($wpdb->prefix . 'bwg_image_tag', array(
-              'tag_id' => $tag_id,
-              'image_id' => $image->id,
-              'gallery_id' => $gallery_id,
-            ));
-            // Increase tag count in term_taxonomy table.
-            $wpdb->query($wpdb->prepare('UPDATE ' . $wpdb->prefix . 'term_taxonomy SET count="%d" WHERE term_id="%d"', $wpdb->get_var($wpdb->prepare('SELECT COUNT(image_id) FROM ' . $wpdb->prefix . 'bwg_image_tag WHERE tag_id="%d"', $tag_id)), $tag_id));
+          if( $tag_act == 'add' ) {
+            if ( $exist_tag == NULL ) {
+              $wpdb->insert($wpdb->prefix . 'bwg_image_tag', array(
+                'tag_id' => $tag_id,
+                'image_id' => $image->id,
+                'gallery_id' => $gallery_id,
+              ));
+              // Increase tag count in term_taxonomy table.
+              $wpdb->query($wpdb->prepare('UPDATE ' . $wpdb->prefix . 'term_taxonomy SET count="%d" WHERE term_id="%d"', $wpdb->get_var($wpdb->prepare('SELECT COUNT(image_id) FROM ' . $wpdb->prefix . 'bwg_image_tag WHERE tag_id="%d"', $tag_id)), $tag_id));
+            }
+          } elseif( $tag_act == 'remove' ) {
+            if ( $exist_tag != NULL ) {
+              $wpdb->delete($wpdb->prefix . 'bwg_image_tag', array(
+                'tag_id' => $tag_id,
+                'image_id' => $image->id,
+                'gallery_id' => $gallery_id,
+              ));
+              // Increase tag count in term_taxonomy table.
+              $wpdb->query($wpdb->prepare('UPDATE ' . $wpdb->prefix . 'term_taxonomy SET count="%d" WHERE term_id="%d"', $wpdb->get_var($wpdb->prepare('SELECT COUNT(image_id) FROM ' . $wpdb->prefix . 'bwg_image_tag WHERE tag_id="%d"', $tag_id)), $tag_id));
+            }
           }
         }
       }

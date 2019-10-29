@@ -27,7 +27,7 @@ class OptionsView_bwg extends AdminView_bwg {
 
   public function body($params = array()) {
     $row = $params['row'];
-	  $instagram_return_url = $params['instagram_return_url'];
+	$instagram_return_url = $params['instagram_return_url'];
     $instagram_reset_href = $params['instagram_reset_href'];
     $options_url_ajax = $params['options_url_ajax'];
     $imgcount = $params['imgcount'];
@@ -93,8 +93,8 @@ class OptionsView_bwg extends AdminView_bwg {
           <input type="text" id="search_in_options" placeholder="Search">
           <span id="current_match"></span>
           <span id="total_matches"></span>
-          <span class="tablenav-pages-navspan tablenav-pages-navspan-search" id="search_prev" aria-hidden="true">‹</span>
-          <span class="tablenav-pages-navspan tablenav-pages-navspan-search" id="search_next" aria-hidden="true">›</span>
+          <span class="tablenav-pages-navspan tablenav-pages-navspan-search" id="search_prev" aria-hidden="true">â€¹</span>
+          <span class="tablenav-pages-navspan tablenav-pages-navspan-search" id="search_next" aria-hidden="true">â€º</span>
         </div>-->
       </div>
       <div id="bwg_tab_general_content" class="search-div bwg-section wd-box-content">
@@ -219,12 +219,12 @@ class OptionsView_bwg extends AdminView_bwg {
               </div>
               <div class="wd-box-content wd-width-100">
                 <div class="wd-group">
-                  <label class="wd-label"><?php _e('Discourage search engines', BWG()->prefix); ?></label>
+                  <label class="wd-label"><?php _e('Discourage Search Engine Visibility', BWG()->prefix); ?></label>
                   <div class="bwg-flex">
                     <input type="radio" name="noindex_custom_post" id="noindex_custom_post_1" value="1" <?php if ($row->noindex_custom_post) echo 'checked="checked"'; ?> /><label for="noindex_custom_post_1" class="wd-radio-label"><?php _e('Yes', BWG()->prefix); ?></label>
                     <input type="radio" name="noindex_custom_post" id="noindex_custom_post_0" value="0" <?php if (!$row->noindex_custom_post) echo 'checked="checked"'; ?> /><label for="noindex_custom_post_0" class="wd-radio-label"><?php _e('No', BWG()->prefix); ?></label>
                   </div>
-                  <p class="description"><?php _e('Do not allow search engines to index custom posts.', BWG()->prefix); ?></p>
+                  <p class="description"><?php _e('Discourage search engines from indexing Photo Gallery custom posts.', BWG()->prefix); ?></p>
                 </div>
               </div>
               <div class="wd-box-content wd-width-100">
@@ -235,6 +235,16 @@ class OptionsView_bwg extends AdminView_bwg {
                     <input type="radio" name="show_hide_post_meta" id="show_hide_post_meta_0" value="0" <?php if (!$row->show_hide_post_meta) echo 'checked="checked"'; ?> /><label for="show_hide_post_meta_0" class="wd-radio-label"><?php _e('No', BWG()->prefix); ?></label>
                   </div>
                   <p class="description"><?php _e('Use this setting to show or hide comments under Photo Gallery custom posts.', BWG()->prefix); ?></p>
+                </div>
+              </div>
+              <div class="wd-box-content wd-width-100">
+                <div class="wd-group">
+                  <label class="wd-label"><?php _e('Use AND operator for tag filtering', BWG()->prefix); ?></label>
+                  <div class="bwg-flex">
+                    <input type="radio" name="tags_filter_and_or" id="tags_filter_and_or_1" value="1" <?php if ($row->tags_filter_and_or) echo 'checked="checked"'; ?> /><label for="tags_filter_and_or_1" class="wd-radio-label"><?php _e('Yes', BWG()->prefix); ?></label>
+                    <input type="radio" name="tags_filter_and_or" id="tags_filter_and_or_0" value="0" <?php if (!$row->tags_filter_and_or) echo 'checked="checked"'; ?> /><label for="tags_filter_and_or_0" class="wd-radio-label"><?php _e('No', BWG()->prefix); ?></label>
+                  </div>
+                  <p class="description"><?php _e('Enable this option to filter images with AND operator. In this case, the filter results must have all selected tags in the Tag Box.', BWG()->prefix); ?></p>
                 </div>
               </div>
             </div>
@@ -318,7 +328,7 @@ class OptionsView_bwg extends AdminView_bwg {
                       <?php _e('Generate Shortcode', BWG()->prefix); ?>
                     </a>
                   </div>
-                  <p class="description"><?php _e('Generate or edit a shortcode.', BWG()->prefix); ?></p>
+                  <p class="description"><?php _e('Generate or edit Photo Gallery shortcodes that are used to publish galleries or gallery groups.', BWG()->prefix); ?></p>
                 </div>
                 <div class="wd-group">
                   <label class="wd-label"><?php _e('Enable dynamic URLs for galleries and gallery groups', BWG()->prefix); ?></label>
@@ -850,7 +860,7 @@ class OptionsView_bwg extends AdminView_bwg {
                 <div class="wd-group">
                   <label class="wd-label" for="built_in_watermark_text"><?php _e('Watermark text', BWG()->prefix); ?></label>
                   <div class="bwg-flex">
-                    <input type="text" name="built_in_watermark_text" id="built_in_watermark_text" style="width: 100%;" value="<?php echo $row->built_in_watermark_text; ?>" onchange="preview_built_in_watermark()" onkeypress="preview_built_in_watermark()" />
+                    <input type="text" name="built_in_watermark_text" id="built_in_watermark_text" style="width: 100%;" value="<?php echo esc_attr($row->built_in_watermark_text); ?>" onchange="preview_built_in_watermark()" onkeypress="preview_built_in_watermark()" />
                   </div>
                   <p class="description"><?php _e('Provide the text to add to images as watermark.', BWG()->prefix) ?></p>
                 </div>

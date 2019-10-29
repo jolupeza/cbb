@@ -118,7 +118,7 @@ class BWGViewImage_browser extends BWGViewSite {
                 }
                 if ( !$is_embed ) {
                   ?>
-                  <a style="position:relative;" <?php echo($params['thumb_click_action'] == 'open_lightbox' ? (' class="bwg_lightbox" data-image-id="' . $image_row->id . '"') : ($params['thumb_click_action'] == 'redirect_to_url' && $image_row->redirect_url ? 'href="' . $image_row->redirect_url . '" target="' . ($params['thumb_link_target'] ? '_blank' : '') . '"' : '')) ?>>
+                  <a style="position:relative;" <?php echo($params['thumb_click_action'] == 'open_lightbox' ? (' class="bwg-a bwg_lightbox" data-image-id="' . $image_row->id . '"') : ('class="bwg-a" ' . ($params['thumb_click_action'] == 'redirect_to_url' && $image_row->redirect_url ? 'href="' . $image_row->redirect_url . '" target="' . ($params['thumb_link_target'] ? '_blank' : '') . '"' : ''))) ?>>
                     <img class="skip-lazy bwg-item0 bwg_image_browser_img bwg_image_browser_img_<?php echo $bwg; ?> <?php if( $lazyload ) { ?> bwg_lazyload lazy_loader<?php } ?>"
                          src="<?php if( !$lazyload ) { echo BWG()->upload_url . $image_row->image_url; } else { echo BWG()->plugin_url."/images/lazy_placeholder.gif"; } ?>"
                          data-original="<?php echo BWG()->upload_url . $image_row->image_url; ?>"

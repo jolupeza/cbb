@@ -431,7 +431,7 @@ class GalleriesView_bwg extends AdminView_bwg {
       <div class="spider_description">
         <div>
           <p class="spider_description_title"><?php _e('<b>Youtube</b> URL example:', BWG()->prefix); ?></p>
-          <input type="text" value="https://www.youtube.com/watch?v=fa4RLjE-yM8" disabled="disabled">
+          <input type="text" value="https://www.youtube.com/watch?v=pA8-5qaMBqM" disabled="disabled">
         </div>
         <div>
           <p class="spider_description_title"><?php _e('<b>Vimeo</b> URL example:', BWG()->prefix); ?></p>
@@ -819,6 +819,7 @@ class GalleriesView_bwg extends AdminView_bwg {
       <input type="hidden" id="image_current_id" name="image_current_id" value="" />
       <input type="hidden" id="total" name="total" value="<?php echo $params['total']; ?>" />
       <input type="hidden" id="added_tags_id" name="added_tags_id" value="" />
+      <input type="hidden" id="added_tags_act" name="added_tags_act" value="" />
       <a class="wd-add-tags thickbox thickbox-preview wd-hide" href="<?php echo add_query_arg(array('TB_iframe' => '1'),  $params['add_tags_action']); ?>"></a>
       <?php
       if (class_exists('BWGEC')) {

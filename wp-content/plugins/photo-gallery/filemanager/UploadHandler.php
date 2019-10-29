@@ -98,7 +98,7 @@ class bwg_UploadHandler {
       // Set the following option to false to enable resumable uploads:
       'discard_aborted_uploads' => TRUE,
       // Set to true to rotate images based on EXIF meta data, if available:
-      'orient_image' => FALSE,
+      'orient_image' => TRUE,
     );
     if ( !$this->options['max_width'] || !$this->options['max_height'] ) {
       $this->options['max_width'] = NULL;
@@ -439,48 +439,70 @@ class bwg_UploadHandler {
     // Handle form data, e.g. $_REQUEST['description'][$index]
   }
 
-  protected function orient_image( $file_path ) {
+  protected function orient_image( $file ) {
     if ( !function_exists('exif_read_data') ) {
       return FALSE;
     }
+    $file_path = BWG()->upload_dir . $file->path . $file->name;
     $exif = @exif_read_data($file_path);
     if ( $exif === FALSE ) {
-      return FALSE;
+      return;
     }
-    $orientation = intval(@$exif['Orientation']);
-    if ( !in_array($orientation, array( 3, 6, 8 )) ) {
-      return FALSE;
+    if ( $exif['ExposureProgram'] == 7 ) {
+      /* 7 for portrait. */
+      if ( $exif['Orientation'] == 6 ) {
+        return;
+      }
+      $rotate = 270;
+    }
+    else {
+      /* 8 for landscape. */
+      if ( $exif['Orientation'] == 1 ) {
+        return;
+      }
+      $rotate = 0;
     }
     @ini_set('memory_limit', '-1');
-    $image = @imagecreatefromjpeg($file_path);
-    switch ( $orientation ) {
-      case 3:
-        $image = @imagerotate($image, 180, 0);
-        break;
-      case 6:
-        $image = @imagerotate($image, 270, 0);
-        break;
-      case 8:
-        $image = @imagerotate($image, 90, 0);
-        break;
-      default:
-        return FALSE;
+    if ( strpos($file->type, 'jp') !== FALSE ) {
+      $source = imagecreatefromjpeg($file_path);
+      $image = @imagerotate($source, $rotate, 0);
+      imagejpeg($source, $file_path);
+      imagedestroy($source);
+      imagedestroy($image);
     }
-    $success = imagejpeg($image, $file_path);
-    // Free up memory (imagedestroy does not delete files):
-    @imagedestroy($image);
+    elseif ( strpos($file->type, 'png') !== FALSE ) {
+      $source = imagecreatefrompng($file_path);
+      imagealphablending($source, FALSE);
+      imagesavealpha($source, TRUE);
+      $image = imagerotate($source, $rotate, imageColorAllocateAlpha($source, 0, 0, 0, 127));
+      imagealphablending($image, FALSE);
+      imagesavealpha($image, TRUE);
+      imagepng($image, $file_path, BWG()->options->png_quality);
+      imagedestroy($source);
+      imagedestroy($image);
+    }
+    elseif ( strpos($file->type, 'gif') !== FALSE ) {
+      $source = imagecreatefromgif($file_path);
+      imagealphablending($source, FALSE);
+      imagesavealpha($source, TRUE);
+      $image = imagerotate($source, $rotate, imageColorAllocateAlpha($source, 0, 0, 0, 127));
+      imagealphablending($image, FALSE);
+      imagesavealpha($image, TRUE);
+      imagegif($image, $file_path, BWG()->options->png_quality);
+      imagedestroy($source);
+      imagedestroy($image);
+    }
     @ini_restore('memory_limit');
-
-    return $success;
   }
 
   protected function handle_image_file( $file_path, $file ) {
-    if ( $this->options['orient_image'] ) {
-      $this->orient_image($file_path);
-    }
     $failed_versions = array();
     foreach ( $this->options['image_versions'] as $version => $options ) {
       if ( $this->create_scaled_image($file->name, $version, $options) ) {
+        if ( $version === '' && $this->options['orient_image'] ) {
+          // Rotate only base size image (not thumb and original).
+          $this->orient_image($file);
+        }
         if ( !empty($version) ) {
           $file->{$version . '_url'} = $this->get_download_url($file, $version);
         }
@@ -589,6 +611,7 @@ class bwg_UploadHandler {
             $content_range = NULL;
             $size = $this->get_file_size($ex_file);
             $file = new stdClass();
+            $file->dir = $this->get_upload_path();
             $file->name = $name;
             $file->path = "/" . trailingslashit(pathinfo($target_dir, PATHINFO_FILENAME));
             $file->size = $this->fix_integer_overflow(intval($size));
@@ -600,6 +623,7 @@ class bwg_UploadHandler {
               $this->create_scaled_image($file->name, 'main', $this->options);
             }
             if ( is_int($img_width) ) {
+              $file->error = FALSE;
               $this->handle_image_file($ex_file, $file);
             }
           }
@@ -619,6 +643,7 @@ class bwg_UploadHandler {
     $type = strtolower(end($file_type_array));
     $file = new stdClass();
     if ( WDWLibrary::allowed_upload_types($type) ) {
+      $file->dir = $this->get_upload_path();
       $file->error = FALSE;
       $file->name = $this->get_file_name($name, $type, 0, "");
       $file->type = $type;
@@ -710,6 +735,7 @@ class bwg_UploadHandler {
         $file->url = $this->get_download_url($file);
         list($img_width, $img_height) = @getimagesize(htmlspecialchars_decode($file_path, ENT_COMPAT | ENT_QUOTES));
         if ( is_int($img_width) ) {
+          $file->error = FALSE;
           $this->handle_image_file($file_path, $file);
         }
         else {
@@ -983,9 +1009,9 @@ class bwg_UploadHandler {
    * @return mixed
    */
   private function set_file_info( $info ) {
-    $iconv_mime_decode_function = '';
+    $iconv_mime_decode_function_exist = FALSE;
     if ( function_exists('iconv_mime_decode') ) {
-      $iconv_mime_decode_function = 'iconv_mime_decode';
+      $iconv_mime_decode_function_exist = TRUE;
     }
 
     $data = array();
@@ -1005,16 +1031,24 @@ class bwg_UploadHandler {
       $resolution_thumb = $temp[0]."x".$temp[2];
     }
     $data['resolution_thumb'] = $resolution_thumb;
-    $data['credit'] = isset($info->credit) ? $iconv_mime_decode_function($info->credit) : '';
-    $data['aperture'] = isset($info->aperture) ? $iconv_mime_decode_function($info->aperture) : '';
-    $data['camera'] = isset($info->camera) ? $iconv_mime_decode_function($info->camera) : '';
-    $data['caption'] = isset($info->caption) ? $iconv_mime_decode_function($info->caption) : '';
-    $data['iso'] = isset($info->iso) ? $iconv_mime_decode_function($info->iso) : '';
+    $data['credit'] = isset($info->credit) ? $this->mime_decode($info->credit, $iconv_mime_decode_function_exist) : '';
+    $data['aperture'] = isset($info->aperture) ? $this->mime_decode($info->aperture, $iconv_mime_decode_function_exist) : '';
+    $data['camera'] = isset($info->camera) ? $this->mime_decode($info->camera, $iconv_mime_decode_function_exist) : '';
+    $data['caption'] = isset($info->caption) ? $this->mime_decode($info->caption, $iconv_mime_decode_function_exist) : '';
+    $data['iso'] = isset($info->iso) ? $this->mime_decode($info->iso, $iconv_mime_decode_function_exist) : '';
     $data['orientation'] = isset($info->orientation) ? $info->orientation : '';
-    $data['copyright'] = isset($info->copyright) ? $iconv_mime_decode_function($info->copyright) : '';
-    $data['tags'] = isset($info->tags) ? $iconv_mime_decode_function($info->tags) : '';
+    $data['copyright'] = isset($info->copyright) ? $this->mime_decode($info->copyright, $iconv_mime_decode_function_exist) : '';
+    $data['tags'] = isset($info->tags) ? $this->mime_decode($info->tags, $iconv_mime_decode_function_exist) : '';
 
     return $data;
+  }
+
+  private function mime_decode($value, $function_exist) {
+    if ( $value && $function_exist ) {
+      $value = iconv_mime_decode($value);
+    }
+
+    return $value;
   }
 }
 

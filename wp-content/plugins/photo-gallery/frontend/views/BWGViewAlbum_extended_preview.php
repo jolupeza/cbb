@@ -106,7 +106,7 @@ class BWGViewAlbum_extended_preview extends BWGViewSite {
           ?>
           <div class="bwg-extended-item">
             <div class="bwg-extended-item0">
-              <a class="bwg-album bwg_album_<?php echo $bwg; ?>"
+              <a class="bwg-a bwg-album bwg_album_<?php echo $bwg; ?>"
                 <?php echo(BWG()->options->enable_seo ? "href='" . esc_url($href) . "'" : ""); ?>
                  style="font-size: 0;"
                  data-bwg="<?php echo $bwg; ?>"

@@ -134,13 +134,23 @@ class BWGModelSite {
     $where .= ($gallery_id ? ' AND image.gallery_id = "' . $gallery_id . '" ' : '') . ($tag ? ' AND tag.tag_id = "' . $tag . '" ' : '');
     $join = $tag ? 'LEFT JOIN ' . $wpdb->prefix . 'bwg_image_tag as tag ON image.id=tag.image_id' : '';
     if ( isset($_REQUEST[$tag_input_name]) && $_REQUEST[$tag_input_name] ) {
-      $join .= ' LEFT JOIN (SELECT GROUP_CONCAT(tag_id SEPARATOR ",") AS tags_combined, image_id FROM  ' . $wpdb->prefix . 'bwg_image_tag' . ($gallery_id ? ' WHERE gallery_id="' . $gallery_id . '"' : '') . ' GROUP BY image_id) AS tags ON image.id=tags.image_id';
-      $where .= ' AND CONCAT(",", tags.tags_combined, ",") REGEXP ",(' . implode("|", $_REQUEST[$tag_input_name]) . ')," ';
+      if ( !BWG()->options->tags_filter_and_or ) {
+        // To find images which have at least one from tags filtered by.
+        $compare_sign = "|";
+      }
+      else {
+        // To find images which have all tags filtered by.
+        // For this case there is need to sort tags by ascending to compare with comma.
+        sort($_REQUEST[$tag_input_name]);
+        $compare_sign = ",";
+      }
+      $join .= ' LEFT JOIN (SELECT GROUP_CONCAT(tag_id order by tag_id SEPARATOR ",") AS tags_combined, image_id FROM  ' . $wpdb->prefix . 'bwg_image_tag' . ($gallery_id ? ' WHERE gallery_id="' . $gallery_id . '"' : '') . ' GROUP BY image_id) AS tags ON image.id=tags.image_id';
+      $where .= ' AND CONCAT(",", tags.tags_combined, ",") REGEXP ",(' . implode($compare_sign, $_REQUEST[$tag_input_name]) . ')," ';
     }
     $join .= ' LEFT JOIN '. $wpdb->prefix .'bwg_gallery as gallery ON gallery.id = image.gallery_id';
     $where .= ' AND gallery.published = 1 ';
     $query = 'SELECT image.* FROM ' . $wpdb->prefix . 'bwg_image as image ' . $join . ' WHERE image.published=1 ' . $where . ' ORDER BY ' . str_replace('RAND()', 'RAND(' . $bwg_random_seed . ')', $sort_by) . ' ' . $sort_direction . ', image.id ' . $limit_str;
-	  $rows = $wpdb->get_results($query);
+    $rows = $wpdb->get_results($query);
     $total = $wpdb->get_var('SELECT COUNT(*) FROM ' . $wpdb->prefix . 'bwg_image as image ' . $join . ' WHERE image.published=1 ' . $where);
     $page_nav['total'] = $total;
     $page_nav['limit'] = 1;
@@ -151,11 +161,13 @@ class BWGModelSite {
     $thumb_urls = array();
     if ( !empty($rows) ) {
       foreach ( $rows as $row ) {
+        $row->alt = esc_html($row->alt);
         if ( strpos($row->filetype, 'EMBED') === FALSE ) {
+          $row->image_url_raw = $row->image_url;
           $row->image_url = WDWLibrary::image_url_version($row->image_url, $row->modified_date);
           $row->thumb_url = WDWLibrary::image_url_version($row->thumb_url, $row->modified_date);
           // To disable Jetpack Photon module.
-		  $thumb_urls[] = BWG()->upload_url . $row->thumb_url;
+		      $thumb_urls[] = BWG()->upload_url . $row->thumb_url;
         }
         else {
           // To disable Jetpack Photon module.

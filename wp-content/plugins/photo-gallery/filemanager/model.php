@@ -49,6 +49,12 @@ class FilemanagerModel {
 		$dir = $params['dir'];
 		$orderby = $params['orderby'];
 		$order = $params['order'];
+    if ( $orderby != 'size' && $orderby != 'name' ) {
+      $orderby = 'date_modified';
+    }
+    if ( $order != 'asc' ) {
+      $order = 'desc';
+    }
 		$search = $params['search'];
 		$page_num = $params['page_num'];
 		$page_per = $params['page_per'];
@@ -148,6 +154,12 @@ class FilemanagerModel {
 		$search = $params['search'];
 		$orderby = $params['orderby'];
 		$order = $params['order'];
+    if ( $orderby != 'size' && $orderby != 'name' ) {
+      $orderby = 'date_modified';
+    }
+    if ( $order != 'asc' ) {
+      $order = 'desc';
+    }
 
 		$query  = ' SELECT * FROM `' . $wpdb->prefix . 'bwg_file_paths`';
 		$query .= ' WHERE `path` = "' . $dir . '"';

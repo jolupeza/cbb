@@ -240,7 +240,7 @@ function bwg_shortcode_hide_show_params() {
     jQuery("#tr_album_extended_resizable_mosaic").show();
     jQuery("#tr_album_extended_mosaic_total_width").show();
   }
-  if (jQuery('#masonry_0').is(':checked')) {
+  if (jQuery('#thumbnails_masonry').is(':checked')) {
     jQuery("#tr_show_masonry_thumb_description").show();
   }
   bwg_pagination_description(jQuery('input[name=image_enable_page]:checked'));
@@ -376,7 +376,12 @@ function bwg_gallery_type(gallery_type) {
   jQuery("#tr_gallery").css('display', 'none');
   jQuery("#tr_album").css('display', 'none');
   var basic_metabox_title = jQuery('#bwg_basic_metabox_title');
-  basic_metabox_title.text(basic_metabox_title.attr('data-title-gallery'));
+  if( jQuery("#" + gallery_type).attr('class') == 'album_type_radio' ) {
+    basic_metabox_title.text(basic_metabox_title.attr('data-title-album'));
+  }
+  else {
+    basic_metabox_title.text(basic_metabox_title.attr('data-title-gallery'));
+  }
   jQuery("#tr_ecommerce_icon_hover").css('display', 'none');
   jQuery("#tr_ecommerce_icon_hover .ecommerce_icon_show").css('display', 'none');
   jQuery("#tr_tag").css('display', 'none');

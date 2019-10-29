@@ -3,7 +3,7 @@
  * Plugin Name: Photo Gallery
  * Plugin URI: https://10web.io/plugins/wordpress-photo-gallery/?utm_source=photo_gallery&utm_medium=free_plugin
  * Description: This plugin is a fully responsive gallery plugin with advanced functionality.  It allows having different image galleries for your posts and pages. You can create unlimited number of galleries, combine them into albums, and provide descriptions and tags.
- * Version: 1.5.29
+ * Version: 1.5.37
  * Author: Photo Gallery Team
  * Author URI: https://10web.io/plugins/?utm_source=photo_gallery&utm_medium=free_plugin
  * License: GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
@@ -84,8 +84,8 @@ final class BWG {
     $this->plugin_dir = WP_PLUGIN_DIR . "/" . plugin_basename(dirname(__FILE__));
     $this->plugin_url = plugins_url(plugin_basename(dirname(__FILE__)));
     $this->main_file = plugin_basename(__FILE__);
-    $this->plugin_version = '1.5.29';
-    $this->db_version = '1.5.29';
+    $this->plugin_version = '1.5.37';
+    $this->db_version = '1.5.37';
     $this->prefix = 'bwg';
     $this->nicename = __('Photo Gallery', $this->prefix);
 
@@ -223,19 +223,57 @@ final class BWG {
     add_action( 'admin_init', array($this, 'add_privacy_policy_content') );
     // Prevent adding shortcode conflict with some builders.
 
-	  $this->before_shortcode_add_builder_editor();
+    $this->before_shortcode_add_builder_editor();
 
-	  // Register widget for Elementor builder.
+    // Register widget for Elementor builder.
     add_action('elementor/widgets/widgets_registered', array($this, 'register_elementor_widgets'));
 
     //fires after elementor editor styles and scripts are enqueued.
     add_action('elementor/editor/after_enqueue_styles', array($this, 'enqueue_editor_styles'), 11);
+
+    add_action('elementor/editor/after_enqueue_scripts', array($this, 'enqueue_elementor_widget_scripts'));
+
 
     // Register 10Web category for Elementor widget if 10Web builder isn't installed.
     add_action('elementor/elements/categories_registered', array($this, 'register_widget_category'), 1, 1);
 
     // Add noindex/nofollow to custom posts to not allow search engines to index custom posts.
     add_action('wp_head', array($this, 'robots'), 9, 1);
+
+    // Divi frontend builder assets.
+    add_action('et_fb_enqueue_assets', array($this, 'enqueue_divi_bulder_assets'));
+  	add_action('et_fb_enqueue_assets', array($this, 'global_script'));
+
+    // Add Photo Gallery images to sitemap xml.
+    require_once ($this->plugin_dir . '/framework/WDWSitemap.php');
+    add_filter('wd_seo_sitemap_images', array( WDWSitemap::instance(), 'add_wpseo_xml_sitemap_images'), 10, 2);
+    add_filter('wpseo_sitemap_urlimages', array( WDWSitemap::instance(), 'add_wpseo_xml_sitemap_images'), 10, 2);
+
+    if ( !$this->is_pro ) {
+      /* Add wordpress.org support custom link in plugin page */
+      add_filter('plugin_action_links_' . plugin_basename(__FILE__), array( $this, 'add_ask_question_links' ));
+    }
+  }
+
+  /**
+   * Add plugin action links.
+   *
+   * Add a link to the settings page on the plugins.php page.
+   *
+   * @since 1.0.0
+   *
+   * @param  array  $links List of existing plugin action links.
+   * @return array         List of modified plugin action links.
+   */
+  function add_ask_question_links ( $links ) {
+    $slug = 'photo-gallery';
+    $fm_ask_question_link = array('<a href="https://wordpress.org/support/plugin/' . $slug . '/#new-post" target="_blank">' . __('Help', $this->prefix) . '</a>');
+    return array_merge( $links, $fm_ask_question_link );
+  }
+
+  public function enqueue_divi_bulder_assets() {
+    wp_enqueue_style('thickbox');
+  	wp_enqueue_script('thickbox');
   }
 
   /**
@@ -473,6 +511,17 @@ final class BWG {
 
     add_submenu_page(NULL, __('Uninstall', $this->prefix), __('Uninstall', $this->prefix), 'manage_options', 'uninstall_' . $this->prefix, array($this , 'admin_pages'));
     add_submenu_page(NULL, __('Generate Shortcode', $this->prefix), __('Generate Shortcode', $this->prefix), $permissions, 'shortcode_' . $this->prefix, array($this , 'admin_pages'));
+
+    if ( !$this->is_pro ) {
+      /* Custom link to wordpress.org*/
+      global $submenu;
+      $slug = 'photo-gallery';
+      $submenu[$parent_slug][] = array(
+        '<div id="bwg_ask_question">' . __('Ask a question', $this->prefix) . '</div>',
+        'manage_options',
+        'https://wordpress.org/support/plugin/' . $slug . '/#new-post',
+      );
+    }
   }
 
   /**
@@ -653,6 +702,7 @@ final class BWG {
     $params['tag'] = WDWLibrary::get('tag', 0);
     $params['album_id'] = WDWLibrary::get('album_id', 0);
     $params['theme_id'] = WDWLibrary::get('theme_id', 0);
+    $params['current_url'] = WDWLibrary::get('current_url', NULL);
     $params['ajax'] = TRUE;
 
     echo $this->shortcode($params);
@@ -968,7 +1018,7 @@ final class BWG {
     ob_start();
     $url = add_query_arg(array('action' => 'shortcode_bwg', 'TB_iframe' => '1'), admin_url('admin-ajax.php'));
 	  ?>
-    <a onclick="if ( typeof tb_click == 'function' && (jQuery(this).parent().attr('id').indexOf('elementor') !== -1 || typeof bwg_check_ready == 'function') ) {
+    <a onclick="if ( typeof tb_click == 'function' && ( jQuery(this).parent().attr('id') && jQuery(this).parent().attr('id').indexOf('elementor') !== -1 || typeof bwg_check_ready == 'function') ) {
             tb_click.call(this);
             bwg_create_loading_block();
             bwg_set_shortcode_popup_dimensions(); } return false;" href="<?php echo $url; ?>" class="bwg-shortcode-btn button" title="<?php _e('Insert Photo Gallery', $this->prefix); ?>">
@@ -1135,7 +1185,10 @@ final class BWG {
       }
     }
     $this->create_post_types();
-    flush_rewrite_rules();
+    // Using this insted of flush_rewrite_rule() for better performance with multisite.
+    global $wp_rewrite;
+    $wp_rewrite->init();
+    $wp_rewrite->flush_rules();
   }
 
   /**
@@ -1167,7 +1220,10 @@ final class BWG {
    */
   public function deactivate() {
     wp_clear_scheduled_hook( 'bwg_schedule_event_hook' );
-    flush_rewrite_rules();
+    // Using this insted of flush_rewrite_rule() for better performance with multisite.
+    global $wp_rewrite;
+    $wp_rewrite->init();
+    $wp_rewrite->flush_rules();
   }
 
   public function new_blog_added( $blog_id, $user_id, $domain, $path, $site_id, $meta ) {
@@ -1868,7 +1924,7 @@ final class BWG {
     if ( plugin_basename(__FILE__) == $file ) {
       $plugin_url = "https://wordpress.org/support/plugin/photo-gallery";
       $prefix = $this->prefix;
-      $meta_fields[] = "<a href='" . $plugin_url . "' target='_blank'>" . __('Support Forum', $prefix) . "</a>";
+      $meta_fields[] = "<a href='" . $plugin_url . "/#new-post' target='_blank'>" . __('Ask a question', $prefix) . "</a>";
       $meta_fields[] = "<a href='" . $plugin_url . "/reviews#new-post' target='_blank' title='" . __('Rate', $prefix) . "'>
             <i class='wdi-rate-stars'>"
         . "<svg xmlns='http://www.w3.org/2000/svg' width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-star'><polygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2'/></svg>"
@@ -1920,6 +1976,26 @@ final class BWG {
       add_action('wp_enqueue_scripts', array( $this, 'global_script' ));
     }
   }
+
+  public function enqueue_elementor_widget_scripts() {
+    wp_enqueue_script(BWG()->prefix . 'elementor_widget_js', plugins_url('js/bwg_elementor_widget.js', __FILE__), array( 'jquery' ));
+  }
+
+  public function webinar_banner() {
+    // Webinar banner
+    if ( !class_exists( 'TWPGWebinar' ) ) {
+      require_once( $this->plugin_dir . '/framework/TWWebinar.php' );
+    }
+    new TWPGWebinar(array(
+      'menu_postfix' => '_' . $this->prefix,
+      'title' => 'Join the Webinar',
+      'description' => 'How to Create a Fully Functional WP Website with Beautiful Photo Gallery in Just an Hour + SPECIAL GIFT FOR WEBINAR ATTENDEES',
+      'preview_type' => 'youtube',
+      'preview_url' => 'A111ykjWdW8',
+      'button_text' => 'SIGN UP',
+      'button_link' => 'https://my.demio.com/ref/ydTJSUzyVqOgcUOV',
+    ));
+  }
 }
 
 /**
@@ -1962,5 +2038,5 @@ if ( !BWG()->is_pro ) {
     'base_php' => '10web-manager.php', // Plugin base php filename to be installed.
     'page_url' => admin_url('admin.php?page=tenweb_menu'), // Redirect to URL after activating the plugin.
   );
-  new TWBanner($tw_banner_params);
+//  new TWBanner($tw_banner_params);
 }

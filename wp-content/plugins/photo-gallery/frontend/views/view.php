@@ -46,16 +46,14 @@ class BWGViewSite {
          class="bwg_container bwg_thumbnail bwg_<?php echo $params['gallery_type']; ?>"
          data-right-click-protection="<?php echo BWG()->options->image_right_click; ?>"
          data-bwg="<?php echo $bwg; ?>"
+         data-current-url="<?php echo addslashes(urldecode($params_array['current_url'])); ?>"
          data-lightbox-url="<?php echo addslashes(add_query_arg($params_array, admin_url('admin-ajax.php'))); ?>"
          data-gallery-id="<?php echo $params_array['gallery_id']; ?>"
          data-popup-width="<?php echo $params["popup_width"]; ?>"
          data-popup-height="<?php echo $params["popup_height"]; ?>"
-         data-buttons-position="<?php echo $theme_row->lightbox_ctrl_btn_pos; ?>"
-         data-bwg="<?php echo $bwg; ?>">
+         data-buttons-position="<?php echo $theme_row->lightbox_ctrl_btn_pos; ?>">
       <div id="bwg_container2_<?php echo $bwg; ?>">
-        <?php
-        $this->loading($bwg);
-        ?>
+         <?php $this->loading($bwg, $params["image_enable_page"], $params['gallery_type'] ); ?>
         <form id="gal_front_form_<?php echo $bwg; ?>"
               class="bwg-hidden"
               method="post"
@@ -74,7 +72,7 @@ class BWGViewSite {
             if ( BWG()->options->front_ajax == "1" && isset($get_album_gallery_id) && intval($get_album_gallery_id) > 0 ) {
               $this->back($params, $bwg);
             }
-			$this->title_description($params, $bwg);
+		      	$this->title_description($params, $bwg);
             if ( (!isset($params['from']) || $params['from'] !== 'widget')
               && ((isset($params['show_sort_images']) && $params['show_sort_images'])
               || (isset($params['show_tag_box']) && $params['show_tag_box'])
@@ -109,7 +107,8 @@ class BWGViewSite {
             ?>
           </div>
         </form>
-        <?php
+          <?php
+         
         if ( $params['thumb_click_action'] == 'open_lightbox' ) {
           ob_start();
           ?>
@@ -144,27 +143,27 @@ class BWGViewSite {
   }
 
   public function ajax_content($params, $bwg, $content) {
-	if ( isset($params['breadcrumb_arr']) && count($params['breadcrumb_arr']) > 1 ) { /* If not first album.*/
+	  if ( isset($params['breadcrumb_arr']) && count($params['breadcrumb_arr']) > 1 ) { /* If not first album.*/
       $this->back($params, $bwg);
     }
     if ( BWG()->options->front_ajax != "1" ) {
       $this->title_description($params, $bwg);
-    if((!isset($params['from']) || $params['from'] !== 'widget')
-      && ((isset($params['show_sort_images']) && $params['show_sort_images'])
-        || (isset($params['show_tag_box']) && $params['show_tag_box'])
-        || (isset($params['show_search_box']) && $params['show_search_box']))) {
-      ?>
-            <div class="search_line">
-              <?php
-              $this->ajax_html_frontend_sort_box($params, $bwg);
+      if((!isset($params['from']) || $params['from'] !== 'widget')
+        && ((isset($params['show_sort_images']) && $params['show_sort_images'])
+          || (isset($params['show_tag_box']) && $params['show_tag_box'])
+          || (isset($params['show_search_box']) && $params['show_search_box']))) {
+        ?>
+              <div class="search_line">
+                <?php
+                $this->ajax_html_frontend_sort_box($params, $bwg);
 
-              $this->ajax_html_frontend_search_tags($params, $bwg);
+                $this->ajax_html_frontend_search_tags($params, $bwg);
 
-              $this->ajax_html_frontend_search_box($params, $bwg);
-              ?>
-            </div>
-      <?php
-    }
+                $this->ajax_html_frontend_search_box($params, $bwg);
+                ?>
+              </div>
+        <?php
+      }
     }
 
     if ( isset($params['image_rows']) && !count($params['image_rows']['images']) ) {
@@ -196,9 +195,13 @@ class BWGViewSite {
     }
   }
 
-  public function loading($bwg = 0) {
-    ?>
-    <div id="ajax_loading_<?php echo $bwg; ?>" class="bwg_loading_div_1">
+  public function loading($bwg = 0, $image_enable_page = 0, $gallery_type = '' ) {
+    $load_type_class = "bwg_loading_div_1";
+      if( ($image_enable_page == 2 || $image_enable_page == 3) ) {
+      $load_type_class = "bwg_load_more_ajax_loading";
+    }
+     ?>
+    <div id="ajax_loading_<?php echo $bwg; ?>" class="<?php echo $load_type_class; ?>">
       <div class="bwg_loading_div_2">
         <div class="bwg_loading_div_3">
           <div id="loading_div_<?php echo $bwg; ?>" class="bwg_spider_ajax_loading">
@@ -416,6 +419,9 @@ class BWGViewSite {
           <option <?php if ( $sort_by == 'default' ) {
             echo 'selected';
           } ?> value="default"><?php echo __('Order by Default', BWG()->prefix); ?></option>
+          <option <?php if ( $sort_by == 'date' ) {
+            echo 'selected';
+          } ?> value="date"><?php echo __('Date', BWG()->prefix); ?></option>
           <option <?php if ( $sort_by == 'filename' ) {
             echo 'selected';
           } ?> value="filename"><?php echo __('Filename', BWG()->prefix); ?></option>
@@ -650,16 +656,16 @@ class BWGViewSite {
         }
         ?>
               <span class="pagination-links_<?php echo $current_view; ?>">
-                <a class="<?php echo $first_page; ?>" title="<?php echo __('Go to the first page', BWG()->prefix); ?>" <?php echo BWG()->options->front_ajax == "1" && $page_number > 1 && $enable_seo ? 'href="' . esc_url(add_query_arg(array( "page_number_" . $current_view => 1 ), $_SERVER['REQUEST_URI'])) . '"' : ""; ?>><?php echo $first_button; ?></a>
-                <a class="<?php echo $prev_page; ?>" title="<?php echo __('Go to the previous page', BWG()->prefix); ?>" <?php echo $page_number > 1 && $enable_seo ? 'href="' . esc_url(add_query_arg(array( "page_number_" . $current_view => $page_number - 1 ), $_SERVER['REQUEST_URI'])) . '"' : ""; ?>><?php echo $previous_button; ?></a>
+                <a class="bwg-a <?php echo $first_page; ?>" title="<?php echo __('Go to the first page', BWG()->prefix); ?>" <?php echo BWG()->options->front_ajax == "1" && $page_number > 1 && $enable_seo ? 'href="' . esc_url(add_query_arg(array( "page_number_" . $current_view => 1 ), $_SERVER['REQUEST_URI'])) . '"' : ""; ?>><?php echo $first_button; ?></a>
+                <a class="bwg-a <?php echo $prev_page; ?>" title="<?php echo __('Go to the previous page', BWG()->prefix); ?>" <?php echo $page_number > 1 && $enable_seo ? 'href="' . esc_url(add_query_arg(array( "page_number_" . $current_view => $page_number - 1 ), $_SERVER['REQUEST_URI'])) . '"' : ""; ?>><?php echo $previous_button; ?></a>
                 <span class="paging-input_<?php echo $current_view; ?>">
           <span class="total-pages_<?php echo $current_view; ?>"><?php echo $page_number; ?></span> <?php echo __('of', BWG()->prefix); ?>
                     <span class="total-pages_<?php echo $current_view; ?>">
             <?php echo $items_county; ?>
           </span>
         </span>
-                <a class="<?php echo $next_page ?>" title="<?php echo __('Go to the next page', BWG()->prefix); ?>" <?php echo $page_number + 1 <= $items_county && $enable_seo ? 'href="' . esc_url(add_query_arg(array( "page_number_" . $current_view => $page_number + 1 ), $_SERVER['REQUEST_URI'])) . '"' : ""; ?>><?php echo $next_button; ?></a>
-                <a class="<?php echo $last_page ?>" title="<?php echo __('Go to the last page', BWG()->prefix); ?>" <?php echo BWG()->options->front_ajax == "1" && $page_number < $items_county && $enable_seo ? 'href="' . esc_url(add_query_arg(array( "page_number_" . $current_view => $items_county ), $_SERVER['REQUEST_URI'])) . '"' : ""; ?>><?php echo $last_button; ?></a>
+                <a class="bwg-a <?php echo $next_page ?>" title="<?php echo __('Go to the next page', BWG()->prefix); ?>" <?php echo $page_number + 1 <= $items_county && $enable_seo ? 'href="' . esc_url(add_query_arg(array( "page_number_" . $current_view => $page_number + 1 ), $_SERVER['REQUEST_URI'])) . '"' : ""; ?>><?php echo $next_button; ?></a>
+                <a class="bwg-a <?php echo $last_page ?>" title="<?php echo __('Go to the last page', BWG()->prefix); ?>" <?php echo BWG()->options->front_ajax == "1" && $page_number < $items_county && $enable_seo ? 'href="' . esc_url(add_query_arg(array( "page_number_" . $current_view => $items_county ), $_SERVER['REQUEST_URI'])) . '"' : ""; ?>><?php echo $last_button; ?></a>
               </span>
         <?php
       }
@@ -671,7 +677,7 @@ class BWGViewSite {
 		if ($count_items > ($limit * ($page_number - 1)) + $items_per_page['images_per_page']) {
 		?>
 		  <div id="bwg_load_<?php echo $current_view; ?>" class="tablenav-pages_<?php echo $current_view; ?>">
-				<a class="bwg_load_btn_<?php echo $current_view; ?> bwg_load_btn" href="javascript:void(0);"><?php echo __('Load More...', BWG()->prefix); ?></a>
+				<a class="bwg-a bwg_load_btn_<?php echo $current_view; ?> bwg_load_btn" href="javascript:void(0);"><?php echo __('Load More...', BWG()->prefix); ?></a>
 				<input type="hidden" id="bwg_load_more_<?php echo $current_view; ?>" name="bwg_load_more_<?php echo $current_view; ?>" value="on" />
 			</div>
 		<?php
@@ -766,7 +772,7 @@ class BWGViewSite {
     if ( !$pieces['query'] ) {
       return $url;
     }
-    $query = [];
+    $query = array();
     parse_str($pieces['query'], $query);
     if ( !isset($query[$param]) ) {
       return $url;

@@ -180,12 +180,13 @@ class FilemanagerController {
       $msg = '';
       $path = $input_dir . '/';
       $data = array(
-      'is_dir' => 1,
-      'path' => $path,
-      'name' => $new_dir_path_name,
-      'alt' => str_replace("_", " ", $new_dir_path_name),
-      'filename' => str_replace("_", " ", $new_dir_path_name),
-      'thumb' => '/filemanager/images/dir.png'
+		'is_dir' => 1,
+		'path' => $path,
+		'name' => $new_dir_path_name,
+		'alt' => str_replace("_", " ", $new_dir_path_name),
+		'filename' => str_replace("_", " ", $new_dir_path_name),
+		'thumb' => '/filemanager/images/dir.png',
+		'date_modified' => date("Y-m-d H:i:s")
       );
       $wpdb->insert($wpdb->prefix . 'bwg_file_paths', $data);
       mkdir($new_dir_path);
@@ -207,7 +208,7 @@ class FilemanagerController {
     exit;
   }
 
-	public function parsing_items() {
+  public function parsing_items() {
 		$dir = $this->model->get_from_session('dir', '');
 		$dir = ($dir == '' || $dir == '/') ? '/' : $dir .'/';
 		$input_dir = (isset($_REQUEST['dir']) ? str_replace('\\', '', esc_html($_REQUEST['dir'])) : '');

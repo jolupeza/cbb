@@ -17,6 +17,7 @@ class WD_BWG_Options {
   public $show_hide_custom_post = 0;
   public $noindex_custom_post = 1;
   public $show_hide_post_meta = 0;
+  public $tags_filter_and_or = 0;
   public $save_ip = 1;
   public $image_right_click = 0;
   public $use_inline_stiles_and_scripts = 0;
@@ -24,6 +25,7 @@ class WD_BWG_Options {
   public $enable_wp_editor = 0;
   public $enable_seo = 1;
   public $read_metadata = 1;
+  public $auto_rotate = 0;
   public $front_ajax = 0;
   public $developer_mode = 0;
 

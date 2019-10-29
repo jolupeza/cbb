@@ -153,6 +153,8 @@ jQuery(document).ready(function () {
 		var value = jQuery(this).val();
 		show_hide_extended_album_view( value );
 	});
+
+  jQuery('#bwg_ask_question').parent().attr('target', '_blank');
   /*jQuery( window ). scroll(function(){
     if( jQuery( window ).scrollTop() >= jQuery( 'div.wd-page-title' ).offset().top ) {
       jQuery( '#search_in_options_container' ).addClass('fixed');
@@ -352,6 +354,8 @@ function spider_ajax_save(form_id, tr_group) {
   post_data["redirecturl"] = jQuery("#redirecturl").val();
   /* Images bulk add tags ids. */
   post_data["added_tags_id"] = jQuery("#added_tags_id").val();
+  /* Images bulk add tags act. */
+  post_data["added_tags_act"] = jQuery("#added_tags_act").val();
   /* Images data. */
   for (var i in ids_array) {
     if (ids_array.hasOwnProperty(i) && ids_array[i]) {
@@ -588,7 +592,7 @@ function spider_check_all_items_checkbox(event) {
     var items_count = added_items + saved_items;
     if ( items_count ) {
       jQuery(".ajax-msg")
-        .html("<div class='notice notice-warning'><p><strong>" + (items_count == 1 ? bwg_objectL10B.selected_item : bwg_objectL10B.selected_items).replace("%d", items_count) + "</strong></p></div>")
+        .html("<div class='notice notice-warning wd-notice'><p><strong>" + (items_count == 1 ? bwg_objectL10B.selected_item : bwg_objectL10B.selected_items).replace("%d", items_count) + "</strong></p></div>")
         .removeClass("wd-hide");
     }
 
@@ -764,9 +768,9 @@ function spider_jslider(idtaginp) {
  *
  * @param image_id
  */
-function bwg_bulk_add_tags(tag_id) {
+function bwg_bulk_add_tags(tag_id, act) {
   var tagIds = "";
-  if ( typeof tag_id == "undefined" ) {
+  if ( tag_id == "" ) {
     jQuery(".tags:checked").each(function () {
       tagIds += jQuery(this).data("id").toString() + ",";
     });
@@ -775,6 +779,7 @@ function bwg_bulk_add_tags(tag_id) {
     tagIds = tag_id;
   }
   jQuery('#added_tags_id', window.parent.document).val(tagIds);
+  jQuery('#added_tags_act', window.parent.document).val(act);
   window.parent.spider_set_input_value('ajax_task', 'image_add_tag');
   window.parent.spider_ajax_save('bwg_gallery');
   window.parent.tb_remove();
@@ -836,7 +841,7 @@ function bwg_add_tag(image_id, tagIds, titles) {
             tag_ids = tag_ids + tagIds[i] + ',';
             var html = jQuery("#" + image_id + "_tag_temptagid").clone().html();
             /* Remove white spaces from keywords to set as id and remove prefix.*/
-            var id = tagIds[i].replace(/\s+/g, '_').replace('bwg_', '').replace(/&amp;/g, "").replace(/&/g, "").replace(/'/g, "39").replace(/"/g, "34").replace(/!/g, "");
+            var id = tagIds[i].replace(/\s+/g, '_').replace('bwg_', '').replace(/&amp;/g, "").replace(/&/g, "").replace(/@/g, "").replace(/'/g, "39").replace(/"/g, "34").replace(/!/g, "");
             html = html.replace(/temptagid/g, id)
                        .replace(/temptagname/g, titles[i]);
             jQuery("#tags_div_" + image_id).append("<div class='tag_div' id='" + image_id + "_tag_" + id + "'>");
@@ -875,6 +880,17 @@ function bwg_remove_tag(tag_id, image_id) {
   }
 }
 
+function bwg_remove_tags(image_id) {
+  var tagIds = [];
+  jQuery(".tags:checked").each(function () {
+    tagIds.push(jQuery(this).data("id").toString());
+  });
+  tagIds.forEach(function(item) {
+    window.parent.bwg_remove_tag(item.toString(), image_id);
+  })
+  window.parent.tb_remove();
+}
+
 function preview_watermark() {
   setTimeout(function() {
     watermark_type = window.parent.document.getElementById('watermark_type_text').checked;
@@ -907,11 +923,30 @@ function preview_watermark() {
   }, 50);
 }
 
+/* Escape a string for HTML.*/
+function tw_escape(string) {
+  /* List of HTML entities for escaping.*/
+  var htmlEscapes = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#x27;',
+    '/': '&#x2F;'
+  };
+  /* Regex containing the keys.*/
+  var htmlEscaper = /[&<>"'\/]/g;
+
+  return ('' + string).replace(htmlEscaper, function(match) {
+    return htmlEscapes[match];
+  });
+};
+
 function preview_built_in_watermark() {
   setTimeout(function(){
   watermark_type = window.parent.document.getElementById('built_in_watermark_type_text').checked;
   if (watermark_type) {
-    watermark_text = document.getElementById('built_in_watermark_text').value;
+    watermark_text = tw_escape(document.getElementById('built_in_watermark_text').value);
     watermark_font_size = document.getElementById('built_in_watermark_font_size').value * 400 / 500;
     watermark_font = 'bwg_' + document.getElementById('built_in_watermark_font').value.replace('.TTF', '').replace('.ttf', '');
     watermark_color = document.getElementById('built_in_watermark_color').value;

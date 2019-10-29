@@ -95,7 +95,7 @@ class BWGViewAlbum_compact_preview extends BWGViewSite {
         }
         ?>
         <div class="bwg-item">
-          <a class="<?php echo $from !== "widget" ? 'bwg-album ' : ''; ?>bwg_album_<?php echo $bwg; ?>"
+          <a class="bwg-a <?php echo $from !== "widget" ? 'bwg-album ' : ''; ?>bwg_album_<?php echo $bwg; ?>"
              <?php echo (BWG()->options->enable_seo && $from !== "widget" ? "href='" . esc_url($href) . "'" : ""); ?>
              <?php echo $from === "widget" ? 'href="' . $row->permalink . '"' : ''; ?>
              data-container_id="<?php echo $params['container_id']; ?>"

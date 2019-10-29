@@ -52,7 +52,7 @@ class BWGViewThumbnails extends BWGViewSite {
         }
         $ecommerce_icon .= '</div></div>';
         if ( $params['thumb_click_action'] == 'open_lightbox' ) {
-          $class = ' class="bwg_lightbox"';
+          $class = ' bwg_lightbox';
           $data_image_id = ' data-image-id="' . $image_row->id . '"';
           if ( BWG()->options->enable_seo ) {
             $href = ' href="' . ($is_embed ? $image_row->thumb_url : BWG()->upload_url . $image_row->image_url) . '"';
@@ -74,7 +74,7 @@ class BWGViewThumbnails extends BWGViewSite {
 
         ?>
       <div class="bwg-item">
-        <a <?php echo $class; ?><?php echo $data_image_id; ?><?php echo $href; ?>>
+        <a class="bwg-a<?php echo $class; ?>" <?php echo $data_image_id; ?><?php echo $href; ?>>
         <?php if ( $params['image_title'] == 'show' && $theme_row->thumb_title_pos == 'top' ) { echo $title; } ?>
         <div class="bwg-item0 <?php if( $lazyload ) { ?> lazy_loader <?php } ?>">
           <div class="bwg-item1 <?php echo $theme_row->thumb_hover_effect == 'zoom' && $params['image_title'] == 'hover' ? 'bwg-zoom-effect' : ''; ?>">

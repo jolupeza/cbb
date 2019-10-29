@@ -25,8 +25,12 @@ class OptionsController_bwg {
     );
     $built_in_watermark_fonts = array();
     foreach (scandir(path_join(BWG()->plugin_dir, 'fonts')) as $filename) {
-      if (strpos($filename, '.') === 0) continue;
-      else $built_in_watermark_fonts[] = $filename;
+      if ( strpos($filename, '.') === 0 || strpos($filename, 'twbb') !== FALSE ) {
+        continue;
+      }
+      else {
+        $built_in_watermark_fonts[] = $filename;
+      }
     }
     $params['built_in_watermark_fonts'] = $built_in_watermark_fonts;
     $params['watermark_fonts'] = array(
@@ -94,8 +98,8 @@ class OptionsController_bwg {
 													BWG()->nonce => wp_create_nonce(BWG()->nonce),
 												), admin_url('admin-ajax.php') );
 
-  	$params['instagram_return_url'] = 'https://api.instagram.com/oauth/authorize/?client_id=54da896cf80343ecb0e356ac5479d9ec&scope=basic+public_content&redirect_uri=http://api.web-dorado.com/instagram/?return_url=' . urlencode( admin_url('admin.php?page=options_bwg')) . '&response_type=token';
-    $params['instagram_reset_href'] =  add_query_arg( array(
+	$params['instagram_return_url'] = 'https://api.instagram.com/oauth/authorize/?client_id=54da896cf80343ecb0e356ac5479d9ec&scope=basic&redirect_uri=http://api.web-dorado.com/instagram/&state=' . urlencode( admin_url('admin.php?options_bwg')) . '&response_type=token';
+	$params['instagram_reset_href'] =  add_query_arg( array(
 														'page' => $this->page,
 														'task' => 'reset_instagram_access_token',
 														BWG()->nonce => wp_create_nonce(BWG()->nonce),
@@ -224,7 +228,7 @@ class OptionsController_bwg {
 			'built_in_watermark_position' => WDWLibrary::get('built_in_watermark_position')
 		);
 		if ( $update_options['built_in_watermark_type'] == 'text' ){
-			$update_options['built_in_watermark_text'] = WDWLibrary::get('built_in_watermark_text');
+			$update_options['built_in_watermark_text'] = WDWLibrary::get('built_in_watermark_text', '', 'sanitize_text_field');
 			$update_options['built_in_watermark_font_size'] = WDWLibrary::get('built_in_watermark_font_size');
 			$update_options['built_in_watermark_font'] = WDWLibrary::get('built_in_watermark_font');
 			$update_options['built_in_watermark_color'] = WDWLibrary::get('built_in_watermark_color');

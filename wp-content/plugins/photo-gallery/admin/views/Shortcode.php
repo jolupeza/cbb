@@ -586,10 +586,9 @@ class ShortcodeView_bwg extends AdminView_bwg {
           jQuery("select[id=album] option[value='" + short_code['album_id'] + "']").attr('selected', 'selected');
           jQuery("select[id=tag] option[value='" + short_code['tag'] + "']").attr('selected', 'selected');
           bwg_gallery_type(short_code['gallery_type']);
-          if (short_code['use_option_defaults'] == 1) {
-            return false;
+          if (short_code['use_option_defaults'] != 1) {
+            jQuery("#use_option_defaults").prop('checked', false).trigger('change');
           }
-          jQuery("#use_option_defaults").prop('checked', false).trigger('change');
           switch (short_code['gallery_type']) {
             case 'thumbnails': {
               jQuery("#thumb_width").val(short_code['thumb_width']);
@@ -1039,7 +1038,7 @@ class ShortcodeView_bwg extends AdminView_bwg {
               }
               jQuery("select[id=blog_style_sort_by] option[value='" + short_code['sort_by'] + "']").attr('selected', 'selected');
               jQuery("select[id=blog_style_order_by] option[value='" + short_code['order_by'] + "']").attr('selected', 'selected');
-			  if (short_code['showthumbs_name'] == 1) {
+			         if (short_code['showthumbs_name'] == 1) {
                 jQuery("#blog_style_thumb_name_yes").attr('checked', 'checked');
               }
               else {
@@ -1144,7 +1143,7 @@ class ShortcodeView_bwg extends AdminView_bwg {
               jQuery("#album_images_per_page").val(short_code['compuct_album_images_per_page']);
               jQuery("select[id=compact_album_sort_by] option[value='" + short_code['all_album_sort_by'] + "']").attr('selected', 'selected');
               jQuery("select[id=compact_album_order_by] option[value='" + short_code['all_album_order_by'] + "']").attr('selected', 'selected');
-			  jQuery("select[id=album_sort_by] option[value='" + short_code['sort_by'] + "']").attr('selected', 'selected');
+			        jQuery("select[id=album_sort_by] option[value='" + short_code['sort_by'] + "']").attr('selected', 'selected');
               jQuery("select[id=album_order_by] option[value='" + short_code['order_by'] + "']").attr('selected', 'selected');
 
               if (short_code['show_search_box'] == 1) {
@@ -1184,8 +1183,8 @@ class ShortcodeView_bwg extends AdminView_bwg {
                 jQuery("#album_show_gallery_description_0").attr('checked', 'checked');
               }
               jQuery("input[name=album_title_show_hover][value=" + short_code['compuct_album_title'] + "]").attr('checked', 'checked');
-			  jQuery('#album_view_type').find('option').removeAttr("selected");
-			  jQuery("#album_view_type option[value='"+ short_code['compuct_album_view_type'] +"']").attr('selected', 'selected');
+			       jQuery('#album_view_type').find('option').removeAttr("selected");
+			       jQuery("#album_view_type option[value='"+ short_code['compuct_album_view_type'] +"']").attr('selected', 'selected');
               jQuery("input[name='album_image_title_show_hover'][value='" + short_code['compuct_album_image_title'] + "']").attr('checked', 'checked');
               if (short_code['compuct_album_mosaic_hor_ver'] == "vertical") {
                 jQuery("#album_mosaic_0").attr('checked', 'checked');
@@ -1347,8 +1346,8 @@ class ShortcodeView_bwg extends AdminView_bwg {
               else {
                 jQuery("#album_extended_show_gallery_description_0").attr('checked', 'checked');
               }
-			  jQuery('#album_extended_view_type').find('option').removeAttr("selected");
-			  jQuery("#album_extended_view_type option[value='"+ short_code['extended_album_view_type'] +"']").attr('selected', 'selected');
+			        jQuery('#album_extended_view_type').find('option').removeAttr("selected");
+			        jQuery("#album_extended_view_type option[value='"+ short_code['extended_album_view_type'] +"']").attr('selected', 'selected');
               jQuery("input[name='album_extended_image_title_show_hover'][value='" + short_code['extended_album_image_title'] + "']").attr('checked', 'checked');
               if (short_code['extended_album_mosaic_hor_ver'] == "vertical") {
                 jQuery("#album_extended_mosaic_0").attr('checked', 'checked');
@@ -2113,7 +2112,7 @@ class ShortcodeView_bwg extends AdminView_bwg {
         return;
       }
       function bwg_before_shortcode_add_builder_editor() {
-        if ( top.jQuery('body').hasClass('elementor-editor-active') || top.jQuery('body').hasClass('fl-builder') ) {
+        if ( top.jQuery('body').hasClass('elementor-editor-active') || top.jQuery('body').hasClass('fl-builder') || top.jQuery('body').hasClass('et_divi_theme') ) {
           return true;
         }
         return false;

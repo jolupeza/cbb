@@ -59,8 +59,8 @@ class FilemanagerView {
     wp_print_styles('wp-auth-check');
     wp_print_styles('wp-pointer');
     ?>
-    <script src="<?php echo BWG()->plugin_url; ?>/filemanager/js/jq_uploader/jquery.iframe-transport.js?v=9.25.1"></script>
-    <script src="<?php echo BWG()->plugin_url; ?>/filemanager/js/jq_uploader/jquery.fileupload.js?v=9.25.1"></script>
+    <script src="<?php echo BWG()->plugin_url; ?>/filemanager/js/jq_uploader/jquery.iframe-transport.js?v=10.0.0"></script>
+    <script src="<?php echo BWG()->plugin_url; ?>/filemanager/js/jq_uploader/jquery.fileupload.js?v=10.0.0"></script>
     <script>
 	  var DS = "<?php echo addslashes('/'); ?>";
       var demo_message = "<?php echo addslashes(__('This option is disabled in demo.', BWG()->prefix)); ?>";
@@ -242,14 +242,12 @@ class FilemanagerView {
           </div>
           <label for="jQueryUploader">
             <div id="uploader_hitter">
-              <div id="drag_message">
-                <span><?php echo __('Choose or Drag files here', BWG()->prefix) . '<br />' . __('to upload',BWG()->prefix)?></span>
-              </div>
               <div id="btnBrowseContainer">
-              <?php
-              $query_url = wp_nonce_url( admin_url('admin-ajax.php'), 'bwg_UploadHandler', 'bwg_nonce' );
-              $query_url = add_query_arg(array('action' => 'bwg_UploadHandler', 'dir' => (isset($_REQUEST['dir']) ? esc_html($_REQUEST['dir']) : '') . '/'), $query_url);
-              ?>
+				<div class="bwg-select-file-text"><?php _e('Drag files here', BWG()->prefix); ?><br><?php _e('or', BWG()->prefix); ?><br><span class="button"><?php _e('Select Files', BWG()->prefix); ?></span></div>
+				<?php
+				  $query_url = wp_nonce_url( admin_url('admin-ajax.php'), 'bwg_UploadHandler', 'bwg_nonce' );
+				  $query_url = add_query_arg(array('action' => 'bwg_UploadHandler', 'dir' => (isset($_REQUEST['dir']) ? esc_html($_REQUEST['dir']) : '') . '/'), $query_url);
+				?>
                 <input id="jQueryUploader" type="file" name="files[]"
 				   data-url="<?php echo $query_url; ?>"
 				   multiple>
@@ -295,9 +293,20 @@ class FilemanagerView {
 			'upload_failed' : '<?php _e('Upload failed', BWG()->prefix); ?>',
 			'upload_problem': '<?php _e('There has been a problem while trying to upload the following images. Please try to upload them again.', BWG()->prefix); ?>',
 			'allowed_upload_types' : '<?php _e('Allowed upload types JPG, JPEG, GIF, PNG.', BWG()->prefix); ?>'
-		}
+		};
+    last_uploaded = [];
 		jQuery(document).ready(function () {
 			jQuery("#loading_div", window.parent.document).hide();
+      if (localStorage.getItem("bwg_selected_images")) {
+        var bwg_selected_images = localStorage.getItem("bwg_selected_images").split(",");
+        filesSelected = bwg_selected_images;
+        jQuery(".explorer_item").each(function () {
+          if (bwg_selected_images.includes(jQuery(this).attr("name")) > 0) {
+            jQuery(this).addClass("explorer_item_select");
+          }
+        });
+        localStorage.removeItem("bwg_selected_images");
+      }
 		});
 		jQuery("#jQueryUploader").fileupload({
 		  dataType: "json",
@@ -305,6 +314,7 @@ class FilemanagerView {
 		  limitConcurrentUploads: 10, // upload step by step
 		  acceptFileTypes: /(\.|\/)(jpe?g|gif|png)$/i,
 		  submit: function (e, data) {
+      localStorage.removeItem( "bwg_selected_images" );
 			isUploading = true;
 			jQuery("#uploader_progress_text").removeClass("uploader_text");
 			jQuery("#uploader_progress_bar").fadeIn();
@@ -316,8 +326,8 @@ class FilemanagerView {
 			if ( data.loaded == data.total ) {
 			  isUploading = false;
 			  jQuery("#uploader_progress_bar").fadeOut(function () {
-				jQuery("#uploader_progress_text").text(messageFilesUploadComplete);
-				jQuery("#uploader_progress_text").addClass("uploader_text");
+          jQuery("#uploader_progress_text").text(messageFilesUploadComplete);
+          jQuery("#uploader_progress_text").addClass("uploader_text");
 			  });
 			}
 		  },
@@ -360,9 +370,11 @@ class FilemanagerView {
 				}
 				else {
 					html += '<li class="uploaded_item">' + file.name + ' (' + messages.uploaded + ')</li>';
+          last_uploaded.push( file.name );
 				}
 				jQuery("#bwg-errors-wrap .bwg-files-item").prepend( html );
 			});
+      localStorage.setItem( "bwg_selected_images", last_uploaded );
 		  },
 		  fail: function (e, data) {
 			  if ( data.textStatus == 'error' ) {

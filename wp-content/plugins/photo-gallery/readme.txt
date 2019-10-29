@@ -3,7 +3,7 @@ Contributors: webdorado,wdsupport,photogallerysupport,10web
 Tags: gallery, photo gallery, image gallery, responsive gallery, wordpress gallery plugin, photo albums, gallery slider, gallery lightbox, wordpress photo gallery plugin, fullscreen gallery, watermarking, video gallery
 Requires at least: 3.4
 Tested up to: 5.2
-Stable tag: 1.5.29
+Stable tag: 1.5.37
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -54,7 +54,7 @@ You can display your media content in a responsive lightbox that comes with 15 s
 
 = AUDIO AND VIDEO SUPPORT =
 
-The Photo Gallery plugin allows you to include both videos and images within a single gallery. The WordPress Plugin supports YouTube, Vimeo, Instagram, Flickr or Dailymotion videos within Galleries. All you need to do is compy the URL of the video you want to include in the gallery plugin. It’s also possible to add audio tracks for the image slideshow. 
+The Photo Gallery plugin allows you to include both videos and images within a single gallery. The WordPress Plugin supports YouTube, Vimeo, Instagram, Flickr or Dailymotion videos within Galleries. All you need to do is copy the URL of the video you want to include in the gallery plugin. It’s also possible to add audio tracks for the image slideshow.
 
 = MULTIPLE WIDGETS =
 
@@ -165,7 +165,7 @@ Instagram: http://instagram.com/p/ykvv0puS4u, if you want to add the image toget
 Flickr: https://www.flickr.com/photos/sui-fong/15250186998/in/gallery-flickr-72157648726328108/
 **Videos**
 YouTube: https://www.youtube.com/watch?v=fa4RLje-yM8
-Vimeos: http://vimeo.com/8110647
+Vimeo: http://vimeo.com/8110647
 Dailymotion: http://www.dailymotion.com/video/xexaq0_frank-sinatra-strangers-in-the-nigh_music
 
 **Bulk Embed.** This option will allow adding more than one images from specific social media (currently only Instagram account, but more options will be added with the upcoming updates) into the standard gallery. You should keep in mind that the images will be added without the possibility of auto-update.  
@@ -268,7 +268,7 @@ To publish gallery plugin widgets, go to Appearance > Widgets. Here select the w
 **Slideshow effect.** Select the effect to apply to the slideshow.   
 **Time interval.** Define the time interval between the images in seconds.     
 **Enable shuffle.** Choose whether to have shuffle for the slideshow images or not.   
-**Theme.** Choose the theme to be applied to the gallery slideshow.    
+**Theme.** Choose the theme to be applied to the gallery slideshow.
  
 **Photo Gallery Widget**
 
@@ -282,6 +282,57 @@ Choose whether to display random or the first/last specific number of images.
 
 == Changelog ==
 
+= 1.5.37 =
+* Fixed: View count.
+* Fixed: Galleries/gallery groups bulk deleting.
+
+= 1.5.36 =
+* Added: Ask a question button.
+* Fixed: Issue with lightbox opening.
+
+= 1.5.35 =
+* Added: Gallery, Gallery group, Tag edit links in widget for Elementor.
+* Improved: Add gallery images to the XML generated with Yoast or Seo by 10Web.
+* Updated: jQuery File Upload framework.
+* Fixed: Shortcode buttons behaviour in Text widget of Divi Builder.
+* Fixed: Vulnerabilities.
+* Fixed: Opening shared URLs.
+* Fixed: Click action on image title click.
+* Fixed: Filmstrip arrows alignment.
+* Fixed: Masonry layout after closing lightbox.
+* Fixed: Do not reset shortcode options on 'Use default options' enable/disable.
+* Fixed: Titles on masonry view.
+* Fixed: Images ordering in lightbox.
+* Fixed: Don't delete tags on deleting all images.
+* Removed: Webinar banner.
+
+= 1.5.34 =
+* Added: Webinar banner.
+* Fixed: More than one mosaic gallery on a page.
+
+= 1.5.33 =
+* Fixed: Error from Instagram after connecting a Personal account.
+
+= 1.5.32 =
+* Added: Possibility to bulk remove tags.
+* Added: Possibility to use AND operator for tag filtering.
+* Added: 'How to insert a shortcode in Gutenberg?' to 'How to use'.
+* Fixed: Minor bug on file upload and import from media library.
+* Fixed: Link in gallery group description.
+* Fixed: Removing link from images alt.
+* Fixed: Order by date in filemanager for folders.
+* Fixed: Scroll load and load more loading should not cover all gallery.
+* Fixed: Instagram sign in.
+* Improved: Automatically select image after upload.
+* Improved: Automatically deactivate gallery after uninstalling.
+* Improved: Auto rotate images depend on image orientation saved in metadata.
+* Improved: Short url for lightbox.
+
+= 1.5.31 =
+* Fixed: Vulnerability problem reported by 'Tin Duong of Fortinet's FortiGuard Labs'.
+
+= 1.5.30 =
+* Removed: Banner to check website performance.
 
 = 1.5.29 =
 * Added: Functionality to disable ajax actions to open galleries by URL.
@@ -405,9 +456,9 @@ Choose whether to display random or the first/last specific number of images.
 * Added: Free plugin flow: When installing Manager, store plugin name or slug in a WP option.   
 
 = 1.5.11 =
-* Fixed: Upload image when there is a qoute in the image metadata.   
+* Fixed: Upload image when there is a quote in the image metadata.   
 * Fixed: Bug on slideshow autoplay.   
-* Fixed: Bug when you put album after a gallery with scroll load.   
+* Fixed: Bug when you put a Gallery Group after a Gallery with scroll load.   
 * Fixed: Conflict with "BigSlam" theme.
 * Fixed: Conflict with some ajax themes.   
 * Fixed: PNG and GIF crop.   
@@ -490,8 +541,8 @@ Choose whether to display random or the first/last specific number of images.
 * Improved: Use the largest image file instead of the original image when the original file doesn't exist to prevent errors.  
 * Improved: Gallery edit page load time.  
 * Improved: Disabled the cron functionality in the free version.  
-* Improved: Masonry view HTML / CSS / JS sturcture.  
-* Improved: Mosaic view HTML / CSS / JS sturcture.  
+* Improved: Masonry view HTML / CSS / JS structure.
+* Improved: Mosaic view HTML / CSS / JS structure.
 * Improved: Albums "Back" button styles.  
 * Improved: Filemanager load time.   
 * Improved: Do not add hashtag ids to browser history.  
@@ -567,6 +618,7 @@ Choose whether to display random or the first/last specific number of images.
 * Fixed: Bug on opening lightbox with embed media.   
 
 = 1.4.10 =
+* Fixed: Removed Bom from Galleries.php.
 * Changed: Separate buttons for deactivation.  
 
 = 1.4.9 =
@@ -864,7 +916,7 @@ Choose whether to display random or the first/last specific number of images.
 
 = 1.3.16 =
 * Fixed: Ampersand in watermark and advertisement text.   
-* Fixed: Lightbox controlls toggle button on mobile.   
+* Fixed: Lightbox controls toggle button on mobile.
 * Added: Google fonts.    
 * Changed: UploadHandler class name to prevent conflict with some themes.   
   
@@ -957,14 +1009,14 @@ IMPORTANT: Instagram changed the API. You need to get a new access token by usin
 * Added: Effect duration option.    
 
 = 1.2.103 =
-* Fixed: Text watermark responsivness.   
+* Fixed: Text watermark responsiveness.
 * Added: Set/Reset watermark to all images at once.   
 * Fixed: Description for masonry album views.   
 
 = 1.2.102 =
 * Fixed: Search also in description.   
 * Added: Options for slideshow widget.   
-* Fixed: Import from media libruary.   
+* Fixed: Import from media library.
 * Fixed: File manager loading.    
 
 = 1.2.101 =
@@ -1039,11 +1091,11 @@ IMPORTANT: Instagram changed the API. You need to get a new access token by usin
 
 = 1.2.84 =
 *  Added: Placeholder for search by name (optional).    
-*  Fixed: Styles conflct with Twenty Sixteen theme.    
+*  Fixed: Styles conflict with Twenty Sixteen theme.
 
 = 1.2.83 =
 *  Fixed: Add selected images to gallery.     
-*  Fixed: Controll buttons and filmstrip conflict in lightbox.     
+*  Fixed: Control buttons and filmstrip conflict in lightbox.
 
 = 1.2.82 =
 *  Added: "Load More..." translation.    
@@ -1062,7 +1114,7 @@ IMPORTANT: Instagram changed the API. You need to get a new access token by usin
 *  Fixed: Russian translation (Thanks to Ruslan Tertyshny).    
 
 = 1.2.78 =
-*  Fixed: Compability with Wordpress 4.4.             
+*  Fixed: Compatibility with Wordpress 4.4.
 *  Fixed: Undefined property on album widget.         
 *  Fixed: German backend translation.        
 *  Fixed: Dutch backend translation.           
@@ -1173,10 +1225,10 @@ IMPORTANT: Instagram changed the API. You need to get a new access token by usin
 = 1.2.52 =
 *  Added: Images count parameter for load more.   
 *  Fixed: Pinterest share.   
-*  Fixed: Depricated function in carousel.   
+*  Fixed: Deprecated function in carousel.
 
 = 1.2.51 =
-*  Changed: Compability with Wordpress 4.3.   
+*  Changed: Compatibility with Wordpress 4.3.
 
 = 1.2.50 =
 *  Fixed: JavaScript conflict with some themes.
@@ -1324,7 +1376,7 @@ This vulnerability was discovered by Fortinet's FortiGuard Labs.
 
 = 1.2.11 =
 *  security issue fixed.    
-*  bug in fullscreen button and laoding image animation fixed.
+*  bug in fullscreen button and loading image animation fixed.
 
 = 1.2.9 =
 *  updated font-awesome to 4.2.0 version.    
@@ -1446,16 +1498,18 @@ This vulnerability was discovered by Fortinet's FortiGuard Labs.
 *  improved filemanager functionality, fix bug on widget.
 
 = 1.0.5 =
-*  bug fixed in file manager. 
+*  Fixed: File manager.
 
 = 1.0.4 =
-*  added shortcode generator, thumbnail title, thumb size in filemanager, bug  fixed in slideshow. 
+*  New: Added shortcode generator
+*  New: Thumbnail title, thumb size in filemanager.
+*  Fixed: Slideshow.
 
 = 1.0.3 =
-*  bug fixed in album view .
+*  Fixed: Album view.
 
 = 1.0.2 =
-*  php 5.2 capability.
+*  Fixed: php 5.2 compatibility.
 
 = 1.0.1 =
 *  Initial version.
@@ -1465,7 +1519,7 @@ This vulnerability was discovered by Fortinet's FortiGuard Labs.
 1.  Photo Gallery - Popup View   
 2.  Photo Gallery - Thumbnails View   
 3.  Photo Gallery - Image Browser View 
-4.  Photo Gallery - Mansory View (Premium version)   
+4.  Photo Gallery - Masonry View (Premium version)
 5.  Photo Gallery - Mosaic View (Premium version) 
-6.  Photo Gallery - Shorecode popup   
+6.  Photo Gallery - Shortcode popup
 7.  Photo Gallery - Galleries list

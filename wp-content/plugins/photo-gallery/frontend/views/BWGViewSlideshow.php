@@ -307,7 +307,7 @@ public function display($params = array(), $bwg = 0) {
                         <?php
                         if ( !$is_embed ) {
                           ?>
-                          <a <?php echo($params['thumb_click_action'] == 'open_lightbox' ? (' class="bwg_lightbox"' . (BWG()->options->enable_seo ? ' href="' . ($is_embed ? $image_row->thumb_url : BWG()->upload_url . $image_row->image_url) . '"' : '') . ' data-image-id="' . $image_row->id . '"') : ($params['thumb_click_action'] == 'redirect_to_url' && $image_row->redirect_url ? 'href="' . $image_row->redirect_url . '" target="' . ($params['thumb_link_target'] ? '_blank' : '') . '"' : '')) ?>>
+                          <a <?php echo($params['thumb_click_action'] == 'open_lightbox' ? (' class="bwg-a bwg_lightbox"' . (BWG()->options->enable_seo ? ' href="' . ($is_embed ? $image_row->thumb_url : BWG()->upload_url . $image_row->image_url) . '"' : '') . ' data-image-id="' . $image_row->id . '"') : ('class="bwg-a" ' . ($params['thumb_click_action'] == 'redirect_to_url' && $image_row->redirect_url ? 'href="' . $image_row->redirect_url . '" target="' . ($params['thumb_link_target'] ? '_blank' : '') . '"' : ''))); ?>>
                           <img id="bwg_slideshow_image_<?php echo $bwg; ?>"
                                class="skip-lazy bwg_slide bwg_slideshow_image_<?php echo $bwg; ?> <?php if( $lazyload ) { ?> bwg_lazyload <?php } ?>"
                                src="<?php if( !$lazyload ) { echo BWG()->upload_url . $image_row->image_url; } else { echo BWG()->plugin_url."/images/lazy_placeholder.gif"; } ?>"
@@ -376,7 +376,7 @@ public function display($params = array(), $bwg = 0) {
                         <?php
                         if ( !$is_embed ) {
                           ?>
-                          <a <?php echo($params['thumb_click_action'] == 'open_lightbox' ? (' class="bwg_lightbox_' . $bwg . '"' . (BWG()->options->enable_seo ? ' href="' . ($is_embed ? $image_row->thumb_url : BWG()->upload_url . $image_row->image_url) . '"' : '') . ' data-image-id="' . $image_row->id . '"') : ($params['thumb_click_action'] == 'redirect_to_url' && $image_row->redirect_url ? 'href="' . $image_row->redirect_url . '" target="' . ($params['thumb_link_target'] ? '_blank' : '') . '"' : '')) ?>>
+                          <a <?php echo($params['thumb_click_action'] == 'open_lightbox' ? (' class="bwg-a bwg_lightbox_' . $bwg . '"' . (BWG()->options->enable_seo ? ' href="' . ($is_embed ? $image_row->thumb_url : BWG()->upload_url . $image_row->image_url) . '"' : '') . ' data-image-id="' . $image_row->id . '"') : ('class="bwg-a" ' . ($params['thumb_click_action'] == 'redirect_to_url' && $image_row->redirect_url ? 'href="' . $image_row->redirect_url . '" target="' . ($params['thumb_link_target'] ? '_blank' : '') . '"' : ''))) ?>>
                           <img id="bwg_slideshow_image_<?php echo $bwg; ?>"
                                class="skip-lazy  bwg_slide bwg_slideshow_image_<?php echo $bwg; ?> <?php if( $lazyload ) { ?> bwg_lazyload lazy_loader <?php } ?>"
                                src="<?php if( !$lazyload ) { echo BWG()->upload_url . $image_row->image_url; } else { echo BWG()->plugin_url."/images/lazy_placeholder.gif"; } ?>"
@@ -440,9 +440,9 @@ public function display($params = array(), $bwg = 0) {
       <?php
       if ( $enable_slideshow_ctrl ) {
         ?>
-        <a id="spider_slideshow_left_<?php echo $bwg; ?>" onclick="bwg_change_image(parseInt(jQuery('#bwg_current_image_key_<?php echo $bwg; ?>').val()), (parseInt(jQuery('#bwg_current_image_key_<?php echo $bwg; ?>').val()) + <?php echo count($data[$bwg]); ?> - bwg_iterator(<?php echo $bwg; ?>)) % <?php echo count($data[$bwg]); ?>, '', '', <?php echo $bwg; ?>); return false;"><span id="spider_slideshow_left-ico_<?php echo $bwg; ?>"><span><i class="<?php echo $theme_row->slideshow_rl_btn_style; ?>-left bwg_slideshow_prev_btn_<?php echo $bwg; ?>"></i></span></span></a>
+        <a class="bwg-a" id="spider_slideshow_left_<?php echo $bwg; ?>" onclick="bwg_change_image(parseInt(jQuery('#bwg_current_image_key_<?php echo $bwg; ?>').val()), (parseInt(jQuery('#bwg_current_image_key_<?php echo $bwg; ?>').val()) + <?php echo count($data[$bwg]); ?> - bwg_iterator(<?php echo $bwg; ?>)) % <?php echo count($data[$bwg]); ?>, '', '', <?php echo $bwg; ?>); return false;"><span id="spider_slideshow_left-ico_<?php echo $bwg; ?>"><span><i class="<?php echo $theme_row->slideshow_rl_btn_style; ?>-left bwg_slideshow_prev_btn_<?php echo $bwg; ?>"></i></span></span></a>
         <span id="bwg_slideshow_play_pause_<?php echo $bwg; ?>" class="bwg_slideshow_play_pause" style="display: <?php echo $play_pause_button_display; ?>;"><span><span id="bwg_slideshow_play_pause-ico_<?php echo $bwg; ?>"><i class="bwg-icon-play bwg_ctrl_btn_<?php echo $bwg; ?> bwg_slideshow_play_pause_<?php echo $bwg; ?>"></i></span></span></span>
-        <a id="spider_slideshow_right_<?php echo $bwg; ?>" onclick="bwg_change_image(parseInt(jQuery('#bwg_current_image_key_<?php echo $bwg; ?>').val()), (parseInt(jQuery('#bwg_current_image_key_<?php echo $bwg; ?>').val()) + bwg_iterator(<?php echo $bwg; ?>)) % <?php echo count($data[$bwg]); ?>, '', '', <?php echo $bwg; ?>); return false;"><span id="spider_slideshow_right-ico_<?php echo $bwg; ?>"><span><i class="<?php echo $theme_row->slideshow_rl_btn_style; ?>-right bwg_slideshow_next_btn_<?php echo $bwg; ?>"></i></span></span></a>
+        <a class="bwg-a" id="spider_slideshow_right_<?php echo $bwg; ?>" onclick="bwg_change_image(parseInt(jQuery('#bwg_current_image_key_<?php echo $bwg; ?>').val()), (parseInt(jQuery('#bwg_current_image_key_<?php echo $bwg; ?>').val()) + bwg_iterator(<?php echo $bwg; ?>)) % <?php echo count($data[$bwg]); ?>, '', '', <?php echo $bwg; ?>); return false;"><span id="spider_slideshow_right-ico_<?php echo $bwg; ?>"><span><i class="<?php echo $theme_row->slideshow_rl_btn_style; ?>-right bwg_slideshow_next_btn_<?php echo $bwg; ?>"></i></span></span></a>
         <?php
       }
       ?>
@@ -457,7 +457,7 @@ public function display($params = array(), $bwg = 0) {
                 <?php
                 if ( $params['watermark_type'] == 'image' ) {
                   ?>
-                  <a href="<?php echo urldecode($watermark_link); ?>" target="_blank">
+                  <a class="bwg-a" href="<?php echo urldecode($watermark_link); ?>" target="_blank">
                   <img class="bwg_slideshow_watermark_image_<?php echo $bwg; ?> bwg_slideshow_watermark_<?php echo $bwg; ?>" src="<?php echo urldecode($watermark_url); ?>" />
                 </a>
                   <?php
