@@ -11,7 +11,7 @@ window.moment = require('moment');
 
 window.clone = function (obj) {
   return JSON.parse(JSON.stringify(obj));
-}
+};
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 

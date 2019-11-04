@@ -698,26 +698,3 @@ function getMenus() {
 
   return $listMenus;
 }
-
-function getLocals() {
-  $locals = [];
-  $args = [
-    'post_type' => 'locals',
-    'posts_per_page' => -1,
-    'post_parent' => 0
-  ];
-
-  $the_query = new WP_Query($args);
-
-  if ($the_query->have_posts()) {
-    while ($the_query->have_posts()) {
-      $the_query->the_post();
-
-      $locals[get_the_ID()] = get_the_title();
-    }
-  }
-
-  wp_reset_postdata();
-
-  return $locals;
-}

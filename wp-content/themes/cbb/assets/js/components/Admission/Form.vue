@@ -127,7 +127,7 @@
       TextInput,
       SelectInput
     },
-    props: ['yearAdmission', 'urlTerms', 'placeholderDatepicker', 'hourStart', 'hourEnd', 'hourStep', 'days', 'calendarOther'],
+    props: ['yearAdmission', 'urlTerms', 'placeholderDatepicker', 'calendarOther'],
     data() {
       return {
         loading: false,
@@ -144,9 +144,9 @@
           }
         },
         timePickerOptions: {
-          start: this.hourStart,
-          step: this.hourStep,
-          end: this.hourEnd
+          start: '',
+          step: '',
+          end: ''
         },
         disabledDays: [],
         draft: {},
@@ -163,28 +163,33 @@
       ...mapState('levels', {
         levels: state => state.all
       }),
+      ...mapState('schedules', {
+        setting: state => state.setting
+      }),
       typeInfo() {
         return 'alert-' + this.info.type;
       },
       minDate() {
         return moment().format('YYYY-MM-DD');
-      },
-      prepareDisabledDays() {
-        return this.days.split(',');
       }
+      // prepareDisabledDays() {
+      //   return this.days.split(',');
+      // }
     },
     created() {
       this.$store.dispatch('locals/getAllLocals').then(() => {
         this.locals.forEach((local, index) => {
           this.localsArr.push({id: local.id, title: this.sanitizeExcerpt(local.excerpt.rendered)})
         })
+
+        this.$store.dispatch('schedules/getSetting');
       })
       this.$store.dispatch('levels/getAllLevels').then(() => {
         this.levelsArr = this.levels.map((level) => {
           return {id: level.id, title: level.name}
         })
       })
-      this.disabledDays = this.prepareDisabledDays;
+      // this.disabledDays = this.prepareDisabledDays;
     },
     methods: {
       checkOtherSchedule() {
@@ -257,6 +262,14 @@
               response.posts.forEach((item, index) => {
                 this.schedules.push({id: item.ID, title: item.post_excerpt})
               })
+
+              for (let key of Object.keys(this.setting)) {
+                  if (key === this.draft.parent_sede) {
+                      this.timePickerOptions.start = this.setting[key].hour_start;
+                      this.timePickerOptions.end = this.setting[key].hour_end;
+                      this.timePickerOptions.step = this.setting[key].hour_step;
+                  }
+              }
             }
           })
       },

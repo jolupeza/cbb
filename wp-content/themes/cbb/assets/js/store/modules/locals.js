@@ -1,35 +1,35 @@
-import localApi from './../../api/local'
+import localApi from './../../api/local';
 
 const state = {
   all: []
-}
+};
 
-const getters = {}
+const getters = {};
 
 const actions = {
   getAllLocals({ dispatch, commit }) {
     return new Promise((resolve, reject) => {
       localApi.getLocals()
         .then(locals => {
-          commit('setLocals', locals)
-          resolve()
+          commit('setLocals', locals);
+          resolve();
         })
         .catch(err => {
-          let info = {type: 'danger', text: err.message, display: true}
-          dispatch('setMessage', info, { root: true })
-          reject()
-        })
-    })
+          let info = {type: 'danger', text: err.message, display: true};
+          dispatch('setMessage', info, { root: true });
+          reject();
+        });
+    });
   }
-}
+};
 
 const mutations = {
   setLocals(state, locals) {
-    state.all = locals
+    state.all = locals;
   }
-}
+};
 
-const methods = {}
+const methods = {};
 
 export default {
   namespaced: true,

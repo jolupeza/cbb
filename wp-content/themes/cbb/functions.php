@@ -554,7 +554,7 @@ function register_admision_callback()
               if (!empty($options['admision_page'])) {
                 $result['redirect'] = true;
                 $result['redirect_page'] = get_permalink($options['admision_page']);
-              }              
+              }
             } else {
               $result['error'] = 'Plantilla email no encontrada.';
               ob_get_clean();
@@ -641,6 +641,50 @@ function load_schedule_callback()
   die();
 }
 
+/***********************************************************/
+/* Load Schedules via ajax */
+/***********************************************************/
+add_action('wp_ajax_setting_schedules', 'setting_schedules_callback');
+add_action('wp_ajax_nopriv_setting_schedules', 'setting_schedules_callback');
+
+function setting_schedules_callback()
+{
+  $nonce = $_POST['nonce'];
+  $result = array(
+    'status' => false,
+    'data' => [],
+    'error' => ''
+  );
+
+  if (!wp_verify_nonce($nonce, 'axios-vuejs')) {
+    die('¡Acceso denegado!');
+  }
+
+  $settingSchedules = [];
+  $locals = getLocals();
+
+  if (count($locals) === 0) {
+    $result['error'] = 'No se pudo completar la acción.';
+    wp_send_json($result);
+  }
+
+  $options = get_option('cbb_custom_settings');
+
+  foreach ($locals as $key => $local) {
+    $settingSchedules[$key] = array(
+      'hour_start' => !empty($options["hour_start_{$key}"]) ? esc_attr($options["hour_start_{$key}"]) : null,
+      'hour_end' => !empty($options["hour_end_{$key}"]) ? esc_attr($options["hour_end_{$key}"]) : null,
+      'hour_step' => !empty($options["hour_step_{$key}"]) ? esc_attr($options["hour_step_{$key}"]) : null,
+      'disabled_days' => !empty($options["disabled_days_{$key}"]) ? esc_attr($options["disabled_days_{$key}"]) : null
+    );
+  }
+
+  $result['status'] = true;
+  $result['data'] = $settingSchedules;
+
+  wp_send_json($result);
+}
+
 /**********************************************/
 /* Load Theme Options Page and Custom Widgets */
 /**********************************************/
@@ -669,6 +713,29 @@ function getPreviousNextLinkItemMenu($currentItem, $locationMenu) {
   }
 
   return $result;
+}
+
+function getLocals() {
+  $locals = [];
+  $args = [
+    'post_type' => 'locals',
+    'posts_per_page' => -1,
+    'post_parent' => 0
+  ];
+
+  $the_query = new WP_Query($args);
+
+  if ($the_query->have_posts()) {
+    while ($the_query->have_posts()) {
+      $the_query->the_post();
+
+      $locals[get_the_ID()] = get_the_title();
+    }
+  }
+
+  wp_reset_postdata();
+
+  return $locals;
 }
 
 /*

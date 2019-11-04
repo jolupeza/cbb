@@ -13,20 +13,12 @@
 
           <?php
             $placeholderCalendar = !empty($options['placeholder_calendar']) ? esc_attr($options['placeholder_calendar']) : '';
-            $hourStart = !empty($options['hour_start']) ? esc_attr($options['hour_start']) : '';
-            $hourEnd = !empty($options['hour_end']) ? esc_attr($options['hour_end']) : '';
-            $hourStep = !empty($options['hour_step']) ? esc_attr($options['hour_step']) : '';
-            $disabledDays = !empty($options['disabled_days']) ? esc_attr($options['disabled_days']) : '';
             $calendarOther = !empty($options['calendar_other']) ? esc_attr($options['calendar_other']) : '';
           ?>
           <app-admission :year-admission="'<?php !empty($options['admision_year']) ? _e($options['admision_year']) : _e(date("Y") + 1); ?>'"
-                        :url-terms="'<?php _e(home_url('condiciones-del-proceso-de-admision')); ?>'"
-                        :placeholder-datepicker="'<?php _e($placeholderCalendar); ?>'"
-                        hour-start="<?php _e($hourStart); ?>"
-                        hour-end="<?php _e($hourEnd); ?>"
-                        hour-step="<?php _e($hourStep); ?>"
-                        :days="'<?php _e($disabledDays); ?>'"
-                        calendar-other="<?php _e($calendarOther); ?>"></app-admission>
+            :url-terms="'<?php _e(home_url('condiciones-del-proceso-de-admision')); ?>'"
+            :placeholder-datepicker="'<?php _e($placeholderCalendar); ?>'"
+            calendar-other="<?php _e($calendarOther); ?>"></app-admission>
         </div>
         <div class="col-md-6">
           <?php if (has_post_thumbnail($idParent)) : ?>
