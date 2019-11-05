@@ -172,9 +172,6 @@
       minDate() {
         return moment().format('YYYY-MM-DD');
       }
-      // prepareDisabledDays() {
-      //   return this.days.split(',');
-      // }
     },
     created() {
       this.$store.dispatch('locals/getAllLocals').then(() => {
@@ -189,7 +186,6 @@
           return {id: level.id, title: level.name}
         })
       })
-      // this.disabledDays = this.prepareDisabledDays;
     },
     methods: {
       checkOtherSchedule() {
@@ -245,6 +241,7 @@
         let token = document.head.querySelector('meta[name="csrf-token"]');
 
         this.cleanSchedules()
+        this.resetTimePickerOptions()
 
         if (!this.draft.parent_sede) {
           return;
@@ -262,13 +259,15 @@
               response.posts.forEach((item, index) => {
                 this.schedules.push({id: item.ID, title: item.post_excerpt})
               })
+            }
+          }).finally(() => {
+            for (let key of Object.keys(this.setting)) {
+              if (key === this.draft.parent_sede) {
+                  this.timePickerOptions.start = this.setting[key].hour_start;
+                  this.timePickerOptions.end = this.setting[key].hour_end;
+                  this.timePickerOptions.step = this.setting[key].hour_step;
 
-              for (let key of Object.keys(this.setting)) {
-                  if (key === this.draft.parent_sede) {
-                      this.timePickerOptions.start = this.setting[key].hour_start;
-                      this.timePickerOptions.end = this.setting[key].hour_end;
-                      this.timePickerOptions.step = this.setting[key].hour_step;
-                  }
+                  this.disabledDays = this.prepareDisabledDays(this.setting[key].disabled_days);
               }
             }
           })
@@ -276,6 +275,13 @@
       resetScheduleCustom() {
         if (!this.checkOtherSchedule()) {
           delete this.draft.schedule_custom
+        }
+      },
+      resetTimePickerOptions() {
+        this.timePickerOptions = {
+          start: '',
+          step: '',
+          end: ''
         }
       },
       processRequest(method, params) {
@@ -312,6 +318,10 @@
       },
       sanitizeExcerpt(text) {
         return text.replace('<p>', '').replace('</p>', '').replace('&#8211;', '-')
+      },
+      prepareDisabledDays(disabledDays) {
+        let days = disabledDays.split(',');
+        return days.map(day => new Date(`${day} 00:00:00`));
       }
     }
   }

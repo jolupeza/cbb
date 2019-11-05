@@ -642,7 +642,7 @@ function load_schedule_callback()
 }
 
 /***********************************************************/
-/* Load Schedules via ajax */
+/* Load Schedules by Locals via ajax */
 /***********************************************************/
 add_action('wp_ajax_setting_schedules', 'setting_schedules_callback');
 add_action('wp_ajax_nopriv_setting_schedules', 'setting_schedules_callback');
@@ -715,6 +715,9 @@ function getPreviousNextLinkItemMenu($currentItem, $locationMenu) {
   return $result;
 }
 
+/**
+ * Retrieve locals parents
+ */
 function getLocals() {
   $locals = [];
   $args = [
