@@ -685,6 +685,19 @@ function cbb_customize_register($wp_customize) {
         'settings' => "cbb_custom_settings[disabled_days_{$key}]",
         'type' => 'textarea'
       ]);
+
+      // Reception Email
+      $wp_customize->add_setting("cbb_custom_settings[email_{$key}]", [
+        'default' => '',
+        'type' => 'option'
+      ]);
+
+      $wp_customize->add_control("cbb_custom_settings[email_{$key}]", [
+        'label' => __('Correo Admin', THEMEDOMAIN),
+        'section' => "cbb_calendar_local_{$key}",
+        'settings' => "cbb_custom_settings[email_{$key}]",
+        'type' => 'text'
+      ]);
     }
   }
 }

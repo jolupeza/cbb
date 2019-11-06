@@ -492,7 +492,7 @@ function register_admision_callback()
       if (is_object($dataLevel)) {
         // Validate Schedule
         $dataSchedule = ($schedule) ? get_post($schedule) : null;
-        $receiverEmail = $options['email'];
+        $receiverEmail = $options["email_{$dataSede->ID}"];
 
         if (!isset($receiverEmail) || empty($receiverEmail)) {
           $receiverEmail = get_option('admin_email');
@@ -509,7 +509,7 @@ function register_admision_callback()
           ob_get_clean();
 
           $headers[] = 'From: Colegio Bertolt Brecht';
-          //$headers[] = 'Reply-To: jolupeza@icloud.com';
+          //$headers[] = 'Reply-To: xxx@xxx.com';
           $headers[] = 'Content-type: text/html; charset=utf-8';
 
           if (wp_mail($receiverEmail, $subjectEmail, $content, $headers)) {

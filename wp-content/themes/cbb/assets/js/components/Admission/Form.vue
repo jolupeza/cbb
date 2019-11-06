@@ -285,6 +285,8 @@
           step: '',
           end: ''
         }
+
+        this.statusSchedule = false;
       },
       processRequest(method, params) {
         return axios[method](this.buildUrl(), qs.stringify(params))
