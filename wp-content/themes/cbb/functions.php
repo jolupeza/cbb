@@ -297,7 +297,7 @@ function mailtrap($phpmailer) {
   $phpmailer->Password = 'f1ea173da928d9';
 }
 
-// add_action('phpmailer_init', 'mailtrap');
+add_action('phpmailer_init', 'mailtrap');
 
 // Bugs send emails WP 4.6.1
 add_filter('wp_mail_from', function() {
@@ -675,7 +675,8 @@ function setting_schedules_callback()
       'hour_start' => !empty($options["hour_start_{$key}"]) ? esc_attr($options["hour_start_{$key}"]) : null,
       'hour_end' => !empty($options["hour_end_{$key}"]) ? esc_attr($options["hour_end_{$key}"]) : null,
       'hour_step' => !empty($options["hour_step_{$key}"]) ? esc_attr($options["hour_step_{$key}"]) : null,
-      'disabled_days' => !empty($options["disabled_days_{$key}"]) ? esc_attr($options["disabled_days_{$key}"]) : null
+      'disabled_days' => !empty($options["disabled_days_{$key}"]) ? esc_attr($options["disabled_days_{$key}"]) : null,
+      'status' => !empty($options["schedule_status_{$key}"]) ? true : false
     );
   }
 

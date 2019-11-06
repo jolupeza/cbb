@@ -53,7 +53,7 @@
       :items="schedules"
       emit-method="resetScheduleCustom"
       @resetScheduleCustom="resetScheduleCustom"
-      :with-other="true"
+      :with-other="statusSchedule"
       :text-other="calendarOther ? calendarOther : 'Otro'"
       :error="errors.first('schedule')" />
 
@@ -150,6 +150,7 @@
         },
         disabledDays: [],
         draft: {},
+        statusSchedule: false,
         localsArr: [],
         levelsArr: [],
         schedules: [],
@@ -266,6 +267,7 @@
                   this.timePickerOptions.start = this.setting[key].hour_start;
                   this.timePickerOptions.end = this.setting[key].hour_end;
                   this.timePickerOptions.step = this.setting[key].hour_step;
+                  this.statusSchedule = this.setting[key].status;
 
                   this.disabledDays = this.prepareDisabledDays(this.setting[key].disabled_days);
               }

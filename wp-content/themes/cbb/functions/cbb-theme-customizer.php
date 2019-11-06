@@ -622,6 +622,18 @@ function cbb_customize_register($wp_customize) {
         'capability' => 'edit_theme_options'
       ]);
 
+      $wp_customize->add_setting("cbb_custom_settings[schedule_status_{$key}]", [
+        'default' => 0,
+        'type' => 'option'
+      ]);
+    
+      $wp_customize->add_control("cbb_custom_settings[schedule_status_{$key}]", [
+        'label' => __('¿Mostrar horario personalizado?', THEMEDOMAIN),
+        'section' => "cbb_calendar_local_{$key}",
+        'settings' => "cbb_custom_settings[schedule_status_{$key}]",
+        'type' => 'checkbox'
+      ]);
+
       // Hour start
       $wp_customize->add_setting("cbb_custom_settings[hour_start_{$key}]", [
         'default' => '',
