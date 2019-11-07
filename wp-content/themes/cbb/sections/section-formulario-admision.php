@@ -14,11 +14,13 @@
           <?php
             $placeholderCalendar = !empty($options['placeholder_calendar']) ? esc_attr($options['placeholder_calendar']) : '';
             $calendarOther = !empty($options['calendar_other']) ? esc_attr($options['calendar_other']) : '';
+            $defaultSelectLocal = !empty($options['admin_default_select_local']) ? esc_attr($options['admin_default_select_local']) : 'Seleccione sede de su interés';
           ?>
           <app-admission :year-admission="'<?php !empty($options['admision_year']) ? _e($options['admision_year']) : _e(date("Y") + 1); ?>'"
             :url-terms="'<?php _e(home_url('condiciones-del-proceso-de-admision')); ?>'"
-            :placeholder-datepicker="'<?php _e($placeholderCalendar); ?>'"
-            calendar-other="<?php _e($calendarOther); ?>"></app-admission>
+            :placeholder-datepicker="'<?php _e($placeholderCalendar, THEMEDOMAIN); ?>'"
+            calendar-other="<?php _e($calendarOther, THEMEDOMAIN); ?>"
+            default-select-local="<?php _e($defaultSelectLocal, THEMEDOMAIN) ?>"></app-admission>
         </div>
         <div class="col-md-6">
           <?php if (has_post_thumbnail($idParent)) : ?>

@@ -6,6 +6,8 @@
 <?php get_header(); ?>
 
 <?php
+  $options = get_option('cbb_custom_settings');
+
   $mainMenu = wp_get_nav_menu_object('main-menu');
   $menuItems = wp_get_nav_menu_items($mainMenu->term_id, [
     'post_parent' => 0
@@ -247,11 +249,14 @@
             ];
             $the_query = new WP_Query($args);
             if ($the_query->have_posts()) :
+              $defaultSelectLocal = !empty($options['cbb_default_select_local']) 
+                ? $options['cbb_default_select_local']
+                : '-- Seleccione la sede de interés --';
           ?>
             <div class="form-group">
               <label for="contact_local" class="sr-only">Sede</label>
               <select name="contact_local" class="form-control">
-                <option value="">-- Seleccione la sede de interés --</option>
+                <option value=""><?php esc_attr_e($defaultSelectLocal); ?></option>
                 <?php while ($the_query->have_posts()) : ?>
                   <?php $the_query->the_post(); ?>
                   <?php global $post; ?>

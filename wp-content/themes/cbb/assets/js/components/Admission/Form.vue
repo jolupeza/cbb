@@ -38,7 +38,7 @@
     <select-input v-model="draft.parent_sede"
       :name="'parent_sede'"
       label="Sede"
-      defaultValueText="Seleccione sede de su interés"
+      :defaultValueText="defaultSelectLocal"
       v-validate="'required'"
       :items="localsArr"
       emit-method="getSchedules"
@@ -127,7 +127,7 @@
       TextInput,
       SelectInput
     },
-    props: ['yearAdmission', 'urlTerms', 'placeholderDatepicker', 'calendarOther'],
+    props: ['yearAdmission', 'urlTerms', 'placeholderDatepicker', 'calendarOther', 'defaultSelectLocal'],
     data() {
       return {
         loading: false,

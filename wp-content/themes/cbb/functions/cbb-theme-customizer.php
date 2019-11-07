@@ -611,6 +611,19 @@ function cbb_customize_register($wp_customize) {
     'type' => 'text'
   ]);
 
+  // Text default select local
+  $wp_customize->add_setting('cbb_custom_settings[admin_default_select_local]', [
+    'default' => '',
+    'type' => 'option'
+  ]);
+
+  $wp_customize->add_control('cbb_custom_settings[admin_default_select_local]', [
+    'label' => __('Texto a mostrar cuando no ha seleccionado ninguna Sede', THEMEDOMAIN),
+    'section' => 'cbb_calendar',
+    'settings' => 'cbb_custom_settings[admin_default_select_local]',
+    'type' => 'text'
+  ]);
+
   $locals = getLocals();
 
   if (count($locals) > 0) {
@@ -700,6 +713,34 @@ function cbb_customize_register($wp_customize) {
       ]);
     }
   }
+
+  // Calendar Settings
+  $wp_customize->add_panel('cbb_general_panel', [
+    'title' => __('Configuraciones Generales', THEMEDOMAIN),
+    'description' => esc_html__('Configuración de opciones generales', THEMEDOMAIN),
+    'priority' => 46,
+    'capability' => 'edit_theme_options',
+  ]);
+
+  $wp_customize->add_section('cbb_page_contact', [
+    'title' => __('Página de Contacto', THEMEDOMAIN),
+    'description' => __('Establecer configuraciones de la página de Contacto', THEMEDOMAIN),
+    'panel' => 'cbb_general_panel',
+    'capability' => 'edit_theme_options',
+  ]);
+
+  // Text default select local
+  $wp_customize->add_setting('cbb_custom_settings[cbb_default_select_local]', [
+    'default' => '',
+    'type' => 'option'
+  ]);
+
+  $wp_customize->add_control('cbb_custom_settings[cbb_default_select_local]', [
+    'label' => __('Texto a mostrar cuando no ha seleccionado ninguna Sede', THEMEDOMAIN),
+    'section' => 'cbb_page_contact',
+    'settings' => 'cbb_custom_settings[cbb_default_select_local]',
+    'type' => 'text'
+  ]);
 }
 
 function getPages() {
