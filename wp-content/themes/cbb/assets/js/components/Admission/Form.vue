@@ -71,7 +71,8 @@
             :not-before="Date.now()"
             :input-class="'mx-input form-control'"
             :disabled-days="disabledDays"
-            v-validate="checkOtherSchedule() ? 'required' : ''"></date-picker>
+            v-validate="checkOtherSchedule() ? 'required' : ''"
+            @change="verifyDateSelect"></date-picker>
           <transition name="fade">
             <p v-if="errors.has('schedule_custom')" class="text-danger Form__alert">{{ errors.first('schedule_custom') }}</p>
           </transition>
@@ -147,6 +148,13 @@
           start: '',
           step: '',
           end: ''
+        },
+        timePickerOptionsCurrent: {
+          start: '',
+          end: '',
+          step: '',
+          startSaturday: '',
+          endSaturday: ''
         },
         disabledDays: [],
         draft: {},
@@ -269,10 +277,25 @@
                   this.timePickerOptions.step = this.setting[key].hour_step;
                   this.statusSchedule = this.setting[key].status;
 
+                  this.setTimePickerOptionsCurrent({ 
+                    start: this.setting[key].hour_start,
+                    end: this.setting[key].hour_end,
+                    step: this.setting[key].hour_step,
+                    startSaturday: this.setting[key].hour_start_saturday,
+                    endSaturday: this.setting[key].hour_end_saturday
+                  })
+
                   this.disabledDays = this.prepareDisabledDays(this.setting[key].disabled_days);
               }
             }
           })
+      },
+      setTimePickerOptionsCurrent({ start, end, step, startSaturday, endSaturday }) {
+        this.timePickerOptionsCurrent.start = start;
+        this.timePickerOptionsCurrent.end = end;
+        this.timePickerOptionsCurrent.step = step;
+        this.timePickerOptionsCurrent.startSaturday = startSaturday;
+        this.timePickerOptionsCurrent.endSaturday = endSaturday;
       },
       resetScheduleCustom() {
         if (!this.checkOtherSchedule()) {
@@ -284,6 +307,14 @@
           start: '',
           step: '',
           end: ''
+        }
+
+        this.timePickerOptionsCurrent = {
+          start: '',
+          step: '',
+          end: '',
+          startSaturday: '',
+          endSaturday: ''
         }
 
         this.statusSchedule = false;
@@ -326,6 +357,15 @@
       prepareDisabledDays(disabledDays) {
         let days = disabledDays.split(',');
         return days.map(day => new Date(`${day} 00:00:00`));
+      },
+      verifyDateSelect(value) {
+        if (value.getDay() === 6) {
+          this.timePickerOptions.start = this.timePickerOptionsCurrent.startSaturday;
+          this.timePickerOptions.end = this.timePickerOptionsCurrent.endSaturday;
+        } else {
+          this.timePickerOptions.start = this.timePickerOptionsCurrent.start;
+          this.timePickerOptions.end = this.timePickerOptionsCurrent.end;
+        }
       }
     }
   }

@@ -674,6 +674,8 @@ function setting_schedules_callback()
     $settingSchedules[$key] = array(
       'hour_start' => !empty($options["hour_start_{$key}"]) ? esc_attr($options["hour_start_{$key}"]) : null,
       'hour_end' => !empty($options["hour_end_{$key}"]) ? esc_attr($options["hour_end_{$key}"]) : null,
+      'hour_start_saturday' => !empty($options["hour_start_saturday_{$key}"]) ? esc_attr($options["hour_start_saturday_{$key}"]) : null,
+      'hour_end_saturday' => !empty($options["hour_end_saturday_{$key}"]) ? esc_attr($options["hour_end_saturday_{$key}"]) : null,
       'hour_step' => !empty($options["hour_step_{$key}"]) ? esc_attr($options["hour_step_{$key}"]) : null,
       'disabled_days' => !empty($options["disabled_days_{$key}"]) ? esc_attr($options["disabled_days_{$key}"]) : null,
       'status' => !empty($options["schedule_status_{$key}"]) ? true : false

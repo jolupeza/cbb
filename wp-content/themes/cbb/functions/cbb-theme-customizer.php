@@ -673,6 +673,32 @@ function cbb_customize_register($wp_customize) {
         'type' => 'text'
       ]);
 
+      // Hour start saturday
+      $wp_customize->add_setting("cbb_custom_settings[hour_start_saturday_{$key}]", [
+        'default' => '',
+        'type' => 'option'
+      ]);
+
+      $wp_customize->add_control("cbb_custom_settings[hour_start_saturday_{$key}]", [
+        'label' => __('Hora Inicial Sábados', THEMEDOMAIN),
+        'section' => "cbb_calendar_local_{$key}",
+        'settings' => "cbb_custom_settings[hour_start_saturday_{$key}]",
+        'type' => 'text'
+      ]);
+
+      // Hour end saturday
+      $wp_customize->add_setting("cbb_custom_settings[hour_end_saturday_{$key}]", [
+        'default' => '',
+        'type' => 'option'
+      ]);
+
+      $wp_customize->add_control("cbb_custom_settings[hour_end_saturday_{$key}]", [
+        'label' => __('Hora Final Sábados', THEMEDOMAIN),
+        'section' => "cbb_calendar_local_{$key}",
+        'settings' => "cbb_custom_settings[hour_end_saturday_{$key}]",
+        'type' => 'text'
+      ]);
+
       // Hour step
       $wp_customize->add_setting("cbb_custom_settings[hour_step_{$key}]", [
         'default' => '',
