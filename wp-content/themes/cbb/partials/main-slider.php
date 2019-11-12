@@ -50,17 +50,14 @@
         $the_query = new WP_Query($args);
 
         if ($the_query->have_posts()) :
-            $i = 0; $j = 0;
+            $i = 0;
     ?>
-
             <section id="carousel-<?php esc_attr_e($term); ?>" class="carousel slide Carousel Carousel--home" data-ride="carousel">
                 <?php if ($the_query->post_count > 1) : ?>
                     <ol class="carousel-indicators">
-                    <?php while ($the_query->have_posts()) : ?>
-                        <?php $the_query->the_post(); ?>
-                        <li data-target="#carousel-<?php esc_attr_e($term); ?>" data-slide-to="<?php echo $j; ?>"<?php echo ($j === 0) ? 'class="active"' : ''; ?>></li>
-                        <?php $j++ ?>
-                    <?php endwhile; ?>
+                        <?php for ($j = 0; $j < $the_query->post_count; $j++) : ?>
+                            <li data-target="#carousel-<?php esc_attr_e($term); ?>" data-slide-to="<?php echo $j; ?>"<?php echo ($j === 0) ? 'class="active"' : ''; ?>></li>
+                        <?php endfor; ?>
                     </ol>
                 <?php endif; ?>
 
@@ -82,14 +79,14 @@
                         ?>
                         <div class="item<?php echo ($i === 0) ? ' active' : ''; ?>">
                             <?php if (has_post_thumbnail()) : ?>
-                            <picture>
-                                <source class="img-responsive center-block" media="(max-width: 767px) and (orientation: portrait)" srcset="<?php echo $responsive; ?>" alt="<?php echo get_the_title(); ?>" />
-                                <?php the_post_thumbnail('full', [
-                                    'class' => 'img-responsive center-block',
-                                    'alt' => get_the_title()
-                                ]);
-                                ?>
-                            </picture>
+                                <picture>
+                                    <source class="img-responsive center-block" media="(max-width: 767px) and (orientation: portrait)" srcset="<?php echo $responsive; ?>" alt="<?php echo get_the_title(); ?>" />
+                                    <?php the_post_thumbnail('full', [
+                                        'class' => 'img-responsive center-block',
+                                        'alt' => get_the_title()
+                                    ]);
+                                    ?>
+                                </picture>
                             <?php endif; ?>
 
                             <div class="carousel-caption carousel-caption--<?php echo $align; ?>">

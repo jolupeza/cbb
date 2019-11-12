@@ -12,7 +12,8 @@ define('THEMEDOMAIN', 'cbb-framework');
 function load_custom_scripts() {
   wp_enqueue_script('vendor_script', THEMEROOT . '/js/vendor.min.js', array('jquery'), false, true);
   wp_enqueue_script('main_script', THEMEROOT . '/js/main.js', array('jquery'), false, true);
-  wp_enqueue_script('app_script', THEMEROOT.'/js/app.js', array(), false, true);
+  wp_enqueue_script('app_script', 'http://localhost:8080/js/app.js', array(), false, true);
+  // wp_enqueue_script('app_script', THEMEROOT.'/js/app.js', array(), false, true);
   wp_localize_script('main_script', 'CbbAjax', array('url' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('cbbajax-nonce')));
 }
 
