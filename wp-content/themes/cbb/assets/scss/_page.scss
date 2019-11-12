@@ -1,0 +1,24 @@
+.App {
+    &__Page {
+        padding: 5em 0;
+        &__title {
+            font-family: $fontReef;
+            font-size: 2.5em;
+            margin: 0 0 1em;
+            text-transform: uppercase;
+        }
+        &__subtitle {
+            font-family: $fontSource;
+            font-size: 1.75em;
+            font-weight: 300;
+            margin: 0 0 0.8em;
+        }
+        &__content {
+            h4 {
+                color: $secondColorAlt;
+                font-size: 2em;
+                font-style: italic;
+            }
+        }
+    }
+}

@@ -62,19 +62,41 @@
 
         <?php endif; ?>
 
-        <section class="Page" id="content">
+        <?php
+            $values = get_post_custom($idPage);
+            $textMain = !empty($values['mb_title']) ? esc_attr($values['mb_title'][0]) : '';
+            $textSecond = !empty($values['mb_subtitle']) ? esc_attr($values['mb_subtitle'][0]) : '';
+            $textButton = !empty($values['mb_text']) ? esc_attr($values['mb_text'][0]) : '';
+            $textUrl = !empty($values['mb_url']) ? esc_attr($values['mb_url'][0]) : '';
+            $target = !empty($values['mb_target']) && $values['mb_target'][0] === 'on' ? true : false;
+            $pageLink = !empty($values['mb_page']) ? esc_attr($values['mb_page'][0]) : null;
+
+            $linkButton = !is_null($pageLink) ? get_the_permalink($pageLink) : esc_url($textUrl);
+        ?>
+
+        <section class="App__Page" id="content">
             <div class="container">
                 <div class="row">
-                <div class="col-md-6">
-                    <h3 class="Page-subtitle Page-title--nmb text-azul">Sé parte de nuestro staff de Profesores</h3>
+                    <div class="col-md-6">
+                        <?php if (!empty($textSecond)) : ?>
+                            <h3 class="App__Page__subtitle App__secondColorAlt App__fontItalic"><?php _e($textSecond, THEMEDOMAIN); ?></h3>
+                        <?php endif; ?>
 
-                    <h2 class="Page-title Page-title--nmb text-red">Convocatoria de Docentes</h2>
-                </div>
-                <div class="col-md-6">
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae culpa maiores eius sapiente adipisci nisi perspiciatis, mollitia temporibus sequi repellat veritatis ipsum quasi molestias alias soluta nostrum vitae accusamus voluptas.</p>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi quae expedita saepe neque vel accusantium non ipsa mollitia? Laboriosam, aliquid enim. Quia dignissimos exercitationem voluptatem qui quos suscipit alias minus.</p>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus voluptatem sapiente suscipit et quod ratione nostrum tempora blanditiis similique molestias, eligendi beatae! Fugiat expedita nemo maxime odio velit accusantium sed.</p>
-                </div>
+                        <?php if (!empty($textMain)) : ?>
+                            <h2 class="App__Page__title App__firstColorAlt"><?php _e($textMain, THEMEDOMAIN); ?></h2>
+                        <?php endif; ?>
+
+                        <?php if (!empty($textButton) && !empty($linkButton)) : ?>
+                            <div>
+                                <a href="<?php echo $linkButton ?>" class="btn Button Button--blue Button--medium text-uppercase"<?php echo $target ? ' target="_blank" rel="noopener noreferrer"' : ''; ?>><?php _e($textButton, THEMEDOMAIN); ?></a>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                    <div class="col-md-6">
+                        <article class="App__Page__content">
+                            <?php the_content(); ?>
+                        </article>
+                    </div>
                 </div>
             </div>
         </section>

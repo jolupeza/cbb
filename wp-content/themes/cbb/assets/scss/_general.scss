@@ -1,11 +1,20 @@
 body {
-  &.single-experiences {
-    .Header {
-      background-color: #b00725;
-      padding: 10px 0;
+    &.single-experiences {
+        .Header {
+            background-color: #b00725;
+            padding: 10px 0;
+        }
     }
-  }
 }
-.text-redSoft {
-  color: $redSoft;
+
+.App {
+    &__fontItalic {
+        font-style: italic;
+    }
+    &__firstColorAlt {
+        color: $firstColorAlt;
+    }
+    &__secondColorAlt {
+        color: $secondColorAlt;
+    }
 }
