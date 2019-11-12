@@ -1,0 +1,329 @@
+@import "compass/css3";
+
+$text-simulator: #949494;
+$azul: #0054bc;
+$celeste: #08c;
+$azulOscuro: #182141;
+$amarillo: #f2b636;
+
+@font-face {
+  font-family: 'bebas_neuebold';
+  src: url('./../fonts/bebasneue-bold.eot');
+  src: url('./../fonts/bebasneue-bold.eot?#iefix') format('embedded-opentype'), url('./../fonts/bebasneue-bold.woff') format('woff'),
+      url('./../fonts/bebasneue-bold.woff2') format('woff2'),
+      url('./../fonts/bebasneue-bold.ttf') format('truetype'),
+      url('./../fonts/bebasneue-bold.svg#bebas_neuebold') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('./../fonts/glyphicons-halflings-regular.eot');
+  src: url('./../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),
+      url('./../fonts/glyphicons-halflings-regular.woff') format('woff'),
+      url('./../fonts/glyphicons-halflings-regular.woff2') format('woff2'),
+      url('./../fonts/glyphicons-halflings-regular.ttf') format('truetype'),
+      url('./../fonts/glyphicons-halflings-regular.svg#Glyphicons_Halflings') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+.Simulator {
+  @include background(url("./../images/simulator-bg.jpg") repeat-x center center, url('./../images/pattern-bg.jpg') repeat-y 0 0);
+  //@include background(url("./../images/simulator-bg.jpg") repeat-x center center, linear-gradient(to right, #0098CE, #36C6EE, #00B6E5));
+  background-size: 100%;
+  @include display-flex();
+  @include align-items(center);
+  font-size: 16px;
+  min-height: calc(100vh - 100px);
+  @media screen and (max-width: 991px) {
+    @include background(url("./../images/simulator-bg-movil.jpg") repeat-x center bottom, url('./../images/pattern-bg.jpg') repeat-y 0 0);
+    //@include background(url("./../images/simulator-bg-movil.jpg") repeat-x center bottom, linear-gradient(to right, #0098CE, #36C6EE, #00B6E5));
+    background-size: 100%;
+  }
+  a {
+    color: $azulOscuro;
+    @include transition(color .3s ease-in-out);
+    &:hover, &:focus {
+      color: $amarillo;
+      text-decoration: none;
+    }
+  }
+}
+
+.Simulator-title {
+  color: $azul;
+  font-family: "bebas_neuebold" !important;
+  font-size: 3em;
+  margin: 20px 0;
+  @media screen and (max-width: 1099px) {
+    font-size: 2.5em;
+  }
+  @media screen and (max-width: 767px) {
+    font-size: 1.7em;
+  }
+  &::before, &::after {
+    background-color: #00abd6;
+    @include border-radius(50%);
+    content: "";
+    display: inline-block;
+    height: 10px;
+    vertical-align: middle;
+    width: 10px;
+    @media screen and (max-width: 767px) {
+      display: none;
+    }
+  }
+  &::before {
+    margin-right: 20px;
+  }
+  &::after {
+    margin-left: 20px;
+  }
+}
+
+.Simulator-register {
+  background-color: rgba(#efefef, 1);
+  @include box-shadow(rgba(black, 0.1) 5px 5px 15px 1px inset);
+  margin: 0 auto 50px auto;
+  padding: 30px 60px;
+  position: relative;
+  width: 70%;
+  @media screen and (max-width: 1499px) {
+    width: 90%;
+  }
+  @media screen and (max-width: 991px) {
+    padding: 30px;
+    width: 100%;
+  }
+}
+
+.Simulator-register--finish {
+  &::before {
+    background-image: url("../images/simulator-llanta.png");
+    height: 84px;
+    width: 84px;
+  }
+}
+
+.Simulator-subtitle {
+  color: black;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif !important;
+  font-size: 1em;
+  font-weight: 300;
+  margin-top: 0;
+  margin-bottom: 30px;
+}
+
+.Simulator-wrapper {
+  width: 60%;
+  @media screen and (max-height: 799px) {
+    margin-top: 60px;
+  }
+  @media screen and (max-width: 991px) {
+    margin: 60px auto 0;
+    width: 90%;
+  }
+}
+.Simulator-form {
+  .checkbox {
+    label {
+      color: black;
+    }
+  }
+}
+.Simulator-form-group {
+  margin-bottom: 25px !important;
+  &.has-error, &.has-success {
+    .Simulator-form-input {
+      @include box-shadow(none);
+      &:focus {
+        @include box-shadow(none);
+      }
+    }
+  }
+
+  &.has-error {
+    .Simulator-form-input {
+      border-color: #a94442;
+    }
+  }
+
+  &.has-success {
+    .Simulator-form-input {
+      border-color: #3c763d;
+    }
+  }
+
+  &.has-feedback {
+    .form-control-feedback {
+      display: none !important;
+    }
+  }
+}
+
+.Simulator-form-label {
+  color: black;
+  font-size: 1em;
+  font-weight: 400;
+}
+
+.Simulator-form-input, .Simulator-form-select {
+  background-color: #e0e0e0 !important;
+  border-color: transparent;
+  color: black;
+  height: 42px !important;
+  padding: 6px 12px !important;
+  @include border-radius(0);
+  @include box-shadow(inset 0 1px 1px rgba(0,0,0,.075));
+  &:focus {
+    @include box-shadow(none);
+  }
+  @include input-placeholder {
+    color: black;
+    font-style: italic;
+  }
+}
+
+.select-style {
+  background: #e0e0e0 url('../images/arrow-select.png') 100% 50% no-repeat;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  width: 100%;
+}
+.Simulator-form-select {
+  @include appearance(none);
+  background-color: transparent !important;
+  background-image: none;
+  padding: 6px 44px 6px 12px !important;
+  width: 100%;
+}
+.Simulator-hr {
+  background-color: #000;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+}
+
+.Simulator-loader {
+  text-align: center;
+}
+
+.Simulator-wrapper-box {
+  @include display-flex();
+  @include justify-content(space-between);
+  margin: 0 auto;
+  width: 600px;
+  @media screen and (max-width: 767px) {
+    @include flex-wrap(wrap);
+    width: 100%;
+  }
+}
+
+.Simulator-box {
+  background-color: rgba(#efefef, 0.5);
+  @include box-shadow(rgba(black, 0.1) 5px 5px 15px 1px inset);
+  @include display-flex();
+  @include align-items(center);
+  @include justify-content(space-around);
+  margin: 0 auto;
+  padding: 20px;
+  width: 600px;
+  @media screen and (max-width: 600px) {
+    width: 100%;
+  }
+}
+
+.Simulator-box--small {
+  @include flex-wrap(wrap);
+  @include align-content(flex-start);
+  width: 48%;
+  @media screen and (max-width: 600px) {
+    margin-bottom: 30px;
+    width: 100%;
+  }
+}
+
+.Simulator-box-group {
+  display: inline-block;
+  margin-left: 0;
+  margin-right: 0;
+  vertical-align: top;
+}
+
+.Simulator-figure {
+  background-image: url("./../images/simulator.png");
+  background-repeat: no-repeat;
+  display: block;
+  height: 70px;
+  width: 75px;
+}
+
+.Simulator-figure--brand {
+  background-position: 0 0;
+}
+.Simulator-figure--model {
+  background-position: -75px 0;
+}
+.Simulator-figure--year {
+  background-position: -225px 0;
+  display: block;
+  margin: 0 auto 10px auto;
+  @media screen and (max-width: 600px) {
+    margin: 0;
+  }
+}
+.Simulator-figure--km {
+  background-position: -150px 0;
+  display: block;
+  margin: 0 auto 10px auto;
+  @media screen and (max-width: 600px) {
+    margin: 0;
+  }
+}
+
+.Simulator-finish-monto {
+  color: #0050aa;
+  font-size: 2em;
+  font-weight: 700;
+}
+
+#simulator_km {
+  + .form-control-feedback {
+    top: 0;
+  }
+}
+
+.Simulator__button {
+  @include border-radius(30px);
+  display: inline-block;
+  font-size: 0.875em;
+  height: auto;
+  line-height: 1.1em;
+  padding: 20px 30px;
+  vertical-align: middle;
+  &--celeste {
+    background-color: #fff;
+    border: 3px solid $azul;
+    color: $celeste;
+    @include transition(color .2s ease-out, background-color .3 ease-in);
+    &:focus, &:hover {
+      background-color: $azul;
+      border-color: $azul;
+      color: white !important;
+    }
+  }
+}
+.Simulator-loading {
+  font-size: 2em;
+  margin-bottom: 0;
+}
+.Simulator-finish-title {
+  color: black;
+}

@@ -1,0 +1,16 @@
+{
+    "name": "watson/cbb-workwithus",
+    "description": "Manage job applications",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jose Perez",
+            "email": "joseluis@watson.pe"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "CBB_WorkWithUs\\": "src/"
+        }
+    }
+}
