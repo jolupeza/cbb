@@ -76,6 +76,8 @@ class Joblevel
         if (isset($_POST['joblevels-image-id']) && '' !== $_POST['joblevels-image-id']) {
             $image = $_POST['joblevels-image-id'];
             add_term_meta($term_id, 'joblevels-image-id', $image, true);
+
+            // @TODO: Remove image with JS
         }
     }
 

@@ -6,6 +6,7 @@ use CBB_WorkWithUs\Admin\Admin;
 use CBB_WorkWithUs\Admin\Entities\Jobapplications;
 use CBB_WorkWithUs\Admin\ScriptLoader;
 use CBB_WorkWithUs\Admin\Taxonomies\Joblevel;
+use CBB_WorkWithUs\Front\Front;
 use CBB_WorkWithUs\Includes\Loader;
 
 // use CBB_WorkWithUs\Admin\CBB_WorkWithUs_Admin;
@@ -146,9 +147,6 @@ class Main
         // $cssLoader = new CSS_Loader($this->get_version());
         // $this->loader->add_action('admin_enqueue_scripts', $cssLoader, 'enqueue');
 
-        // $jsLoader = new Script_Loader($this->get_version());
-        // $this->loader->add_action('admin_enqueue_scripts', $jsLoader, 'enqueue');
-
         // $adminPage = new VM_Manager_Page();
         // $this->loader->add_action('add_meta_boxes', $adminPage, 'cd_mb_page_add');
         // $this->loader->add_action('save_post', $adminPage, 'cd_mb_page_save');
@@ -210,6 +208,9 @@ class Main
      */
     private function define_public_hooks()
     {
+        $public = new Front($this->loader, $this->plugin_domain, $this->get_version());
+        $public->init();
+
         // $deserializer = new Deserializer();
 
         // $public = new VM_Manager_Public($this->version, $deserializer);

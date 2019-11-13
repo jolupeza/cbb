@@ -30,8 +30,6 @@ if (!defined('WPINC')) {
     die;
 }
 
-// require_once( trailingslashit(dirname(__FILE__)) . 'inc/autoloader.php' );
-
 /**
  * Instantiates the Ibisa Manager class and then
  * calls its run method officially starting up the plugin.

@@ -167,15 +167,17 @@ class Jobapplications
 
         $args = array(
             'labels' => $labels,
-            'public' => false,
-            'show_in_nav_menus' => false,
+            'public' => true,
+            'show_in_nav_menus' => true,
             'show_in_menu' => true,
             'show_admin_column' => true,
             'hierarchical' => true,
             'show_tagcloud' => false,
             'show_ui' => true,
             'query_var' => true,
-            'rewrite' => false,
+            'rewrite' => array(
+                'slug' => 'convocatorias'
+            ),
         );
 
         register_taxonomy('joblevels', 'jobapplications', $args);
