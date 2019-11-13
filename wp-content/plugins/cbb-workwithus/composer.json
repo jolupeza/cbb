@@ -10,7 +10,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "CBB_WorkWithUs\\": "src/"
+            "CBB_WorkWithUs\\": "app/"
         }
     }
 }

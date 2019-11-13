@@ -2,6 +2,8 @@
 
 namespace CBB_WorkWithUs\Admin;
 
+use CBB_WorkWithUs\Includes\Loader;
+
 /**
  * The CBB WorkWithUs Admin defines all functionality for the dashboard
  * of the plugin.
@@ -16,8 +18,16 @@ namespace CBB_WorkWithUs\Admin;
  *
  * @since    1.0.0
  */
-class CBB_WorkWithUs_Admin
+class Admin
 {
+    /**
+     * A reference to the loader class that coordinates the hooks and callbacks
+     * throughout the plugin.
+     *
+     * @var Loader Manages hooks between the WordPress hooks and the callback functions.
+     */
+    private $loader;
+
     /**
      * A reference to the version of the plugin that is passed to this class from the caller.
      *
@@ -40,8 +50,9 @@ class CBB_WorkWithUs_Admin
      * @param string $domain  Text domain plugin
      * @param string $version The current version of this plugin.
      */
-    public function __construct($domain, $version)
+    public function __construct(Loader $loader, $domain, $version)
     {
+        $this->loader = $loader;
         $this->version = $version;
         $this->domain  = $domain;
 
@@ -65,11 +76,16 @@ class CBB_WorkWithUs_Admin
             'span' => array(),
         );
     }
+
+    public function init()
+    {
+        $this->loader->add_action('init', $this, 'addPostType');
+    }
     
     /**
      * Add custom content type
      */
-    public function add_post_type()
+    public function addPostType()
     {
         $this->registerJobPostulations();
     }

@@ -96,13 +96,17 @@ class Cbb_Manager_Admin
      */
     public function enqueue_scripts()
     {
-        wp_enqueue_script(
-            'cbb-manager-admin',
-            plugin_dir_url(__FILE__).'js/cbb-manager-admin.js',
-            array('jquery'),
-            $this->version,
-            true
-        );
+        global $post_type;
+
+        if (isset($post_type) && 'jobapplications' !== $post_type) {
+            wp_enqueue_script(
+                'cbb-manager-admin',
+                plugin_dir_url(__FILE__).'js/cbb-manager-admin.js',
+                array('jquery'),
+                $this->version,
+                true
+            );
+        }
     }
 
     /**

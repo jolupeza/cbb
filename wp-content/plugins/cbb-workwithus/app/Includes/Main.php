@@ -2,10 +2,15 @@
 
 namespace CBB_WorkWithUs\Includes;
 
-use CBB_WorkWithUs\Includes\CBB_WorkWithUs_Loader;
+use CBB_WorkWithUs\Admin\Admin;
+use CBB_WorkWithUs\Admin\Entities\Jobapplications;
+use CBB_WorkWithUs\Admin\ScriptLoader;
+use CBB_WorkWithUs\Admin\Taxonomies\Joblevel;
+use CBB_WorkWithUs\Includes\Loader;
 
-use CBB_WorkWithUs\Admin\CBB_WorkWithUs_Admin;
-use CBB_WorkWithUs\Admin\CBB_WorkWithUs_Jobapplications;
+// use CBB_WorkWithUs\Admin\CBB_WorkWithUs_Admin;
+// use CBB_WorkWithUs\Admin\CBB_WorkWithUs_Jobapplications;
+// use CBB_WorkWithUs\Admin\Taxonomies\Joblevel;
 
 // use VM_Manager\Shared\VM_Manager_Deserializer as Deserializer;
 // use VM_Manager\Admin\VM_Manager_Admin;
@@ -48,13 +53,13 @@ use CBB_WorkWithUs\Admin\CBB_WorkWithUs_Jobapplications;
  *
  * @since    1.0.0
  */
-class CBB_WorkWithUs
+class Main
 {
     /**
      * A reference to the loader class that coordinates the hooks and callbacks
      * throughout the plugin.
      *
-     * @var CBB_WorkWithUs_Loader Manages hooks between the WordPress hooks and the callback functions.
+     * @var Loader Manages hooks between the WordPress hooks and the callback functions.
      */
     protected $loader;
 
@@ -114,7 +119,7 @@ class CBB_WorkWithUs
      */
     private function load_dependencies()
     {
-        $this->loader = new CBB_WorkWithUs_Loader();
+        $this->loader = new Loader();
     }
 
     /**
@@ -126,11 +131,17 @@ class CBB_WorkWithUs
      */
     private function define_admin_hooks()
     {
-        $admin = new CBB_WorkWithUs_Admin($this->plugin_domain, $this->get_version());
-        $this->loader->add_action('init', $admin, 'add_post_type');
+        $admin = new Admin($this->loader, $this->plugin_domain, $this->get_version());
+        $admin->init();
 
-        $adminJobApplications = new CBB_WorkWithUs_Jobapplications($this->plugin_domain);
-        $this->loader->add_action('init', $adminJobApplications, 'add_taxonomies_jobapplications');
+        $adminJobApplications = new Jobapplications($this->loader, $this->plugin_domain);
+        $adminJobApplications->init();
+
+        $adminJobLevels = new Joblevel($this->loader, $this->plugin_domain);
+        $adminJobLevels->init();
+
+        $adminJsLoader  = new ScriptLoader($this->loader, $this->get_version());
+        $adminJsLoader->init();
         
         // $cssLoader = new CSS_Loader($this->get_version());
         // $this->loader->add_action('admin_enqueue_scripts', $cssLoader, 'enqueue');

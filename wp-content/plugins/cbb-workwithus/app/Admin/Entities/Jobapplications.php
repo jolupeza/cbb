@@ -1,14 +1,30 @@
 <?php
 
-namespace CBB_WorkWithUs\Admin;
+namespace CBB_WorkWithUs\Admin\Entities;
 
-class CBB_WorkWithUs_Jobapplications
+use CBB_WorkWithUs\Includes\Loader;
+
+class Jobapplications
 {
+    /**
+     * A reference to the loader class that coordinates the hooks and callbacks
+     * throughout the plugin.
+     *
+     * @var Loader Manages hooks between the WordPress hooks and the callback functions.
+     */
+    private $loader;
+
     protected $domain;
 
-    public function __construct($domain)
+    public function __construct(Loader $loader, $domain)
     {
+        $this->loader = $loader;
         $this->domain = $domain;
+    }
+
+    public function init()
+    {
+        $this->loader->add_action('init', $this, 'addTaxonomiesJobapplications');
     }
 
     /**
@@ -130,7 +146,7 @@ class CBB_WorkWithUs_Jobapplications
     /**
      * Add custom taxonomies levels to post type jobapplications.
      */
-    public function add_taxonomies_jobapplications()
+    public function addTaxonomiesJobapplications()
     {
         $labels = array(
             'name' => _x('Niveles', 'Taxonomy plural name', $this->domain),

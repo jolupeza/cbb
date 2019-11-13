@@ -21,14 +21,16 @@
 
 namespace CBB_WorkWithUs;
 
-use CBB_WorkWithUs\Includes\CBB_WorkWithUs;
+use CBB_WorkWithUs\Includes\Main;
+
+require_once plugin_dir_path(__FILE__) . 'vendor/autoload.php';
 
 // If this file is called directly, then abort execution.
 if (!defined('WPINC')) {
     die;
 }
 
-require_once( trailingslashit(dirname(__FILE__)) . 'inc/autoloader.php' );
+// require_once( trailingslashit(dirname(__FILE__)) . 'inc/autoloader.php' );
 
 /**
  * Instantiates the Ibisa Manager class and then
@@ -36,7 +38,7 @@ require_once( trailingslashit(dirname(__FILE__)) . 'inc/autoloader.php' );
  */
 function run_cbb_workwithus()
 {
-    $spmm = new CBB_WorkWithUs();
+    $spmm = new Main();
     $spmm->run();
 }
 

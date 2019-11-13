@@ -17,7 +17,7 @@ namespace CBB_WorkWithUs\Includes;
  *
  * @since    1.0.0
  */
-class CBB_WorkWithUs_Loader
+class Loader
 {
     /**
      * A reference to the collection of actions used throughout the plugin.

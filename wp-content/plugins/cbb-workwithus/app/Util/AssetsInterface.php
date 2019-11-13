@@ -1,12 +1,12 @@
 <?php
 
-namespace VM_Manager\Util;
+namespace CBB_WorkWithUs\Util;
 
 /**
  * Defines a common set of functions that any class responsible for loading
  * stylesheets, JavaScript, or other assets should implement.
  */
-interface Assets_Interface
+interface AssetsInterface
 {
     public function init();
     public function enqueue();

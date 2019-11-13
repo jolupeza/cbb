@@ -1,8 +1,9 @@
 <?php
 
-namespace VM_Manager\Admin;
+namespace CBB_WorkWithUs\Admin;
 
-use VM_Manager\Util\Assets_Interface;
+use CBB_WorkWithUs\Includes\Loader;
+use CBB_WorkWithUs\Util\AssetsInterface;
 
 /**
  * Provides a consistent way to enqueue all administrative-related scripts.
@@ -11,17 +12,17 @@ use VM_Manager\Util\Assets_Interface;
 /**
  * Provides a consistent way to enqueue all administrative-related scripts.
  *
- * Implements the Assets_Interface by defining the init function and the
+ * Implements the AssetsInterface by defining the init function and the
  * enqueue function.
  *
  * The first is responsible for hooking up the enqueue
  * callback to the proper WordPress hook. The second is responsible for
  * actually registering and enqueuing the file.
  *
- * @implements Assets_Interface
+ * @implements AssetsInterface
  * @since      1.1.0
  */
-class Script_Loader implements Assets_Interface
+class ScriptLoader implements AssetsInterface
 {
     /**
      * A reference to the version of the plugin that is passed to this class from the caller.
@@ -31,12 +32,21 @@ class Script_Loader implements Assets_Interface
     private $version;
 
     /**
+     * A reference to the loader class that coordinates the hooks and callbacks
+     * throughout the plugin.
+     *
+     * @var Loader Manages hooks between the WordPress hooks and the callback functions.
+     */
+    private $loader;
+
+    /**
      * Initializes this class and stores the current version of this plugin.
      *
      * @param string $version The current version of this plugin.
      */
-    public function __construct($version)
+    public function __construct(Loader $loader, $version)
     {
+        $this->loader = $loader;
         $this->version = $version;
     }
 
@@ -44,14 +54,18 @@ class Script_Loader implements Assets_Interface
      * Defines the functionality responsible for loading the file.
      */
     public function enqueue()
-    {        
-        wp_enqueue_script(
-            'vm-manager-admin',
-            plugin_dir_url(__FILE__).'js/vm-manager-admin.js',
-            array('jquery'),
-            $this->version,
-            true
-        );
+    {
+        global $post_type;
+
+        if (isset($post_type) && 'jobapplications' === $post_type) {
+            wp_enqueue_script(
+                'cbb-workwithus-admin',
+                plugin_dir_url(__FILE__).'Resources/js/cbb-workwithus-admin.js',
+                array('jquery'),
+                $this->version,
+                true
+            );
+        }
     }
 
     /**
@@ -60,10 +74,7 @@ class Script_Loader implements Assets_Interface
      */
     public function init()
     {
-        add_action(
-            'wp_enqueue_scripts',
-            array( $this, 'enqueue' )
-        );
+        $this->loader->add_action('admin_enqueue_scripts', $this, 'enqueue');
     }
 
 }
