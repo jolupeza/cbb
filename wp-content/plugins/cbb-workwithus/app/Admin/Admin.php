@@ -9,7 +9,7 @@ use CBB_WorkWithUs\Includes\Loader;
  * of the plugin.
  */
 
-/** 
+/**
  * The CBB WorkWithUs Admin defines all functionality for the dashboard
  * of the plugin.
  *
@@ -41,7 +41,7 @@ class Admin
      * @var array
      */
     private $allowed;
-    
+
     private $domain;
 
     /**
@@ -81,7 +81,7 @@ class Admin
     {
         $this->loader->add_action('init', $this, 'addPostType');
     }
-    
+
     /**
      * Add custom content type
      */
@@ -89,7 +89,7 @@ class Admin
     {
         $this->registerJobPostulations();
     }
-    
+
     private function registerJobPostulations()
     {
         $labels = array(
@@ -137,16 +137,16 @@ class Admin
         );
         register_post_type('jobapplications', $args);
     }
-    
+
     public function unregister_post_type()
     {
         global $wp_post_types;
-        
+
         if (isset($wp_post_types['models'])) {
             unset($wp_post_types['models']);
             return TRUE;
         }
-        
+
         return FALSE;
     }
 }

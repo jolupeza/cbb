@@ -47,12 +47,12 @@ class Front
 
     public function init()
     {
-        $this->loader->add_filter('archive_template', $this, 'loadArchiveTemplate');
+        $this->loader->add_filter('taxonomy_template', $this, 'loadArchiveTemplate');
     }
 
-    public function loadArchiveTemplate($archive)
+    public function loadArchiveTemplate($tax_template)
     {
-        var_dump($archive);
+        var_dump($tax_template);
         exit();
     }
 }

@@ -28,11 +28,52 @@ class Joblevel
 
     public function init()
     {
+        $this->loader->add_action('init', $this, 'addTaxonomiesJobapplications');
         $this->loader->add_action('joblevels_add_form_fields', $this, 'addTaxonomyImage');
         $this->loader->add_action('created_joblevels', $this, 'saveTaxonomyImage', 10, 2);
         $this->loader->add_action('joblevels_edit_form_fields', $this, 'updateTaxonomyImage', 10, 2);
         $this->loader->add_action('edited_joblevels', $this, 'updatedTaxonomyImage', 10, 2);
         $this->loader->add_action('admin_enqueue_scripts', $this, 'loadMedia');
+    }
+
+    /**
+     * Add custom taxonomies levels to post type jobapplications.
+     */
+    public function addTaxonomiesJobapplications()
+    {
+        $labels = array(
+            'name' => _x('Niveles', 'Taxonomy plural name', $this->domain),
+            'singular_name' => _x('Nivel', 'Taxonomy singular name', $this->domain),
+            'search_items' => __('Buscar Nivel', $this->domain),
+            'popular_items' => __('Niveles Populares', $this->domain),
+            'all_items' => __('Todos los Niveles', $this->domain),
+            'parent_item' => __('Nivel Padre', $this->domain),
+            'parent_item_colon' => __('Nivel Padre', $this->domain),
+            'edit_item' => __('Editar Nivel', $this->domain),
+            'update_item' => __('Actualizar Nivel', $this->domain),
+            'add_new_item' => __('Añadir nuevo Nivel', $this->domain),
+            'new_item_name' => __('Nuevo Nivel', $this->domain),
+            'add_or_remove_items' => __('Añadir o eliminar Nivel', $this->domain),
+            'choose_from_most_used' => __('Choose from most used text-domain', $this->domain),
+            'menu_name' => __('Niveles', $this->domain),
+        );
+
+        $args = array(
+            'labels' => $labels,
+            'public' => true,
+            'show_in_nav_menus' => false,
+            'show_in_menu' => true,
+            'show_admin_column' => true,
+            'hierarchical' => true,
+            'show_tagcloud' => false,
+            'show_ui' => true,
+            'query_var' => true,
+            'rewrite' => array(
+                'slug' => 'convocatorias'
+            ),
+        );
+
+        register_taxonomy('joblevels', 'jobapplications', $args);
     }
 
     public function loadMedia()

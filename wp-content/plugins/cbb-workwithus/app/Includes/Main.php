@@ -3,15 +3,9 @@
 namespace CBB_WorkWithUs\Includes;
 
 use CBB_WorkWithUs\Admin\Admin;
-use CBB_WorkWithUs\Admin\Entities\Jobapplications;
 use CBB_WorkWithUs\Admin\ScriptLoader;
 use CBB_WorkWithUs\Admin\Taxonomies\Joblevel;
 use CBB_WorkWithUs\Front\Front;
-use CBB_WorkWithUs\Includes\Loader;
-
-// use CBB_WorkWithUs\Admin\CBB_WorkWithUs_Admin;
-// use CBB_WorkWithUs\Admin\CBB_WorkWithUs_Jobapplications;
-// use CBB_WorkWithUs\Admin\Taxonomies\Joblevel;
 
 // use VM_Manager\Shared\VM_Manager_Deserializer as Deserializer;
 // use VM_Manager\Admin\VM_Manager_Admin;
@@ -74,7 +68,7 @@ class Main
 
     /**
      * Contain text domain of plugin
-     * 
+     *
      * @var string
      */
     protected $plugin_domain;
@@ -135,22 +129,19 @@ class Main
         $admin = new Admin($this->loader, $this->plugin_domain, $this->get_version());
         $admin->init();
 
-        $adminJobApplications = new Jobapplications($this->loader, $this->plugin_domain);
-        $adminJobApplications->init();
-
         $adminJobLevels = new Joblevel($this->loader, $this->plugin_domain);
         $adminJobLevels->init();
 
         $adminJsLoader  = new ScriptLoader($this->loader, $this->get_version());
         $adminJsLoader->init();
-        
+
         // $cssLoader = new CSS_Loader($this->get_version());
         // $this->loader->add_action('admin_enqueue_scripts', $cssLoader, 'enqueue');
 
         // $adminPage = new VM_Manager_Page();
         // $this->loader->add_action('add_meta_boxes', $adminPage, 'cd_mb_page_add');
         // $this->loader->add_action('save_post', $adminPage, 'cd_mb_page_save');
-        
+
         // $adminPost = new VM_Manager_Post();
         // $this->loader->add_action('add_meta_boxes', $adminPost, 'cd_mb_post_add');
         // $this->loader->add_action('save_post', $adminPost, 'cd_mb_post_save');
@@ -165,31 +156,31 @@ class Main
         // $adminTemplates = new VM_Manager_Templates();
         // $this->loader->add_action('add_meta_boxes', $adminTemplates, 'cd_mb_templates_add');
         // $this->loader->add_action('save_post', $adminTemplates, 'cd_mb_templates_save');
-        
+
         // $adminFronts = new VM_Manager_Fronts();
         // $this->loader->add_action('add_meta_boxes', $adminFronts, 'cd_mb_fronts_add');
         // $this->loader->add_action('save_post', $adminFronts, 'cd_mb_fronts_save');
-        
+
         // $adminAchievements = new VM_Manager_Achievements();
         // $this->loader->add_action('add_meta_boxes', $adminAchievements, 'cd_mb_achievements_add');
         // $this->loader->add_action('save_post', $adminAchievements, 'cd_mb_achievements_save');
-        
+
         // $adminStaff = new VM_Manager_Staff();
         // $this->loader->add_action('init', $adminStaff, 'add_taxonomies_staff');
-        
+
         // $adminServices = new VM_Manager_Services();
         // $this->loader->add_action('init', $adminServices, 'add_taxonomies_services');
         // $this->loader->add_action('add_meta_boxes', $adminServices, 'cd_mb_services_add');
         // $this->loader->add_action('save_post', $adminServices, 'cd_mb_services_save');
-        
+
         // $adminSliders = new VM_Manager_Sliders();
         // $this->loader->add_action('add_meta_boxes', $adminSliders, 'cd_mb_sliders_add');
         // $this->loader->add_action('save_post', $adminSliders, 'cd_mb_sliders_save');
-        
+
         // $adminQuestions = new VM_Manager_Questions();
         // $this->loader->add_action('add_meta_boxes', $adminQuestions, 'cd_mb_questions_add');
         // $this->loader->add_action('save_post', $adminQuestions, 'cd_mb_questions_save');
-        
+
         // $deserializer = new Deserializer();
         // $serializer = new Serializer();
 
