@@ -12,5 +12,8 @@
         "psr-4": {
             "CBB_WorkWithUs\\": "app/"
         }
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^4.3"
     }
 }

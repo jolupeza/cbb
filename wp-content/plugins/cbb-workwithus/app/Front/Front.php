@@ -47,12 +47,20 @@ class Front
 
     public function init()
     {
-        $this->loader->add_filter('taxonomy_template', $this, 'loadArchiveTemplate');
+        $scriptLoader = new ScriptLoader($this->loader, $this->version);
+        $scriptLoader->init();
+
+        $this->loader->add_filter('taxonomy_template', $this, 'loadTaxonomyTemplate');
     }
 
-    public function loadArchiveTemplate($tax_template)
+    public function loadTaxonomyTemplate($template)
     {
-        var_dump($tax_template);
-        exit();
+        if (is_tax('joblevels')) {
+            if (file_exists(plugin_dir_path(__FILE__) . 'partials/cbb-workwithus-joblevels.php')) {
+                return plugin_dir_path(__FILE__) . 'partials/cbb-workwithus-joblevels.php';
+            }
+        }
+
+        return $template;
     }
 }

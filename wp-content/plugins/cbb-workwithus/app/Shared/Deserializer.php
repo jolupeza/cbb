@@ -1,11 +1,11 @@
 <?php
 
-namespace VM_Manager\Shared;
+namespace CBB_WorkWithUs\Shared;
 
 /**
  * Retrieves information from the database.
  *
- * @package VM_Manager
+ * @package CBB_WorkWithUs
  */
 
 /**
@@ -15,11 +15,11 @@ namespace VM_Manager\Shared;
  * specified by an incoming key. If no key is specified or a value is not found
  * then an empty string will be returned.
  *
- * @package VM_Manager
+ * @package CBB_WorkWithUs
  *
  */
 
-class VM_Manager_Deserializer
+class Deserializer
 {
     public function get_value( $option_key )
     {

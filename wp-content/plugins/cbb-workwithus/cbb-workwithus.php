@@ -30,6 +30,10 @@ if (!defined('WPINC')) {
     die;
 }
 
+if (!defined('CBB_WORKWITHUS_FILE')) {
+    define('CBB_WORKWITHUS_FILE', __FILE__);
+}
+
 /**
  * Instantiates the Ibisa Manager class and then
  * calls its run method officially starting up the plugin.
