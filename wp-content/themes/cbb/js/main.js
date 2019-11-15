@@ -12,7 +12,7 @@ var j = jQuery.noConflict();
   function affixHeader() {
     var noAffix = false;
 
-    if ($body.hasClass('single-post') || $body.hasClass('page-template-default') || $body.hasClass('page-template-page-applications')) {
+    if ($body.hasClass('single-post') || $body.hasClass('page-template-default') || $body.hasClass('page-template-page-applications') || $body.hasClass('tax-joblevels')) {
       noAffix = true;
     }
 
