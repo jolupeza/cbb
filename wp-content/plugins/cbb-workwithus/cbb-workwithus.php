@@ -22,6 +22,8 @@
 namespace CBB_WorkWithUs;
 
 use CBB_WorkWithUs\Includes\Main;
+use Whoops\Handler\PrettyPageHandler;
+use Whoops\Run;
 
 require_once plugin_dir_path(__FILE__) . 'vendor/autoload.php';
 
@@ -42,6 +44,10 @@ function run_cbb_workwithus()
 {
     $spmm = new Main();
     $spmm->run();
+
+    $whoops = new Run();
+    $whoops->prependHandler(new PrettyPageHandler);
+    $whoops->register();
 }
 
 // Call the above function to begin execution of the plugin.
