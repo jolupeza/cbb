@@ -1,4 +1,7 @@
+import applicationApi from '@/api/application';
+
 const state = {
+  levelId: null,
   document: '',
   apepaterno: '',
   apematerno: '',
@@ -92,6 +95,44 @@ const actions = {
   },
   setPhoto( context, photo ) {
     context.commit( 'SET_PHOTO', photo );
+  },
+  setLevelId( context, id ) {
+    context.commit( 'SET_LEVEL_ID', id );
+  },
+  register({ state }, { nonce, action }) {
+    let params = {
+      nonce,
+      action,
+      level: state.levelId,
+      document: state.document,
+      apepaterno: state.apematerno,
+      apematerno: state.apematerno,
+      name: state.name,
+      gender: state.gender,
+      birthday: state.birthday,
+      age: state.age,
+      phone: state.phone,
+      mobile: state.mobile,
+      email: state.email,
+      city: state.city,
+      province: state.province,
+      district: state.district,
+      address: state.address,
+      reference: state.reference,
+      review: state.review
+    };
+
+    applicationApi.register( params ).then( response => {
+      return new Promise( ( resolve, reject ) => {
+        if ( response.status ) {
+          resolve( response.msg );
+        }
+
+        reject( response.msg );
+      });
+    }).catch( error => {
+      throw error;
+    });
   }
 };
 
@@ -152,6 +193,9 @@ const mutations = {
   },
   SET_PHOTO( state, photo ) {
     state.photo = photo;
+  },
+  SET_LEVEL_ID( state, id ) {
+    state.levelId = id;
   }
 };
 

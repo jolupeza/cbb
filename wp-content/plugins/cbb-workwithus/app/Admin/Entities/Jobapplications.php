@@ -35,6 +35,86 @@ class Jobapplications
 
         $jobSpecialty = new JobSpecialty($this->loader, $this->domain);
         $jobSpecialty->init();
+
+        $this->loader->add_action('wp_ajax_register_application', $this, 'register');
+        $this->loader->add_action('wp_ajax_nopriv_register_application', $this, 'register');
+    }
+
+    public function register()
+    {
+        $nonce = $_POST['nonce'];
+        $data = array();
+
+        $result = array(
+            'status' => false,
+            'msg' => '',
+            'error' => ''
+        );
+
+        if (!wp_verify_nonce($nonce, 'axios-vuejs')) {
+            die('¡Acceso denegado!');
+        }
+
+        if (!$this->validData($_POST)) {
+            $result['msg'] = 'Por favor verifique que sus datos sean correctos y vuelva a intentarlo.';
+            wp_send_json($result);
+        }
+
+        $data['name'] = sanitize_text_field($_POST['name']);
+        $data['apepaterno'] = sanitize_text_field($_POST['apepaterno']);
+        $data['apematerno'] = sanitize_text_field($_POST['apematerno']);
+        $data['document'] = sanitize_text_field($_POST['document']);
+        $data['gender'] = sanitize_text_field($_POST['gender']);
+        $data['birthday'] = sanitize_text_field($_POST['birthday']);
+        $data['age'] = (int)sanitize_text_field($_POST['age']);
+        $data['phone'] = sanitize_text_field($_POST['phone']);
+        $data['mobile'] = sanitize_text_field($_POST['mobile']);
+        $data['email'] = sanitize_email($_POST['email']);
+        $data['address'] = sanitize_text_field($_POST['address']);
+        $data['reference'] = sanitize_text_field($_POST['reference']);
+        $data['review'] = sanitize_text_field($_POST['review']);
+        $data['level'] = (int)sanitize_text_field($_POST['level']);
+
+        $this->saveApplication($data);
+
+        $result['status'] = true;
+        $result['msg'] = 'Postulación agregada correctamente.';
+
+        wp_send_json($result);
+    }
+
+    protected function validData($data)
+    {
+        return !empty($data['name']) && !empty($data['apepaterno']) && !empty($data['apematerno']) && !empty($data['document'])
+            && (strlen($data['document']) >= 8 || strlen($data['document']) <= 15) && !empty($data['birthday'])
+            && (!empty($data['age']) && ($data['age'] >= 18 || $data['age'] <= 80 ))
+            && (!empty($data['email']) && is_email($data['email']))
+            && !empty($data['address']);
+    }
+
+    protected function saveApplication($data)
+    {
+        $postId = wp_insert_post(array(
+            'post_author' => 1,
+            'post_status' => 'publish',
+            'post_type' => 'jobapplications',
+        ));
+
+        update_post_meta($postId, 'mb_name', $data['name']);
+        update_post_meta($postId, 'mb_ape_paterno', $data['apepaterno']);
+        update_post_meta($postId, 'mb_ap_materno', $data['apematerno']);
+        update_post_meta($postId, 'mb_document', $data['document']);
+        update_post_meta($postId, 'mb_gender', $data['gender']);
+        update_post_meta($postId, 'mb_birthday', $data['birthday']);
+        update_post_meta($postId, 'mb_age', $data['age']);
+        update_post_meta($postId, 'mb_phone', $data['phone']);
+        update_post_meta($postId, 'mb_mobile', $data['mobile']);
+        update_post_meta($postId, 'mb_email', $data['email']);
+        update_post_meta($postId, 'mb_address', $data['address']);
+        update_post_meta($postId, 'mb_reference', $data['reference']);
+        update_post_meta($postId, 'mb_review', $data['review']);
+
+        wp_set_object_terms($postId, $data['level'], 'joblevels');
     }
 
     /**

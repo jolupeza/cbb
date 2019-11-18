@@ -38,7 +38,14 @@ export default {
       this.$store.dispatch( 'setModal', false );
     },
     saveApplication() {
-      alert( 'Información guardada' );
+      let params = {
+        nonce: document.head.querySelector( 'meta[name="csrf-token"]' ).content,
+        action: 'register_application'
+      };
+
+      this.$store.dispatch( 'applications/register', params ).then( () => {
+        this.closeModal();
+      });
     }
   }
 };

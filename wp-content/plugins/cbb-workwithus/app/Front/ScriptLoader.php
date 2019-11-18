@@ -128,6 +128,7 @@ class ScriptLoader implements AssetsInterface
         return [
             'plugin_directory_uri' => plugin_dir_url(CBB_WORKWITHUS_FILE),
             'rest_url' => untrailingslashit(esc_url_raw(rest_url())),
+            'ajaxUrl' => admin_url('admin-ajax.php'),
         ];
 
     }

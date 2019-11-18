@@ -54,6 +54,13 @@ export default {
     ...mapState({
       step: state => state.step
     })
+  },
+
+  mounted() {
+    let wrapper = document.getElementById( 'wp-vue-workwithus-main' );
+    let levelId = parseInt( wrapper.dataset.levelid );
+
+    this.$store.dispatch( 'applications/setLevelId', levelId );
   }
 };
 </script>
