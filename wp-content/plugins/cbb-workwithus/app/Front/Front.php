@@ -50,6 +50,9 @@ class Front
         $scriptLoader = new ScriptLoader($this->loader, $this->version);
         $scriptLoader->init();
 
+        $cssLoader = new CssLoader($this->loader, $this->version);
+        $cssLoader->init();
+
         $this->loader->add_filter('taxonomy_template', $this, 'loadTaxonomyTemplate');
     }
 
