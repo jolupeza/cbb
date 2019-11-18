@@ -149,6 +149,10 @@ export default {
     })
   },
 
+  mounted() {
+    this.$helpers.scrollToTop();
+  },
+
   methods: {
     async addStudy() {
       const isValid = await this.$refs.observer.validate();

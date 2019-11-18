@@ -195,8 +195,7 @@
           <hr class="WorkWithUs__Separator" />
 
           <div class="WorkWithUs__buttons">
-    <!--        <button class="WorkWithUs__button WorkWithUs__button&#45;&#45;second">Anterior</button>-->
-            <button class="WorkWithUs__button WorkWithUs__button--first" :disabled="!valid" @click="next">Siguiente</button>
+            <button class="WorkWithUs__button WorkWithUs__button--first" :disabled="!valid" @click.prevent="next">Siguiente</button>
           </div>
         </form>
       </ValidationObserver>
@@ -355,6 +354,10 @@ export default {
     if ( 0 === this.cities.length ) {
       this.$store.dispatch( 'cities/retrieve' );
     }
+  },
+
+  mounted() {
+    this.$helpers.scrollToTop();
   },
 
   methods: {

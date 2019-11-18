@@ -1,10 +1,34 @@
 <template>
   <div id="wp-vue-workwithus">
     <section class="WorkWithUs__Form">
-      <General v-if="step === 1" />
-      <Studies v-if="step === 2" />
-      <Experiences v-if="step === 3" />
-      <Relevant v-if="step === 4" />
+      <transition
+        name="custom-classes-transition"
+        enter-active-class="animated slideInLeft"
+        leave-active-class="animated slideOutRight"
+        :duration="{ enter: 500, leave: 10 }">
+        <General v-if="step === 1" />
+      </transition>
+      <transition
+        name="custom-classes-transition"
+        enter-active-class="animated slideInLeft"
+        leave-active-class="animated slideOutRight"
+        :duration="{ enter: 500, leave: 10 }">
+        <Studies v-if="step === 2" />
+      </transition>
+      <transition
+        name="custom-classes-transition"
+        enter-active-class="animated slideInLeft"
+        leave-active-class="animated slideOutRight"
+        :duration="{ enter: 500, leave: 10 }">
+        <Experiences v-if="step === 3" />
+      </transition>
+      <transition
+        name="custom-classes-transition"
+        enter-active-class="animated slideInLeft"
+        leave-active-class="animated slideOutRight"
+        :duration="{ enter: 500, leave: 10 }">
+        <Relevant v-if="step === 4" />
+      </transition>
     </section>
   </div>
 </template>

@@ -31,7 +31,7 @@
         <hr class="WorkWithUs__Separator">
 
         <div class="WorkWithUs__buttons">
-          <button class="WorkWithUs__button WorkWithUs__button--second" @click.prevent="gotToStep(1)">Anterior</button>
+          <button class="WorkWithUs__button WorkWithUs__button--second" @click.prevent="goToStep(3)">Anterior</button>
           <button type="submit" class="WorkWithUs__button WorkWithUs__button--first" :disabled="!valid">Finalizar</button>
         </div>
       </ValidationObserver>
@@ -60,6 +60,10 @@ export default {
         this.$store.dispatch( 'applications/setReview', value );
       }
     }
+  },
+
+  mounted() {
+    this.$helpers.scrollToTop();
   },
 
   methods: {

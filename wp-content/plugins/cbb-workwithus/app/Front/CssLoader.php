@@ -60,11 +60,6 @@ class CssLoader implements AssetsInterface
         if (is_tax('joblevels')) {
             $filesJs = $this->spaFile->getFilesSpa('css');
 
-            /*echo '<pre>';
-            var_dump($filesJs);
-            echo '</pre>';
-            exit();*/
-
             if (!empty($filesJs)) {
                 $this->registerApp($filesJs);
             }

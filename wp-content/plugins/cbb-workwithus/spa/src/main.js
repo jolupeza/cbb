@@ -4,6 +4,7 @@ import store from './store';
 import { ValidationProvider, ValidationObserver, extend } from 'vee-validate';
 import * as rules from 'vee-validate/dist/rules';
 import es from 'vee-validate/dist/locale/es';
+import helpers from '@/helpers';
 
 require( './bootstrap' );
 
@@ -18,6 +19,8 @@ for ( let rule in rules ) {
 
 Vue.component( 'ValidationProvider', ValidationProvider );
 Vue.component( 'ValidationObserver', ValidationObserver );
+
+Object.defineProperty( Vue.prototype, '$helpers', { value: helpers });
 
 new Vue({
   store,

@@ -90,6 +90,10 @@ export default {
     };
   },
 
+  mounted() {
+    this.$helpers.scrollToTop();
+  },
+
   methods: {
     async addExperience() {
       const isValid = await this.$refs.observer.validate();

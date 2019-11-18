@@ -13,7 +13,6 @@ const actions = {
         context.commit( 'RETRIEVE', provinces );
         resolve();
       }).catch( error => {
-        console.error( error );
         reject( error );
       });
     });
