@@ -2,6 +2,8 @@
 
 namespace CBB_WorkWithUs\Admin;
 
+use CBB_WorkWithUs\Admin\Entities\District;
+use CBB_WorkWithUs\Admin\Entities\Province;
 use CBB_WorkWithUs\Includes\Loader;
 
 /**
@@ -80,6 +82,12 @@ class Admin
     public function init()
     {
         $this->loader->add_action('init', $this, 'addPostType');
+
+        $province = new Province($this->loader, $this->domain);
+        $province->init();
+
+        $distric = new District($this->loader, $this->domain);
+        $distric->init();
     }
 
     /**
@@ -88,6 +96,9 @@ class Admin
     public function addPostType()
     {
         $this->registerJobPostulations();
+        $this->registerCities();
+        $this->registerProvinces();
+        $this->registerDistricts();
     }
 
     private function registerJobPostulations()
@@ -136,6 +147,153 @@ class Admin
             'rewrite' => false
         );
         register_post_type('jobapplications', $args);
+    }
+
+    private function registerCities()
+    {
+        $labels = array(
+            'name' => __('Departamentos', $this->domain),
+            'singular_name' => __('Departamento', $this->domain),
+            'add_new' => __('Nuevo departamento', $this->domain),
+            'add_new_item' => __('Agregar nuevo departamento', $this->domain),
+            'edit_item' => __('Editar departamento', $this->domain),
+            'new_item' => __('Nuevo departamento', $this->domain),
+            'view_item' => __('Ver departamento', $this->domain),
+            'search_items' => __('Buscar departamento', $this->domain),
+            'not_found' => __('Departamento no encontrado', $this->domain),
+            'not_found_in_trash' => __('Departamento no encontrado en la papelera', $this->domain),
+            'all_items' => __('Todos los departamentos', $this->domain),
+        );
+        $args = array(
+            'labels' => $labels,
+            'description' => 'Listado de departamentos.',
+            // 'public'              => false,
+            // 'exclude_from_search' => true,
+            // 'publicly_queryable' => false,
+            'show_ui' => true,
+            'show_in_nav_menus' => false,
+            'show_in_menu' => true,
+            'show_in_admin_bar' => true,
+            'show_in_rest' => true,
+            // 'menu_position'          => null,
+            'menu_icon' => 'dashicons-location',
+            // 'hierarchical'        => false,
+            'supports' => array(
+                'title',
+                // 'editor',
+//                'custom-fields',
+                'author',
+                // 'thumbnail',
+//                'page-attributes',
+                // 'excerpt'
+                // 'trackbacks'
+                // 'comments',
+                // 'revisions',
+                // 'post-formats'
+            ),
+            // 'taxonomies'  => array('post_tag', 'category'),
+            // 'has_archive' => false,
+            'rewrite' => false
+        );
+        register_post_type('cities', $args);
+    }
+
+    private function registerProvinces()
+    {
+        $labels = array(
+            'name' => __('Provincias', $this->domain),
+            'singular_name' => __('Provincia', $this->domain),
+            'add_new' => __('Nueva provincia', $this->domain),
+            'add_new_item' => __('Agregar nueva provincia', $this->domain),
+            'edit_item' => __('Editar provincia', $this->domain),
+            'new_item' => __('Nueva provincia', $this->domain),
+            'view_item' => __('Ver provincia', $this->domain),
+            'search_items' => __('Buscar provincia', $this->domain),
+            'not_found' => __('Provincia no encontrada', $this->domain),
+            'not_found_in_trash' => __('Provincia no encontrada en la papelera', $this->domain),
+            'all_items' => __('Todos las provincias', $this->domain),
+        );
+        $args = array(
+            'labels' => $labels,
+            'description' => 'Listado de provincias.',
+            // 'public'              => false,
+            // 'exclude_from_search' => true,
+            // 'publicly_queryable' => false,
+            'show_ui' => true,
+            'show_in_nav_menus' => false,
+            'show_in_menu' => true,
+            'show_in_admin_bar' => true,
+            'show_in_rest' => true,
+            // 'menu_position'          => null,
+            'menu_icon' => 'dashicons-location',
+            // 'hierarchical'        => false,
+            'supports' => array(
+                'title',
+                // 'editor',
+                'custom-fields',
+                'author',
+                // 'thumbnail',
+//                'page-attributes',
+                // 'excerpt'
+                // 'trackbacks'
+                // 'comments',
+                // 'revisions',
+                // 'post-formats'
+            ),
+            // 'taxonomies'  => array('post_tag', 'category'),
+            // 'has_archive' => false,
+            'rewrite' => false
+        );
+        register_post_type('provinces', $args);
+    }
+
+    private function registerDistricts()
+    {
+        $labels = array(
+            'name' => __('Distritos', $this->domain),
+            'singular_name' => __('Distrito', $this->domain),
+            'add_new' => __('Nuevo distrito', $this->domain),
+            'add_new_item' => __('Agregar nuevo distrito', $this->domain),
+            'edit_item' => __('Editar distrito', $this->domain),
+            'new_item' => __('Nuevo distrito', $this->domain),
+            'view_item' => __('Ver distrito', $this->domain),
+            'search_items' => __('Buscar distrito', $this->domain),
+            'not_found' => __('Distrito no encontrado', $this->domain),
+            'not_found_in_trash' => __('Distrito no encontrado en la papelera', $this->domain),
+            'all_items' => __('Todos los distritos', $this->domain),
+        );
+        $args = array(
+            'labels' => $labels,
+            'description' => 'Listado de distritos.',
+            // 'public'              => false,
+            // 'exclude_from_search' => true,
+            // 'publicly_queryable' => false,
+            'show_ui' => true,
+            'show_in_nav_menus' => false,
+            'show_in_menu' => true,
+            'show_in_admin_bar' => true,
+            'show_in_rest' => true,
+            // 'menu_position'          => null,
+            'menu_icon' => 'dashicons-location',
+            // 'hierarchical'        => false,
+            'supports' => array(
+                'title',
+                // 'editor',
+                'custom-fields',
+                'author',
+                // 'thumbnail',
+//                'page-attributes',
+                // 'excerpt'
+                // 'trackbacks'
+                // 'comments',
+                // 'revisions',
+                // 'post-formats'
+            ),
+            // 'taxonomies'  => array('post_tag', 'category'),
+            // 'has_archive' => false,
+            'rewrite' => false
+        );
+        register_post_type('districts', $args);
     }
 
     public function unregister_post_type()
