@@ -14,6 +14,10 @@
             margin: 0 0 0.8em;
         }
         &__content {
+            margin-top: 2em;
+            @media screen and (min-width: 768px) {
+                margin-top: 0;
+            }
             h4 {
                 color: $secondColorAlt;
                 font-size: 2em;

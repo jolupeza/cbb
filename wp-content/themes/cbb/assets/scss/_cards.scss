@@ -2,8 +2,20 @@
     &__CardsLevels {
         display: flex;
         justify-content: space-between;
+        flex-wrap: wrap;
+        margin: 0 1.5em;
+        @media screen and (min-width: 768px) {
+            margin: 0;
+        }
         &__item {
-            width: 30%;
+            margin-bottom: 2em;
+            width: 100%;
+            @media screen and (min-width: 768px) {
+                width: 45%;
+            }
+            @media screen and (min-width: 992px) {
+                width: 30%;
+            }
         }
         &__figure {
             position: relative;
@@ -25,10 +37,16 @@
             width: 100%;
         }
         &__info {
-            margin: 3em 0 0 0;
+            margin-top: 1em;
+            @media screen and (min-width: 768px) {
+                margin: 3em 0 0 0;
+            }
             p {
-                margin-bottom: 3em;
+                margin-bottom: 1em;
                 text-align: center;
+                @media screen and (min-width: 768px) {
+                    margin-bottom: 3em;
+                }
             }
         }
     }
