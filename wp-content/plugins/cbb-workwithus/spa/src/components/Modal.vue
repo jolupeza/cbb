@@ -1,19 +1,24 @@
 <template>
-  <section class="Modal" v-if="openModal">
-    <div class="Modal__wrapper">
-      <header class="Modal__header">
-        <h4>Estado de Docente</h4>
-        <button type="button" class="Modal__close" @click="closeModal">x</button>
-      </header>
-      <div class="Modal__body">
-        <p class="text-center">¿Está seguro de guardar los datos?</p>
+  <transition
+    name="custom-classes-transition"
+    enter-active-class="animated fadeIn"
+    leave-active-class="animated fadeOut">
+    <section class="Modal" v-if="openModal">
+      <div class="Modal__wrapper">
+        <header class="Modal__header">
+          <h4>Estado de Docente</h4>
+          <button type="button" class="Modal__close" @click="closeModal">x</button>
+        </header>
+        <div class="Modal__body">
+          <p class="text-center">¿Está seguro de guardar los datos?</p>
+        </div>
+        <footer class="Modal__footer">
+          <button type="button" class="WorkWithUs__button WorkWithUs__button--second" @click="saveApplication">Guardar</button>
+          <button type="button" class="WorkWithUs__button WorkWithUs__button--first" @click="closeModal">Cancelar</button>
+        </footer>
       </div>
-      <footer class="Modal__footer">
-        <button type="button" class="WorkWithUs__button WorkWithUs__button--second" @click="saveApplication">Guardar</button>
-        <button type="button" class="WorkWithUs__button WorkWithUs__button--first" @click="closeModal">Cancelar</button>
-      </footer>
-    </div>
-  </section>
+    </section>
+  </transition>
 </template>
 
 <script>
@@ -33,7 +38,7 @@ export default {
       this.$store.dispatch( 'setModal', false );
     },
     saveApplication() {
-      console.info( 'Aquí enviaremos la data a base de datos' );
+      alert( 'Información guardada' );
     }
   }
 };
