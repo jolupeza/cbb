@@ -58,10 +58,24 @@ class CssLoader implements AssetsInterface
     public function enqueue()
     {
         if (is_tax('joblevels')) {
-            $filesJs = $this->spaFile->getFilesSpa('css');
+            $filesCss = $this->spaFile->getFilesSpa('css');
 
             if (!empty($filesJs)) {
-                $this->registerApp($filesJs);
+                $this->registerChunk($filesCss);
+
+                $this->registerApp($filesCss);
+            }
+        }
+    }
+
+    private function registerChunk($files)
+    {
+        foreach ($files as $file) {
+            if (strpos($file, 'chunk-') === 0) {
+                wp_enqueue_style(
+                    'vue_workwithus_chunk',
+                    plugin_dir_url(CBB_WORKWITHUS_FILE) . 'spa/dist/css/' . $file,
+                    array(), $this->version, true);
             }
         }
     }
