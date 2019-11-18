@@ -1,0 +1,10 @@
+.MainMenu {
+    li {
+        a {
+            font-size: 0.875em;
+            @media screen and (min-width: 992px) {
+                font-size: 0.75em;
+            }
+        }
+    }
+}
