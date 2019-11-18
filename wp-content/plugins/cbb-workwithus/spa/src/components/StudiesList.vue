@@ -9,7 +9,7 @@
           <th>Grado</th>
           <th>Inicio</th>
           <th>Fin</th>
-          <th>Especialidad</th>
+<!--          <th>Especialidad</th>-->
           <th>Acción</th>
         </tr>
       </thead>
@@ -21,7 +21,7 @@
           <td>{{ item.degree }}</td>
           <td>{{ item.dateStart }}</td>
           <td>{{ item.dateEnd }}</td>
-          <td>{{ item.study }}</td>
+<!--          <td>{{ item.specialty }}</td>-->
           <td>botones</td>
         </tr>
       </tbody>

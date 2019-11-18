@@ -3,23 +3,11 @@
 namespace CBB_WorkWithUs\Includes;
 
 use CBB_WorkWithUs\Admin\Admin;
+use CBB_WorkWithUs\Admin\Entities\Jobapplications;
 use CBB_WorkWithUs\Admin\ScriptLoader;
-use CBB_WorkWithUs\Admin\Taxonomies\Joblevel;
 use CBB_WorkWithUs\Front\Front;
 
 // use VM_Manager\Shared\VM_Manager_Deserializer as Deserializer;
-// use VM_Manager\Admin\VM_Manager_Admin;
-// use VM_Manager\Admin\CSS_Loader;
-// use VM_Manager\Admin\Script_Loader;
-// use VM_Manager\Admin\VM_Manager_Contacts;
-// use VM_Manager\Admin\VM_Manager_Templates;
-// use VM_Manager\Admin\VM_Manager_Fronts;
-// use VM_Manager\Admin\VM_Manager_Page;
-// use VM_Manager\Admin\VM_Manager_Post;
-// use VM_Manager\Admin\VM_Manager_Achievements;
-// use VM_Manager\Admin\VM_Manager_Staff;
-// use VM_Manager\Admin\VM_Manager_Services;
-// use VM_Manager\Admin\VM_Manager_Sliders;
 // use VM_Manager\Admin\VM_Manager_Questions;
 // use VM_Manager\Admin\VM_Manager_Submenu_Page;
 // use VM_Manager\Admin\VM_Manager_Submenu;
@@ -129,8 +117,8 @@ class Main
         $admin = new Admin($this->loader, $this->plugin_domain, $this->get_version());
         $admin->init();
 
-        $adminJobLevels = new Joblevel($this->loader, $this->plugin_domain);
-        $adminJobLevels->init();
+        $adminJobApplication = new Jobapplications($this->loader, $this->plugin_domain);
+        $adminJobApplication->init();
 
         $adminJsLoader  = new ScriptLoader($this->loader, $this->get_version());
         $adminJsLoader->init();

@@ -2,6 +2,9 @@
 
 namespace CBB_WorkWithUs\Admin\Entities;
 
+use CBB_WorkWithUs\Admin\Taxonomies\JobDegree;
+use CBB_WorkWithUs\Admin\Taxonomies\Joblevel;
+use CBB_WorkWithUs\Admin\Taxonomies\JobSpecialty;
 use CBB_WorkWithUs\Includes\Loader;
 
 class Jobapplications
@@ -24,6 +27,14 @@ class Jobapplications
 
     public function init()
     {
+        $adminJobLevels = new Joblevel($this->loader, $this->domain);
+        $adminJobLevels->init();
+
+        $jobDegree = new JobDegree($this->loader, $this->domain);
+        $jobDegree->init();
+
+        $jobSpecialty = new JobSpecialty($this->loader, $this->domain);
+        $jobSpecialty->init();
     }
 
     /**

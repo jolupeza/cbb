@@ -29,8 +29,7 @@
               <ValidationProvider name="grado" rules="required" v-slot="{ errors }">
                 <select name="degree" id="degree" v-model="degree" class="form-control">
                   <option :value="null">Seleccione</option>
-                  <option value="bachiller">Bachiller</option>
-                  <option value="titulo">Título</option>
+                  <option :value="item.id" v-for="item in degrees" :key="item.id">{{ item.name }}</option>
                 </select>
                 <span class="is-invalid">{{ errors[0] }}</span>
               </ValidationProvider>
@@ -59,12 +58,11 @@
           </div>
           <div class="col-sm-4">
             <div class="form-group">
-              <label for="study">Especialidad: <span>(*)</span></label>
+              <label for="specialty">Especialidad: <span>(*)</span></label>
               <ValidationProvider name="especialidad" rules="required" v-slot="{ errors }">
-                <select name="degree" id="study" v-model="study" class="form-control">
+                <select name="degree" id="specialty" v-model="specialty" class="form-control">
                   <option :value="null">Seleccione</option>
-                  <option value="primaria">Educación Primaria</option>
-                  <option value="secundaria">Educación Secundaria</option>
+                  <option v-for="item in specialties" :key="item.id" :value="item.id">{{ item.name }}</option>
                 </select>
                 <span class="is-invalid">{{ errors[0] }}</span>
               </ValidationProvider>
@@ -119,7 +117,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 import StudiesList from '@/components/StudiesList';
 
 export default {
@@ -136,7 +134,7 @@ export default {
       degree: null,
       dateStart: '',
       dateEnd: '',
-      study: null,
+      specialty: null,
       phone: '',
       mobile: '',
       email: ''
@@ -144,9 +142,25 @@ export default {
   },
 
   computed: {
+    ...mapState( 'jobDegrees', {
+      degrees: state => state.all
+    }),
+    ...mapState( 'jobSpecialties', {
+      specialties: state => state.all
+    }),
     ...mapGetters({
       hasStudies: 'applications/hasStudies'
     })
+  },
+
+  created() {
+    if ( 0 === this.degrees.length ) {
+      this.$store.dispatch( 'jobDegrees/retrieve' );
+    }
+
+    if ( 0 === this.specialties.length ) {
+      this.$store.dispatch( 'jobSpecialties/retrieve' );
+    }
   },
 
   mounted() {
@@ -167,7 +181,7 @@ export default {
         degree: this.degree,
         dateStart: this.dateStart,
         dateEnd: this.dateEnd,
-        study: this.study,
+        specialty: this.specialty,
         phone: this.phone,
         mobile: this.mobile,
         email: this.email
@@ -182,7 +196,7 @@ export default {
       this.degree = null;
       this.dateStart = '';
       this.dateEnd = '';
-      this.study = null;
+      this.specialty = null;
       this.phone = '';
       this.mobile = '';
       this.email = '';
