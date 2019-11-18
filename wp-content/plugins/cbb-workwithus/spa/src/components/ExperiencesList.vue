@@ -48,6 +48,7 @@ export default {
   .ExperiencesList {
     font-size: 16px;
     margin-bottom: 2em;
+    overflow-y: auto;
     &__table {
       width: 100%;
       th {

@@ -51,9 +51,13 @@ export default {
     position: fixed;
     top: 0;
     width: 100%;
+    z-index: 9;
     &__wrapper {
       background-color: $white;
-      width: 30%;
+      width: 90%;
+      @media screen and (min-width: 992px) {
+        width: 30%;
+      }
     }
     &__header {
       background-color: $secondColorAlt;

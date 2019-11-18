@@ -127,7 +127,9 @@ export default {
 
 <style lang="scss" scoped>
   .Experiences {
+    display: block;
     font-size: 16px;
+    margin: 0;
     &__buttons {
       margin-top: 1.5em;
       text-align: right;

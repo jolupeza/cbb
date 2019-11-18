@@ -68,15 +68,21 @@ export default {
   &__title {
     color: $secondColorAlt;
     font-family: $fontReef;
-    font-size: 2em;
+    font-size: 1.5em;
     text-transform: uppercase;
+    @media screen and (min-width: 992px) {
+      font-size: 2em;
+    }
   }
   &__Form {
     label {
       color: $secondColorAlt;
       font-family: $fontSource;
-      font-size: 1.125em;
+      font-size: 1em;
       font-weight: 300;
+      @media screen and (min-width: 992px) {
+        font-size: 1.125em;
+      }
       span {
         color: $firstColorAlt;
         font-weight: 600;
