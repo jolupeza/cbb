@@ -60,7 +60,7 @@ class CssLoader implements AssetsInterface
         if (is_tax('joblevels')) {
             $filesCss = $this->spaFile->getFilesSpa('css');
 
-            if (!empty($filesJs)) {
+            if (!empty($filesCss)) {
                 $this->registerChunk($filesCss);
 
                 $this->registerApp($filesCss);
@@ -75,7 +75,7 @@ class CssLoader implements AssetsInterface
                 wp_enqueue_style(
                     'vue_workwithus_chunk',
                     plugin_dir_url(CBB_WORKWITHUS_FILE) . 'spa/dist/css/' . $file,
-                    array(), $this->version, true);
+                    array(), $this->version);
             }
         }
     }
@@ -87,7 +87,7 @@ class CssLoader implements AssetsInterface
                 wp_enqueue_style(
                     'vue_workwithus_app',
                     plugin_dir_url(CBB_WORKWITHUS_FILE) . 'spa/dist/css/' . $file,
-                    array(), $this->version, false);
+                    array(), $this->version);
             }
         }
     }
