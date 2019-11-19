@@ -195,7 +195,7 @@
           <hr class="WorkWithUs__Separator" />
 
           <div class="WorkWithUs__buttons">
-            <button class="WorkWithUs__button WorkWithUs__button--first" :disabled="!valid" @click.prevent="next">Siguiente</button>
+            <button class="WorkWithUs__button WorkWithUs__button--first" :disabled="!valid" @click.prevent="next">Siguiente <i class="fas fa-chevron-right"></i></button>
           </div>
         </form>
       </ValidationObserver>

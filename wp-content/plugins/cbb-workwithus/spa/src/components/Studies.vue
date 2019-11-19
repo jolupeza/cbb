@@ -109,8 +109,8 @@
       <StudiesList />
 
       <div class="WorkWithUs__buttons">
-        <button class="WorkWithUs__button WorkWithUs__button--second" @click.prevent="gotToStep(1)">Anterior</button>
-        <button type="button" class="WorkWithUs__button WorkWithUs__button--first" :disabled="!hasStudies" @click.prevent="gotToStep(3)">Siguiente</button>
+        <button class="WorkWithUs__button WorkWithUs__button--second" @click.prevent="gotToStep(1)"><i class="fas fa-chevron-left"></i> Anterior</button>
+        <button type="button" class="WorkWithUs__button WorkWithUs__button--first" :disabled="!hasStudies" @click.prevent="gotToStep(3)">Siguiente <i class="fas fa-chevron-right"></i></button>
       </div>
     </div>
   </section>

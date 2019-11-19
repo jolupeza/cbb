@@ -57,8 +57,8 @@
       <ExperiencesList />
 
       <div class="WorkWithUs__buttons">
-        <button type="button" class="WorkWithUs__button WorkWithUs__button--second" @click.prevent="goToStep(2)">Anterior</button>
-        <button type="button" class="WorkWithUs__button WorkWithUs__button--first" :disabled="!hasExperiences" @click.prevent="goToStep(4)">Siguiente</button>
+        <button type="button" class="WorkWithUs__button WorkWithUs__button--second" @click.prevent="goToStep(2)"><i class="fas fa-chevron-left"></i> Anterior</button>
+        <button type="button" class="WorkWithUs__button WorkWithUs__button--first" :disabled="!hasExperiences" @click.prevent="goToStep(4)">Siguiente <i class="fas fa-chevron-right"></i></button>
       </div>
     </div>
   </section>

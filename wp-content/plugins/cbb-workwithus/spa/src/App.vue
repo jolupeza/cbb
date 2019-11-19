@@ -1,5 +1,6 @@
 <template>
   <div id="wp-vue-workwithus">
+    <Steps />
     <section class="WorkWithUs__Form">
       <transition
         name="custom-classes-transition"
@@ -47,6 +48,7 @@ import Studies from '@/components/Studies';
 import Experiences from '@/components/Experiences';
 import Relevant from '@/components/Relevant';
 import Loading from '@/components/Loading';
+import Steps from '@/components/Steps';
 
 export default {
   name: 'App',
@@ -56,7 +58,8 @@ export default {
     Studies,
     Experiences,
     Relevant,
-    Loading
+    Loading,
+    Steps
   },
 
   computed: {

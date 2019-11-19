@@ -7,14 +7,14 @@
       <div class="Modal__wrapper">
         <header class="Modal__header">
           <h4>Estado de Docente</h4>
-          <button type="button" class="Modal__close" @click="closeModal">x</button>
+          <button type="button" class="Modal__close" @click="closeModal"><i class="fas fa-times"></i></button>
         </header>
         <div class="Modal__body">
           <p class="text-center">¿Está seguro de guardar los datos?</p>
         </div>
         <footer class="Modal__footer">
-          <button type="button" class="WorkWithUs__button WorkWithUs__button--second" @click="saveApplication">Guardar</button>
-          <button type="button" class="WorkWithUs__button WorkWithUs__button--first" @click="closeModal">Cancelar</button>
+          <button type="button" class="WorkWithUs__button WorkWithUs__button--second" @click="saveApplication">Guardar <i class="fas fa-check"></i></button>
+          <button type="button" class="WorkWithUs__button WorkWithUs__button--first" @click="closeModal">Cancelar <i class="fas fa-times"></i></button>
         </footer>
       </div>
     </section>

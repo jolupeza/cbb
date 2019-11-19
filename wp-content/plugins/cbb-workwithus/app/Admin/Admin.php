@@ -88,8 +88,8 @@ class Admin
         $province = new Province($this->loader, $this->domain);
         $province->init();
 
-        $distric = new District($this->loader, $this->domain);
-        $distric->init();
+        $district = new District($this->loader, $this->domain);
+        $district->init();
 
         $degree = new Degree($this->loader, $this->domain);
         $degree->init();

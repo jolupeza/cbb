@@ -33,8 +33,8 @@
         <Message />
 
         <div class="WorkWithUs__buttons">
-          <button class="WorkWithUs__button WorkWithUs__button--second" @click.prevent="goToStep(3)">Anterior</button>
-          <button type="submit" class="WorkWithUs__button WorkWithUs__button--first" :disabled="!valid">Finalizar</button>
+          <button class="WorkWithUs__button WorkWithUs__button--second" @click.prevent="goToStep(3)"><i class="fas fa-chevron-left"></i> Anterior</button>
+          <button type="submit" class="WorkWithUs__button WorkWithUs__button--first" :disabled="!valid">Finalizar <i class="fas fa-check"></i></button>
         </div>
       </ValidationObserver>
     </div>
