@@ -6,9 +6,9 @@
           <h3 class="WorkWithUs__title">Datos Usuario</h3>
 
           <div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-7">
               <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-5">
                   <div class="form-group">
                     <label for="document">Documento de Identidad: <span>(*)</span></label>
                     <ValidationProvider name="documento de identidad" rules="required|numeric|min:8|max:15" v-slot="{ errors }">
@@ -17,14 +17,14 @@
                     </ValidationProvider>
                   </div>
                 </div>
-                <div class="col-sm-6">
-                  <!--<div class="form-group">
+                <div class="col-sm-7">
+                  <div class="form-group">
                     <label for="photo">Adjuntar foto:</label>
-                    <ValidationProvider name="photo" rules="image" v-slot="{ validate, errors }">
-                      <input type="file" class="form-control" id="photo" name="photo" @change="validate($event) || handlePhotoChange($event)" />
+                    <ValidationProvider name="foto" ref="photo" rules="required|image" v-slot="{ validate, errors }">
+                      <input type="file" class="form-control" id="photo" @change="handlePhotoChange($event) || validate($event)" />
                       <span class="is-invalid">{{ errors[0] }}</span>
                     </ValidationProvider>
-                  </div>-->
+                  </div>
                 </div>
               </div>
             </div>
@@ -382,6 +382,15 @@ export default {
       this.$store.dispatch( 'districts/retrieveByProvince', this.province ).then( () => {
         this.district = null;
       });
+    },
+    handlePhotoChange( event ) {
+      let tgt = event.target || window.event.srcElement;
+      let files = tgt.files;
+
+      const isValid = this.$refs.photo.validate();
+
+      console.info( files );
+      console.warn( isValid );
     },
     next() {
       this.$store.dispatch( 'setStep', 2 );
