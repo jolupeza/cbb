@@ -98,6 +98,7 @@ class Jobapplications
             'post_author' => 1,
             'post_status' => 'publish',
             'post_type' => 'jobapplications',
+            'post_title' => "{$data['name']} {$data['apepaterno']} {$data['apematerno']}"
         ));
 
         update_post_meta($postId, 'mb_name', $data['name']);

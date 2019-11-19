@@ -4,6 +4,9 @@ import store from './store';
 import { ValidationProvider, ValidationObserver, extend } from 'vee-validate';
 import * as rules from 'vee-validate/dist/rules';
 import es from 'vee-validate/dist/locale/es';
+import 'animate.css/animate.css';
+import '@fortawesome/fontawesome-free/css/all.css';
+import '@fortawesome/fontawesome-free/js/all.js';
 import helpers from '@/helpers';
 
 require( './bootstrap' );

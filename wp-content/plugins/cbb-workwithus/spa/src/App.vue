@@ -29,6 +29,13 @@
         :duration="{ enter: 500, leave: 10 }">
         <Relevant v-if="step === 4" />
       </transition>
+
+      <transition
+        name="custom-classes-transition"
+        enter-active-class="animated fadeIn"
+        leave-active-class="animated fadeOut">
+        <Loading v-if="loading" />
+      </transition>
     </section>
   </div>
 </template>
@@ -39,6 +46,7 @@ import General from '@/components/General';
 import Studies from '@/components/Studies';
 import Experiences from '@/components/Experiences';
 import Relevant from '@/components/Relevant';
+import Loading from '@/components/Loading';
 
 export default {
   name: 'App',
@@ -47,12 +55,14 @@ export default {
     General,
     Studies,
     Experiences,
-    Relevant
+    Relevant,
+    Loading
   },
 
   computed: {
     ...mapState({
-      step: state => state.step
+      step: state => state.step,
+      loading: state => state.loading
     })
   },
 

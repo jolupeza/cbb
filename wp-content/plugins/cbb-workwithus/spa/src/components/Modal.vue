@@ -38,12 +38,21 @@ export default {
       this.$store.dispatch( 'setModal', false );
     },
     saveApplication() {
+      this.$store.dispatch( 'setStatusLoading', true );
+
       let params = {
         nonce: document.head.querySelector( 'meta[name="csrf-token"]' ).content,
         action: 'register_application'
       };
 
-      this.$store.dispatch( 'applications/register', params ).then( () => {
+      this.$store.dispatch( 'applications/register', params ).then( ( msg ) => {
+        let params = { type: 'success', msg: msg, show: true };
+        this.$store.dispatch( 'setMessage', params );
+      }).catch( msg => {
+        let params = { type: 'danger', msg: msg, show: true };
+        this.$store.dispatch( 'setMessage', params );
+      }).finally( () => {
+        this.$store.dispatch( 'setStatusLoading', false );
         this.closeModal();
       });
     }

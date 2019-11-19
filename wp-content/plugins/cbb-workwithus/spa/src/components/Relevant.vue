@@ -30,6 +30,8 @@
 
         <hr class="WorkWithUs__Separator">
 
+        <Message />
+
         <div class="WorkWithUs__buttons">
           <button class="WorkWithUs__button WorkWithUs__button--second" @click.prevent="goToStep(3)">Anterior</button>
           <button type="submit" class="WorkWithUs__button WorkWithUs__button--first" :disabled="!valid">Finalizar</button>
@@ -43,12 +45,14 @@
 
 <script>
 import Modal from '@/components/Modal';
+import Message from '@/components/Message';
 
 export default {
   name: 'Relevant',
 
   components: {
-    Modal
+    Modal,
+    Message
   },
 
   computed: {

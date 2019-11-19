@@ -99,7 +99,7 @@ const actions = {
   setLevelId( context, id ) {
     context.commit( 'SET_LEVEL_ID', id );
   },
-  register({ state }, { nonce, action }) {
+  async register({ state }, { nonce, action }) {
     let params = {
       nonce,
       action,
@@ -122,17 +122,12 @@ const actions = {
       review: state.review
     };
 
-    applicationApi.register( params ).then( response => {
-      return new Promise( ( resolve, reject ) => {
-        if ( response.status ) {
-          resolve( response.msg );
-        }
-
-        reject( response.msg );
-      });
-    }).catch( error => {
+    try {
+      let response = await applicationApi.register( params );
+      return response.msg;
+    } catch ( error ) {
       throw error;
-    });
+    }
   }
 };
 

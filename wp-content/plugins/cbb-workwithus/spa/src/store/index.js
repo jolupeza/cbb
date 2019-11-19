@@ -12,7 +12,13 @@ Vue.use( Vuex );
 export default new Vuex.Store({
   state: {
     step: 1,
-    modal: false
+    modal: false,
+    loading: false,
+    message: {
+      type: 'danger',
+      msg: '',
+      show: false
+    }
   },
   mutations: {
     SET_STEP( state, step ) {
@@ -20,6 +26,14 @@ export default new Vuex.Store({
     },
     SET_MODAL( state, status ) {
       state.modal = status;
+    },
+    SET_LOADING( state, status ) {
+      state.loading = status;
+    },
+    SET_MESSAGE( state, { type, msg, show }) {
+      state.message.type = type;
+      state.message.msg = msg;
+      state.message.show = show;
     }
   },
   actions: {
@@ -28,6 +42,12 @@ export default new Vuex.Store({
     },
     setModal( context, status ) {
       context.commit( 'SET_MODAL', status );
+    },
+    setStatusLoading( context, status ) {
+      context.commit( 'SET_LOADING', status );
+    },
+    setMessage( context, { type, msg, show }) {
+      context.commit( 'SET_MESSAGE', { type, msg, show });
     }
   },
   modules: {
