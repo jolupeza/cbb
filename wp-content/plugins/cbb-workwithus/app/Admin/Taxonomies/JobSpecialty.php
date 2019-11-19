@@ -27,12 +27,17 @@ class JobSpecialty
 
     public function init()
     {
-        $this->loader->add_action('init', $this, 'addTaxonomy');
+        $this->loader->add_action('init', $this, 'unregisterTaxonomy');
         $this->loader->add_action('rest_api_init', $this, 'registerRestRoute');
     }
 
+    public function unregisterTaxonomy()
+    {
+        unregister_taxonomy('jobspecialties');
+    }
+
     /**
-     * Add custom taxonomies jobdegrees to post type jobapplications.
+     * Add custom taxonomies jobspecialties to post type jobapplications.
      */
     public function addTaxonomy()
     {

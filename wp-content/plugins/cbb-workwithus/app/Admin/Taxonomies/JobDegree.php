@@ -27,8 +27,13 @@ class JobDegree
 
     public function init()
     {
-        $this->loader->add_action('init', $this, 'addTaxonomy');
+        $this->loader->add_action('init', $this, 'unregisterTaxonomy');
         $this->loader->add_action('rest_api_init', $this, 'registerRestRoute');
+    }
+
+    public function unregisterTaxonomy()
+    {
+        unregister_taxonomy('jobdegrees');
     }
 
     /**
