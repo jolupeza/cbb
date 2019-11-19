@@ -45,9 +45,13 @@ export default {
         action: 'register_application'
       };
 
-      this.$store.dispatch( 'applications/register', params ).then( ( msg ) => {
-        let params = { type: 'success', msg: msg, show: true };
+      this.$store.dispatch( 'applications/register', params ).then( ( response ) => {
+        let params = { type: response.status ? 'success' : 'danger', msg: response.msg, show: true };
         this.$store.dispatch( 'setMessage', params );
+
+        if ( response.status ) {
+          this.$store.dispatch( 'applications/resetData' );
+        }
       }).catch( msg => {
         let params = { type: 'danger', msg: msg, show: true };
         this.$store.dispatch( 'setMessage', params );

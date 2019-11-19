@@ -123,11 +123,13 @@ const actions = {
     };
 
     try {
-      let response = await applicationApi.register( params );
-      return response.msg;
+      return await applicationApi.register( params );
     } catch ( error ) {
       throw error;
     }
+  },
+  resetData( context ) {
+    context.commit( 'RESET_DATA' );
   }
 };
 
@@ -191,6 +193,27 @@ const mutations = {
   },
   SET_LEVEL_ID( state, id ) {
     state.levelId = id;
+  },
+  RESET_DATA( state ) {
+    state.document = '';
+    state.apepaterno = '';
+    state.apematerno = '';
+    state.name = '';
+    state.gender = null;
+    state.birthday = '';
+    state.age = 18;
+    state.phone = '';
+    state.mobile = '';
+    state.email = '';
+    state.city = null;
+    state.province = null;
+    state.district = null;
+    state.address = '';
+    state.reference = '';
+    state.photo = null;
+    state.studies = [];
+    state.experiences = [];
+    state.review = '';
   }
 };
 

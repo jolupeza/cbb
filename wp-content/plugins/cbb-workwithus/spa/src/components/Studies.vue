@@ -29,7 +29,7 @@
               <ValidationProvider name="grado" rules="required" v-slot="{ errors }">
                 <select name="degree" id="degree" v-model="degree" class="form-control">
                   <option :value="null">Seleccione</option>
-                  <option :value="item.id" v-for="item in degrees" :key="item.id">{{ item.name }}</option>
+                  <option :value="item.id" v-for="item in degrees" :key="item.id">{{ item.title.rendered }}</option>
                 </select>
                 <span class="is-invalid">{{ errors[0] }}</span>
               </ValidationProvider>
@@ -62,7 +62,7 @@
               <ValidationProvider name="especialidad" rules="required" v-slot="{ errors }">
                 <select name="degree" id="specialty" v-model="specialty" class="form-control">
                   <option :value="null">Seleccione</option>
-                  <option v-for="item in specialties" :key="item.id" :value="item.id">{{ item.name }}</option>
+                  <option v-for="item in specialties" :key="item.id" :value="item.id">{{ item.title.rendered }}</option>
                 </select>
                 <span class="is-invalid">{{ errors[0] }}</span>
               </ValidationProvider>
@@ -142,10 +142,10 @@ export default {
   },
 
   computed: {
-    ...mapState( 'jobDegrees', {
+    ...mapState( 'degrees', {
       degrees: state => state.all
     }),
-    ...mapState( 'jobSpecialties', {
+    ...mapState( 'specialties', {
       specialties: state => state.all
     }),
     ...mapGetters({
@@ -155,11 +155,11 @@ export default {
 
   created() {
     if ( 0 === this.degrees.length ) {
-      this.$store.dispatch( 'jobDegrees/retrieve' );
+      this.$store.dispatch( 'degrees/retrieve' );
     }
 
     if ( 0 === this.specialties.length ) {
-      this.$store.dispatch( 'jobSpecialties/retrieve' );
+      this.$store.dispatch( 'specialties/retrieve' );
     }
   },
 

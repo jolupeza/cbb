@@ -2,8 +2,10 @@
 
 namespace CBB_WorkWithUs\Admin;
 
+use CBB_WorkWithUs\Admin\Entities\Degree;
 use CBB_WorkWithUs\Admin\Entities\District;
 use CBB_WorkWithUs\Admin\Entities\Province;
+use CBB_WorkWithUs\Admin\Entities\Specialty;
 use CBB_WorkWithUs\Includes\Loader;
 
 /**
@@ -88,6 +90,12 @@ class Admin
 
         $distric = new District($this->loader, $this->domain);
         $distric->init();
+
+        $degree = new Degree($this->loader, $this->domain);
+        $degree->init();
+
+        $specialty = new Specialty($this->loader, $this->domain);
+        $specialty->init();
     }
 
     /**

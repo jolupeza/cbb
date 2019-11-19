@@ -2,9 +2,7 @@
 
 namespace CBB_WorkWithUs\Admin\Entities;
 
-use CBB_WorkWithUs\Admin\Taxonomies\JobDegree;
 use CBB_WorkWithUs\Admin\Taxonomies\Joblevel;
-use CBB_WorkWithUs\Admin\Taxonomies\JobSpecialty;
 use CBB_WorkWithUs\Includes\Loader;
 
 class Jobapplications
@@ -29,12 +27,6 @@ class Jobapplications
     {
         $adminJobLevels = new Joblevel($this->loader, $this->domain);
         $adminJobLevels->init();
-
-        $jobDegree = new JobDegree($this->loader, $this->domain);
-        $jobDegree->init();
-
-        $jobSpecialty = new JobSpecialty($this->loader, $this->domain);
-        $jobSpecialty->init();
 
         $this->loader->add_action('wp_ajax_register_application', $this, 'register');
         $this->loader->add_action('wp_ajax_nopriv_register_application', $this, 'register');

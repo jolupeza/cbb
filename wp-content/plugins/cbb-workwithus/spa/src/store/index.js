@@ -4,8 +4,8 @@ import cities from '@/store/modules/cities';
 import provinces from '@/store/modules/provinces';
 import districts from '@/store/modules/districts';
 import applications from '@/store/modules/applications';
-import jobDegrees from '@/store/modules/jobDegrees';
-import jobSpecialties from '@/store/modules/jobSpecialties';
+import degrees from '@/store/modules/degrees';
+import specialties from '@/store/modules/specialties';
 
 Vue.use( Vuex );
 
@@ -55,7 +55,7 @@ export default new Vuex.Store({
     provinces,
     districts,
     applications,
-    jobDegrees,
-    jobSpecialties
+    degrees,
+    specialties
   }
 });

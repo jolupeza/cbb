@@ -5,7 +5,8 @@ import axios from 'axios';
 export default {
   async retrieve() {
     try {
-      const url = `${wpData.rest_url}/workwithus/v1/jobdegrees`;
+      const filters = '?_fields=id,title&order=asc&orderby=menu_order&per_page=100';
+      const url = `${wpData.rest_url}/wp/v2/specialties${filters}`;
       const response = await axios.get( url );
       return response.data;
     } catch ( error ) {
