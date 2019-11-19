@@ -105,7 +105,7 @@ const actions = {
       action,
       level: state.levelId,
       document: state.document,
-      apepaterno: state.apematerno,
+      apepaterno: state.apepaterno,
       apematerno: state.apematerno,
       name: state.name,
       gender: state.gender,
@@ -119,7 +119,9 @@ const actions = {
       district: state.district,
       address: state.address,
       reference: state.reference,
-      review: state.review
+      review: state.review,
+      studies: state.studies,
+      experiences: state.experiences
     };
 
     try {

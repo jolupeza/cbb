@@ -1,0 +1,180 @@
+<?php
+/**
+ * Displays the user interface for the CBB WorkWithUs meta box by type content JobApplications.
+ *
+ * This is a partial template that is included by the CBB WorkWithUs
+ * Admin class that is used to display all of the information that is related
+ * to the page meta data for the given page.
+ */
+?>
+<div id="mb-job-applications-id">
+
+<?php
+    $values = get_post_custom( get_the_ID() );
+    $name = !empty($values['mb_name']) ? esc_attr($values['mb_name'][0]) : '';
+    $firstName = !empty($values['mb_ape_paterno']) ? esc_attr($values['mb_ape_paterno'][0]) : '';
+    $lastName = !empty($values['mb_ape_materno']) ?  esc_attr($values['mb_ape_materno'][0]) : '';
+    $document = !empty($values['mb_document']) ?  esc_attr($values['mb_document'][0]) : '';
+    $gender = !empty($values['mb_gender']) ? esc_attr($values['mb_gender'][0]) : '';
+    $birthday = !empty($values['mb_birthday']) ? esc_attr(date('d-m-Y' , strtotime($values['mb_birthday'][0]))) : '';
+    $age = !empty($values['mb_age']) ? esc_attr($values['mb_age'][0]) : '';
+    $phone = !empty($values['mb_phone']) ? esc_attr($values['mb_phone'][0]) : '';
+    $mobile = !empty($values['mb_mobile']) ? esc_attr($values['mb_mobile'][0]) : '';
+    $email = !empty($values['mb_email']) ? esc_attr($values['mb_email'][0]) : '';
+    $address = !empty($values['mb_address']) ? esc_attr($values['mb_address'][0]) : '';
+    $reference = !empty($values['mb_reference']) ? esc_attr($values['mb_reference'][0]) : '';
+    $review = !empty($values['mb_review']) ? esc_attr($values['mb_review'][0]) : '';
+    $studies = !empty($values['mb_studies']) ? unserialize($values['mb_studies'][0]) : '';
+    $experiences = !empty($values['mb_experiences']) ? unserialize($values['mb_experiences'][0]) : '';
+
+wp_nonce_field( 'jobapplications_meta_box_nonce', 'meta_box_nonce' );
+?>
+
+    <!-- Name-->
+    <p class="content-mb">
+        <label for="mb_name">Nombre: </label>
+        <input type="text" name="mb_name" id="mb_name" value="<?php echo $name; ?>" />
+    </p>
+
+    <!-- Firstname -->
+    <p class="content-mb">
+        <label for="mb_apepaterno">Apellido Paterno: </label>
+        <input type="text" name="mb_apepaterno" id="mb_apepaterno" value="<?php echo $firstName; ?>" />
+    </p>
+
+    <!-- Lastname -->
+    <p class="content-mb">
+        <label for="mb_apematerno">Apellido Materno: </label>
+        <input type="text" name="mb_apamaterno" id="mb_apematerno" value="<?php echo $lastName; ?>" />
+    </p>
+
+    <!-- Document -->
+    <p class="content-mb">
+        <label for="mb_document">Documento: </label>
+        <input type="text" name="mb_document" id="mb_document" value="<?php echo $document; ?>" />
+    </p>
+
+    <!-- Gender -->
+    <p class="content-mb">
+        <label for="mb_gender">Género: </label>
+        <select name="mb_gender" id="mb_gender">
+            <option value="" <?php selected($gender, ''); ?>>Indicar</option>
+            <option value="femenino" <?php selected($gender, 'femenino'); ?>><?php esc_attr_e('Femenino'); ?></option>
+            <option value="masculino" <?php selected($gender, 'masculino'); ?>><?php esc_attr_e('Masculino'); ?></option>
+        </select>
+    </p>
+
+    <!-- Document -->
+    <p class="content-mb">
+        <label for="mb_birthday">Fecha de Nacimiento: </label>
+        <input type="text" name="mb_birthday" id="mb_birthday" value="<?php echo $birthday; ?>" />
+    </p>
+
+    <!-- Age -->
+    <p class="content-mb">
+        <label for="mb_age">Edad: </label>
+        <input type="text" name="mb_age" id="mb_age" value="<?php echo $age; ?>" />
+    </p>
+
+    <!-- Phone -->
+    <p class="content-mb">
+        <label for="mb_phone">Teléfono fijo: </label>
+        <input type="text" name="mb_phone" id="mb_phone" value="<?php echo $phone; ?>" />
+    </p>
+
+    <!-- Mobile -->
+    <p class="content-mb">
+        <label for="mb_mobile">Teléfono celular: </label>
+        <input type="text" name="mb_mobile" id="mb_mobile" value="<?php echo $mobile; ?>" />
+    </p>
+
+    <!-- Email -->
+    <p class="content-mb">
+        <label for="mb_email">Correo electrónico: </label>
+        <input type="email" name="mb_email" id="mb_email" value="<?php echo $email; ?>" />
+    </p>
+
+    <!-- Address -->
+    <p class="content-mb">
+        <label for="mb_address">Dirección: </label>
+        <input type="text" name="mb_address" id="mb_address" value="<?php echo $address; ?>" />
+    </p>
+
+    <!-- Reference -->
+    <p class="content-mb">
+        <label for="mb_reference">Referencia: </label>
+        <textarea rows="6" name="mb_reference" id="mb_reference"><?php echo $reference; ?>"</textarea>
+    </p>
+
+    <!-- Review -->
+    <p class="content-mb">
+        <label for="mb_review">Reseña: </label>
+        <textarea rows="6" name="mb_review" id="mb_review"><?php echo $review; ?>"</textarea>
+    </p>
+
+    <article class="Fields__table">
+        <h3 class="hndle">Estudios Realizados</h3>
+        <?php if (count($studies)) : ?>
+            <table class="widefat fixed striped">
+                <thead>
+                <tr>
+                    <td class="manage-column column-cb check-column">ID</td>
+                    <td class="manage-column">Carrera Profesional</td>
+                    <td class="manage-column">Institución</td>
+                    <td class="manage-column">Grado Acad.</td>
+                    <td class="manage-column">Inicio</td>
+                    <td class="manage-column">Fin</td>
+                    <td class="manage-column">Especialidad</td>
+                    <td class="manage-column">Tlf. Fijo</td>
+                    <td class="manage-column">Celular</td>
+                    <td class="manage-column">Correo</td>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($studies as $index => $study) : ?>
+                    <tr>
+                        <td><?php esc_attr_e($index + 1); ?></td>
+                        <td><?php esc_attr_e($study['profession']); ?></td>
+                        <td><?php esc_attr_e($study['institution']); ?></td>
+                        <td><?php esc_attr_e(get_post($study['degree'])->post_title); ?></td>
+                        <td><?php esc_attr_e(date('d-m-Y', strtotime($study['dateStart']))); ?></td>
+                        <td><?php esc_attr_e(date('d-m-Y', strtotime($study['dateEnd']))); ?></td>
+                        <td><?php esc_attr_e(get_post($study['specialty'])->post_title); ?></td>
+                        <td><?php esc_attr_e($study['phone']); ?></td>
+                        <td><?php esc_attr_e($study['mobile']); ?></td>
+                        <td><?php esc_attr_e($study['email']); ?></td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        <?php endif; ?>
+    </article>
+
+    <article class="Fields__table">
+        <h3 class="hndle">Experiencia</h3>
+        <?php if (count($experiences)) : ?>
+            <table class="widefat fixed striped">
+                <thead>
+                <tr>
+                    <td class="manage-column column-cb check-column">ID</td>
+                    <td class="manage-column">Institución</td>
+                    <td class="manage-column">Cargo</td>
+                    <td class="manage-column">Inicio</td>
+                    <td class="manage-column">Fin</td>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($experiences as $index => $experience) : ?>
+                    <tr>
+                        <td><?php esc_attr_e($index + 1); ?></td>
+                        <td><?php esc_attr_e($experience['institution']); ?></td>
+                        <td><?php esc_attr_e($experience['job']); ?></td>
+                        <td><?php esc_attr_e(date('d-m-Y', strtotime($experience['dateStart']))); ?></td>
+                        <td><?php esc_attr_e(date('d-m-Y', strtotime($experience['dateEnd']))); ?></td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        <?php endif; ?>
+    </article>
+</div><!-- #mb-provinces-id -->

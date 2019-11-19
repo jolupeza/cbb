@@ -28,6 +28,8 @@ class Jobapplications
         $adminJobLevels = new Joblevel($this->loader, $this->domain);
         $adminJobLevels->init();
 
+        $this->loader->add_action('add_meta_boxes', $this, 'cdMbJobapplicationsAdd');
+
         $this->loader->add_action('wp_ajax_register_application', $this, 'register');
         $this->loader->add_action('wp_ajax_nopriv_register_application', $this, 'register');
     }
@@ -66,6 +68,8 @@ class Jobapplications
         $data['reference'] = sanitize_text_field($_POST['reference']);
         $data['review'] = sanitize_text_field($_POST['review']);
         $data['level'] = (int)sanitize_text_field($_POST['level']);
+        $data['studies'] = $_POST['studies'];
+        $data['experiences'] = $_POST['experiences'];
 
         $this->saveApplication($data);
 
@@ -81,7 +85,8 @@ class Jobapplications
             && (strlen($data['document']) >= 8 || strlen($data['document']) <= 15) && !empty($data['birthday'])
             && (!empty($data['age']) && ($data['age'] >= 18 || $data['age'] <= 80 ))
             && (!empty($data['email']) && is_email($data['email']))
-            && !empty($data['address']);
+            && !empty($data['address'])
+            && count($data['studies']) > 0 && count($data['experiences']) > 0;
     }
 
     protected function saveApplication($data)
@@ -90,12 +95,12 @@ class Jobapplications
             'post_author' => 1,
             'post_status' => 'publish',
             'post_type' => 'jobapplications',
-            'post_title' => "{$data['name']} {$data['apepaterno']} {$data['apematerno']}"
+            'post_title' => "{$data['name']} {$data['apepaterno']} {$data['apematerno']} - {$data['email']}"
         ));
 
         update_post_meta($postId, 'mb_name', $data['name']);
         update_post_meta($postId, 'mb_ape_paterno', $data['apepaterno']);
-        update_post_meta($postId, 'mb_ap_materno', $data['apematerno']);
+        update_post_meta($postId, 'mb_ape_materno', $data['apematerno']);
         update_post_meta($postId, 'mb_document', $data['document']);
         update_post_meta($postId, 'mb_gender', $data['gender']);
         update_post_meta($postId, 'mb_birthday', $data['birthday']);
@@ -106,6 +111,8 @@ class Jobapplications
         update_post_meta($postId, 'mb_address', $data['address']);
         update_post_meta($postId, 'mb_reference', $data['reference']);
         update_post_meta($postId, 'mb_review', $data['review']);
+        update_post_meta($postId, 'mb_studies', $data['studies']);
+        update_post_meta($postId, 'mb_experiences', $data['experiences']);
 
         wp_set_object_terms($postId, $data['level'], 'joblevels');
     }
@@ -114,19 +121,24 @@ class Jobapplications
      * Registers the meta box that will be used to display all of the post meta data
      * associated with post type jobapplications.
      */
-    public function cd_mb_contacts_add()
+    public function cdMbJobapplicationsAdd()
     {
         add_meta_box(
-            'mb-contacts-id', 'Datos del Usuario', array($this, 'render_mb_contacts'), 'contacts', 'normal', 'core'
+            'mb-job-applications-id',
+            'Datos del Postulante',
+            array($this, 'renderMbJobApplications'),
+            'jobapplications',
+            'normal',
+            'core'
         );
     }
 
     /**
      * Requires the file that is used to display the user interface of the post meta box.
      */
-    public function render_mb_contacts()
+    public function renderMbJobApplications()
     {
-        require_once plugin_dir_path(__FILE__).'partials/vm-mb-contacts.php';
+        require_once plugin_dir_path(__FILE__).'partials/cbb-mb-job-applications.php';
     }
 
     public function custom_columns_contacts($columns)
