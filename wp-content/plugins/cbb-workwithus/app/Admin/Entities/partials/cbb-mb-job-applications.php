@@ -112,69 +112,69 @@ wp_nonce_field( 'jobapplications_meta_box_nonce', 'meta_box_nonce' );
         <textarea rows="6" name="mb_review" id="mb_review"><?php echo $review; ?>"</textarea>
     </p>
 
-    <article class="Fields__table">
-        <h3 class="hndle">Estudios Realizados</h3>
-        <?php if (count($studies)) : ?>
+    <?php if (!empty($studies)) : ?>
+        <article class="Fields__table">
+            <h3 class="hndle">Estudios Realizados</h3>
             <table class="widefat fixed striped">
-                <thead>
-                <tr>
-                    <td class="manage-column column-cb check-column">ID</td>
-                    <td class="manage-column">Carrera Profesional</td>
-                    <td class="manage-column">Institución</td>
-                    <td class="manage-column">Grado Acad.</td>
-                    <td class="manage-column">Inicio</td>
-                    <td class="manage-column">Fin</td>
-                    <td class="manage-column">Especialidad</td>
-                    <td class="manage-column">Tlf. Fijo</td>
-                    <td class="manage-column">Celular</td>
-                    <td class="manage-column">Correo</td>
-                </tr>
-                </thead>
-                <tbody>
-                <?php foreach ($studies as $index => $study) : ?>
+                    <thead>
                     <tr>
-                        <td><?php esc_attr_e($index + 1); ?></td>
-                        <td><?php esc_attr_e($study['profession']); ?></td>
-                        <td><?php esc_attr_e($study['institution']); ?></td>
-                        <td><?php esc_attr_e(get_post($study['degree'])->post_title); ?></td>
-                        <td><?php esc_attr_e(date('d-m-Y', strtotime($study['dateStart']))); ?></td>
-                        <td><?php esc_attr_e(date('d-m-Y', strtotime($study['dateEnd']))); ?></td>
-                        <td><?php esc_attr_e(get_post($study['specialty'])->post_title); ?></td>
-                        <td><?php esc_attr_e($study['phone']); ?></td>
-                        <td><?php esc_attr_e($study['mobile']); ?></td>
-                        <td><?php esc_attr_e($study['email']); ?></td>
+                        <td class="manage-column column-cb check-column">ID</td>
+                        <td class="manage-column">Carrera Profesional</td>
+                        <td class="manage-column">Institución</td>
+                        <td class="manage-column">Grado Acad.</td>
+                        <td class="manage-column">Inicio</td>
+                        <td class="manage-column">Fin</td>
+                        <td class="manage-column">Especialidad</td>
+                        <td class="manage-column">Tlf. Fijo</td>
+                        <td class="manage-column">Celular</td>
+                        <td class="manage-column">Correo</td>
                     </tr>
-                <?php endforeach; ?>
-                </tbody>
-            </table>
-        <?php endif; ?>
-    </article>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($studies as $index => $study) : ?>
+                        <tr>
+                            <td><?php esc_attr_e($index + 1); ?></td>
+                            <td><?php esc_attr_e($study['profession']); ?></td>
+                            <td><?php esc_attr_e($study['institution']); ?></td>
+                            <td><?php esc_attr_e(get_post($study['degree'])->post_title); ?></td>
+                            <td><?php esc_attr_e(date('d-m-Y', strtotime($study['dateStart']))); ?></td>
+                            <td><?php esc_attr_e(date('d-m-Y', strtotime($study['dateEnd']))); ?></td>
+                            <td><?php esc_attr_e(get_post($study['specialty'])->post_title); ?></td>
+                            <td><?php esc_attr_e($study['phone']); ?></td>
+                            <td><?php esc_attr_e($study['mobile']); ?></td>
+                            <td><?php esc_attr_e($study['email']); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+        </article>
+    <?php endif; ?>
 
-    <article class="Fields__table">
-        <h3 class="hndle">Experiencia</h3>
-        <?php if (count($experiences)) : ?>
+    <?php if (!empty($experiences)) : ?>
+        <article class="Fields__table">
+            <h3 class="hndle">Experiencia</h3>
             <table class="widefat fixed striped">
-                <thead>
-                <tr>
-                    <td class="manage-column column-cb check-column">ID</td>
-                    <td class="manage-column">Institución</td>
-                    <td class="manage-column">Cargo</td>
-                    <td class="manage-column">Inicio</td>
-                    <td class="manage-column">Fin</td>
-                </tr>
-                </thead>
-                <tbody>
-                <?php foreach ($experiences as $index => $experience) : ?>
+                    <thead>
                     <tr>
-                        <td><?php esc_attr_e($index + 1); ?></td>
-                        <td><?php esc_attr_e($experience['institution']); ?></td>
-                        <td><?php esc_attr_e($experience['job']); ?></td>
-                        <td><?php esc_attr_e(date('d-m-Y', strtotime($experience['dateStart']))); ?></td>
-                        <td><?php esc_attr_e(date('d-m-Y', strtotime($experience['dateEnd']))); ?></td>
+                        <td class="manage-column column-cb check-column">ID</td>
+                        <td class="manage-column">Institución</td>
+                        <td class="manage-column">Cargo</td>
+                        <td class="manage-column">Inicio</td>
+                        <td class="manage-column">Fin</td>
                     </tr>
-                <?php endforeach; ?>
-                </tbody>
-            </table>
-        <?php endif; ?>
-    </article>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($experiences as $index => $experience) : ?>
+                        <tr>
+                            <td><?php esc_attr_e($index + 1); ?></td>
+                            <td><?php esc_attr_e($experience['institution']); ?></td>
+                            <td><?php esc_attr_e($experience['job']); ?></td>
+                            <td><?php esc_attr_e(date('d-m-Y', strtotime($experience['dateStart']))); ?></td>
+                            <td><?php esc_attr_e(date('d-m-Y', strtotime($experience['dateEnd']))); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+        </article>
+    <?php endif; ?>
 </div><!-- #mb-provinces-id -->
