@@ -85,6 +85,9 @@ class Jobapplications
         $data['phone'] = sanitize_text_field($_POST['phone']);
         $data['mobile'] = sanitize_text_field($_POST['mobile']);
         $data['email'] = sanitize_email($_POST['email']);
+        $data['city'] = sanitize_text_field($_POST['city']);
+        $data['province'] = sanitize_text_field($_POST['province']);
+        $data['district'] = sanitize_text_field($_POST['district']);
         $data['address'] = sanitize_text_field($_POST['address']);
         $data['reference'] = sanitize_text_field($_POST['reference']);
         $data['review'] = sanitize_text_field($_POST['review']);
@@ -111,6 +114,7 @@ class Jobapplications
             && (strlen($data['document']) >= 8 || strlen($data['document']) <= 15) && !empty($data['birthday'])
             && (!empty($data['age']) && ($data['age'] >= 18 || $data['age'] <= 80 ))
             && (!empty($data['email']) && is_email($data['email']))
+            && !empty($data['city']) && !empty($data['province']) && !empty($data['district'])
             && !empty($data['address'])
             && count($data['studies']) > 0 && count($data['experiences']) > 0;
     }
@@ -160,6 +164,9 @@ class Jobapplications
         add_post_meta($postId, 'mb_phone', $data['phone']);
         add_post_meta($postId, 'mb_mobile', $data['mobile']);
         add_post_meta($postId, 'mb_email', $data['email']);
+        add_post_meta($postId, 'mb_city', $data['city']);
+        add_post_meta($postId, 'mb_province', $data['province']);
+        add_post_meta($postId, 'mb_district', $data['district']);
         add_post_meta($postId, 'mb_address', $data['address']);
         add_post_meta($postId, 'mb_reference', $data['reference']);
         add_post_meta($postId, 'mb_review', $data['review']);

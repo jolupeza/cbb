@@ -1,4 +1,7 @@
 import applicationApi from '@/api/application';
+import dataCities from '@/assets/resources/cities.json';
+import dataProvinces from '@/assets/resources/provinces.json';
+import dataDistricts from '@/assets/resources/districts.json';
 
 const state = {
   levelId: null,
@@ -119,9 +122,9 @@ const actions = {
     formData.append( 'phone', state.phone );
     formData.append( 'mobile', state.mobile );
     formData.append( 'email', state.email );
-    formData.append( 'city', state.city );
-    formData.append( 'province', state.province );
-    formData.append( 'district', state.district );
+    formData.append( 'city', methods.findNameCity( state.city ) );
+    formData.append( 'province', methods.findNameProvince( state.province ) );
+    formData.append( 'district', methods.findNameDistrict( state.district ) );
     formData.append( 'address', state.address );
     formData.append( 'reference', state.reference );
     formData.append( 'review', state.review );
@@ -253,6 +256,24 @@ const mutations = {
     state.cv.file = null;
     state.cv.name = '';
     state.cv.loaded = false;
+  }
+};
+
+const methods = {
+  findNameCity( idCity ) {
+    return dataCities.find( city => {
+      return city.id === idCity;
+    }).name;
+  },
+  findNameProvince( idProvince ) {
+    return dataProvinces.find( province => {
+      return province.id === idProvince;
+    }).name;
+  },
+  findNameDistrict( idDistrict ) {
+    return dataDistricts.find( district => {
+      return district.id === idDistrict;
+    }).name;
   }
 };
 

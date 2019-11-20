@@ -24,7 +24,6 @@ const actions = {
         context.commit( 'RETRIEVE', districts );
         resolve();
       }).catch( error => {
-        console.error( error );
         reject( error );
       });
     });

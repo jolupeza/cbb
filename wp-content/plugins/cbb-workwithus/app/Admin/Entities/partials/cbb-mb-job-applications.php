@@ -21,6 +21,9 @@
     $phone = !empty($values['mb_phone']) ? esc_attr($values['mb_phone'][0]) : '';
     $mobile = !empty($values['mb_mobile']) ? esc_attr($values['mb_mobile'][0]) : '';
     $email = !empty($values['mb_email']) ? esc_attr($values['mb_email'][0]) : '';
+    $city = !empty($values['mb_city']) ? esc_attr($values['mb_city'][0]) : '';
+    $province = !empty($values['mb_province']) ? esc_attr($values['mb_province'][0]) : '';
+    $district = !empty($values['mb_district']) ? esc_attr($values['mb_district'][0]) : '';
     $address = !empty($values['mb_address']) ? esc_attr($values['mb_address'][0]) : '';
     $reference = !empty($values['mb_reference']) ? esc_attr($values['mb_reference'][0]) : '';
     $review = !empty($values['mb_review']) ? esc_attr($values['mb_review'][0]) : '';
@@ -92,6 +95,24 @@ wp_nonce_field( 'jobapplications_meta_box_nonce', 'meta_box_nonce' );
     <p class="content-mb">
         <label for="mb_email">Correo electrónico: </label>
         <input type="email" name="mb_email" id="mb_email" value="<?php echo $email; ?>" />
+    </p>
+
+    <!-- City -->
+    <p class="content-mb">
+        <label for="mb_city">Departamento: </label>
+        <input type="text" name="mb_city" id="mb_city" value="<?php echo $city; ?>" />
+    </p>
+
+    <!-- Province -->
+    <p class="content-mb">
+        <label for="mb_province">Provincia: </label>
+        <input type="text" name="mb_province" id="mb_province" value="<?php echo $province; ?>" />
+    </p>
+
+    <!-- District -->
+    <p class="content-mb">
+        <label for="mb_district">Distrito: </label>
+        <input type="text" name="mb_district" id="mb_district" value="<?php echo $district; ?>" />
     </p>
 
     <!-- Address -->
