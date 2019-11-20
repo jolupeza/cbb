@@ -20,6 +20,10 @@ for ( let rule in rules ) {
   });
 }
 
+extend( 'mimes', {
+  message: ( field, values ) => 'El archivo cargado no es válido.'
+});
+
 Vue.component( 'ValidationProvider', ValidationProvider );
 Vue.component( 'ValidationObserver', ValidationObserver );
 

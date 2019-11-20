@@ -128,6 +128,54 @@ export default {
         height: 38px;
       }
     }
+    &__fileWrapper {
+      align-items: center;
+      border: 1px solid $secondColorAlt;
+      border-radius: 0.5em;
+      color: $secondColorAlt;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      overflow: hidden;
+      padding: 1em;
+      position: relative;
+      &::after {
+        content: 'Adjuntar foto';
+        font-family: $fontSource;
+        font-size: 0.875em;
+        font-weight: 300;
+        margin-top: 0.5em;
+        text-align: center;
+        width: 100%;
+      }
+      img {
+        max-width: 120px;
+      }
+      .glyphicon {
+        display: block;
+        font-size: 3em;
+        text-align: center;
+        width: 100%;
+      }
+      input[type=file] {
+        background-color: $white;
+        cursor: inherit;
+        display: block;
+        height: 100%;
+        width: 100%;
+        opacity: 0;
+        outline: none;
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+      + .is-invalid {
+        color: $firstColorAlt;
+        display: block;
+        font-size: 0.875em;
+        text-align: center;
+      }
+    }
   }
   &__Separator {
     border-top: 1px solid $secondColorAlt;

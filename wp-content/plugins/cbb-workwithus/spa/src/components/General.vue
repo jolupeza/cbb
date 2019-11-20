@@ -8,7 +8,7 @@
           <div class="row">
             <div class="col-sm-7">
               <div class="row">
-                <div class="col-sm-5">
+                <div class="col-sm-7 col-md-5">
                   <div class="form-group">
                     <label for="document">Documento de Identidad: <span>(*)</span></label>
                     <ValidationProvider name="documento de identidad" rules="required|numeric|min:8|max:15" v-slot="{ errors }">
@@ -17,11 +17,14 @@
                     </ValidationProvider>
                   </div>
                 </div>
-                <div class="col-sm-7">
+                <div class="col-sm-4 col-md-3">
                   <div class="form-group">
-                    <label for="photo">Adjuntar foto:</label>
                     <ValidationProvider name="foto" ref="photo" rules="required|image" v-slot="{ validate, errors }">
-                      <input type="file" class="form-control" id="photo" @change="handlePhotoChange($event) || validate($event)" />
+                      <article class="WorkWithUs__Form__fileWrapper">
+                        <i v-if="!avatar.loaded" class="glyphicon glyphicon-user" aria-hidden="true"></i>
+                        <img v-else :src="avatar.result" class="img-responsive" alt="avatar" />
+                        <input type="file" id="photo" @change="handlePhotoChange($event) || validate($event)" />
+                      </article>
                       <span class="is-invalid">{{ errors[0] }}</span>
                     </ValidationProvider>
                   </div>
@@ -212,7 +215,8 @@ export default {
       avatar: {
         file: null,
         name: '',
-        loaded: false
+        loaded: false,
+        result: null
       },
       typesPhoto: [ 'image/jpeg', 'image/png' ]
     };
@@ -394,6 +398,12 @@ export default {
         this.avatar.name = files[0].name;
         this.avatar.loaded = true;
 
+        let fr = new FileReader();
+        fr.onload = () => {
+          this.avatar.result = fr.result;
+        };
+        fr.readAsDataURL( files[0]);
+
         this.$store.dispatch( 'applications/setPhoto', {
           file: this.avatar.file,
           name: this.avatar.name,
@@ -415,6 +425,7 @@ export default {
       this.avatar.file = null;
       this.avatar.name = '';
       this.avatar.loaded = false;
+      this.avatar.result = null;
 
       this.$store.dispatch( 'applications/resetPhoto' );
     }

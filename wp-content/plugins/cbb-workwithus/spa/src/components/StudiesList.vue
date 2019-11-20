@@ -18,7 +18,7 @@
           <td>{{ index + 1  }}</td>
           <td>{{ item.profession }}</td>
           <td>{{ item.institution }}</td>
-          <td>{{ item.degree }}</td>
+<!--          <td>{{ item.degree }}</td>-->
           <td>{{ item.dateStart }}</td>
           <td>{{ item.dateEnd }}</td>
 <!--          <td>{{ item.specialty }}</td>-->
