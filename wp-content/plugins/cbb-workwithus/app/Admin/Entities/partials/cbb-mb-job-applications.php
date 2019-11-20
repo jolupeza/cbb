@@ -103,13 +103,13 @@ wp_nonce_field( 'jobapplications_meta_box_nonce', 'meta_box_nonce' );
     <!-- Reference -->
     <p class="content-mb">
         <label for="mb_reference">Referencia: </label>
-        <textarea rows="6" name="mb_reference" id="mb_reference"><?php echo $reference; ?>"</textarea>
+        <textarea rows="6" name="mb_reference" id="mb_reference"><?php echo $reference; ?></textarea>
     </p>
 
     <!-- Review -->
     <p class="content-mb">
         <label for="mb_review">Reseña: </label>
-        <textarea rows="6" name="mb_review" id="mb_review"><?php echo $review; ?>"</textarea>
+        <textarea rows="6" name="mb_review" id="mb_review"><?php echo $review; ?></textarea>
     </p>
 
     <?php if (!empty($studies)) : ?>

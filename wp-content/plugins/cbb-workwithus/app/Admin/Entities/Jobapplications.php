@@ -62,9 +62,12 @@ class Jobapplications
             wp_send_json($result);
         }
 
-        $data['cv'] = $_FILES['cv'];
+        $data['cv'] = isset($_FILES['cv']) ? $_FILES['cv'] : null;
 
-        // @TODO Validar formato CV y size
+        if (!$this->checkCv($data['cv'])) {
+            $result['msg'] = 'Su cv no es válido. Por favor vuelva a cargarla.';
+            wp_send_json($result);
+        }
 
         if (!empty($this->uploadDir['basedir'])) {
             if (!file_exists("{$this->uploadDir['basedir']}/postulantes")) {
@@ -115,6 +118,11 @@ class Jobapplications
     protected function checkPhoto($photo)
     {
         return !empty($photo) && in_array($photo['type'], $this->typesImage) && $photo['size'] <= 2097152;
+    }
+
+    protected function checkCv($cv)
+    {
+        return !is_null($cv) ? in_array($cv['type'], $this->typesCv) && $cv['size'] <= 3145728 : true;
     }
 
     protected function saveApplication($data)

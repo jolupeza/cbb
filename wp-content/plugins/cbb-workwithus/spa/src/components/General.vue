@@ -19,7 +19,7 @@
                 </div>
                 <div class="col-sm-4 col-md-3">
                   <div class="form-group">
-                    <ValidationProvider name="foto" ref="photo" rules="required|image" v-slot="{ validate, errors }">
+                    <ValidationProvider name="foto" ref="photo" rules="required|image|size:2048" v-slot="{ validate, errors }">
                       <article class="WorkWithUs__Form__fileWrapper">
                         <i v-if="!avatar.loaded" class="glyphicon glyphicon-user" aria-hidden="true"></i>
                         <img v-else :src="avatar.result" class="img-responsive" alt="avatar" />
@@ -391,9 +391,7 @@ export default {
       let tgt = event.target || window.event.srcElement;
       let files = tgt.files;
 
-      // @TODO Valid max size file
-
-      if ( this.checkTypePhoto( files[0].type ) ) {
+      if ( this.checkTypePhoto( files[0].type ) && this.checkSizePhoto( files[0].size ) ) {
         this.avatar.file = files[0];
         this.avatar.name = files[0].name;
         this.avatar.loaded = true;
@@ -420,6 +418,9 @@ export default {
     },
     checkTypePhoto( type ) {
       return this.typesPhoto.includes( type );
+    },
+    checkSizePhoto( size ) {
+      return 2097152 > size;
     },
     resetAvatar() {
       this.avatar.file = null;

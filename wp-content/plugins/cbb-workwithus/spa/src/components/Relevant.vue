@@ -7,7 +7,7 @@
         <div class="row">
           <div class="col-xs-12">
             <div class="form-group">
-              <label for="review">Reseña: <span>(*)</span></label>
+              <label for="review">Reseña:</label>
               <ValidationProvider rules="" v-slot="{ errors }">
                 <textarea class="form-control" id="review" name="review" v-model="review" rows="8"></textarea>
                 <span class="is-invalid">{{ errors[0] }}</span>
@@ -20,7 +20,7 @@
           <div class="col-sm-6">
             <div class="form-group">
               <label for="cv">Adjuntar tu CV: (Formatos válidos: DOC, DOCX y PDF)</label>
-              <ValidationProvider name="CV" rules="mimes:application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/pdf" v-slot="{ validate, errors }">
+              <ValidationProvider name="CV" rules="mimes:application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/pdf|size:3072" v-slot="{ validate, errors }">
                 <input type="file" class="form-control" id="cv" name="cv" @change="handleCvChange($event) || validate($event)" />
                 <span class="is-invalid">{{ errors[0] }}</span>
               </ValidationProvider>
@@ -34,7 +34,7 @@
 
         <div class="WorkWithUs__buttons">
           <button class="WorkWithUs__button WorkWithUs__button--second" @click.prevent="goToStep(3)"><i class="fas fa-chevron-left"></i> Anterior</button>
-          <button type="submit" class="WorkWithUs__button WorkWithUs__button--first" :disabled="!valid">Finalizar <i class="fas fa-check"></i></button>
+          <button type="submit" class="WorkWithUs__button WorkWithUs__button--first">Finalizar <i class="fas fa-check"></i></button>
         </div>
       </ValidationObserver>
     </div>
@@ -93,9 +93,7 @@ export default {
       let tgt = event.target || window.event.srcElement;
       let files = tgt.files;
 
-      // @TODO Valid max size file
-
-      if ( this.checkTypeCv( files[0].type ) ) {
+      if ( this.checkTypeCv( files[0].type ) && this.checkSizeCv( files[0].size ) ) {
         this.$store.dispatch( 'applications/setCv', {
           file: files[0],
           name: files[0].name,
@@ -109,6 +107,9 @@ export default {
     },
     checkTypeCv( type ) {
       return this.typesCv.includes( type );
+    },
+    checkSizeCv( size ) {
+      return 3145728 > size;
     }
   }
 };
