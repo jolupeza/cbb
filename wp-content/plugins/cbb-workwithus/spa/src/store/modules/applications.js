@@ -17,7 +17,8 @@ const state = {
   district: null,
   address: '',
   reference: '',
-  photo: null,
+  photo: { file: null, name: '', loaded: false },
+  cv: { file: null, name: '', loaded: false },
   studies: [],
   experiences: [],
   review: ''
@@ -93,42 +94,59 @@ const actions = {
       resolve();
     });
   },
-  setPhoto( context, photo ) {
-    context.commit( 'SET_PHOTO', photo );
+  setPhoto( context, { file, name, loaded }) {
+    context.commit( 'SET_PHOTO', { file, name, loaded });
+  },
+  setCv( context, { file, name, loaded }) {
+    context.commit( 'SET_CV', { file, name, loaded });
   },
   setLevelId( context, id ) {
     context.commit( 'SET_LEVEL_ID', id );
   },
   async register({ state }, { nonce, action }) {
-    let params = {
-      nonce,
-      action,
-      level: state.levelId,
-      document: state.document,
-      apepaterno: state.apepaterno,
-      apematerno: state.apematerno,
-      name: state.name,
-      gender: state.gender,
-      birthday: state.birthday,
-      age: state.age,
-      phone: state.phone,
-      mobile: state.mobile,
-      email: state.email,
-      city: state.city,
-      province: state.province,
-      district: state.district,
-      address: state.address,
-      reference: state.reference,
-      review: state.review,
-      studies: state.studies,
-      experiences: state.experiences
-    };
+    let formData = new FormData();
+
+    formData.append( 'nonce', nonce );
+    formData.append( 'action', action );
+    formData.append( 'level', state.levelId );
+    formData.append( 'document', state.document );
+    formData.append( 'apepaterno', state.apepaterno );
+    formData.append( 'apematerno', state.apematerno );
+    formData.append( 'name', state.name );
+    formData.append( 'gender', state.gender );
+    formData.append( 'birthday', state.birthday );
+    formData.append( 'age', state.age );
+    formData.append( 'phone', state.phone );
+    formData.append( 'mobile', state.mobile );
+    formData.append( 'email', state.email );
+    formData.append( 'city', state.city );
+    formData.append( 'province', state.province );
+    formData.append( 'district', state.district );
+    formData.append( 'address', state.address );
+    formData.append( 'reference', state.reference );
+    formData.append( 'review', state.review );
+    formData.append( 'studies', JSON.stringify( state.studies ) );
+    formData.append( 'experiences', JSON.stringify( state.experiences ) );
+
+    if ( state.photo.loaded ) {
+      formData.append( 'photo', state.photo.file, state.photo.name );
+    }
+
+    if ( state.cv.loaded ) {
+      formData.append( 'cv', state.cv.file, state.cv.name );
+    }
 
     try {
-      return await applicationApi.register( params );
+      return await applicationApi.register( formData );
     } catch ( error ) {
       throw error;
     }
+  },
+  resetPhoto( context ) {
+    context.commit( 'RESET_PHOTO' );
+  },
+  resetCv( context ) {
+    context.commit( 'RESET_CV' );
   },
   resetData( context ) {
     context.commit( 'RESET_DATA' );
@@ -190,8 +208,15 @@ const mutations = {
   SET_REVIEW( state, review ) {
     state.review = review;
   },
-  SET_PHOTO( state, photo ) {
-    state.photo = photo;
+  SET_PHOTO( state, { file, name, loaded }) {
+    state.photo.file = file;
+    state.photo.name = name;
+    state.photo.loaded = loaded;
+  },
+  SET_CV( state, { file, name, loaded }) {
+    state.cv.file = file;
+    state.cv.name = name;
+    state.cv.loaded = loaded;
   },
   SET_LEVEL_ID( state, id ) {
     state.levelId = id;
@@ -212,10 +237,22 @@ const mutations = {
     state.district = null;
     state.address = '';
     state.reference = '';
-    state.photo = null;
+    state.photo.file = null;
+    state.photo.name = '';
+    state.photo.loaded = false;
     state.studies = [];
     state.experiences = [];
     state.review = '';
+  },
+  RESET_PHOTO( state ) {
+    state.photo.file = null;
+    state.photo.name = '';
+    state.photo.loaded = false;
+  },
+  RESET_CV( state ) {
+    state.cv.file = null;
+    state.cv.name = '';
+    state.cv.loaded = false;
   }
 };
 

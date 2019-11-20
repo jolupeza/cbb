@@ -204,7 +204,6 @@
 </template>
 <script>
 import { mapState } from 'vuex';
-
 export default {
   name: 'General',
 
@@ -214,7 +213,8 @@ export default {
         file: null,
         name: '',
         loaded: false
-      }
+      },
+      typesPhoto: [ 'image/jpeg', 'image/png' ]
     };
   },
 
@@ -387,13 +387,36 @@ export default {
       let tgt = event.target || window.event.srcElement;
       let files = tgt.files;
 
-      const isValid = this.$refs.photo.validate();
+      // @TODO Valid max size file
 
-      console.info( files );
-      console.warn( isValid );
+      if ( this.checkTypePhoto( files[0].type ) ) {
+        this.avatar.file = files[0];
+        this.avatar.name = files[0].name;
+        this.avatar.loaded = true;
+
+        this.$store.dispatch( 'applications/setPhoto', {
+          file: this.avatar.file,
+          name: this.avatar.name,
+          loaded: this.avatar.loaded
+        });
+
+        return;
+      }
+
+      this.resetAvatar();
     },
     next() {
       this.$store.dispatch( 'setStep', 2 );
+    },
+    checkTypePhoto( type ) {
+      return this.typesPhoto.includes( type );
+    },
+    resetAvatar() {
+      this.avatar.file = null;
+      this.avatar.name = '';
+      this.avatar.loaded = false;
+
+      this.$store.dispatch( 'applications/resetPhoto' );
     }
   }
 };

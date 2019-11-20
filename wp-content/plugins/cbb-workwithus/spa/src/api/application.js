@@ -1,12 +1,15 @@
 /* globals wpData */
 
 import axios from 'axios';
-import qs from 'qs';
 
 export default {
   async register( params ) {
     try {
-      const response = await axios.post( wpData.ajaxUrl, qs.stringify( params ) );
+      const response = await axios.post( wpData.ajaxUrl, params, {
+        headers: {
+          'Content-Type': 'multipart/form-fata'
+        }
+      });
       return response.data;
     } catch ( error ) {
       if ( error.response ) {

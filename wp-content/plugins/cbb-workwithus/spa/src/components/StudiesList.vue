@@ -6,11 +6,11 @@
           <th>N&deg;</th>
           <th>Carrera Profesional</th>
           <th>Institución</th>
-          <th>Grado</th>
+<!--          <th>Grado</th>-->
           <th>Inicio</th>
           <th>Fin</th>
 <!--          <th>Especialidad</th>-->
-          <th>Acción</th>
+<!--          <th>Acción</th>-->
         </tr>
       </thead>
       <tbody v-if="studies.length > 0">
@@ -22,7 +22,7 @@
           <td>{{ item.dateStart }}</td>
           <td>{{ item.dateEnd }}</td>
 <!--          <td>{{ item.specialty }}</td>-->
-          <td>botones</td>
+<!--          <td>botones</td>-->
         </tr>
       </tbody>
       <tbody v-else>

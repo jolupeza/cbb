@@ -18,13 +18,13 @@
 
         <div class="row">
           <div class="col-sm-6">
-            <!--<div class="form-group">
-              <label for="photo">Adjuntar foto:</label>
-              <ValidationProvider name="photo" rules="image" v-slot="{ validate, errors }">
-                <input type="file" class="form-control" id="photo" name="photo" @change="validate($event) || handlePhotoChange($event)" />
+            <div class="form-group">
+              <label for="cv">Adjuntar tu CV:</label>
+              <ValidationProvider name="cv" ref="cv" rules="" v-slot="{ validate, errors }">
+                <input type="file" class="form-control" id="cv" @change="handleCvChange($event) || validate($event)" />
                 <span class="is-invalid">{{ errors[0] }}</span>
               </ValidationProvider>
-            </div>-->
+            </div>
           </div>
         </div>
 
@@ -66,6 +66,12 @@ export default {
     }
   },
 
+  data() {
+    return {
+      typesCv: [ 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/pdf' ]
+    };
+  },
+
   mounted() {
     this.$helpers.scrollToTop();
   },
@@ -82,6 +88,27 @@ export default {
       }
 
       this.$store.dispatch( 'setModal', true );
+    },
+    handleCvChange( event ) {
+      let tgt = event.target || window.event.srcElement;
+      let files = tgt.files;
+
+      // @TODO Valid max size file
+
+      if ( this.checkTypeCv( files[0].type ) ) {
+        this.$store.dispatch( 'applications/setCv', {
+          file: files[0],
+          name: files[0].name,
+          loaded: true
+        });
+
+        return;
+      }
+
+      this.$store.dispatch( 'applications/resetCv' );
+    },
+    checkTypeCv( type ) {
+      return this.typesCv.includes( type );
     }
   }
 };

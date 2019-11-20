@@ -8,7 +8,7 @@
           <th>Cargo</th>
           <th>Inicio</th>
           <th>Fin</th>
-          <th>Acción</th>
+<!--          <th>Acción</th>-->
         </tr>
       </thead>
       <tbody v-if="experiences.length > 0">
@@ -18,7 +18,7 @@
           <td>{{ item.job }}</td>
           <td>{{ item.dateStart }}</td>
           <td>{{ item.dateEnd }}</td>
-          <td>botones</td>
+<!--          <td>botones</td>-->
         </tr>
       </tbody>
       <tbody v-else>

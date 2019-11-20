@@ -17,10 +17,17 @@ class Jobapplications
 
     protected $domain;
 
+    protected $typesImage = array('image/png', 'image/jpeg', 'image/gif');
+
+    protected $typesCv = array('application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/pdf');
+
+    protected $uploadDir;
+
     public function __construct(Loader $loader, $domain)
     {
         $this->loader = $loader;
         $this->domain = $domain;
+        $this->uploadDir = wp_upload_dir();
     }
 
     public function init()
@@ -49,9 +56,20 @@ class Jobapplications
             die('¡Acceso denegado!');
         }
 
-        if (!$this->validData($_POST)) {
-            $result['msg'] = 'Por favor verifique que sus datos sean correctos y vuelva a intentarlo.';
+        $data['photo'] = $_FILES['photo'];
+        if (!$this->checkPhoto($data['photo'])) {
+            $result['msg'] = 'La imagen de su foto no es válida. Por favor vuelva a cargarla.';
             wp_send_json($result);
+        }
+
+        $data['cv'] = $_FILES['cv'];
+
+        // @TODO Validar formato CV y size
+
+        if (!empty($this->uploadDir['basedir'])) {
+            if (!file_exists("{$this->uploadDir['basedir']}/postulantes")) {
+                wp_mkdir_p($this->uploadDir['basedir'] . '/postulantes');
+            }
         }
 
         $data['name'] = sanitize_text_field($_POST['name']);
@@ -68,8 +86,13 @@ class Jobapplications
         $data['reference'] = sanitize_text_field($_POST['reference']);
         $data['review'] = sanitize_text_field($_POST['review']);
         $data['level'] = (int)sanitize_text_field($_POST['level']);
-        $data['studies'] = $_POST['studies'];
-        $data['experiences'] = $_POST['experiences'];
+        $data['studies'] = json_decode(stripslashes($_POST['studies']));
+        $data['experiences'] = json_decode(stripslashes($_POST['experiences']));
+
+        if (!$this->validData($data)) {
+            $result['msg'] = 'Por favor verifique que sus datos sean correctos y vuelva a intentarlo.';
+            wp_send_json($result);
+        }
 
         $this->saveApplication($data);
 
@@ -89,6 +112,11 @@ class Jobapplications
             && count($data['studies']) > 0 && count($data['experiences']) > 0;
     }
 
+    protected function checkPhoto($photo)
+    {
+        return !empty($photo) && in_array($photo['type'], $this->typesImage) && $photo['size'] <= 2097152;
+    }
+
     protected function saveApplication($data)
     {
         $postId = wp_insert_post(array(
@@ -98,23 +126,53 @@ class Jobapplications
             'post_title' => "{$data['name']} {$data['apepaterno']} {$data['apematerno']} - {$data['email']}"
         ));
 
-        update_post_meta($postId, 'mb_name', $data['name']);
-        update_post_meta($postId, 'mb_ape_paterno', $data['apepaterno']);
-        update_post_meta($postId, 'mb_ape_materno', $data['apematerno']);
-        update_post_meta($postId, 'mb_document', $data['document']);
-        update_post_meta($postId, 'mb_gender', $data['gender']);
-        update_post_meta($postId, 'mb_birthday', $data['birthday']);
-        update_post_meta($postId, 'mb_age', $data['age']);
-        update_post_meta($postId, 'mb_phone', $data['phone']);
-        update_post_meta($postId, 'mb_mobile', $data['mobile']);
-        update_post_meta($postId, 'mb_email', $data['email']);
-        update_post_meta($postId, 'mb_address', $data['address']);
-        update_post_meta($postId, 'mb_reference', $data['reference']);
-        update_post_meta($postId, 'mb_review', $data['review']);
-        update_post_meta($postId, 'mb_studies', $data['studies']);
-        update_post_meta($postId, 'mb_experiences', $data['experiences']);
+        $ext = explode('.', $data['photo']['name']);
+        $ext = $ext[count($ext) - 1];
+        $namePhoto = "{$data['document']}-{$postId}.{$ext}";
+
+        if ($this->uploadPhoto($namePhoto, $data['photo'])) {
+            add_post_meta($postId, 'mb_photo', $namePhoto);
+        }
+
+        $ext = explode('.', $data['cv']['name']);
+        $ext = $ext[count($ext) - 1];
+        $nameCv = "{$data['document']}-{$postId}.{$ext}";
+
+        if ($this->uploadCv($nameCv, $data['cv'])) {
+            add_post_meta($postId, 'mb_cv', $nameCv);
+        }
+
+        add_post_meta($postId, 'mb_name', $data['name']);
+        add_post_meta($postId, 'mb_ape_paterno', $data['apepaterno']);
+        add_post_meta($postId, 'mb_ape_materno', $data['apematerno']);
+        add_post_meta($postId, 'mb_document', $data['document']);
+        add_post_meta($postId, 'mb_gender', $data['gender']);
+        add_post_meta($postId, 'mb_birthday', $data['birthday']);
+        add_post_meta($postId, 'mb_age', $data['age']);
+        add_post_meta($postId, 'mb_phone', $data['phone']);
+        add_post_meta($postId, 'mb_mobile', $data['mobile']);
+        add_post_meta($postId, 'mb_email', $data['email']);
+        add_post_meta($postId, 'mb_address', $data['address']);
+        add_post_meta($postId, 'mb_reference', $data['reference']);
+        add_post_meta($postId, 'mb_review', $data['review']);
+        add_post_meta($postId, 'mb_studies', $data['studies']);
+        add_post_meta($postId, 'mb_experiences', $data['experiences']);
 
         wp_set_object_terms($postId, $data['level'], 'joblevels');
+    }
+
+    protected function uploadPhoto($namePhoto, $photo)
+    {
+        $filePhoto = "{$this->uploadDir['basedir']}/postulantes/{$namePhoto}";
+
+        return move_uploaded_file($photo['tmp_name'], $filePhoto);
+    }
+
+    protected function uploadCv($nameCv, $cv)
+    {
+        $fileCv = "{$this->uploadDir['basedir']}/postulantes/{$nameCv}";
+
+        return move_uploaded_file($cv['tmp_name'], $fileCv);
     }
 
     /**

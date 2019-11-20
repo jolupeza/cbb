@@ -134,15 +134,15 @@ wp_nonce_field( 'jobapplications_meta_box_nonce', 'meta_box_nonce' );
                     <?php foreach ($studies as $index => $study) : ?>
                         <tr>
                             <td><?php esc_attr_e($index + 1); ?></td>
-                            <td><?php esc_attr_e($study['profession']); ?></td>
-                            <td><?php esc_attr_e($study['institution']); ?></td>
-                            <td><?php esc_attr_e(get_post($study['degree'])->post_title); ?></td>
-                            <td><?php esc_attr_e(date('d-m-Y', strtotime($study['dateStart']))); ?></td>
-                            <td><?php esc_attr_e(date('d-m-Y', strtotime($study['dateEnd']))); ?></td>
-                            <td><?php esc_attr_e(get_post($study['specialty'])->post_title); ?></td>
-                            <td><?php esc_attr_e($study['phone']); ?></td>
-                            <td><?php esc_attr_e($study['mobile']); ?></td>
-                            <td><?php esc_attr_e($study['email']); ?></td>
+                            <td><?php esc_attr_e($study->profession); ?></td>
+                            <td><?php esc_attr_e($study->institution); ?></td>
+                            <td><?php esc_attr_e(get_post($study->degree)->post_title); ?></td>
+                            <td><?php esc_attr_e(date('d-m-Y', strtotime($study->dateStart))); ?></td>
+                            <td><?php esc_attr_e(date('d-m-Y', strtotime($study->dateEnd))); ?></td>
+                            <td><?php esc_attr_e(get_post($study->specialty)->post_title); ?></td>
+                            <td><?php esc_attr_e($study->phone); ?></td>
+                            <td><?php esc_attr_e($study->mobile); ?></td>
+                            <td><?php esc_attr_e($study->email); ?></td>
                         </tr>
                     <?php endforeach; ?>
                     </tbody>
@@ -167,10 +167,10 @@ wp_nonce_field( 'jobapplications_meta_box_nonce', 'meta_box_nonce' );
                     <?php foreach ($experiences as $index => $experience) : ?>
                         <tr>
                             <td><?php esc_attr_e($index + 1); ?></td>
-                            <td><?php esc_attr_e($experience['institution']); ?></td>
-                            <td><?php esc_attr_e($experience['job']); ?></td>
-                            <td><?php esc_attr_e(date('d-m-Y', strtotime($experience['dateStart']))); ?></td>
-                            <td><?php esc_attr_e(date('d-m-Y', strtotime($experience['dateEnd']))); ?></td>
+                            <td><?php esc_attr_e($experience->institution); ?></td>
+                            <td><?php esc_attr_e($experience->job); ?></td>
+                            <td><?php esc_attr_e(date('d-m-Y', strtotime($experience->dateStart))); ?></td>
+                            <td><?php esc_attr_e(date('d-m-Y', strtotime($experience->dateEnd))); ?></td>
                         </tr>
                     <?php endforeach; ?>
                     </tbody>
