@@ -15,8 +15,6 @@ const actions = {
     cityApi.retrieve().then( cities => {
       localStorage.setItem( 'cities', JSON.stringify( cities ) );
       context.commit( 'RETRIEVE', cities );
-    }).catch( error => {
-      console.error( error );
     });
   },
   destroy( context ) {
