@@ -1,4 +1,5 @@
 import districtApi from '@/api/district';
+import dataDistricts from '@/assets/resources/districts.json';
 
 const state = {
   all: []
@@ -7,6 +8,16 @@ const state = {
 const getters = {};
 
 const actions = {
+  retrieve({ commit }, idProvince ) {
+    return new Promise( ( resolve ) => {
+      let districts = dataDistricts.filter( district => {
+        return district.province_id === idProvince;
+      });
+
+      commit( 'RETRIEVE', districts );
+      resolve();
+    });
+  },
   retrieveByProvince( context, idProvince ) {
     return new Promise( ( resolve, reject ) => {
       districtApi.retrieveByProvince( idProvince ).then( districts => {

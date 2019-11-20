@@ -142,7 +142,7 @@
                 <ValidationProvider name="departamento" rules="required" v-slot="{ errors }">
                   <select name="city" id="city" v-model="city" class="form-control" @change="selectCity">
                     <option :value="null">Seleccione</option>
-                    <option :value="item.id" v-for="item in cities" :key="item.id">{{ item.title.rendered }}</option>
+                    <option :value="item.id" v-for="item in cities" :key="item.id">{{ item.name }}</option>
                   </select>
                   <span class="is-invalid">{{ errors[0] }}</span>
                 </ValidationProvider>
@@ -356,7 +356,7 @@ export default {
 
   created() {
     if ( 0 === this.cities.length ) {
-      this.$store.dispatch( 'cities/retrieve' );
+      this.$store.dispatch( 'cities/byJson' );
     }
   },
 
@@ -372,7 +372,7 @@ export default {
         return;
       }
 
-      this.$store.dispatch( 'provinces/retrieveByCity', this.city ).then( () => {
+      this.$store.dispatch( 'provinces/retrieve', this.city ).then( () => {
         this.province = null;
         this.district = null;
       });
@@ -383,7 +383,7 @@ export default {
         return;
       }
 
-      this.$store.dispatch( 'districts/retrieveByProvince', this.province ).then( () => {
+      this.$store.dispatch( 'districts/retrieve', this.province ).then( () => {
         this.district = null;
       });
     },

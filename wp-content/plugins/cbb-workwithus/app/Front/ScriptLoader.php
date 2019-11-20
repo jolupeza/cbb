@@ -129,6 +129,7 @@ class ScriptLoader implements AssetsInterface
             'plugin_directory_uri' => plugin_dir_url(CBB_WORKWITHUS_FILE),
             'rest_url' => untrailingslashit(esc_url_raw(rest_url())),
             'ajaxUrl' => admin_url('admin-ajax.php'),
+            'dataUbigeo' => plugin_dir_path(CBB_WORKWITHUS_FILE) . 'resources'
         ];
 
     }

@@ -1,4 +1,5 @@
 import provinceApi from '@/api/province';
+import dataProvinces from '@/assets/resources/provinces.json';
 
 const state = {
   all: []
@@ -7,6 +8,16 @@ const state = {
 const getters = {};
 
 const actions = {
+  retrieve( context, idCity ) {
+    return new Promise( ( resolve ) => {
+      let provinces = dataProvinces.filter( province => {
+        return province.department_id === idCity;
+      });
+
+      context.commit( 'RETRIEVE', provinces );
+      resolve();
+    });
+  },
   retrieveByCity( context, idCity ) {
     return new Promise( ( resolve, reject ) => {
       provinceApi.retrieveByCity( idCity ).then( provinces => {
@@ -23,8 +34,8 @@ const actions = {
 };
 
 const mutations = {
-  RETRIEVE( state, cities ) {
-    state.all = cities;
+  RETRIEVE( state, provinces ) {
+    state.all = provinces;
   },
   DESTROY( state ) {
     state.all = [];

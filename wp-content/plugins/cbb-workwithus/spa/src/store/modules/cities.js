@@ -1,4 +1,5 @@
 import cityApi from '@/api/city';
+import dataCities from '@/assets/resources/cities.json';
 
 const state = {
   all: JSON.parse( localStorage.getItem( 'cities' ) ) || []
@@ -7,6 +8,9 @@ const state = {
 const getters = {};
 
 const actions = {
+  byJson( context ) {
+    context.commit( 'RETRIEVE', dataCities );
+  },
   retrieve( context ) {
     cityApi.retrieve().then( cities => {
       localStorage.setItem( 'cities', JSON.stringify( cities ) );
