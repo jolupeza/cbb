@@ -148,6 +148,9 @@ const actions = {
   resetPhoto( context ) {
     context.commit( 'RESET_PHOTO' );
   },
+  removeStudy({ commit }, index ) {
+    commit( 'REMOVE_STUDY', index );
+  },
   resetCv( context ) {
     context.commit( 'RESET_CV' );
   },
@@ -223,6 +226,9 @@ const mutations = {
   },
   SET_LEVEL_ID( state, id ) {
     state.levelId = id;
+  },
+  REMOVE_STUDY( state, index ) {
+    state.studies.splice( index, 1 );
   },
   RESET_DATA( state ) {
     state.document = '';
