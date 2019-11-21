@@ -85,11 +85,7 @@ class Admin
     {
         $this->loader->add_action('init', $this, 'addPostType');
 
-        $province = new Province($this->loader, $this->domain);
-        $province->init();
-
-        $district = new District($this->loader, $this->domain);
-        $district->init();
+        $this->loader->add_action('init', $this, 'unregisterPostType');
 
         $degree = new Degree($this->loader, $this->domain);
         $degree->init();
@@ -104,9 +100,9 @@ class Admin
     public function addPostType()
     {
         $this->registerJobPostulations();
-        $this->registerCities();
+        /*$this->registerCities();
         $this->registerProvinces();
-        $this->registerDistricts();
+        $this->registerDistricts();*/
     }
 
     private function registerJobPostulations()
@@ -304,15 +300,10 @@ class Admin
         register_post_type('districts', $args);
     }
 
-    public function unregister_post_type()
+    public function unregisterPostType()
     {
-        global $wp_post_types;
-
-        if (isset($wp_post_types['models'])) {
-            unset($wp_post_types['models']);
-            return TRUE;
-        }
-
-        return FALSE;
+        unregister_post_type('cities');
+        unregister_post_type('provinces');
+        unregister_post_type('districts');
     }
 }

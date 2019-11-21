@@ -1,15 +1,18 @@
 import specialtyApi from '@/api/specialty';
 
 const state = {
-  all: JSON.parse( localStorage.getItem( 'specialties' ) ) || []
+  all: []
 };
 
 const getters = {};
 
 const actions = {
   retrieve( context ) {
+    if ( null !== localStorage.getItem( 'specialties' ) ) {
+      localStorage.removeItem( 'specialties' );
+    }
+
     specialtyApi.retrieve().then( specialties => {
-      localStorage.setItem( 'specialties', JSON.stringify( specialties ) );
       context.commit( 'RETRIEVE', specialties );
     });
   }

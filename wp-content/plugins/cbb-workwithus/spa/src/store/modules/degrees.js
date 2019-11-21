@@ -1,15 +1,18 @@
 import degreeApi from '@/api/degree';
 
 const state = {
-  all: JSON.parse( localStorage.getItem( 'degrees' ) ) || []
+  all: []
 };
 
 const getters = {};
 
 const actions = {
   retrieve( context ) {
+    if ( null !== localStorage.getItem( 'degrees' ) ) {
+      localStorage.removeItem( 'degrees' );
+    }
+
     degreeApi.retrieve().then( degrees => {
-      localStorage.setItem( 'degrees', JSON.stringify( degrees ) );
       context.commit( 'RETRIEVE', degrees );
     });
   }

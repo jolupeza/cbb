@@ -356,7 +356,7 @@ export default {
 
   created() {
     if ( 0 === this.cities.length ) {
-      this.$store.dispatch( 'cities/byJson' );
+      this.$store.dispatch( 'cities/retrieve' );
     }
   },
 
@@ -372,7 +372,7 @@ export default {
         return;
       }
 
-      this.$store.dispatch( 'provinces/retrieve', this.city ).then( () => {
+      this.$store.dispatch( 'provinces/retrieveByCity', this.city ).then( () => {
         this.province = null;
         this.district = null;
       });
@@ -383,7 +383,7 @@ export default {
         return;
       }
 
-      this.$store.dispatch( 'districts/retrieve', this.province ).then( () => {
+      this.$store.dispatch( 'districts/retrieveByProvince', this.province ).then( () => {
         this.district = null;
       });
     },

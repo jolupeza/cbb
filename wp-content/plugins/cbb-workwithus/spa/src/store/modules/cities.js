@@ -1,24 +1,20 @@
-import cityApi from '@/api/city';
 import dataCities from '@/assets/resources/cities.json';
 
 const state = {
-  all: JSON.parse( localStorage.getItem( 'cities' ) ) || []
+  all: []
 };
 
 const getters = {};
 
 const actions = {
-  byJson( context ) {
+  retrieve( context ) {
+    if ( null !== localStorage.getItem( 'cities' ) ) {
+      localStorage.removeItem( 'cities' );
+    }
+
     context.commit( 'RETRIEVE', dataCities );
   },
-  retrieve( context ) {
-    cityApi.retrieve().then( cities => {
-      localStorage.setItem( 'cities', JSON.stringify( cities ) );
-      context.commit( 'RETRIEVE', cities );
-    });
-  },
   destroy( context ) {
-    localStorage.removeItem( 'cities' );
     context.commit( 'DESTROY' );
   }
 };
