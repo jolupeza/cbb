@@ -186,12 +186,17 @@ wp_nonce_field( 'jobapplications_meta_box_nonce', 'meta_box_nonce' );
                     </thead>
                     <tbody>
                     <?php foreach ($experiences as $index => $experience) : ?>
+                        <?php
+                            $dateEnd = $experience->dateEnd === 'Actualmente'
+                                ? $experience->dateEnd
+                                : date('d-m-Y', strtotime($experience->dateEnd));
+                        ?>
                         <tr>
                             <td><?php esc_attr_e($index + 1); ?></td>
                             <td><?php esc_attr_e($experience->institution); ?></td>
                             <td><?php esc_attr_e($experience->job); ?></td>
                             <td><?php esc_attr_e(date('d-m-Y', strtotime($experience->dateStart))); ?></td>
-                            <td><?php esc_attr_e(date('d-m-Y', strtotime($experience->dateEnd))); ?></td>
+                            <td><?php esc_attr_e($dateEnd); ?></td>
                         </tr>
                     <?php endforeach; ?>
                     </tbody>

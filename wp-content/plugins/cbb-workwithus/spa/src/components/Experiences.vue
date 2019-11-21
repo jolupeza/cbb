@@ -38,10 +38,13 @@
           <div class="col-sm-4">
             <div class="form-group">
               <label for="dateEnd">Fecha fin: <span>(*)</span></label>
-              <ValidationProvider name="fecha fin" rules="required" v-slot="{ errors }">
-                <input type="date" class="form-control" id="dateEnd" name="dateEnd" v-model="dateEnd" />
+              <ValidationProvider name="fecha fin" :rules="{ required: !current }" v-slot="{ errors }">
+                <input type="date" class="form-control" id="dateEnd" name="dateEnd" v-model="dateEnd" :disabled="current" />
                 <span class="is-invalid">{{ errors[0] }}</span>
               </ValidationProvider>
+              <div class="checkbox">
+                <label><input type="checkbox" v-model="current" /> Actualmente</label>
+              </div>
             </div>
           </div>
           <div class="col-sm-4">
@@ -86,7 +89,8 @@ export default {
       institution: '',
       job: '',
       dateStart: '',
-      dateEnd: ''
+      dateEnd: '',
+      current: false
     };
   },
 
@@ -106,7 +110,7 @@ export default {
         institution: this.institution,
         job: this.job,
         dateStart: this.dateStart,
-        dateEnd: this.dateEnd
+        dateEnd: this.current ? 'Actualmente' : this.dateEnd
       }).then( () => {
         this.resetData();
         this.$refs.observer.reset();
@@ -117,6 +121,7 @@ export default {
       this.job = '';
       this.dateStart = '';
       this.dateEnd = '';
+      this.current = false;
     },
     goToStep( step ) {
       this.$store.dispatch( 'setStep', step );

@@ -23,27 +23,7 @@ const state = {
   photo: { file: null, name: '', loaded: false },
   cv: { file: null, name: '', loaded: false },
   studies: [],
-  experiences: [ {
-    institution: 'Agencia Watson',
-    job: 'Analista Desarrollador',
-    dateStart: '01-01-2000',
-    dateEnd: '01-01-2000'
-  }, {
-    institution: 'Altimea',
-    job: 'Analista Desarrollador',
-    dateStart: '01-01-2000',
-    dateEnd: '01-01-2000'
-  }, {
-    institution: 'Agencia Watson',
-    job: 'Analista Desarrollador',
-    dateStart: '01-01-2000',
-    dateEnd: '01-01-2000'
-  }, {
-    institution: 'Agencia Watson',
-    job: 'Analista Desarrollador',
-    dateStart: '01-01-2000',
-    dateEnd: '01-01-2000'
-  } ],
+  experiences: [],
   review: ''
 };
 
