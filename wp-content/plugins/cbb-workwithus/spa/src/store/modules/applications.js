@@ -23,7 +23,27 @@ const state = {
   photo: { file: null, name: '', loaded: false },
   cv: { file: null, name: '', loaded: false },
   studies: [],
-  experiences: [],
+  experiences: [ {
+    institution: 'Agencia Watson',
+    job: 'Analista Desarrollador',
+    dateStart: '01-01-2000',
+    dateEnd: '01-01-2000'
+  }, {
+    institution: 'Altimea',
+    job: 'Analista Desarrollador',
+    dateStart: '01-01-2000',
+    dateEnd: '01-01-2000'
+  }, {
+    institution: 'Agencia Watson',
+    job: 'Analista Desarrollador',
+    dateStart: '01-01-2000',
+    dateEnd: '01-01-2000'
+  }, {
+    institution: 'Agencia Watson',
+    job: 'Analista Desarrollador',
+    dateStart: '01-01-2000',
+    dateEnd: '01-01-2000'
+  } ],
   review: ''
 };
 
@@ -151,6 +171,9 @@ const actions = {
   removeStudy({ commit }, index ) {
     commit( 'REMOVE_STUDY', index );
   },
+  removeExperience({ commit }, index ) {
+    commit( 'REMOVE_EXPERIENCE', index );
+  },
   resetCv( context ) {
     context.commit( 'RESET_CV' );
   },
@@ -229,6 +252,9 @@ const mutations = {
   },
   REMOVE_STUDY( state, index ) {
     state.studies.splice( index, 1 );
+  },
+  REMOVE_EXPERIENCE( state, index ) {
+    state.experiences.splice( index, 1 );
   },
   RESET_DATA( state ) {
     state.document = '';

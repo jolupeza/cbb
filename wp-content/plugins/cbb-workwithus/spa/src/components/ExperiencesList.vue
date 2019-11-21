@@ -8,7 +8,7 @@
           <th>Cargo</th>
           <th>Inicio</th>
           <th>Fin</th>
-<!--          <th>Acción</th>-->
+          <th>Acción</th>
         </tr>
       </thead>
       <tbody v-if="experiences.length > 0">
@@ -18,7 +18,7 @@
           <td>{{ item.job }}</td>
           <td>{{ item.dateStart }}</td>
           <td>{{ item.dateEnd }}</td>
-<!--          <td>botones</td>-->
+          <td class="text-center"><button type="button" class="btn btn-danger" @click="remove( index )"><i class="fas fa-times"></i></button></td>
         </tr>
       </tbody>
       <tbody v-else>
@@ -40,6 +40,12 @@ export default {
     ...mapState( 'applications', {
       experiences: state => state.experiences
     })
+  },
+
+  methods: {
+    remove( index ) {
+      this.$store.dispatch( 'applications/removeExperience', index );
+    }
   }
 };
 </script>
