@@ -7,12 +7,8 @@ const state = {
 const getters = {};
 
 const actions = {
-  retrieve( context ) {
-    if ( null !== localStorage.getItem( 'degrees' ) ) {
-      localStorage.removeItem( 'degrees' );
-    }
-
-    degreeApi.retrieve().then( degrees => {
+  retrieve( context, levelId ) {
+    degreeApi.retrieve( levelId ).then( degrees => {
       context.commit( 'RETRIEVE', degrees );
     });
   }

@@ -29,8 +29,15 @@
     $review = !empty($values['mb_review']) ? esc_attr($values['mb_review'][0]) : '';
     $studies = !empty($values['mb_studies']) ? unserialize($values['mb_studies'][0]) : '';
     $experiences = !empty($values['mb_experiences']) ? unserialize($values['mb_experiences'][0]) : '';
+    $local = !empty($values['mb_local']) ? (int)esc_attr($values['mb_local'][0]) : '';
+    $levelEducation = !empty($values['mb_level_education']) ? esc_attr($values['mb_level_education'][0]) : '';
 
-wp_nonce_field( 'jobapplications_meta_box_nonce', 'meta_box_nonce' );
+    $locals = get_posts([
+        'post_type' => 'locals',
+        'post_parent' => 0
+    ]);
+
+    wp_nonce_field( 'jobapplications_meta_box_nonce', 'meta_box_nonce' );
 ?>
 
     <!-- Name-->
@@ -127,6 +134,23 @@ wp_nonce_field( 'jobapplications_meta_box_nonce', 'meta_box_nonce' );
         <textarea rows="6" name="mb_reference" id="mb_reference"><?php echo $reference; ?></textarea>
     </p>
 
+    <!-- Level Education -->
+    <p class="content-mb">
+        <label for="mb_level_education">Nivel: </label>
+        <input type="text" name="mb_level_education" id="mb_level_education" value="<?php echo $levelEducation; ?>" />
+    </p>
+
+    <!-- Local -->
+    <p class="content-mb">
+        <label for="mb_gender">Sede a la que postula: </label>
+        <select name="mb_local" id="mb_local">
+            <option value="" <?php selected($local, ''); ?>>Indicar</option>
+            <?php foreach ($locals as $item) : ?>
+                <option value="<?php esc_attr_e($item->ID); ?>" <?php selected($local, $item->ID); ?>><?php esc_attr_e($item->post_title); ?></option>
+            <?php endforeach; ?>
+        </select>
+    </p>
+
     <!-- Review -->
     <p class="content-mb">
         <label for="mb_review">Reseña: </label>
@@ -146,9 +170,6 @@ wp_nonce_field( 'jobapplications_meta_box_nonce', 'meta_box_nonce' );
                         <td class="manage-column">Inicio</td>
                         <td class="manage-column">Fin</td>
                         <td class="manage-column">Especialidad</td>
-                        <td class="manage-column">Tlf. Fijo</td>
-                        <td class="manage-column">Celular</td>
-                        <td class="manage-column">Correo</td>
                     </tr>
                     </thead>
                     <tbody>
@@ -160,10 +181,7 @@ wp_nonce_field( 'jobapplications_meta_box_nonce', 'meta_box_nonce' );
                             <td><?php esc_attr_e(get_post($study->degree)->post_title); ?></td>
                             <td><?php esc_attr_e(date('d-m-Y', strtotime($study->dateStart))); ?></td>
                             <td><?php esc_attr_e(date('d-m-Y', strtotime($study->dateEnd))); ?></td>
-                            <td><?php esc_attr_e(get_post($study->specialty)->post_title); ?></td>
-                            <td><?php esc_attr_e($study->phone); ?></td>
-                            <td><?php esc_attr_e($study->mobile); ?></td>
-                            <td><?php esc_attr_e($study->email); ?></td>
+                            <td><?php esc_attr_e($study->specialty); ?></td>
                         </tr>
                     <?php endforeach; ?>
                     </tbody>
@@ -182,6 +200,9 @@ wp_nonce_field( 'jobapplications_meta_box_nonce', 'meta_box_nonce' );
                         <td class="manage-column">Cargo</td>
                         <td class="manage-column">Inicio</td>
                         <td class="manage-column">Fin</td>
+                        <td class="manage-column">Referencia Nombre</td>
+                        <td class="manage-column">Referencia Celular</td>
+                        <td class="manage-column">Tel. Institucional</td>
                     </tr>
                     </thead>
                     <tbody>
@@ -197,6 +218,9 @@ wp_nonce_field( 'jobapplications_meta_box_nonce', 'meta_box_nonce' );
                             <td><?php esc_attr_e($experience->job); ?></td>
                             <td><?php esc_attr_e(date('d-m-Y', strtotime($experience->dateStart))); ?></td>
                             <td><?php esc_attr_e($dateEnd); ?></td>
+                            <td><?php esc_attr_e($experience->name); ?></td>
+                            <td><?php esc_attr_e($experience->mobile); ?></td>
+                            <td><?php esc_attr_e($experience->phone); ?></td>
                         </tr>
                     <?php endforeach; ?>
                     </tbody>

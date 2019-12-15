@@ -1,3 +1,5 @@
+/* globals wpData */
+
 import Vue from 'vue';
 import App from './App.vue';
 import store from './store';
@@ -27,6 +29,8 @@ extend( 'mimes', {
 Vue.component( 'ValidationProvider', ValidationProvider );
 Vue.component( 'ValidationObserver', ValidationObserver );
 
+window.wpData = wpData;
+Object.defineProperty( Vue.prototype, 'wpData', { value: wpData });
 Object.defineProperty( Vue.prototype, '$helpers', { value: helpers });
 
 new Vue({

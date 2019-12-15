@@ -113,8 +113,8 @@
             </div>
             <div class="col-sm-4">
               <div class="form-group">
-                <label for="mobile">Teléfono celular:</label>
-                <ValidationProvider name="teléfono celular" rules="min:9" v-slot="{ errors }">
+                <label for="mobile">Teléfono celular: <span>(*)</span></label>
+                <ValidationProvider name="teléfono celular" rules="required|min:9" v-slot="{ errors }">
                   <input type="text" class="form-control" id="mobile" name="mobile" v-model="mobile" />
                   <span class="is-invalid">{{ errors[0] }}</span>
                 </ValidationProvider>
@@ -129,6 +129,34 @@
                 </ValidationProvider>
               </div>
             </div>
+          </div>
+
+          <div class="row">
+            <div v-if="isTeacher" class="col-sm-4">
+              <div class="form-group">
+                <label for="level">Nivel: <span>(*)</span></label>
+                <ValidationProvider name="nivel" rules="required" v-slot="{ errors }">
+                  <select name="level" id="level" v-model="level" class="form-control">
+                    <option :value="null">Seleccione</option>
+                    <option :value="level.key" v-for="(level, key) in levels" :key="key">{{ level.title }}</option>
+                  </select>
+                  <span class="is-invalid">{{ errors[0] }}</span>
+                </ValidationProvider>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="local">Sede: <span>(*)</span></label>
+                <ValidationProvider name="sede" rules="required" v-slot="{ errors }">
+                  <select name="local" id="local" v-model="local" class="form-control">
+                    <option :value="null">Seleccione</option>
+                    <option :value="local.ID" v-for="local in locals" :key="local.ID">{{ local.post_title }}</option>
+                  </select>
+                  <span class="is-invalid">{{ errors[0] }}</span>
+                </ValidationProvider>
+              </div>
+            </div>
+            <div class="col-sm-4"></div>
           </div>
 
           <hr class="WorkWithUs__Separator" />
@@ -206,7 +234,7 @@
   </section>
 </template>
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 export default {
   name: 'General',
 
@@ -218,6 +246,12 @@ export default {
         loaded: false,
         result: null
       },
+      levels: [
+        { key: 'inicial', title: 'Inicial' },
+        { key: 'primaria', title: 'Primaria' },
+        { key: 'secundaria', title: 'Secundaria' }
+      ],
+      locals: this.wpData.locals,
       typesPhoto: [ 'image/jpeg', 'image/png' ]
     };
   },
@@ -232,6 +266,12 @@ export default {
     ...mapState( 'districts', {
       districts: state => state.all
     }),
+    ...mapGetters( 'applications', {
+      slugLevel: 'getLevelSlug'
+    }),
+    isTeacher() {
+      return 'docente' === this.slugLevel || 'auxiliar' === this.slugLevel;
+    },
     document: {
       get() {
         return this.$store.state.applications.document;
@@ -350,6 +390,22 @@ export default {
       },
       set( value ) {
         this.$store.dispatch( 'applications/setReference', value );
+      }
+    },
+    level: {
+      get() {
+        return this.$store.state.applications.level;
+      },
+      set( value ) {
+        this.$store.dispatch( 'applications/setLevel', value );
+      }
+    },
+    local: {
+      get() {
+        return this.$store.state.applications.local;
+      },
+      set( value ) {
+        this.$store.dispatch( 'applications/setLocal', value );
       }
     }
   },

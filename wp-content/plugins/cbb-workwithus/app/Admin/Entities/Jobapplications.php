@@ -90,6 +90,8 @@ class Jobapplications
         $data['district'] = sanitize_text_field($_POST['district']);
         $data['address'] = sanitize_text_field($_POST['address']);
         $data['reference'] = sanitize_text_field($_POST['reference']);
+        $data['levelEducation'] = !empty($_POST['levelEducation']) ? sanitize_text_field($_POST['levelEducation']) : null;
+        $data['local'] = (int)sanitize_text_field($_POST['local']);
         $data['review'] = sanitize_text_field($_POST['review']);
         $data['level'] = (int)sanitize_text_field($_POST['level']);
         $data['studies'] = json_decode(stripslashes($_POST['studies']));
@@ -103,7 +105,7 @@ class Jobapplications
         $this->saveApplication($data);
 
         $result['status'] = true;
-        $result['msg'] = 'Postulación agregada correctamente.';
+        $result['msg'] = 'Gracias por postular al colegio Bertolt Brecht, hemos recibido tu solicitud. Nos comunicaremos a la brevedad.';
 
         wp_send_json($result);
     }
@@ -168,6 +170,10 @@ class Jobapplications
         add_post_meta($postId, 'mb_province', $data['province']);
         add_post_meta($postId, 'mb_district', $data['district']);
         add_post_meta($postId, 'mb_address', $data['address']);
+        add_post_meta($postId, 'mb_local', $data['local']);
+        if (!is_null($data['levelEducation'])) {
+            add_post_meta($postId, 'mb_level_education', $data['levelEducation']);
+        }
         add_post_meta($postId, 'mb_reference', $data['reference']);
         add_post_meta($postId, 'mb_review', $data['review']);
         add_post_meta($postId, 'mb_studies', $data['studies']);

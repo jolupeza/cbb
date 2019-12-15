@@ -47,11 +47,43 @@
               </div>
             </div>
           </div>
+          <div class="col-sm-4"></div>
+        </div>
+
+        <h3 class="WorkWithUs__title">Referencias Laborales</h3>
+
+        <div class="row">
           <div class="col-sm-4">
-            <div class="Experiences__buttons">
-              <button class="WorkWithUs__button WorkWithUs__button--second" :disabled="!valid">Agregar +</button>
+            <div class="form-group">
+              <label for="name">Nombre: <span>(*)</span></label>
+              <ValidationProvider name="nombre" rules="required" v-slot="{ errors }">
+                <input type="text" class="form-control" id="name" name="name" v-model="name" />
+                <span class="is-invalid">{{ errors[0] }}</span>
+              </ValidationProvider>
             </div>
           </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label for="mobile">Teléfono celular: <span>(*)</span></label>
+              <ValidationProvider name="teléfono celular" rules="required|min:9" v-slot="{ errors }">
+                <input type="text" class="form-control" id="mobile" name="mobile" v-model="mobile" />
+                <span class="is-invalid">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label for="phone">Teléfono Institucional:</label>
+              <ValidationProvider name="teléfono" rules="min:7" v-slot="{ errors }">
+                <input type="text" class="form-control" id="phone" name="phone" v-model="phone" />
+                <span class="is-invalid">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </div>
+          </div>
+        </div>
+
+        <div class="Experiences__buttons">
+          <button class="WorkWithUs__button WorkWithUs__button--second" :disabled="!valid">Agregar +</button>
         </div>
       </ValidationObserver>
 
@@ -90,7 +122,10 @@ export default {
       job: '',
       dateStart: '',
       dateEnd: '',
-      current: false
+      current: false,
+      name: '',
+      mobile: '',
+      phone: ''
     };
   },
 
@@ -110,7 +145,10 @@ export default {
         institution: this.institution,
         job: this.job,
         dateStart: this.dateStart,
-        dateEnd: this.current ? 'Actualmente' : this.dateEnd
+        dateEnd: this.current ? 'Actualmente' : this.dateEnd,
+        name: this.name,
+        mobile: this.mobile,
+        phone: this.phone
       }).then( () => {
         this.resetData();
         this.$refs.observer.reset();
@@ -122,6 +160,9 @@ export default {
       this.dateStart = '';
       this.dateEnd = '';
       this.current = false;
+      this.name = '';
+      this.mobile = '';
+      this.phone = '';
     },
     goToStep( step ) {
       this.$store.dispatch( 'setStep', step );

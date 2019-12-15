@@ -1,3 +1,5 @@
+/* globals wpData */
+
 import applicationApi from '@/api/application';
 import dataCities from '@/assets/resources/cities.json';
 import dataProvinces from '@/assets/resources/provinces.json';
@@ -5,6 +7,8 @@ import dataDistricts from '@/assets/resources/districts.json';
 
 const state = {
   levelId: null,
+  level: null,
+  local: null,
   document: '',
   apepaterno: '',
   apematerno: '',
@@ -33,6 +37,15 @@ const getters = {
   },
   hasExperiences( state ) {
     return 0 < state.experiences.length;
+  },
+  getLevelSlug( state ) {
+    for ( const id in wpData.levels ) {
+      if ( parseInt( id ) === state.levelId ) {
+        return wpData.levels[id];
+      }
+    }
+
+    return null;
   }
 };
 
@@ -75,6 +88,12 @@ const actions = {
   },
   setDistrict( context, district ) {
     context.commit( 'SET_DISTRICT', district );
+  },
+  setLevel( context, level ) {
+    context.commit( 'SET_LEVEL', level );
+  },
+  setLocal( context, local ) {
+    context.commit( 'SET_LOCAL', local );
   },
   setAddress( context, address ) {
     context.commit( 'SET_ADDRESS', address );
@@ -127,6 +146,8 @@ const actions = {
     formData.append( 'district', methods.findNameDistrict( state.district ) );
     formData.append( 'address', state.address );
     formData.append( 'reference', state.reference );
+    formData.append( 'levelEducation', null === state.level ? '' : state.level );
+    formData.append( 'local', state.local );
     formData.append( 'review', state.review );
     formData.append( 'studies', JSON.stringify( state.studies ) );
     formData.append( 'experiences', JSON.stringify( state.experiences ) );
@@ -226,6 +247,12 @@ const mutations = {
     state.cv.file = file;
     state.cv.name = name;
     state.cv.loaded = loaded;
+  },
+  SET_LEVEL( state, level ) {
+    state.level = level;
+  },
+  SET_LOCAL( state, local ) {
+    state.local = local;
   },
   SET_LEVEL_ID( state, id ) {
     state.levelId = id;

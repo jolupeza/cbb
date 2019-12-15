@@ -125,10 +125,23 @@ class ScriptLoader implements AssetsInterface
 
     private function getWpData()
     {
+        $levels = get_terms([
+            'taxonomy' => 'joblevels',
+            'hide_empty' => false,
+            'fields' => 'id=>slug'
+        ]);
+
+        $locals = get_posts([
+            'post_type' => 'locals',
+            'post_parent' => 0
+        ]);
+
         return [
             'plugin_directory_uri' => plugin_dir_url(CBB_WORKWITHUS_FILE),
             'rest_url' => untrailingslashit(esc_url_raw(rest_url())),
             'ajaxUrl' => admin_url('admin-ajax.php'),
+            'levels' => $levels,
+            'locals' => $locals,
             'dataUbigeo' => plugin_dir_path(CBB_WORKWITHUS_FILE) . 'resources'
         ];
 

@@ -29,7 +29,7 @@
               <ValidationProvider name="grado" rules="required" v-slot="{ errors }">
                 <select name="degree" id="degree" v-model="degree" class="form-control">
                   <option :value="null">Seleccione</option>
-                  <option :value="item.id" v-for="item in degrees" :key="item.id">{{ item.title.rendered }}</option>
+                  <option :value="item.id" v-for="item in degrees" :key="item.id">{{ item.name }}</option>
                 </select>
                 <span class="is-invalid">{{ errors[0] }}</span>
               </ValidationProvider>
@@ -60,16 +60,13 @@
             <div class="form-group">
               <label for="specialty">Especialidad: <span>(*)</span></label>
               <ValidationProvider name="especialidad" rules="required" v-slot="{ errors }">
-                <select name="degree" id="specialty" v-model="specialty" class="form-control">
-                  <option :value="null">Seleccione</option>
-                  <option v-for="item in specialties" :key="item.id" :value="item.id">{{ item.title.rendered }}</option>
-                </select>
+                <input type="text" class="form-control" id="specialty" name="specialty" v-model="specialty" />
                 <span class="is-invalid">{{ errors[0] }}</span>
               </ValidationProvider>
             </div>
           </div>
         </div>
-        <div class="row">
+        <!--<div class="row">
           <div class="col-sm-4">
             <div class="form-group">
               <label for="phone">Teléfono fijo:</label>
@@ -97,8 +94,7 @@
               </ValidationProvider>
             </div>
           </div>
-        </div>
-
+        </div>-->
         <div class="Studies__buttons">
           <button class="WorkWithUs__button WorkWithUs__button--second" :disabled="!valid">Agregar +</button>
         </div>
@@ -134,19 +130,16 @@ export default {
       degree: null,
       dateStart: '',
       dateEnd: '',
-      specialty: null,
-      phone: '',
-      mobile: '',
-      email: ''
+      specialty: ''
     };
   },
 
   computed: {
+    ...mapState( 'applications', {
+      levelId: state => state.levelId
+    }),
     ...mapState( 'degrees', {
       degrees: state => state.all
-    }),
-    ...mapState( 'specialties', {
-      specialties: state => state.all
     }),
     ...mapGetters({
       hasStudies: 'applications/hasStudies'
@@ -155,11 +148,7 @@ export default {
 
   created() {
     if ( 0 === this.degrees.length ) {
-      this.$store.dispatch( 'degrees/retrieve' );
-    }
-
-    if ( 0 === this.specialties.length ) {
-      this.$store.dispatch( 'specialties/retrieve' );
+      this.$store.dispatch( 'degrees/retrieve', this.levelId );
     }
   },
 
@@ -181,10 +170,7 @@ export default {
         degree: this.degree,
         dateStart: this.dateStart,
         dateEnd: this.dateEnd,
-        specialty: this.specialty,
-        phone: this.phone,
-        mobile: this.mobile,
-        email: this.email
+        specialty: this.specialty
       }).then( () => {
         this.resetData();
         this.$refs.observer.reset();

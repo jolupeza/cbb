@@ -19,7 +19,7 @@
         <div class="row">
           <div class="col-sm-6">
             <div class="form-group">
-              <label for="cv">Adjuntar tu CV: (Formatos válidos: DOC, DOCX y PDF)</label>
+              <label for="cv">Adjuntar tu CV con certificados de trabajo y títulos obtenidos: (Formatos válidos: DOC, DOCX y PDF)</label>
               <ValidationProvider name="CV" rules="mimes:application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/pdf|size:3072" v-slot="{ validate, errors }">
                 <input type="file" class="form-control" id="cv" name="cv" @change="handleCvChange($event) || validate($event)" />
                 <span class="is-invalid">{{ errors[0] }}</span>

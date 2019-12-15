@@ -9,7 +9,7 @@
 <!--          <th>Grado</th>-->
           <th>Inicio</th>
           <th>Fin</th>
-<!--          <th>Especialidad</th>-->
+          <th>Especialidad</th>
           <th>Acción</th>
         </tr>
       </thead>
@@ -21,7 +21,7 @@
 <!--          <td>{{ item.degree }}</td>-->
           <td>{{ item.dateStart }}</td>
           <td>{{ item.dateEnd }}</td>
-<!--          <td>{{ item.specialty }}</td>-->
+          <td>{{ item.specialty }}</td>
           <td class="text-center"><button type="button" class="btn btn-danger" @click="remove( index )"><i class="fas fa-times"></i></button></td>
         </tr>
       </tbody>
