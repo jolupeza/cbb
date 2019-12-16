@@ -7,15 +7,6 @@ use CBB_WorkWithUs\Admin\Entities\Jobapplications;
 use CBB_WorkWithUs\Admin\ScriptLoader;
 use CBB_WorkWithUs\Front\Front;
 
-// use VM_Manager\Shared\VM_Manager_Deserializer as Deserializer;
-// use VM_Manager\Admin\VM_Manager_Questions;
-// use VM_Manager\Admin\VM_Manager_Submenu_Page;
-// use VM_Manager\Admin\VM_Manager_Submenu;
-// use VM_Manager\Admin\VM_Manager_Serializer as Serializer;
-
-// use VM_Manager\Front\VM_Manager_Public;
-// use VM_Manager\Front\Script_Loader as Script_Loader_Public;
-
 /**
  * The CBB WorkWithUs is the core plugin responsible for including and
  * instantiating all of the code that composes the plugin.
