@@ -104,8 +104,10 @@ class Jobapplications
 
         $this->saveApplication($data);
 
+        $options = get_option('cbb_custom_settings');
+
         $result['status'] = true;
-        $result['msg'] = 'Gracias por postular al colegio Bertolt Brecht, hemos recibido tu solicitud. Nos comunicaremos a la brevedad.';
+        $result['msg'] = $options['response_workwithus_forms'];
 
         wp_send_json($result);
     }

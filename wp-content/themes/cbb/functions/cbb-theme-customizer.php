@@ -401,6 +401,19 @@ function cbb_customize_register($wp_customize) {
     'type' => 'textarea'
   ]);
 
+    // Response WorkWithUs
+    $wp_customize->add_setting('cbb_custom_settings[response_workwithus_forms]', [
+        'default' => 'Gracias por postular al colegio Bertolt Brecht, hemos recibido tu solicitud. Nos comunicaremos a la brevedad.',
+        'type' => 'option'
+    ]);
+
+    $wp_customize->add_control('cbb_custom_settings[response_workwithus_forms]', [
+        'label' => __('Mensaje de respuesta del formulario de postulaciones', THEMEDOMAIN),
+        'section' => 'cbb_response_forms',
+        'settings' => 'cbb_custom_settings[response_workwithus_forms]',
+        'type' => 'textarea'
+    ]);
+
   // Information
   $wp_customize->add_panel('cbb_categories', [
     'title' => __('Categorías', THEMEDOMAIN),
@@ -639,7 +652,7 @@ function cbb_customize_register($wp_customize) {
         'default' => 0,
         'type' => 'option'
       ]);
-    
+
       $wp_customize->add_control("cbb_custom_settings[schedule_status_{$key}]", [
         'label' => __('¿Mostrar horario personalizado?', THEMEDOMAIN),
         'section' => "cbb_calendar_local_{$key}",
