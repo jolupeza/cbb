@@ -31,6 +31,8 @@
     $experiences = !empty($values['mb_experiences']) ? unserialize($values['mb_experiences'][0]) : '';
     $local = !empty($values['mb_local']) ? (int)esc_attr($values['mb_local'][0]) : '';
     $levelEducation = !empty($values['mb_level_education']) ? esc_attr($values['mb_level_education'][0]) : '';
+    $photo = !empty($values['mb_photo']) ? esc_url($values['mb_photo'][0]) : '';
+    $cv = !empty($values['mb_cv']) ? esc_url($values['mb_cv'][0]) : '';
 
     $locals = get_posts([
         'post_type' => 'locals',
@@ -149,6 +151,22 @@
                 <option value="<?php esc_attr_e($item->ID); ?>" <?php selected($local, $item->ID); ?>><?php esc_attr_e($item->post_title); ?></option>
             <?php endforeach; ?>
         </select>
+    </p>
+
+    <!-- Photo -->
+    <p class="content-mb">
+        <label for="mb_photo">Foto: </label>
+        <img width="100" src="<?php echo $photo; ?>" alt="" />
+    </p>
+
+    <!-- Cv -->
+    <p class="content-mb">
+        <label for="mb_photo">CV: </label>
+        <?php if (!empty($cv)) : ?>
+            <a href="<?php echo $cv; ?>" target="_blank" download="" title="Descargar">
+                <img src="<?php echo esc_url(includes_url() . '/images/media/document.png') ?>" alt="CV" />
+            </a>
+        <?php endif; ?>
     </p>
 
     <!-- Review -->

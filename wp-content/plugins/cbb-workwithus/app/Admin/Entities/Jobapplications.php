@@ -147,7 +147,7 @@ class Jobapplications
         $namePhoto = "{$data['document']}-{$postId}.{$ext}";
 
         if ($this->uploadPhoto($namePhoto, $data['photo'])) {
-            add_post_meta($postId, 'mb_photo', $namePhoto);
+            add_post_meta($postId, 'mb_photo', "{$this->uploadDir['baseurl']}/postulantes/{$namePhoto}");
         }
 
         $ext = explode('.', $data['cv']['name']);
@@ -155,7 +155,7 @@ class Jobapplications
         $nameCv = "{$data['document']}-{$postId}.{$ext}";
 
         if ($this->uploadCv($nameCv, $data['cv'])) {
-            add_post_meta($postId, 'mb_cv', $nameCv);
+            add_post_meta($postId, 'mb_cv', "{$this->uploadDir['baseurl']}/postulantes/{$nameCv}");
         }
 
         add_post_meta($postId, 'mb_name', $data['name']);
