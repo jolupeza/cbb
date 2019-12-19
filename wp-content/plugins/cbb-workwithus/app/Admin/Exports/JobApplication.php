@@ -1,12 +1,12 @@
 <?php
 namespace CBB_WorkWithUs\Admin\Exports;
 
-use Endroid\SimpleExcel\SimpleExcel;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
 
 class JobApplication
 {
-    private $excel;
-
     private $headers;
 
     public function __construct()
@@ -16,10 +16,9 @@ class JobApplication
 
     public function generateExcel()
     {
-        $this->excel = new SimpleExcel();
-        $objPHPExcel = new PHPExcel();
+        $objPHPExcel = new Spreadsheet();
 
-        $filename = 'reporte.xlxs';
+        $filename = 'reporte.xlsx';
         $title = 'Relación de Postulaciones';
 
         $objPHPExcel->setActiveSheetIndex(0);
@@ -28,7 +27,7 @@ class JobApplication
         $objPHPExcel->getActiveSheet()->getStyle('A1')->getFont()->setSize(18);
         $objPHPExcel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);
         $objPHPExcel->getActiveSheet()->mergeCells('A1:Q1');
-        $objPHPExcel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $objPHPExcel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
         $objPHPExcel->getActiveSheet()->getRowDimension(1)->setRowHeight(30);
         $objPHPExcel->getActiveSheet()->getRowDimension(3)->setRowHeight(20);
         $objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(20);
@@ -52,16 +51,17 @@ class JobApplication
         $this->generateHeaderExcel($objPHPExcel);
         $this->generateCellsExcel($objPHPExcel);
 
-        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'); //mime type XLSX
-//        header('Content-Type: application/vnd.ms-excel'); //mime type XLS
-        header('Content-Disposition: attachment;filename="'.$filename.'"'); //tell browser what's the file name
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="'.$filename.'"');
         header('Cache-Control: max-age=0'); //no cache
 
-        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+        $objWriter = IOFactory::createWriter($objPHPExcel, 'Xlsx');
         $objWriter->save('php://output');
+
+        exit;
     }
 
-    private function generateHeaderExcel(PHPExcel $excel)
+    private function generateHeaderExcel(Spreadsheet $excel)
     {
         $headers = $this->setHeaders();
         if (count($headers)) {
@@ -69,7 +69,7 @@ class JobApplication
                 $excel->getActiveSheet()->setCellValue($key, $value);
                 $excel->getActiveSheet()->getStyle($key)->getFont()->setSize(11);
                 $excel->getActiveSheet()->getStyle($key)->getFont()->setBold(true);
-                $excel->getActiveSheet()->getStyle($key)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+                $excel->getActiveSheet()->getStyle($key)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
             }
         }
     }
@@ -98,7 +98,7 @@ class JobApplication
         return $this->headers;
     }
 
-    private function generateCellsExcel(PHPExcel $excel)
+    private function generateCellsExcel(Spreadsheet $excel)
     {
         $args = array(
             'posts_per_page' => -1,
@@ -106,7 +106,7 @@ class JobApplication
         );
 
         $i = 4;
-        $the_query = new WP_Query($args);
+        $the_query = new \WP_Query($args);
         if ($the_query->have_posts()) {
             while ($the_query->have_posts()) {
                 $the_query->the_post();
@@ -190,12 +190,10 @@ class JobApplication
                 $excel->getActiveSheet()->setCellValue('Q'.$i, $typePostulation);
                 $excel->getActiveSheet()->getStyle('Q'.$i)->getFont()->setSize(10);
 
-                /*$excel->getActiveSheet()->setCellValue('G'.$i, get_the_time('d-m-Y'));
-                $excel->getActiveSheet()->getStyle('G'.$i)->getFont()->setSize(10);*/
-
                 ++$i;
             }
         }
+
         wp_reset_postdata();
     }
 }

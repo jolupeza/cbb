@@ -236,9 +236,9 @@
                             <td><?php esc_attr_e($experience->job); ?></td>
                             <td><?php esc_attr_e(date('d-m-Y', strtotime($experience->dateStart))); ?></td>
                             <td><?php esc_attr_e($dateEnd); ?></td>
-                            <td><?php esc_attr_e($experience->name); ?></td>
-                            <td><?php esc_attr_e($experience->mobile); ?></td>
-                            <td><?php esc_attr_e($experience->phone); ?></td>
+                            <td><?php esc_attr_e(!empty($experience->name) ? $experience->name : ''); ?></td>
+                            <td><?php esc_attr_e(!empty($experience->mobile) ? $experience->mobile : ''); ?></td>
+                            <td><?php esc_attr_e(!empty($experience->phone) ? $experience->phone : ''); ?></td>
                         </tr>
                     <?php endforeach; ?>
                     </tbody>
