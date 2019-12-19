@@ -44,10 +44,6 @@ function run_cbb_workwithus()
 {
     $spmm = new Main();
     $spmm->run();
-
-    $whoops = new Run();
-    $whoops->prependHandler(new PrettyPageHandler);
-    $whoops->register();
 }
 
 // Call the above function to begin execution of the plugin.

@@ -1,10 +1,6 @@
 <?php
 namespace CBB_WorkWithUs\Admin\Exports;
 
-use PhpOffice\PhpSpreadsheet\IOFactory;
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Style\Alignment;
-
 class JobApplication
 {
     private $headers;
@@ -16,7 +12,7 @@ class JobApplication
 
     public function generateExcel()
     {
-        $objPHPExcel = new Spreadsheet();
+        $objPHPExcel = new \PHPExcel();
 
         $filename = 'reporte.xlsx';
         $title = 'Relación de Postulaciones';
@@ -27,7 +23,7 @@ class JobApplication
         $objPHPExcel->getActiveSheet()->getStyle('A1')->getFont()->setSize(18);
         $objPHPExcel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);
         $objPHPExcel->getActiveSheet()->mergeCells('A1:Q1');
-        $objPHPExcel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        $objPHPExcel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal( \PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $objPHPExcel->getActiveSheet()->getRowDimension(1)->setRowHeight(30);
         $objPHPExcel->getActiveSheet()->getRowDimension(3)->setRowHeight(20);
         $objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(20);
@@ -35,17 +31,17 @@ class JobApplication
         $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(20);
         $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(15);
         $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(20);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(40);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(10);
         $objPHPExcel->getActiveSheet()->getColumnDimension('G')->setWidth(20);
         $objPHPExcel->getActiveSheet()->getColumnDimension('H')->setWidth(20);
         $objPHPExcel->getActiveSheet()->getColumnDimension('I')->setWidth(20);
         $objPHPExcel->getActiveSheet()->getColumnDimension('J')->setWidth(20);
         $objPHPExcel->getActiveSheet()->getColumnDimension('K')->setWidth(20);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('L')->setWidth(20);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('M')->setWidth(20);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('N')->setWidth(20);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('O')->setWidth(20);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('P')->setWidth(20);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('L')->setWidth(30);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('M')->setWidth(30);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('N')->setWidth(15);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('O')->setWidth(15);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('P')->setWidth(40);
         $objPHPExcel->getActiveSheet()->getColumnDimension('Q')->setWidth(20);
 
         $this->generateHeaderExcel($objPHPExcel);
@@ -55,13 +51,13 @@ class JobApplication
         header('Content-Disposition: attachment;filename="'.$filename.'"');
         header('Cache-Control: max-age=0'); //no cache
 
-        $objWriter = IOFactory::createWriter($objPHPExcel, 'Xlsx');
+        $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
         $objWriter->save('php://output');
 
         exit;
     }
 
-    private function generateHeaderExcel(Spreadsheet $excel)
+    private function generateHeaderExcel(\PHPExcel $excel)
     {
         $headers = $this->setHeaders();
         if (count($headers)) {
@@ -69,7 +65,7 @@ class JobApplication
                 $excel->getActiveSheet()->setCellValue($key, $value);
                 $excel->getActiveSheet()->getStyle($key)->getFont()->setSize(11);
                 $excel->getActiveSheet()->getStyle($key)->getFont()->setBold(true);
-                $excel->getActiveSheet()->getStyle($key)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+                $excel->getActiveSheet()->getStyle($key)->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
             }
         }
     }
@@ -98,7 +94,7 @@ class JobApplication
         return $this->headers;
     }
 
-    private function generateCellsExcel(Spreadsheet $excel)
+    private function generateCellsExcel(\PHPExcel $excel)
     {
         $args = array(
             'posts_per_page' => -1,

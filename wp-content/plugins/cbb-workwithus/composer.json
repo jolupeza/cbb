@@ -14,9 +14,7 @@
         }
     },
     "require": {
-        "endroid/simple-excel": "^1.1"
     },
     "require-dev": {
-        "filp/whoops": "^2.5"
     }
 }
