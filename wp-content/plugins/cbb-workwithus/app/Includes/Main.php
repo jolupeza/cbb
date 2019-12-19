@@ -4,6 +4,7 @@ namespace CBB_WorkWithUs\Includes;
 
 use CBB_WorkWithUs\Admin\Admin;
 use CBB_WorkWithUs\Admin\Entities\Jobapplications;
+use CBB_WorkWithUs\Admin\Entities\Role;
 use CBB_WorkWithUs\Admin\ScriptLoader;
 use CBB_WorkWithUs\Front\Front;
 
@@ -105,6 +106,9 @@ class Main
      */
     private function define_admin_hooks()
     {
+        $adminRole = new Role($this->loader, $this->plugin_domain);
+        $adminRole->init();
+
         $admin = new Admin($this->loader, $this->plugin_domain, $this->get_version());
         $admin->init();
 

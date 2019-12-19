@@ -137,7 +137,23 @@ class Admin
             ),
             // 'taxonomies'  => array('post_tag', 'category'),
             // 'has_archive' => false,
-            'rewrite' => false
+            'rewrite' => false,
+            'capability_type' => 'jobapplication',
+            'capabilities' => array(
+                'edit_post' => 'edit_jobapplication',
+                'read_post' => 'read_jobapplication',
+                'delete_post' => 'delete_jobapplication',
+                'delete_posts' => 'delete_jobapplications',
+                'delete_published_posts' => 'delete_published_jobapplications',
+                'delete_others_posts' => 'delete_others_jobapplications',
+                'edit_posts' => 'edit_jobapplications',
+                'edit_others_posts' => 'edit_others_jobapplications',
+                'publish_posts' => 'publish_jobapplications',
+                'read_private_posts' => 'read_private_jobapplications',
+                'edit_published_posts' => 'edit_published_jobapplications',
+                'create_posts' => 'edit_jobapplications',
+            ),
+            'map_meta_cap' => true
         );
         register_post_type('jobapplications', $args);
     }

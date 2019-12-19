@@ -325,11 +325,9 @@ class Jobapplications
     public function exportJobApplications()
     {
         if (!empty($_POST['jobapplications_export_excel'])) {
-            if (current_user_can('manage_options')) {
-                $exportJobApplications = new JobApplication();
+            $exportJobApplications = new JobApplication();
 
-                $exportJobApplications->generateExcel();
-            }
+            $exportJobApplications->generateExcel();
         }
     }
 
