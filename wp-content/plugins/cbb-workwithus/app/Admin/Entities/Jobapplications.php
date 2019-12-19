@@ -2,6 +2,7 @@
 
 namespace CBB_WorkWithUs\Admin\Entities;
 
+use CBB_WorkWithUs\Admin\Exports\JobApplication;
 use CBB_WorkWithUs\Admin\Taxonomies\Joblevel;
 use CBB_WorkWithUs\Includes\Loader;
 
@@ -36,6 +37,8 @@ class Jobapplications
         $adminJobLevels->init();
 
         $this->loader->add_action('add_meta_boxes', $this, 'cdMbJobapplicationsAdd');
+        $this->loader->add_filter('views_edit-jobapplications', $this, 'displayButtonDownloadApplications');
+        $this->loader->add_action('admin_init', $this, 'exportJobApplications');
 
         $this->loader->add_action('wp_ajax_register_application', $this, 'register');
         $this->loader->add_action('wp_ajax_nopriv_register_application', $this, 'register');
@@ -311,12 +314,23 @@ class Jobapplications
         }
     }
 
-    public function buttonDownloadExcel($views)
+    public function displayButtonDownloadApplications($views)
     {
-        echo '<p>'
-            . '<a href="' . plugin_dir_url(dirname(__FILE__)) . 'contacts/generateExcel"'
-            . ' id="generate-excel" class="button button-primary">Generar excel</a>'
-            . '</p>';
+        echo '<form action="#" method="POST">'
+            . '<input type="hidden" id="jobapplications_export_excel" name="jobapplications_export_excel" value="1" />'
+            . '<input class="button button-primary user_export_button" style="margin-top:3px;" type="submit" value="Exportar a Excel" />'
+            .'</form>';
+    }
+
+    public function exportJobApplications()
+    {
+        if (!empty($_POST['jobapplications_export_excel'])) {
+            if (current_user_can('manage_options')) {
+                $exportJobApplications = new JobApplication();
+
+                $exportJobApplications->generateExcel();
+            }
+        }
     }
 
 }
