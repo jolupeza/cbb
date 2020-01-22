@@ -117,60 +117,6 @@ class Main
 
         $adminJsLoader  = new ScriptLoader($this->loader, $this->get_version());
         $adminJsLoader->init();
-
-        // $cssLoader = new CSS_Loader($this->get_version());
-        // $this->loader->add_action('admin_enqueue_scripts', $cssLoader, 'enqueue');
-
-        // $adminPage = new VM_Manager_Page();
-        // $this->loader->add_action('add_meta_boxes', $adminPage, 'cd_mb_page_add');
-        // $this->loader->add_action('save_post', $adminPage, 'cd_mb_page_save');
-
-        // $adminPost = new VM_Manager_Post();
-        // $this->loader->add_action('add_meta_boxes', $adminPost, 'cd_mb_post_add');
-        // $this->loader->add_action('save_post', $adminPost, 'cd_mb_post_save');
-
-        // $adminContacts = new VM_Manager_Contacts();
-        // $this->loader->add_action('add_meta_boxes', $adminContacts, 'cd_mb_contacts_add');
-        // $this->loader->add_filter('manage_edit-contacts_columns', $adminContacts, 'custom_columns_contacts');
-        // $this->loader->add_action('manage_contacts_posts_custom_column', $adminContacts, 'custom_column_contacts');
-        // $this->loader->add_action('init', $adminContacts, 'add_taxonomies_contacts');
-        // $this->loader->add_filter('views_edit-contacts', $adminContacts, 'buttonDownloadExcel');
-
-        // $adminTemplates = new VM_Manager_Templates();
-        // $this->loader->add_action('add_meta_boxes', $adminTemplates, 'cd_mb_templates_add');
-        // $this->loader->add_action('save_post', $adminTemplates, 'cd_mb_templates_save');
-
-        // $adminFronts = new VM_Manager_Fronts();
-        // $this->loader->add_action('add_meta_boxes', $adminFronts, 'cd_mb_fronts_add');
-        // $this->loader->add_action('save_post', $adminFronts, 'cd_mb_fronts_save');
-
-        // $adminAchievements = new VM_Manager_Achievements();
-        // $this->loader->add_action('add_meta_boxes', $adminAchievements, 'cd_mb_achievements_add');
-        // $this->loader->add_action('save_post', $adminAchievements, 'cd_mb_achievements_save');
-
-        // $adminStaff = new VM_Manager_Staff();
-        // $this->loader->add_action('init', $adminStaff, 'add_taxonomies_staff');
-
-        // $adminServices = new VM_Manager_Services();
-        // $this->loader->add_action('init', $adminServices, 'add_taxonomies_services');
-        // $this->loader->add_action('add_meta_boxes', $adminServices, 'cd_mb_services_add');
-        // $this->loader->add_action('save_post', $adminServices, 'cd_mb_services_save');
-
-        // $adminSliders = new VM_Manager_Sliders();
-        // $this->loader->add_action('add_meta_boxes', $adminSliders, 'cd_mb_sliders_add');
-        // $this->loader->add_action('save_post', $adminSliders, 'cd_mb_sliders_save');
-
-        // $adminQuestions = new VM_Manager_Questions();
-        // $this->loader->add_action('add_meta_boxes', $adminQuestions, 'cd_mb_questions_add');
-        // $this->loader->add_action('save_post', $adminQuestions, 'cd_mb_questions_save');
-
-        // $deserializer = new Deserializer();
-        // $serializer = new Serializer();
-
-        // $submenu = new VM_Manager_Submenu($this->version, new VM_Manager_Submenu_Page($deserializer));
-
-        // $this->loader->add_action('admin_menu', $submenu, 'add_options_page');
-        // $this->loader->add_action('admin_post', $serializer, 'save');
     }
 
     /**
@@ -184,16 +130,6 @@ class Main
     {
         $public = new Front($this->loader, $this->plugin_domain, $this->get_version());
         $public->init();
-
-        // $deserializer = new Deserializer();
-
-        // $public = new VM_Manager_Public($this->version, $deserializer);
-
-        // //$cssLoader = new CSS_Loader($this->get_version(), $deserializer);
-        // $jsLoader = new Script_Loader_Public($this->version);
-
-        // $this->loader->add_action('wp_enqueue_scripts', $jsLoader, 'enqueue', 50);
-        // //$this->loader->add_action('wp_enqueue_scripts', $cssLoader, 'enqueue');
     }
 
     /**

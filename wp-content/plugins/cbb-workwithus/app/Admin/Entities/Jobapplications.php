@@ -320,6 +320,8 @@ class Jobapplications
             . '<input type="hidden" id="jobapplications_export_excel" name="jobapplications_export_excel" value="1" />'
             . '<input class="button button-primary user_export_button" style="margin-top:3px;" type="submit" value="Exportar a Excel" />'
             .'</form>';
+
+        return $views;
     }
 
     public function exportJobApplications()

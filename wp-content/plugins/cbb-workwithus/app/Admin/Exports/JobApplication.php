@@ -14,7 +14,7 @@ class JobApplication
     {
         $objPHPExcel = new \PHPExcel();
 
-        $filename = 'reporte.xlsx';
+        $filename = 'reporte.xls';
         $title = 'Relación de Postulaciones';
 
         $objPHPExcel->setActiveSheetIndex(0);
@@ -47,7 +47,7 @@ class JobApplication
         $this->generateHeaderExcel($objPHPExcel);
         $this->generateCellsExcel($objPHPExcel);
 
-        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Type: application/vnd.ms-excel');
         header('Content-Disposition: attachment;filename="'.$filename.'"');
         header('Cache-Control: max-age=0'); //no cache
 
