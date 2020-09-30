@@ -17,7 +17,6 @@
         $phone = isset($values['mb_phone']) ? esc_attr($values['mb_phone'][0]) : '';
         $email = isset($values['mb_email']) ? esc_attr($values['mb_email'][0]) : '';
         $sede = isset($values['mb_sede']) ? esc_attr($values['mb_sede'][0]) : '';
-        $sonName = isset($values['mb_sonName']) ? esc_attr($values['mb_sonName'][0]) : '';
         $schedule = isset($values['mb_schedule']) ? esc_attr($values['mb_schedule'][0]) : 0;
         $scheduleCustom = isset($values['mb_scheduleCustom']) ? esc_attr($values['mb_scheduleCustom'][0]) : '';
         $year = isset($values['mb_year']) ? esc_attr($values['mb_year'][0]) : '';
@@ -113,14 +112,6 @@
     <p class="content-mb">
         <label for="mb_scheduleCustom">Horario personalizado: </label>
         <input type="text" name="mb_scheduleCustom" id="mb_scheduleCustom" value="<?php echo $scheduleCustom; ?>" />
-    </p>
-
-    <h3>Datos del hijo a postular</h3>
-
-    <!-- Son Name -->
-    <p class="content-mb">
-        <label for="mb_sonName">Nombre Completo: </label>
-        <input type="text" name="mb_sonName" id="mb_sonName" value="<?php echo $sonName; ?>" />
     </p>
 
     <!-- Year -->

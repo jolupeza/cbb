@@ -67,10 +67,9 @@ class prestudentsController extends Controller
         $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(20);
         $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(20);
         $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(20);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('G')->setWidth(25);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('H')->setWidth(20);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('I')->setWidth(10);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('J')->setWidth(20);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('G')->setWidth(20);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('H')->setWidth(10);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('I')->setWidth(20);
 
         $this->generateHeaderExcel($objPHPExcel);
         $this->generateCellsExcel($objPHPExcel, $sede, $level, $year);
@@ -82,9 +81,6 @@ class prestudentsController extends Controller
 
         $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
         $objWriter->save('php://output');
-
-//        $this->excel->loadFromArray(array('Postulantes' => $data));
-//        $this->excel->saveToOutput($filename, array('Postulantes'));
     }
 
     private function generateHeaderExcel(PHPExcel $excel)
@@ -110,10 +106,9 @@ class prestudentsController extends Controller
             'D3' => 'Correo electrónico',
             'E3' => 'Sede',
             'F3' => 'Horario',
-            'G3' => 'Nombre Hijo',
-            'H3' => 'Grado',
-            'I3' => 'Año',
-            'J3' => 'Fecha',
+            'G3' => 'Grado',
+            'H3' => 'Año',
+            'I3' => 'Fecha',
         );
 
         return $this->headers;
@@ -198,17 +193,14 @@ class prestudentsController extends Controller
                 $excel->getActiveSheet()->setCellValue('F'.$i, !is_null($dataSchedule) ? $dataSchedule->post_excerpt : $scheduleCustom);
                 $excel->getActiveSheet()->getStyle('F'.$i)->getFont()->setSize(10);
 
-                $excel->getActiveSheet()->setCellValue('G'.$i, $sonName);
+                $excel->getActiveSheet()->setCellValue('G'.$i, is_object($level) ? $level->name : '');
                 $excel->getActiveSheet()->getStyle('G'.$i)->getFont()->setSize(10);
 
-                $excel->getActiveSheet()->setCellValue('H'.$i, is_object($level) ? $level->name : '');
+                $excel->getActiveSheet()->setCellValue('H'.$i, $yearRow);
                 $excel->getActiveSheet()->getStyle('H'.$i)->getFont()->setSize(10);
 
-                $excel->getActiveSheet()->setCellValue('I'.$i, $yearRow);
+                $excel->getActiveSheet()->setCellValue('I'.$i, get_the_time('d-m-Y'));
                 $excel->getActiveSheet()->getStyle('I'.$i)->getFont()->setSize(10);
-
-                $excel->getActiveSheet()->setCellValue('J'.$i, get_the_time('d-m-Y'));
-                $excel->getActiveSheet()->getStyle('J'.$i)->getFont()->setSize(10);
 
 //                $excel->getActiveSheet()->setCellValue('G'.$i, $datePostulation);
 //                $excel->getActiveSheet()->getStyle('G'.$i)->getFont()->setSize(10);

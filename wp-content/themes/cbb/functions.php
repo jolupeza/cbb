@@ -12,7 +12,7 @@ define('THEMEDOMAIN', 'cbb-framework');
 function load_custom_scripts() {
   wp_enqueue_script('vendor_script', THEMEROOT . '/js/vendor.min.js', array('jquery'), false, true);
   wp_enqueue_script('main_script', THEMEROOT . '/js/main.js', array('jquery'), false, true);
-//   wp_enqueue_script('app_script', 'http://localhost:8080/js/app.js', array(), false, true);
+  // wp_enqueue_script('app_script', 'http://localhost:8080/js/app.js', array(), false, true);
   wp_enqueue_script('app_script', THEMEROOT.'/js/app.js', array(), false, true);
   wp_localize_script('main_script', 'CbbAjax', array('url' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('cbbajax-nonce')));
 }
@@ -464,12 +464,11 @@ function register_admision_callback()
   $phone = trim($_POST['fields']['parent_phone']);
   $email = trim($_POST['fields']['parent_email']);
   $sede = (int)trim($_POST['fields']['parent_sede']);
-  $sonName = trim($_POST['fields']['son_name']);
   $level = (int)trim($_POST['fields']['son_level']);
   $schedule = (int)trim($_POST['fields']['schedule']);
   $scheduleCustom = !empty($_POST['fields']['schedule_custom']) ? $_POST['fields']['schedule_custom'] : '';
 
-  if (!empty($name) && !empty($dni) && preg_match('/^[0-9]+$/', $dni) && strlen($dni) === 8 && !empty($phone) && preg_match('/^[0-9]+$/', $phone) && (strlen($phone) > 6 || strlen($phone) < 10) && !empty($email) && is_email($email) && $sede > 0 && !empty($sonName) && $level > 0) {
+  if (!empty($name) && !empty($dni) && preg_match('/^[0-9]+$/', $dni) && strlen($dni) === 8 && !empty($phone) && preg_match('/^[0-9]+$/', $phone) && (strlen($phone) > 6 || strlen($phone) < 10) && !empty($email) && is_email($email) && $sede > 0 && $level > 0) {
     if (!$schedule && empty($scheduleCustom)) {
       $result['error'] = 'Por favor indica una fecha personalizada.';
       echo json_encode($result);
@@ -482,7 +481,6 @@ function register_admision_callback()
     $dni = sanitize_text_field($dni);
     $phone = sanitize_text_field($phone);
     $email = sanitize_email($email);
-    $sonName = sanitize_text_field($sonName);
 
     // Validate Sede
     $dataSede = get_post($sede);
@@ -543,7 +541,6 @@ function register_admision_callback()
               update_post_meta($post_id, 'mb_phone', $phone);
               update_post_meta($post_id, 'mb_email', $email);
               update_post_meta($post_id, 'mb_sede', $sede);
-              update_post_meta($post_id, 'mb_sonName', $sonName);
               update_post_meta($post_id, 'mb_schedule', $schedule);
               update_post_meta($post_id, 'mb_scheduleCustom', $scheduleCustom);
               update_post_meta($post_id, 'mb_year', isset($options['admision_year']) && !empty($options['admision_year']) ? $options['admision_year'] : date("Y") + 1);

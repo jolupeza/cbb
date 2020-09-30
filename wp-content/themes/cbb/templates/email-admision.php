@@ -171,9 +171,6 @@
         <td class="innerpadding bodycontent" style="padding: 30px 50px 30px 50px; background-color: #f7f7f7;">
           <table width="160" align="left" border="0" cellpadding="0" cellspacing="0">
             <tr>
-              <td class="bodycopy" align="right" style="padding: 10px 10px 10px 10px; font-size: 14px; line-height: 18px; color: #484848; font-family: Arial; font-weight: bold;">Nombre:</td>
-            </tr>
-            <tr>
               <td class="bodycopy" align="right" style="padding: 10px 10px 10px 10px; font-size: 14px; line-height: 18px; color: #484848; font-family: Arial; font-weight: bold;">Grado</td>
             </tr>
           </table>
@@ -186,9 +183,6 @@
                     <tr>
                       <td>
                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                          <tr>
-                            <td class="bodycopy" style="padding: 10px 10px 10px 10px; font-size: 14px; line-height: 18px; color: #484848; font-family: Arial;"><?php echo $sonName; ?></td>
-                          </tr>
                           <tr>
                             <td class="bodycopy" style="padding: 10px 10px 10px 10px; font-size: 14px; line-height: 18px; color: #484848; font-family: Arial;"><?php echo $dataLevel->name; ?></td>
                           </tr>

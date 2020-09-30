@@ -76,17 +76,9 @@
           <transition name="fade">
             <p v-if="errors.has('schedule_custom')" class="text-danger Form__alert">{{ errors.first('schedule_custom') }}</p>
           </transition>
-          <!-- <p class="text-info">Sábados de 8 a.m. a 1 p.m.</p> -->
         </div>
       </div>
     </div>
-
-    <h3 class="Form-title">2. Datos del hijo a postular</h3>
-    <text-input v-model="draft.son_name"
-      :name="'son_name'"
-      label="Nombre completo"
-      v-validate="'required'"
-      :error="errors.first('son_name')" />
 
     <select-input v-model="draft.son_level"
       :name="'son_level'"
