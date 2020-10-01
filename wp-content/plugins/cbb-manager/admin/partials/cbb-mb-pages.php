@@ -10,7 +10,7 @@
 <div id="mb-pages-id">
     <?php
         $values = get_post_custom(get_the_ID());
-        
+
         $parallax = isset($values['mb_parallax']) ? esc_attr($values['mb_parallax'][0]) : '';
         $template = isset($values['mb_template']) ? esc_attr($values['mb_template'][0]) : '';
         $youtube = isset($values['mb_youtube']) ? esc_attr($values['mb_youtube'][0]) : '';
@@ -27,19 +27,23 @@
         $mp43 = isset($values['mb_mp43']) ? esc_attr($values['mb_mp43'][0]) : '';
         $ogv3 = isset($values['mb_ogv3']) ? esc_attr($values['mb_ogv3'][0]) : '';
         $pdf = isset($values['mb_pdf']) ? esc_attr($values['mb_pdf'][0]) : '';
+        $titleMainColor = !empty($values['mb_title_main_color']) ? esc_attr($values['mb_title_main_color'][0]) : 'red';
         $icon = isset($values['mb_icon']) ? esc_attr($values['mb_icon'][0]) : '';
         $url = isset($values['mb_url']) ? esc_attr($values['mb_url'][0]) : '';
         $page = isset($values['mb_page']) ? (int)esc_attr($values['mb_page'][0]) : '';
         $text = isset($values['mb_text']) ? esc_attr($values['mb_text'][0]) : '';
+        $buttonAlign = !empty($values['mb_button_align']) ? esc_attr($values['mb_button_align'][0]) : 'center';
+        $buttonSize = !empty($values['mb_button_size']) ? esc_attr($values['mb_button_size'][0]) : 'small';
+        $buttonColor = !empty($values['mb_button_color']) ? esc_attr($values['mb_button_color'][0]) : 'red';
         $target = isset($values['mb_target']) ? esc_attr($values['mb_target'][0]) : '';
         $title = isset($values['mb_title']) ? esc_attr($values['mb_title'][0]) : '';
         $subtitle = isset($values['mb_subtitle']) ? esc_attr($values['mb_subtitle'][0]) : '';
-        
+
         $more = !empty($values['mb_more']) ? esc_attr($values['mb_more'][0]) : 'off';
-        
+
         wp_nonce_field('pages_meta_box_nonce', 'meta_box_nonce');
     ?>
-    
+
     <!-- Template-->
     <p class="content-mb">
         <label for="mb_template">Seleccionar Plantilla: </label>
@@ -66,7 +70,7 @@
 
         </select>
     </p>
-    
+
     <!-- Parallax-->
     <p class="content-mb">
         <label for="mb_parallax">Seleccionar Parallax: </label>
@@ -93,19 +97,19 @@
 
         </select>
     </p>
-    
+
     <!-- youtube -->
     <p class="content-mb">
         <label for="mb_youtube">Ids vídeo youtube (si son más de dos separarlos con ";"): </label>
         <input type="text" name="mb_youtube" id="mb_youtube" value="<?php echo $youtube; ?>" />
     </p>
-    
+
     <!-- More -->
     <p class="content-mb">
         <label for="mb_more">Mostrar información adicional:</label>
         <input type="checkbox" name="mb_more" id="mb_more" <?php checked($more, 'on'); ?> />
     </p>
-    
+
     <fieldset class="GroupForm">
         <legend class="GroupForm-legend">Video 1</legend>
         
@@ -191,7 +195,7 @@
             </div><!-- end container-upload-file -->
         </section>
     </fieldset><!-- end GroupFrm -->
-    
+
     <fieldset class="GroupForm">
         <legend class="GroupForm-legend">Video 2</legend>
         
@@ -277,7 +281,7 @@
             </div><!-- end container-upload-file -->
         </section>
     </fieldset><!-- end GroupFrm -->
-    
+
     <fieldset class="GroupForm">
         <legend class="GroupForm-legend">Video 3</legend>
         
@@ -363,7 +367,7 @@
             </div><!-- end container-upload-file -->
         </section>
     </fieldset><!-- end GroupFrm -->
-    
+
     <fieldset class="GroupForm">
         <legend class="GroupForm-legend">PDF</legend>
         
@@ -389,7 +393,19 @@
             </div><!-- end container-upload-file -->
         </section>
     </fieldset>
-    
+
+    <!-- Title Main Color -->
+    <p class="content-mb">
+        <label for="mb_title_main_color">Color título principal: </label>
+        <select name="mb_title_main_color" id="mb_title_main_color">
+            <option value="white" <?php selected($titleMainColor, 'white'); ?>>Blanco</option>
+            <option value="red" <?php selected($titleMainColor, 'red'); ?>>Rojo</option>
+            <option value="gray" <?php selected($titleMainColor, 'gray'); ?>>Gris</option>
+            <option value="azul" <?php selected($titleMainColor, 'azul'); ?>>Azul</option>
+            <option value="celeste" <?php selected($titleMainColor, 'celeste'); ?>>Celeste</option>
+        </select>
+    </p>
+
     <!-- Icon -->
     <p class="content-mb">
         <label for="mb_icon">Seleccionar Ícono: </label>
@@ -407,37 +423,67 @@
             <option value="trabajo-cooperativo" <?php selected($icon, 'trabajo-cooperativo'); ?>>Trabajo cooperativo</option>
         </select>
     </p>
-    
+
     <!-- Texto principal -->
     <p class="content-mb">
         <label for="mb_title">Texto principal: </label>
         <input type="text" name="mb_title" id="mb_title" value="<?php echo $title; ?>" />
     </p>
-    
+
     <!-- Texto secundario -->
     <p class="content-mb">
         <label for="mb_subtitle">Texto secundario: </label>
         <input type="text" name="mb_subtitle" id="mb_subtitle" value="<?php echo $subtitle; ?>" />
     </p>
-    
+
     <!-- Texto enlace-->
     <p class="content-mb">
         <label for="mb_text">Texto botón enlace: </label>
         <input type="text" name="mb_text" id="mb_text" value="<?php echo $text; ?>" />
     </p>
-    
+
+    <!-- Button align -->
+    <p class="content-mb">
+        <label for="mb_button_align">Alineación del bóton: </label>
+        <select name="mb_button_align" id="mb_button_align">
+            <option value="left" <?php selected($buttonAlign, 'left'); ?>>Izquierda</option>
+            <option value="center" <?php selected($buttonAlign, 'center'); ?>>Centrado</option>
+            <option value="right" <?php selected($buttonAlign, 'right'); ?>>Derecho</option>
+        </select>
+    </p>
+
+    <!-- Button size -->
+    <p class="content-mb">
+        <label for="mb_button_size">Tamaño del bóton: </label>
+        <select name="mb_button_size" id="mb_button_size">
+            <option value="big" <?php selected($buttonSize, 'big'); ?>>Grande</option>
+            <option value="medium" <?php selected($buttonSize, 'medium'); ?>>Normal</option>
+            <option value="small" <?php selected($buttonSize, 'small'); ?>>Pequeño</option>
+        </select>
+    </p>
+
+    <!-- Button color -->
+    <p class="content-mb">
+        <label for="mb_button_color">Color del bóton: </label>
+        <select name="mb_button_color" id="mb_button_color">
+            <option value="red" <?php selected($buttonColor, 'red'); ?>>Rojo</option>
+            <option value="blue" <?php selected($buttonColor, 'blue'); ?>>Azul</option>
+            <option value="yellow" <?php selected($buttonColor, 'yellow'); ?>>Amarillo</option>
+        </select>
+    </p>
+
     <!-- URL-->
     <p class="content-mb">
         <label for="mb_url">Url: </label>
         <input type="text" name="mb_url" id="mb_url" value="<?php echo $url; ?>" />
     </p>
-    
+
     <!-- Target-->
     <p class="content-mb">
         <label for="mb_target">Mostrar en otra pestaña:</label>
         <input type="checkbox" name="mb_target" id="mb_target" <?php checked($target, 'on'); ?> />
     </p>
-    
+
 <?php
     $args = [
         'post_type' => 'page',
@@ -445,7 +491,7 @@
         'post_parent' => 0
     ];
     $pages = new WP_Query($args);
-    
+
     if ($pages->have_posts()) :
 ?>
     <p class="content-mb">

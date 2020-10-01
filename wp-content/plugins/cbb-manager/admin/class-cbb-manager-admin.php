@@ -590,6 +590,13 @@ class Cbb_Manager_Admin
             delete_post_meta($post_id, 'mb_pdf');
         }
 
+        // Title main color
+        if (isset($_POST['mb_title_main_color']) && !empty($_POST['mb_title_main_color'])) {
+            update_post_meta($post_id, 'mb_title_main_color', esc_attr($_POST['mb_title_main_color']));
+        } else {
+            delete_post_meta($post_id, 'mb_title_main_color');
+        }
+
         // Icon
         if (isset($_POST['mb_icon']) && !empty($_POST['mb_icon'])) {
             update_post_meta($post_id, 'mb_icon', esc_attr($_POST['mb_icon']));
@@ -616,6 +623,27 @@ class Cbb_Manager_Admin
             update_post_meta($post_id, 'mb_text', esc_attr($_POST['mb_text']));
         } else {
             delete_post_meta($post_id, 'mb_text');
+        }
+
+        // Button Align
+        if (isset($_POST['mb_button_align']) && !empty($_POST['mb_button_align'])) {
+            update_post_meta($post_id, 'mb_button_align', esc_attr($_POST['mb_button_align']));
+        } else {
+            delete_post_meta($post_id, 'mb_button_align');
+        }
+
+        // Button Size
+        if (isset($_POST['mb_button_size']) && !empty($_POST['mb_button_size'])) {
+            update_post_meta($post_id, 'mb_button_size', esc_attr($_POST['mb_button_size']));
+        } else {
+            delete_post_meta($post_id, 'mb_button_size');
+        }
+
+        // Button Color
+        if (isset($_POST['mb_button_color']) && !empty($_POST['mb_button_color'])) {
+            update_post_meta($post_id, 'mb_button_color', esc_attr($_POST['mb_button_color']));
+        } else {
+            delete_post_meta($post_id, 'mb_button_color');
         }
 
         // URL
