@@ -1,6 +1,6 @@
 <template>
   <form @submit.prevent="registerAdmission" class="Form Form--fields" action="" method="POST">
-    <h3 class="Form-title">1. Datos del padre de familia</h3>
+    <h3 class="Form-title">Datos del padre de familia</h3>
 
     <text-input v-model="draft.parent_name"
       label="Nombre completo"
