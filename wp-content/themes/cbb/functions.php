@@ -693,10 +693,10 @@ function setting_schedules_callback()
 add_action( 'rest_api_init', 'generateRouteByGetLabelTermsAdmisionForm');
 
 function generateRouteByGetLabelTermsAdmisionForm() {
-    register_rest_route('cbb/v1', '/admision/labelTerms', [
+    register_rest_route('cbb/v1', '/admision/labelTerms', array(
         'methods' => 'GET',
         'callback' => 'getLabelTermsAdmisionForm'
-    ]);
+    ));
 }
 
 function getLabelTermsAdmisionForm() {
@@ -707,11 +707,11 @@ function getLabelTermsAdmisionForm() {
         return new WP_Error( 'no_found', 'Not found', array( 'status' => 404 ) );
     }
 
-    $args = [
+    $args = array(
         'post_type' => 'page',
         'posts_per_page' => 1,
         'p' => $pageAdmision
-    ];
+    );
 
     $pageAdmision = new WP_Query($args);
 

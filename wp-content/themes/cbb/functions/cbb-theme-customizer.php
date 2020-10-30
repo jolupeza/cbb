@@ -244,88 +244,88 @@ function cbb_customize_register($wp_customize) {
   )));
 
   // Id Youtube
-  $wp_customize->add_setting('cbb_custom_settings[infraestructura_youtube]', [
+  $wp_customize->add_setting('cbb_custom_settings[infraestructura_youtube]', array(
     'default' => '',
     'type' => 'option'
-  ]);
+  ));
 
-  $wp_customize->add_control('cbb_custom_settings[infraestructura_youtube]', [
+  $wp_customize->add_control('cbb_custom_settings[infraestructura_youtube]', array(
     'label' => __('Id video Youtube', THEMEDOMAIN),
     'section' => 'cbb_locals',
     'settings' => 'cbb_custom_settings[infraestructura_youtube]',
     'type' => 'text'
-  ]);
+  ));
 
   // Description
-  $wp_customize->add_setting('cbb_custom_settings[infraestructura_desc]', [
+  $wp_customize->add_setting('cbb_custom_settings[infraestructura_desc]', array(
     'default' => '',
     'type' => 'option'
-  ]);
+  ));
 
-  $wp_customize->add_control('cbb_custom_settings[infraestructura_desc]', [
+  $wp_customize->add_control('cbb_custom_settings[infraestructura_desc]', array(
     'label' => __('Descripción', THEMEDOMAIN),
     'section' => 'cbb_locals',
     'settings' => 'cbb_custom_settings[infraestructura_desc]',
     'type' => 'textarea'
-  ]);
+  ));
 
   // Information
-  $wp_customize->add_section('cbb_info', [
+  $wp_customize->add_section('cbb_info', array(
     'title' => __('Información de la Web', THEMEDOMAIN),
     'description' => __('Configuración acerca de información relevante de la Web', THEMEDOMAIN),
     'priority' => 38
-  ]);
+  ));
 
   // Email Contact
-  $wp_customize->add_setting('cbb_custom_settings[email]', [
+  $wp_customize->add_setting('cbb_custom_settings[email]', array(
     'default' => '',
     'type' => 'option'
-  ]);
+  ));
 
-  $wp_customize->add_control('cbb_custom_settings[email]', [
+  $wp_customize->add_control('cbb_custom_settings[email]', array(
     'label' => __('Email', THEMEDOMAIN),
     'section' => 'cbb_info',
     'settings' => 'cbb_custom_settings[email]',
     'type' => 'text'
-  ]);
+  ));
 
   // Central phone
-  $wp_customize->add_setting('cbb_custom_settings[phone]', [
+  $wp_customize->add_setting('cbb_custom_settings[phone]', array(
     'default' => '',
     'type' => 'option'
-  ]);
+  ));
 
-  $wp_customize->add_control('cbb_custom_settings[phone]', [
+  $wp_customize->add_control('cbb_custom_settings[phone]', array(
     'label' => __('Central Telefónica', THEMEDOMAIN),
     'section' => 'cbb_info',
     'settings' => 'cbb_custom_settings[phone]',
     'type' => 'text'
-  ]);
+  ));
 
   // Admisión
-  $wp_customize->add_section('cbb_admision', [
+  $wp_customize->add_section('cbb_admision', array(
     'title' => __('Admisión', THEMEDOMAIN),
     'description' => __('Configuración de parámetros de la sección de Admisión', THEMEDOMAIN),
     'priority' => 39
-  ]);
+  ));
 
   // Year
-  $wp_customize->add_setting('cbb_custom_settings[admision_year]', [
+  $wp_customize->add_setting('cbb_custom_settings[admision_year]', array(
     'default' => '',
     'type' => 'option'
-  ]);
+  ));
 
-  $wp_customize->add_control('cbb_custom_settings[admision_year]', [
+  $wp_customize->add_control('cbb_custom_settings[admision_year]', array(
     'label' => __('Año Admisión', THEMEDOMAIN),
     'section' => 'cbb_admision',
     'settings' => 'cbb_custom_settings[admision_year]',
     'type' => 'text'
-  ]);
+  ));
 
-    $wp_customize->add_setting('cbb_custom_settings[admision_form]', [
+    $wp_customize->add_setting('cbb_custom_settings[admision_form]', array(
         'default' => '',
         'type' => 'option'
-    ]);
+    ));
 
     $wp_customize->add_control('cbb_custom_settings[admision_form]', array(
         'label'      => __('Página Formulario de Admisión:', THEMEDOMAIN),
@@ -335,10 +335,10 @@ function cbb_customize_register($wp_customize) {
         'choices'    => getPages(true),
     ));
 
-  $wp_customize->add_setting('cbb_custom_settings[admision_page]', [
+  $wp_customize->add_setting('cbb_custom_settings[admision_page]', array(
     'default' => '',
     'type' => 'option'
-  ]);
+  ));
 
   $wp_customize->add_control('cbb_custom_settings[admision_page]', array(
     'label'      => __('Página de Agradecimiento:', THEMEDOMAIN),
@@ -349,100 +349,100 @@ function cbb_customize_register($wp_customize) {
   ));
 
   // Text Emails
-  $wp_customize->add_section('cbb_response_email', [
+  $wp_customize->add_section('cbb_response_email', array(
     'title' => __('Mensajes Emails', THEMEDOMAIN),
     'description' => __('Configurar los mensajes de respuesta a los formulario de contacto y registro de admisión', THEMEDOMAIN),
     'priority' => 40
-  ]);
+  ));
 
   // Response Contact
-  $wp_customize->add_setting('cbb_custom_settings[response_contact]', [
+  $wp_customize->add_setting('cbb_custom_settings[response_contact]', array(
     'default' => '',
     'type' => 'option'
-  ]);
+  ));
 
-  $wp_customize->add_control('cbb_custom_settings[response_contact]', [
+  $wp_customize->add_control('cbb_custom_settings[response_contact]', array(
     'label' => __('Mensaje de respuesta al formulario de contacto', THEMEDOMAIN),
     'section' => 'cbb_response_email',
     'settings' => 'cbb_custom_settings[response_contact]',
     'type' => 'textarea'
-  ]);
+  ));
 
   // Response Admition
-  $wp_customize->add_setting('cbb_custom_settings[response_admision]', [
+  $wp_customize->add_setting('cbb_custom_settings[response_admision]', array(
     'default' => '',
     'type' => 'option'
-  ]);
+  ));
 
-  $wp_customize->add_control('cbb_custom_settings[response_admision]', [
+  $wp_customize->add_control('cbb_custom_settings[response_admision]', array(
     'label' => __('Mensaje de respuesta al formulario de admisión', THEMEDOMAIN),
     'section' => 'cbb_response_email',
     'settings' => 'cbb_custom_settings[response_admision]',
     'type' => 'textarea'
-  ]);
+  ));
 
   // Messages user forms
-  $wp_customize->add_section('cbb_response_forms', [
+  $wp_customize->add_section('cbb_response_forms', array(
     'title' => __('Mensajes Respuesta Formularios', THEMEDOMAIN),
     'description' => __('Configurar los mensajes de respuesta al usuario de los formulario de contacto y registro de admisión', THEMEDOMAIN),
     'priority' => 41
-  ]);
+  ));
 
   // Response Contact
-  $wp_customize->add_setting('cbb_custom_settings[response_contact_forms]', [
+  $wp_customize->add_setting('cbb_custom_settings[response_contact_forms]', array(
     'default' => '',
     'type' => 'option'
-  ]);
+  ));
 
-  $wp_customize->add_control('cbb_custom_settings[response_contact_forms]', [
+  $wp_customize->add_control('cbb_custom_settings[response_contact_forms]', array(
     'label' => __('Mensaje de respuesta del formulario de contacto', THEMEDOMAIN),
     'section' => 'cbb_response_forms',
     'settings' => 'cbb_custom_settings[response_contact_forms]',
     'type' => 'textarea'
-  ]);
+  ));
 
   // Response Admition
-  $wp_customize->add_setting('cbb_custom_settings[response_admision_forms]', [
+  $wp_customize->add_setting('cbb_custom_settings[response_admision_forms]', array(
     'default' => '',
     'type' => 'option'
-  ]);
+  ));
 
-  $wp_customize->add_control('cbb_custom_settings[response_admision_forms]', [
+  $wp_customize->add_control('cbb_custom_settings[response_admision_forms]', array(
     'label' => __('Mensaje de respuesta del formulario de admisión', THEMEDOMAIN),
     'section' => 'cbb_response_forms',
     'settings' => 'cbb_custom_settings[response_admision_forms]',
     'type' => 'textarea'
-  ]);
+  ));
 
     // Response WorkWithUs
-    $wp_customize->add_setting('cbb_custom_settings[response_workwithus_forms]', [
+    $wp_customize->add_setting('cbb_custom_settings[response_workwithus_forms]', array(
         'default' => 'Gracias por postular al colegio Bertolt Brecht, hemos recibido tu solicitud. Nos comunicaremos a la brevedad.',
         'type' => 'option'
-    ]);
+    ));
 
-    $wp_customize->add_control('cbb_custom_settings[response_workwithus_forms]', [
+    $wp_customize->add_control('cbb_custom_settings[response_workwithus_forms]', array(
         'label' => __('Mensaje de respuesta del formulario de postulaciones', THEMEDOMAIN),
         'section' => 'cbb_response_forms',
         'settings' => 'cbb_custom_settings[response_workwithus_forms]',
         'type' => 'textarea'
-    ]);
+    ));
 
   // Information
-  $wp_customize->add_panel('cbb_categories', [
+  $wp_customize->add_panel('cbb_categories', array(
     'title' => __('Categorías', THEMEDOMAIN),
     'description' => esc_html__('Configuraciones Categorías', THEMEDOMAIN),
     'priority' => 42,
     'capability' => 'edit_theme_options',
-  ]);
+  ));
 
-  $wp_customize->add_section('cbb_blog', [
+  $wp_customize->add_section('cbb_blog', array(
     'title' => __('Configuración Vida Escolar', THEMEDOMAIN),
     'description' => __('Configuración de opciones para la sección Vida Escolar', THEMEDOMAIN),
     'panel' => 'cbb_categories',
     'capability' => 'edit_theme_options',
-  ]);
+  ));
 
-  $parallaxs = [];
+  $parallaxs = array();
   $args = array(
     'post_type' => 'parallaxs',
     'posts_per_page' => -1
@@ -460,10 +460,10 @@ function cbb_customize_register($wp_customize) {
   }
   wp_reset_postdata();
 
-  $wp_customize->add_setting('cbb_custom_settings[blog_parallax]', [
+  $wp_customize->add_setting('cbb_custom_settings[blog_parallax]', array(
     'default' => '',
     'type' => 'option'
-  ]);
+  ));
 
   $wp_customize->add_control('cbb_custom_settings[blog_parallax]', array(
     'label'      => __('Parallax', THEMEDOMAIN),
@@ -473,10 +473,10 @@ function cbb_customize_register($wp_customize) {
     'choices'    => $parallaxs,
   ));
 
-  $wp_customize->add_setting('cbb_custom_settings[blog_menu]', [
+  $wp_customize->add_setting('cbb_custom_settings[blog_menu]', array(
     'default' => '',
     'type' => 'option'
-  ]);
+  ));
 
   $wp_customize->add_control('cbb_custom_settings[blog_menu]', array(
     'label'      => __('Menú Zonas', THEMEDOMAIN),
@@ -486,17 +486,17 @@ function cbb_customize_register($wp_customize) {
     'choices'    => getMenus(),
   ));
 
-  $wp_customize->add_section('cbb_gallery', [
+  $wp_customize->add_section('cbb_gallery', array(
     'title' => __('Configuración Galería', THEMEDOMAIN),
     'description' => __('Configuración de opciones para la categoría Galería', THEMEDOMAIN),
     'panel' => 'cbb_categories',
     'capability' => 'edit_theme_options',
-  ]);
+  ));
 
-  $wp_customize->add_setting('cbb_custom_settings[gallery_menu]', [
+  $wp_customize->add_setting('cbb_custom_settings[gallery_menu]', array(
     'default' => '',
     'type' => 'option'
-  ]);
+  ));
 
   $wp_customize->add_control('cbb_custom_settings[gallery_menu]', array(
     'label'      => __('Menú Zonas', THEMEDOMAIN),
@@ -507,41 +507,41 @@ function cbb_customize_register($wp_customize) {
   ));
 
   // Pixel Facebook
-  $wp_customize->add_section('cbb_pixel', [
+  $wp_customize->add_section('cbb_pixel', array(
     'title' => __('Configuración Pixel de Facebook', THEMEDOMAIN),
     'description' => __('Configuración de opciones para el funcionamiento de Pixel de Facebook', THEMEDOMAIN),
     'priority' => 43
-  ]);
+  ));
 
   // pixel code
-  $wp_customize->add_setting('cbb_custom_settings[pixel_code]', [
+  $wp_customize->add_setting('cbb_custom_settings[pixel_code]', array(
     'default' => '',
     'type' => 'option'
-  ]);
+  ));
 
-  $wp_customize->add_control('cbb_custom_settings[pixel_code]', [
+  $wp_customize->add_control('cbb_custom_settings[pixel_code]', array(
     'label' => __('Código', THEMEDOMAIN),
     'section' => 'cbb_pixel',
     'settings' => 'cbb_custom_settings[pixel_code]',
     'type' => 'textarea'
-  ]);
+  ));
 
-  $wp_customize->add_setting('cbb_custom_settings[pixel_all]', [
+  $wp_customize->add_setting('cbb_custom_settings[pixel_all]', array(
     'default' => 0,
     'type' => 'option'
-  ]);
+  ));
 
-  $wp_customize->add_control('cbb_custom_settings[pixel_all]', [
+  $wp_customize->add_control('cbb_custom_settings[pixel_all]', array(
     'label' => __('¿Mostrar en todas las páginas?', THEMEDOMAIN),
     'section' => 'cbb_pixel',
     'settings' => 'cbb_custom_settings[pixel_all]',
     'type' => 'checkbox'
-  ]);
+  ));
 
-  $wp_customize->add_setting('cbb_custom_settings[pixel_page]', [
+  $wp_customize->add_setting('cbb_custom_settings[pixel_page]', array(
     'default' => '',
     'type' => 'option'
-  ]);
+  ));
 
   $wp_customize->add_control('cbb_custom_settings[pixel_page]', array(
     'label'      => __('En página específica:', THEMEDOMAIN),
@@ -552,11 +552,11 @@ function cbb_customize_register($wp_customize) {
   ));
 
   // Google Ads
-  $wp_customize->add_section('cbb_google_ads', [
+  $wp_customize->add_section('cbb_google_ads', array(
     'title' => __('Configuración Google Ads', THEMEDOMAIN),
     'description' => __('Configuración de opciones para el funcionamiento de Google Ads', THEMEDOMAIN),
     'priority' => 44
-  ]);
+  ));
 
   // google ads code
   $wp_customize->add_setting('cbb_custom_settings[google_ads_code]', [
