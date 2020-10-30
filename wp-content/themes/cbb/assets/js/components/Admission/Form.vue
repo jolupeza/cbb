@@ -91,7 +91,7 @@
     <div class="form-group" :class="{'has-error has-feedback': errors.has('parent_terms')}">
       <div class="checkbox">
         <label>
-          <input type="checkbox" name="parent_terms" v-model="draft.parent_terms" v-validate="'required'"> Acepto las <a :href="urlTerms" target="_blank" rel="noopener noreferrer">condiciones del proceso de admisión {{ yearAdmission }}</a>
+          <input type="checkbox" name="parent_terms" v-model="draft.parent_terms" v-validate="'required'"><span v-html="labelTerms"></span>
         </label>
         <p v-show="errors.has('parent_terms')" class="text-danger Form__alert">{{ errors.first('parent_terms') }}</p>
       </div>
@@ -167,6 +167,9 @@
       ...mapState('schedules', {
         setting: state => state.setting
       }),
+        ...mapState('form', {
+            labelTerms: state => state.labelTerms
+        }),
       typeInfo() {
         return 'alert-' + this.info.type;
       },
@@ -187,6 +190,7 @@
           return {id: level.id, title: level.name}
         })
       })
+        this.$store.dispatch('form/getLabelTerms');
     },
     methods: {
       checkOtherSchedule() {
@@ -269,7 +273,7 @@
                   this.timePickerOptions.step = this.setting[key].hour_step;
                   this.statusSchedule = this.setting[key].status;
 
-                  this.setTimePickerOptionsCurrent({ 
+                  this.setTimePickerOptionsCurrent({
                     start: this.setting[key].hour_start,
                     end: this.setting[key].hour_end,
                     step: this.setting[key].hour_step,

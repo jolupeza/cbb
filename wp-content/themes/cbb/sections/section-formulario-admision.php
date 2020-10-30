@@ -21,6 +21,11 @@
             :placeholder-datepicker="'<?php _e($placeholderCalendar, THEMEDOMAIN); ?>'"
             calendar-other="<?php _e($calendarOther, THEMEDOMAIN); ?>"
             default-select-local="<?php _e($defaultSelectLocal, THEMEDOMAIN) ?>"></app-admission>
+          <?php if (get_field('page_admision_information_additional')) : ?>
+            <article class="Page__content">
+                <?php the_field('page_admision_information_additional'); ?>
+            </article>
+          <?php endif; ?>
         </div>
         <div class="col-md-6">
           <?php if (has_post_thumbnail($idParent)) : ?>

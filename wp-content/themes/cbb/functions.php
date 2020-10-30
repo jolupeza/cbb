@@ -5,6 +5,7 @@
 define('THEMEROOT', get_stylesheet_directory_uri());
 define('IMAGES', THEMEROOT . '/images');
 define('THEMEDOMAIN', 'cbb-framework');
+define('THEMEPATH', trailingslashit(get_stylesheet_directory()));
 
 /****************************************/
 /* Load JS Files */
@@ -12,7 +13,7 @@ define('THEMEDOMAIN', 'cbb-framework');
 function load_custom_scripts() {
   wp_enqueue_script('vendor_script', THEMEROOT . '/js/vendor.min.js', array('jquery'), false, true);
   wp_enqueue_script('main_script', THEMEROOT . '/js/main.js', array('jquery'), false, true);
-  // wp_enqueue_script('app_script', 'http://localhost:8080/js/app.js', array(), false, true);
+//   wp_enqueue_script('app_script', 'http://localhost:8080/js/app.js', array(), false, true);
   wp_enqueue_script('app_script', THEMEROOT.'/js/app.js', array(), false, true);
   wp_localize_script('main_script', 'CbbAjax', array('url' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('cbbajax-nonce')));
 }
@@ -685,6 +686,55 @@ function setting_schedules_callback()
 
   wp_send_json($result);
 }
+
+/*********************************************************/
+/* Create route by get label field terms of admision form */
+/*********************************************************/
+add_action( 'rest_api_init', 'generateRouteByGetLabelTermsAdmisionForm');
+
+function generateRouteByGetLabelTermsAdmisionForm() {
+    register_rest_route('cbb/v1', '/admision/labelTerms', [
+        'methods' => 'GET',
+        'callback' => 'getLabelTermsAdmisionForm'
+    ]);
+}
+
+function getLabelTermsAdmisionForm() {
+    $options = get_option('cbb_custom_settings');
+    $pageAdmision = !empty($options['admision_form']) ? (int)$options['admision_form'] : null;
+
+    if ( is_null($pageAdmision) ) {
+        return new WP_Error( 'no_found', 'Not found', array( 'status' => 404 ) );
+    }
+
+    $args = [
+        'post_type' => 'page',
+        'posts_per_page' => 1,
+        'p' => $pageAdmision
+    ];
+
+    $pageAdmision = new WP_Query($args);
+
+    if ( !$pageAdmision->have_posts() ) {
+        return new WP_Error( 'no_found', 'Not found', array( 'status' => 404 ) );
+    }
+
+    while($pageAdmision->have_posts()) {
+        $pageAdmision->the_post();
+
+        $showFieldsAdmisionForm = get_field('page_show_fields_admision_form');
+
+        if  (!$showFieldsAdmisionForm) {
+            return new WP_Error( 'no_found', 'Not found', array( 'status' => 404 ) );
+        }
+
+        return get_field('page_admision_label_terms');
+    }
+}
+
+require_once THEMEPATH . 'inc/WatsonCbb.php';
+
+$cbb = new WatsonCbb();
 
 /**********************************************/
 /* Load Theme Options Page and Custom Widgets */
