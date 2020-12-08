@@ -15,7 +15,7 @@ require( './bootstrap' );
 
 Vue.config.productionTip = false;
 
-for ( let rule in rules ) {
+for ( const rule in rules ) {
   extend( rule, {
     ...rules[rule],
     message: es.messages[rule]

@@ -90,8 +90,8 @@ export default {
       this.$store.dispatch( 'setModal', true );
     },
     handleCvChange( event ) {
-      let tgt = event.target || window.event.srcElement;
-      let files = tgt.files;
+      const tgt = event.target || window.event.srcElement;
+      const files = tgt.files;
 
       if ( this.checkTypeCv( files[0].type ) && this.checkSizeCv( files[0].size ) ) {
         this.$store.dispatch( 'applications/setCv', {

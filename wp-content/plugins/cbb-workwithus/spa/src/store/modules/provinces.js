@@ -9,7 +9,7 @@ const getters = {};
 const actions = {
   retrieveByCity( context, idCity ) {
     return new Promise( ( resolve ) => {
-      let provinces = dataProvinces.filter( province => {
+      const provinces = dataProvinces.filter( province => {
         return province.department_id === idCity;
       });
 

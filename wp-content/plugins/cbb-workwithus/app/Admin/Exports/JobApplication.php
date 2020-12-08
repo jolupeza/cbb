@@ -88,7 +88,7 @@ class JobApplication
             'M3' => 'Referencia',
             'N3' => 'Nivel',
             'O3' => 'Sede',
-            'P3' => 'Reseña',
+            'P3' => 'Especialidad',
             'Q3' => 'Tipo Postulación'
         );
         return $this->headers;
@@ -135,6 +135,9 @@ class JobApplication
                 $typePostulation = wp_get_object_terms($id, 'joblevels');
                 $typePostulation = !is_wp_error($typePostulation) ? $typePostulation[0]->name : '';
 
+                $speciality = wp_get_object_terms($id, 'job_specialities');
+                $nameSpeciality = !is_wp_error($speciality) ? $speciality[0]->name : '';
+
                 $excel->getActiveSheet()->setCellValue('A'.$i, "{$name} {$firstName} {$lastName}");
                 $excel->getActiveSheet()->getStyle('A'.$i)->getFont()->setSize(10);
 
@@ -180,7 +183,7 @@ class JobApplication
                 $excel->getActiveSheet()->setCellValue('O'.$i, is_object($dataLocal) ? $dataLocal->post_title : $dataLocal);
                 $excel->getActiveSheet()->getStyle('O'.$i)->getFont()->setSize(10);
 
-                $excel->getActiveSheet()->setCellValue('P'.$i, $review);
+                $excel->getActiveSheet()->setCellValue('P'.$i, $nameSpeciality);
                 $excel->getActiveSheet()->getStyle('P'.$i)->getFont()->setSize(10);
 
                 $excel->getActiveSheet()->setCellValue('Q'.$i, $typePostulation);

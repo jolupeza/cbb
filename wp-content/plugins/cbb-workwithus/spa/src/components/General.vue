@@ -19,7 +19,7 @@
                 </div>
                 <div class="col-sm-4 col-md-3">
                   <div class="form-group">
-                    <ValidationProvider name="foto" ref="photo" rules="required|image|size:2048" v-slot="{ validate, errors }">
+                    <ValidationProvider name="foto" ref="photo" rules="image|size:1024" v-slot="{ validate, errors }">
                       <article class="WorkWithUs__Form__fileWrapper">
                         <i v-if="!avatar.loaded" class="glyphicon glyphicon-user" aria-hidden="true"></i>
                         <img v-else :src="avatar.result" class="img-responsive" alt="avatar" />
@@ -131,34 +131,6 @@
             </div>
           </div>
 
-          <div class="row">
-            <div v-if="isTeacher" class="col-sm-4">
-              <div class="form-group">
-                <label for="level">Nivel: <span>(*)</span></label>
-                <ValidationProvider name="nivel" rules="required" v-slot="{ errors }">
-                  <select name="level" id="level" v-model="level" class="form-control">
-                    <option :value="null">Seleccione</option>
-                    <option :value="level.key" v-for="(level, key) in levels" :key="key">{{ level.title }}</option>
-                  </select>
-                  <span class="is-invalid">{{ errors[0] }}</span>
-                </ValidationProvider>
-              </div>
-            </div>
-            <div class="col-sm-4">
-              <div class="form-group">
-                <label for="local">Sede: <span>(*)</span></label>
-                <ValidationProvider name="sede" rules="required" v-slot="{ errors }">
-                  <select name="local" id="local" v-model="local" class="form-control">
-                    <option :value="null">Seleccione</option>
-                    <option :value="local.ID" v-for="local in locals" :key="local.ID">{{ local.post_title }}</option>
-                  </select>
-                  <span class="is-invalid">{{ errors[0] }}</span>
-                </ValidationProvider>
-              </div>
-            </div>
-            <div class="col-sm-4"></div>
-          </div>
-
           <hr class="WorkWithUs__Separator" />
 
           <h3 class="WorkWithUs__title">Ubicación actual</h3>
@@ -225,6 +197,49 @@
 
           <hr class="WorkWithUs__Separator" />
 
+          <h3 class="WorkWithUs__title">Interés de postulación</h3>
+
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="local">Sede a la que postula: <span>(*)</span></label>
+                <ValidationProvider name="sede" rules="required" v-slot="{ errors }">
+                  <select name="local" id="local" v-model="local" class="form-control">
+                    <option :value="null">Seleccione</option>
+                    <option :value="local.ID" v-for="local in locals" :key="local.ID">{{ local.post_title }}</option>
+                  </select>
+                  <span class="is-invalid">{{ errors[0] }}</span>
+                </ValidationProvider>
+              </div>
+            </div>
+            <div v-if="isTeacher" class="col-sm-4">
+              <div class="form-group">
+                <label for="level">Nivel: <span>(*)</span></label>
+                <ValidationProvider name="nivel" rules="required" v-slot="{ errors }">
+                  <select name="level" id="level" v-model="level" class="form-control">
+                    <option :value="null">Seleccione</option>
+                    <option :value="level.key" v-for="(level, key) in levels" :key="key">{{ level.title }}</option>
+                  </select>
+                  <span class="is-invalid">{{ errors[0] }}</span>
+                </ValidationProvider>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="speciality">Especialidad <span>(*)</span></label>
+                <ValidationProvider name="especialidad" rules="required" v-slot="{ errors }">
+                  <select name="speciality" id="speciality" v-model="speciality" class="form-control">
+                    <option :value="null">Seleccione</option>
+                    <option :value="key" v-for="(speciality, key) in specialities" :key="key">{{ speciality }}</option>
+                  </select>
+                  <span class="is-invalid">{{ errors[0] }}</span>
+                </ValidationProvider>
+              </div>
+            </div>
+          </div>
+
+          <hr class="WorkWithUs__Separator" />
+
           <div class="WorkWithUs__buttons">
             <button class="WorkWithUs__button WorkWithUs__button--first" :disabled="!valid" @click.prevent="next">Siguiente <i class="fas fa-chevron-right"></i></button>
           </div>
@@ -252,6 +267,7 @@ export default {
         { key: 'secundaria', title: 'Secundaria' }
       ],
       locals: this.wpData.locals,
+      specialities: this.wpData.specialities,
       typesPhoto: [ 'image/jpeg', 'image/png' ]
     };
   },
@@ -407,6 +423,14 @@ export default {
       set( value ) {
         this.$store.dispatch( 'applications/setLocal', value );
       }
+    },
+    speciality: {
+      get() {
+        return this.$store.state.applications.speciality;
+      },
+      set( value ) {
+        this.$store.dispatch( 'applications/setSpeciality', null !== value ? parseInt( value ) : null );
+      }
     }
   },
 
@@ -444,15 +468,15 @@ export default {
       });
     },
     handlePhotoChange( event ) {
-      let tgt = event.target || window.event.srcElement;
-      let files = tgt.files;
+      const tgt = event.target || window.event.srcElement;
+      const files = tgt.files;
 
       if ( this.checkTypePhoto( files[0].type ) && this.checkSizePhoto( files[0].size ) ) {
         this.avatar.file = files[0];
         this.avatar.name = files[0].name;
         this.avatar.loaded = true;
 
-        let fr = new FileReader();
+        const fr = new FileReader();
         fr.onload = () => {
           this.avatar.result = fr.result;
         };

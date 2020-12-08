@@ -27,9 +27,7 @@ export default {
     return {
       steps: [
         { id: 1, title: 'Datos generales', number: '01' },
-        { id: 2, title: 'Formación académica', number: '02' },
-        { id: 3, title: 'Experiencia laboral', number: '03' },
-        { id: 4, title: 'Información relevante', number: '04' }
+        { id: 2, title: 'Formación y experiencia', number: '02' }
       ]
     };
   },
@@ -52,7 +50,7 @@ export default {
     display: flex;
   }
   &__item {
-    width: 25%;
+    width: 50%;
     &.active {
       .Steps {
         &__figure {

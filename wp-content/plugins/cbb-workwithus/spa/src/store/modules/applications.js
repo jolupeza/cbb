@@ -1,4 +1,5 @@
 /* globals wpData */
+/* eslint no-useless-catch: "off" */
 
 import applicationApi from '@/api/application';
 import dataCities from '@/assets/resources/cities.json';
@@ -9,6 +10,7 @@ const state = {
   levelId: null,
   level: null,
   local: null,
+  speciality: null,
   document: '',
   apepaterno: '',
   apematerno: '',
@@ -95,6 +97,9 @@ const actions = {
   setLocal( context, local ) {
     context.commit( 'SET_LOCAL', local );
   },
+  setSpeciality( context, speciality ) {
+    context.commit( 'SET_SPECIALITY', speciality );
+  },
   setAddress( context, address ) {
     context.commit( 'SET_ADDRESS', address );
   },
@@ -126,41 +131,41 @@ const actions = {
     context.commit( 'SET_LEVEL_ID', id );
   },
   async register({ state }, { nonce, action }) {
-    let formData = new FormData();
-
-    formData.append( 'nonce', nonce );
-    formData.append( 'action', action );
-    formData.append( 'level', state.levelId );
-    formData.append( 'document', state.document );
-    formData.append( 'apepaterno', state.apepaterno );
-    formData.append( 'apematerno', state.apematerno );
-    formData.append( 'name', state.name );
-    formData.append( 'gender', state.gender );
-    formData.append( 'birthday', state.birthday );
-    formData.append( 'age', state.age );
-    formData.append( 'phone', state.phone );
-    formData.append( 'mobile', state.mobile );
-    formData.append( 'email', state.email );
-    formData.append( 'city', methods.findNameCity( state.city ) );
-    formData.append( 'province', methods.findNameProvince( state.province ) );
-    formData.append( 'district', methods.findNameDistrict( state.district ) );
-    formData.append( 'address', state.address );
-    formData.append( 'reference', state.reference );
-    formData.append( 'levelEducation', null === state.level ? '' : state.level );
-    formData.append( 'local', state.local );
-    formData.append( 'review', state.review );
-    formData.append( 'studies', JSON.stringify( state.studies ) );
-    formData.append( 'experiences', JSON.stringify( state.experiences ) );
-
-    if ( state.photo.loaded ) {
-      formData.append( 'photo', state.photo.file, state.photo.name );
-    }
-
-    if ( state.cv.loaded ) {
-      formData.append( 'cv', state.cv.file, state.cv.name );
-    }
-
     try {
+      const formData = new FormData();
+
+      formData.append( 'nonce', nonce );
+      formData.append( 'action', action );
+      formData.append( 'level', state.levelId );
+      formData.append( 'document', state.document );
+      formData.append( 'apepaterno', state.apepaterno );
+      formData.append( 'apematerno', state.apematerno );
+      formData.append( 'name', state.name );
+      formData.append( 'gender', state.gender );
+      formData.append( 'birthday', state.birthday );
+      formData.append( 'age', state.age );
+      formData.append( 'phone', state.phone );
+      formData.append( 'mobile', state.mobile );
+      formData.append( 'email', state.email );
+      formData.append( 'city', methods.findNameCity( state.city ) );
+      formData.append( 'province', methods.findNameProvince( state.province ) );
+      formData.append( 'district', methods.findNameDistrict( state.district ) );
+      formData.append( 'address', state.address );
+      formData.append( 'reference', state.reference );
+      formData.append( 'levelEducation', null === state.level ? '' : state.level );
+      formData.append( 'local', state.local );
+      formData.append( 'speciality', state.speciality );
+      formData.append( 'studies', JSON.stringify( state.studies ) );
+      formData.append( 'experiences', JSON.stringify( state.experiences ) );
+
+      if ( state.photo.loaded ) {
+        formData.append( 'photo', state.photo.file, state.photo.name );
+      }
+
+      if ( state.cv.loaded ) {
+        formData.append( 'cv', state.cv.file, state.cv.name );
+      }
+
       return await applicationApi.register( formData );
     } catch ( error ) {
       throw error;
@@ -253,6 +258,9 @@ const mutations = {
   },
   SET_LOCAL( state, local ) {
     state.local = local;
+  },
+  SET_SPECIALITY( state, speciality ) {
+    state.speciality = speciality;
   },
   SET_LEVEL_ID( state, id ) {
     state.levelId = id;

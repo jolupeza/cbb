@@ -185,9 +185,6 @@
                         <td class="manage-column">Carrera Profesional</td>
                         <td class="manage-column">Institución</td>
                         <td class="manage-column">Grado Acad.</td>
-                        <td class="manage-column">Inicio</td>
-                        <td class="manage-column">Fin</td>
-                        <td class="manage-column">Especialidad</td>
                     </tr>
                     </thead>
                     <tbody>
@@ -197,9 +194,6 @@
                             <td><?php esc_attr_e($study->profession); ?></td>
                             <td><?php esc_attr_e($study->institution); ?></td>
                             <td><?php esc_attr_e(get_post($study->degree)->post_title); ?></td>
-                            <td><?php esc_attr_e(date('d-m-Y', strtotime($study->dateStart))); ?></td>
-                            <td><?php esc_attr_e(date('d-m-Y', strtotime($study->dateEnd))); ?></td>
-                            <td><?php esc_attr_e($study->specialty); ?></td>
                         </tr>
                     <?php endforeach; ?>
                     </tbody>
@@ -218,9 +212,6 @@
                         <td class="manage-column">Cargo</td>
                         <td class="manage-column">Inicio</td>
                         <td class="manage-column">Fin</td>
-                        <td class="manage-column">Referencia Nombre</td>
-                        <td class="manage-column">Referencia Celular</td>
-                        <td class="manage-column">Tel. Institucional</td>
                     </tr>
                     </thead>
                     <tbody>
@@ -236,9 +227,6 @@
                             <td><?php esc_attr_e($experience->job); ?></td>
                             <td><?php esc_attr_e(date('d-m-Y', strtotime($experience->dateStart))); ?></td>
                             <td><?php esc_attr_e($dateEnd); ?></td>
-                            <td><?php esc_attr_e(!empty($experience->name) ? $experience->name : ''); ?></td>
-                            <td><?php esc_attr_e(!empty($experience->mobile) ? $experience->mobile : ''); ?></td>
-                            <td><?php esc_attr_e(!empty($experience->phone) ? $experience->phone : ''); ?></td>
                         </tr>
                     <?php endforeach; ?>
                     </tbody>

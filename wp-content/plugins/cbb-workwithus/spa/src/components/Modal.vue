@@ -40,20 +40,20 @@ export default {
     saveApplication() {
       this.$store.dispatch( 'setStatusLoading', true );
 
-      let params = {
+      const params = {
         nonce: document.head.querySelector( 'meta[name="csrf-token"]' ).content,
         action: 'register_application'
       };
 
       this.$store.dispatch( 'applications/register', params ).then( ( response ) => {
-        let params = { type: response.status ? 'success' : 'danger', msg: response.msg, show: true };
+        const params = { type: response.status ? 'success' : 'danger', msg: response.msg, show: true };
         this.$store.dispatch( 'setMessage', params );
 
         if ( response.status ) {
           this.$store.dispatch( 'applications/resetData' );
         }
       }).catch( msg => {
-        let params = { type: 'danger', msg: msg, show: true };
+        const params = { type: 'danger', msg: msg, show: true };
         this.$store.dispatch( 'setMessage', params );
       }).finally( () => {
         this.$store.dispatch( 'setStatusLoading', false );

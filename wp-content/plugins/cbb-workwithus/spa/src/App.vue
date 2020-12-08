@@ -16,20 +16,6 @@
         :duration="{ enter: 500, leave: 10 }">
         <Studies v-if="step === 2" />
       </transition>
-      <transition
-        name="custom-classes-transition"
-        enter-active-class="animated slideInLeft"
-        leave-active-class="animated slideOutRight"
-        :duration="{ enter: 500, leave: 10 }">
-        <Experiences v-if="step === 3" />
-      </transition>
-      <transition
-        name="custom-classes-transition"
-        enter-active-class="animated slideInLeft"
-        leave-active-class="animated slideOutRight"
-        :duration="{ enter: 500, leave: 10 }">
-        <Relevant v-if="step === 4" />
-      </transition>
 
       <transition
         name="custom-classes-transition"
@@ -45,8 +31,6 @@
 import { mapState } from 'vuex';
 import General from '@/components/General';
 import Studies from '@/components/Studies';
-import Experiences from '@/components/Experiences';
-import Relevant from '@/components/Relevant';
 import Loading from '@/components/Loading';
 import Steps from '@/components/Steps';
 
@@ -56,8 +40,6 @@ export default {
   components: {
     General,
     Studies,
-    Experiences,
-    Relevant,
     Loading,
     Steps
   },
@@ -70,8 +52,8 @@ export default {
   },
 
   mounted() {
-    let wrapper = document.getElementById( 'wp-vue-workwithus-main' );
-    let levelId = parseInt( wrapper.dataset.levelid );
+    const wrapper = document.getElementById( 'wp-vue-workwithus-main' );
+    const levelId = parseInt( wrapper.dataset.levelid );
 
     this.$store.dispatch( 'applications/setLevelId', levelId );
   }
@@ -159,7 +141,7 @@ export default {
       }
       input[type=file] {
         background-color: $white;
-        cursor: inherit;
+        cursor: pointer;
         display: block;
         height: 100%;
         width: 100%;

@@ -136,12 +136,19 @@ class ScriptLoader implements AssetsInterface
             'post_parent' => 0
         ]);
 
+        $specialities = get_terms(array(
+            'taxonomy' => 'job_specialities',
+            'hide_empty' => false,
+            'fields' => 'id=>name'
+        ));
+
         return [
             'plugin_directory_uri' => plugin_dir_url(CBB_WORKWITHUS_FILE),
             'rest_url' => untrailingslashit(esc_url_raw(rest_url())),
             'ajaxUrl' => admin_url('admin-ajax.php'),
             'levels' => $levels,
             'locals' => $locals,
+            'specialities' => $specialities,
             'dataUbigeo' => plugin_dir_path(CBB_WORKWITHUS_FILE) . 'resources'
         ];
 

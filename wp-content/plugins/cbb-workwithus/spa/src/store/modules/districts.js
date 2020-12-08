@@ -9,7 +9,7 @@ const getters = {};
 const actions = {
   retrieveByProvince({ commit }, idProvince ) {
     return new Promise( ( resolve ) => {
-      let districts = dataDistricts.filter( district => {
+      const districts = dataDistricts.filter( district => {
         return district.province_id === idProvince;
       });
 
