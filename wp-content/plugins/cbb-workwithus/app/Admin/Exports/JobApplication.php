@@ -123,20 +123,16 @@ class JobApplication
                 $district = !empty($values['mb_district']) ? esc_attr($values['mb_district'][0]) : '';
                 $address = !empty($values['mb_address']) ? esc_attr($values['mb_address'][0]) : '';
                 $reference = !empty($values['mb_reference']) ? esc_attr($values['mb_reference'][0]) : '';
-                $review = !empty($values['mb_review']) ? esc_attr($values['mb_review'][0]) : '';
-                $local = !empty($values['mb_local']) ? (int)esc_attr($values['mb_local'][0]) : '';
                 $levelEducation = !empty($values['mb_level_education']) ? esc_attr($values['mb_level_education'][0]) : '';
-
-                $dataLocal = '';
-                if (!empty($local)) {
-                    $dataLocal = get_post($local);
-                }
 
                 $typePostulation = wp_get_object_terms($id, 'joblevels');
                 $typePostulation = !is_wp_error($typePostulation) ? $typePostulation[0]->name : '';
 
                 $speciality = wp_get_object_terms($id, 'job_specialities');
                 $nameSpeciality = !is_wp_error($speciality) ? $speciality[0]->name : '';
+
+                $local = wp_get_object_terms($id, 'job_locals');
+                $nameLocal = !is_wp_error($local) ? $local[0]->name : '';
 
                 $excel->getActiveSheet()->setCellValue('A'.$i, "{$name} {$firstName} {$lastName}");
                 $excel->getActiveSheet()->getStyle('A'.$i)->getFont()->setSize(10);
@@ -180,7 +176,7 @@ class JobApplication
                 $excel->getActiveSheet()->setCellValue('N'.$i, $levelEducation);
                 $excel->getActiveSheet()->getStyle('N'.$i)->getFont()->setSize(10);
 
-                $excel->getActiveSheet()->setCellValue('O'.$i, is_object($dataLocal) ? $dataLocal->post_title : $dataLocal);
+                $excel->getActiveSheet()->setCellValue('O'.$i, $nameLocal);
                 $excel->getActiveSheet()->getStyle('O'.$i)->getFont()->setSize(10);
 
                 $excel->getActiveSheet()->setCellValue('P'.$i, $nameSpeciality);

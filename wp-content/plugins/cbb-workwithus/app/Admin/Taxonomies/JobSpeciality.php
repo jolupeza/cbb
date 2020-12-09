@@ -42,9 +42,7 @@ class JobSpeciality
             'show_tagcloud' => false,
             'show_ui' => true,
             'query_var' => true,
-            'rewrite' => array(
-                'slug' => 'convocatorias'
-            ),
+            'rewrite' => false,
         );
 
         register_taxonomy('job_specialities', 'jobapplications', $args);

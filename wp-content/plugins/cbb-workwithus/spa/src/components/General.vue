@@ -206,7 +206,7 @@
                 <ValidationProvider name="sede" rules="required" v-slot="{ errors }">
                   <select name="local" id="local" v-model="local" class="form-control">
                     <option :value="null">Seleccione</option>
-                    <option :value="local.ID" v-for="local in locals" :key="local.ID">{{ local.post_title }}</option>
+                    <option :value="key" v-for="(local, key) in locals" :key="key">{{ local }}</option>
                   </select>
                   <span class="is-invalid">{{ errors[0] }}</span>
                 </ValidationProvider>
@@ -421,7 +421,7 @@ export default {
         return this.$store.state.applications.local;
       },
       set( value ) {
-        this.$store.dispatch( 'applications/setLocal', value );
+        this.$store.dispatch( 'applications/setLocal', null !== value ? parseInt( value ) : null );
       }
     },
     speciality: {

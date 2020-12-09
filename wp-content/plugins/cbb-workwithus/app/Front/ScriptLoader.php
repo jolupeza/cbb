@@ -131,13 +131,14 @@ class ScriptLoader implements AssetsInterface
             'fields' => 'id=>slug'
         ]);
 
-        $locals = get_posts([
-            'post_type' => 'locals',
-            'post_parent' => 0
-        ]);
-
         $specialities = get_terms(array(
             'taxonomy' => 'job_specialities',
+            'hide_empty' => false,
+            'fields' => 'id=>name'
+        ));
+
+        $locals = get_terms(array(
+            'taxonomy' => 'job_locals',
             'hide_empty' => false,
             'fields' => 'id=>name'
         ));

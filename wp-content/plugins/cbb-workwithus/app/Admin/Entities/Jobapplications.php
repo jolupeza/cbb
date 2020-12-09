@@ -4,6 +4,7 @@ namespace CBB_WorkWithUs\Admin\Entities;
 
 use CBB_WorkWithUs\Admin\Exports\JobApplication;
 use CBB_WorkWithUs\Admin\Taxonomies\Joblevel;
+use CBB_WorkWithUs\Admin\Taxonomies\JobLocal;
 use CBB_WorkWithUs\Admin\Taxonomies\JobSpeciality;
 use CBB_WorkWithUs\Includes\Loader;
 
@@ -25,11 +26,14 @@ class Jobapplications
 
     protected $uploadDir;
 
+    protected $postType;
+
     public function __construct(Loader $loader, $domain)
     {
         $this->loader = $loader;
         $this->domain = $domain;
         $this->uploadDir = wp_upload_dir();
+        $this->postType = 'jobapplications';
     }
 
     public function init()
@@ -40,12 +44,17 @@ class Jobapplications
         $adminJobSpeciality = new JobSpeciality($this->loader, $this->domain);
         $adminJobSpeciality->init();
 
+        $adminJobLocal = new JobLocal($this->loader, $this->domain);
+        $adminJobLocal->init();
+
         $this->loader->add_action('add_meta_boxes', $this, 'cdMbJobapplicationsAdd');
         $this->loader->add_filter('views_edit-jobapplications', $this, 'displayButtonDownloadApplications');
         $this->loader->add_action('admin_init', $this, 'exportJobApplications');
 
         $this->loader->add_action('wp_ajax_register_application', $this, 'register');
         $this->loader->add_action('wp_ajax_nopriv_register_application', $this, 'register');
+
+        $this->loader->add_action('pre_get_posts', $this, 'extendAdminSearch');
     }
 
     public function register()
@@ -179,7 +188,6 @@ class Jobapplications
         add_post_meta($postId, 'mb_province', $data['province']);
         add_post_meta($postId, 'mb_district', $data['district']);
         add_post_meta($postId, 'mb_address', $data['address']);
-        add_post_meta($postId, 'mb_local', $data['local']);
         if (!is_null($data['levelEducation'])) {
             add_post_meta($postId, 'mb_level_education', $data['levelEducation']);
         }
@@ -189,6 +197,7 @@ class Jobapplications
 
         wp_set_object_terms($postId, $data['level'], 'joblevels');
         wp_set_object_terms($postId, $data['speciality'], 'job_specialities');
+        wp_set_object_terms($postId, $data['local'], 'job_locals');
     }
 
     protected function uploadPhoto($namePhoto, $photo)
@@ -334,6 +343,43 @@ class Jobapplications
             $exportJobApplications = new JobApplication();
 
             $exportJobApplications->generateExcel();
+        }
+    }
+
+    public function extendAdminSearch($query)
+    {
+        $customFields = array(
+            'mb_name',
+            'mb_ape_paterno',
+            'mb_ape_materno',
+            'mb_document',
+        );
+
+        if ( ! is_admin() ) {
+            return;
+        }
+
+        if ( $query->query['post_type'] !== $this->postType ) {
+            return;
+        }
+
+        $search_term = $query->query_vars['s'];
+
+        // Set to empty, otherwise it won't find anything
+        $query->query_vars['s'] = '';
+
+        if ( $search_term != '' ) {
+            $meta_query = array( 'relation' => 'OR' );
+
+            foreach( $customFields as $customField ) {
+                array_push( $meta_query, array(
+                    'key' => $customField,
+                    'value' => $search_term,
+                    'compare' => 'LIKE'
+                ));
+            }
+
+            $query->set( 'meta_query', $meta_query );
         }
     }
 

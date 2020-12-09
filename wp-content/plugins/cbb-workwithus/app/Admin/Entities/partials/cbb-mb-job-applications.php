@@ -29,15 +29,9 @@
     $review = !empty($values['mb_review']) ? esc_attr($values['mb_review'][0]) : '';
     $studies = !empty($values['mb_studies']) ? unserialize($values['mb_studies'][0]) : '';
     $experiences = !empty($values['mb_experiences']) ? unserialize($values['mb_experiences'][0]) : '';
-    $local = !empty($values['mb_local']) ? (int)esc_attr($values['mb_local'][0]) : '';
     $levelEducation = !empty($values['mb_level_education']) ? esc_attr($values['mb_level_education'][0]) : '';
     $photo = !empty($values['mb_photo']) ? esc_url($values['mb_photo'][0]) : '';
     $cv = !empty($values['mb_cv']) ? esc_url($values['mb_cv'][0]) : '';
-
-    $locals = get_posts([
-        'post_type' => 'locals',
-        'post_parent' => 0
-    ]);
 
     wp_nonce_field( 'jobapplications_meta_box_nonce', 'meta_box_nonce' );
 ?>
@@ -140,17 +134,6 @@
     <p class="content-mb">
         <label for="mb_level_education">Nivel: </label>
         <input type="text" name="mb_level_education" id="mb_level_education" value="<?php echo $levelEducation; ?>" />
-    </p>
-
-    <!-- Local -->
-    <p class="content-mb">
-        <label for="mb_gender">Sede a la que postula: </label>
-        <select name="mb_local" id="mb_local">
-            <option value="" <?php selected($local, ''); ?>>Indicar</option>
-            <?php foreach ($locals as $item) : ?>
-                <option value="<?php esc_attr_e($item->ID); ?>" <?php selected($local, $item->ID); ?>><?php esc_attr_e($item->post_title); ?></option>
-            <?php endforeach; ?>
-        </select>
     </p>
 
     <!-- Photo -->
