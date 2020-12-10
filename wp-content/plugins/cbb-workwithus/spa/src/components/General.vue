@@ -1,249 +1,257 @@
 <template>
   <section class="General">
     <div class="container">
-      <ValidationObserver v-slot="{ valid }">
-        <form>
-          <h3 class="WorkWithUs__title">Datos Usuario</h3>
+      <ValidationObserver ref="observerGeneral" tag="form" @submit.prevent="next" v-slot="{ valid }">
+        <h3 class="WorkWithUs__title">Datos Usuario</h3>
 
-          <div class="row">
-            <div class="col-sm-7">
-              <div class="row">
-                <div class="col-sm-7 col-md-5">
-                  <div class="form-group">
-                    <label for="document">Documento de Identidad: <span>(*)</span></label>
-                    <ValidationProvider name="documento de identidad" rules="required|numeric|min:8|max:15" v-slot="{ errors }">
-                      <input type="text" class="form-control" id="document" name="document" v-model="document" />
-                      <span class="is-invalid">{{ errors[0] }}</span>
-                    </ValidationProvider>
-                  </div>
-                </div>
-                <div class="col-sm-4 col-md-3">
-                  <div class="form-group">
-                    <ValidationProvider name="foto" ref="photo" rules="image|size:1024" v-slot="{ validate, errors }">
-                      <article class="WorkWithUs__Form__fileWrapper">
-                        <i v-if="!avatar.loaded" class="glyphicon glyphicon-user" aria-hidden="true"></i>
-                        <img v-else :src="avatar.result" class="img-responsive" alt="avatar" />
-                        <input type="file" id="photo" @change="handlePhotoChange($event) || validate($event)" />
-                      </article>
-                      <span class="is-invalid">{{ errors[0] }}</span>
-                    </ValidationProvider>
-                  </div>
+        <div class="row">
+          <div class="col-sm-7">
+            <div class="row">
+              <div class="col-sm-7 col-md-5">
+                <div class="form-group">
+                  <label for="document">Documento de Identidad: <span>(*)</span></label>
+                  <ValidationProvider name="documento de identidad" rules="required|numeric|min:8|max:15" v-slot="{ errors }">
+                    <input type="text" class="form-control" id="document" name="document" v-model="document" />
+                    <span class="is-invalid">{{ errors[0] }}</span>
+                  </ValidationProvider>
                 </div>
               </div>
-            </div>
-          </div>
+              <div class="col-sm-4 col-md-4">
+                <div class="form-group">
+                  <label for="photo">Tamaño máximo 1Mb</label>
+                  <article class="WorkWithUs__Form__fileWrapper">
+                    <aside v-show="avatar.loaded" class="WorkWithUs__Form__fileWrapper__delete" @click="handlePhotoDelete"><i class="fas fa-times"></i></aside>
+                    <i v-if="!avatar.loaded" class="glyphicon glyphicon-user" aria-hidden="true"></i>
+                    <img v-else :src="avatar.result" class="img-responsive" alt="avatar" />
+                    <input type="file" id="photo" @change="handlePhotoChange($event)" />
+                  </article>
+                  <span v-show="showErrorPhoto" class="is-invalid">Tipo de archivo o tamaño no permitido.</span>
 
-          <hr class="WorkWithUs__Separator" />
-
-          <h3 class="WorkWithUs__title">Datos Usuario</h3>
-
-          <div class="row">
-            <div class="col-sm-4">
-              <div class="form-group">
-                <label for="apepaterno">Apellido Paterno: <span>(*)</span></label>
-                <ValidationProvider name="apellido paterno" rules="required" v-slot="{ errors }">
-                  <input type="text" class="form-control" id="apepaterno" name="apepaterno" v-model="apepaterno" />
-                  <span class="is-invalid">{{ errors[0] }}</span>
-                </ValidationProvider>
-              </div>
-            </div>
-            <div class="col-sm-4">
-              <div class="form-group">
-                <label for="apematerno">Apellido Materno: <span>(*)</span></label>
-                <ValidationProvider name="apellido materno" rules="required" v-slot="{ errors }">
-                  <input type="text" class="form-control" id="apematerno" name="apematerno" v-model="apematerno" />
-                  <span class="is-invalid">{{ errors[0] }}</span>
-                </ValidationProvider>
-              </div>
-            </div>
-            <div class="col-sm-4">
-              <div class="form-group">
-                <label for="name">Nombres: <span>(*)</span></label>
-                <ValidationProvider name="nombres" rules="required" v-slot="{ errors }">
-                  <input type="text" class="form-control" id="name" name="name" v-model="name" />
-                  <span class="is-invalid">{{ errors[0] }}</span>
-                </ValidationProvider>
+<!--                  <ValidationProvider name="foto" ref="photo" rules="image|size:1024" v-slot="{ validate, errors }">
+                    <article class="WorkWithUs__Form__fileWrapper">
+                      <aside v-show="avatar.loaded" class="WorkWithUs__Form__fileWrapper__delete" @click="handlePhotoDelete"><i class="fas fa-times"></i></aside>
+                      <i v-if="!avatar.loaded" class="glyphicon glyphicon-user" aria-hidden="true"></i>
+                      <img v-else :src="avatar.result" class="img-responsive" alt="avatar" />
+                      <input type="file" id="photo" @change="handlePhotoChange($event) || validate($event)" />
+                    </article>
+                    <span class="is-invalid">{{ errors[0] }}</span>
+                  </ValidationProvider>-->
+                </div>
               </div>
             </div>
           </div>
+        </div>
 
-          <div class="row">
-            <div class="col-sm-4">
-              <div class="form-group">
-                <label for="gender">Sexo: <span>(*)</span></label>
-                <ValidationProvider name="sexo" rules="required" v-slot="{ errors }">
-                  <select name="gender" id="gender" v-model="gender" class="form-control">
-                    <option :value="null">Seleccione</option>
-                    <option value="femenino">Femenino</option>
-                    <option value="masculino">Masculino</option>
-                  </select>
-                  <span class="is-invalid">{{ errors[0] }}</span>
-                </ValidationProvider>
-              </div>
-            </div>
-            <div class="col-sm-4">
-              <div class="form-group">
-                <label for="birthday">Fecha de nacimiento: <span>(*)</span></label>
-                <ValidationProvider name="fecha de nacimiento" rules="required" v-slot="{ errors }">
-                  <input type="date" class="form-control" id="birthday" name="birthday" v-model="birthday" />
-                  <span class="is-invalid">{{ errors[0] }}</span>
-                </ValidationProvider>
-              </div>
-            </div>
-            <div class="col-sm-4">
-              <div class="form-group">
-                <label for="age">Edad: <span>(*)</span></label>
-                <ValidationProvider name="edad" rules="required|numeric|min_value:18|max_value:80" v-slot="{ errors }">
-                  <input type="number" class="form-control" id="age" name="age" v-model.number="age" />
-                  <span class="is-invalid">{{ errors[0] }}</span>
-                </ValidationProvider>
-              </div>
+        <hr class="WorkWithUs__Separator" />
+
+        <h3 class="WorkWithUs__title">Datos Usuario</h3>
+
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label for="apepaterno">Apellido Paterno: <span>(*)</span></label>
+              <ValidationProvider name="apellido paterno" rules="required" v-slot="{ errors }">
+                <input type="text" class="form-control" id="apepaterno" name="apepaterno" v-model="apepaterno" />
+                <span class="is-invalid">{{ errors[0] }}</span>
+              </ValidationProvider>
             </div>
           </div>
-
-          <div class="row">
-            <div class="col-sm-4">
-              <div class="form-group">
-                <label for="phone">Teléfono fijo:</label>
-                <ValidationProvider name="teléfono fijo" rules="min:7" v-slot="{ errors }">
-                  <input type="text" class="form-control" id="phone" name="phone" v-model="phone" />
-                  <span class="is-invalid">{{ errors[0] }}</span>
-                </ValidationProvider>
-              </div>
-            </div>
-            <div class="col-sm-4">
-              <div class="form-group">
-                <label for="mobile">Teléfono celular: <span>(*)</span></label>
-                <ValidationProvider name="teléfono celular" rules="required|min:9" v-slot="{ errors }">
-                  <input type="text" class="form-control" id="mobile" name="mobile" v-model="mobile" />
-                  <span class="is-invalid">{{ errors[0] }}</span>
-                </ValidationProvider>
-              </div>
-            </div>
-            <div class="col-sm-4">
-              <div class="form-group">
-                <label for="email">Correo: <span>(*)</span></label>
-                <ValidationProvider name="correo" rules="required|email" v-slot="{ errors }">
-                  <input type="email" class="form-control" id="email" name="email" v-model="email" />
-                  <span class="is-invalid">{{ errors[0] }}</span>
-                </ValidationProvider>
-              </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label for="apematerno">Apellido Materno: <span>(*)</span></label>
+              <ValidationProvider name="apellido materno" rules="required" v-slot="{ errors }">
+                <input type="text" class="form-control" id="apematerno" name="apematerno" v-model="apematerno" />
+                <span class="is-invalid">{{ errors[0] }}</span>
+              </ValidationProvider>
             </div>
           </div>
-
-          <hr class="WorkWithUs__Separator" />
-
-          <h3 class="WorkWithUs__title">Ubicación actual</h3>
-
-          <div class="row">
-            <div class="col-sm-4">
-              <div class="form-group">
-                <label for="city">Departamento: <span>(*)</span></label>
-                <ValidationProvider name="departamento" rules="required" v-slot="{ errors }">
-                  <select name="city" id="city" v-model="city" class="form-control" @change="selectCity">
-                    <option :value="null">Seleccione</option>
-                    <option :value="item.id" v-for="item in cities" :key="item.id">{{ item.name }}</option>
-                  </select>
-                  <span class="is-invalid">{{ errors[0] }}</span>
-                </ValidationProvider>
-              </div>
-            </div>
-            <div class="col-sm-4">
-              <div class="form-group">
-                <label for="province">Provincia: <span>(*)</span></label>
-                <ValidationProvider name="provincia" rules="required" v-slot="{ errors }">
-                  <select name="province" id="province" v-model="province" class="form-control" @change="selectProvince">
-                    <option :value="null">Seleccione</option>
-                    <option :value="item.id" v-for="item in provinces" :key="item.id">{{ item.name }}</option>
-                  </select>
-                  <span class="is-invalid">{{ errors[0] }}</span>
-                </ValidationProvider>
-              </div>
-            </div>
-            <div class="col-sm-4">
-              <div class="form-group">
-                <label for="district">Distrito: <span>(*)</span></label>
-                <ValidationProvider name="distrito" rules="required" v-slot="{ errors }">
-                  <select name="district" id="district" v-model="district" class="form-control">
-                    <option :value="null">Seleccione</option>
-                    <option :value="item.id" v-for="item in districts" :key="item.id">{{ item.name }}</option>
-                  </select>
-                  <span class="is-invalid">{{ errors[0] }}</span>
-                </ValidationProvider>
-              </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label for="name">Nombres: <span>(*)</span></label>
+              <ValidationProvider name="nombres" rules="required" v-slot="{ errors }">
+                <input type="text" class="form-control" id="name" name="name" v-model="name" />
+                <span class="is-invalid">{{ errors[0] }}</span>
+              </ValidationProvider>
             </div>
           </div>
+        </div>
 
-          <div class="row">
-            <div class="col-sm-6">
-              <div class="form-group">
-                <label for="address">Domicilio: <span>(*)</span></label>
-                <ValidationProvider name="domicilio" rules="required" v-slot="{ errors }">
-                  <input type="text" class="form-control" id="address" name="address" v-model="address" />
-                  <span class="is-invalid">{{ errors[0] }}</span>
-                </ValidationProvider>
-              </div>
-            </div>
-            <div class="col-sm-6">
-              <div class="form-group">
-                <label for="reference">Referencia:</label>
-                <ValidationProvider name="referencia" rules="" v-slot="{ errors }">
-                  <input type="text" class="form-control" id="reference" name="reference" v-model="reference" />
-                  <span class="is-invalid">{{ errors[0] }}</span>
-                </ValidationProvider>
-              </div>
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label for="gender">Sexo: <span>(*)</span></label>
+              <ValidationProvider name="sexo" rules="required" v-slot="{ errors }">
+                <select name="gender" id="gender" v-model="gender" class="form-control">
+                  <option :value="null">Seleccione</option>
+                  <option value="femenino">Femenino</option>
+                  <option value="masculino">Masculino</option>
+                </select>
+                <span class="is-invalid">{{ errors[0] }}</span>
+              </ValidationProvider>
             </div>
           </div>
-
-          <hr class="WorkWithUs__Separator" />
-
-          <h3 class="WorkWithUs__title">Interés de postulación</h3>
-
-          <div class="row">
-            <div class="col-sm-4">
-              <div class="form-group">
-                <label for="local">Sede a la que postula: <span>(*)</span></label>
-                <ValidationProvider name="sede" rules="required" v-slot="{ errors }">
-                  <select name="local" id="local" v-model="local" class="form-control">
-                    <option :value="null">Seleccione</option>
-                    <option :value="key" v-for="(local, key) in locals" :key="key">{{ local }}</option>
-                  </select>
-                  <span class="is-invalid">{{ errors[0] }}</span>
-                </ValidationProvider>
-              </div>
-            </div>
-            <div v-if="isTeacher" class="col-sm-4">
-              <div class="form-group">
-                <label for="level">Nivel: <span>(*)</span></label>
-                <ValidationProvider name="nivel" rules="required" v-slot="{ errors }">
-                  <select name="level" id="level" v-model="level" class="form-control">
-                    <option :value="null">Seleccione</option>
-                    <option :value="level.key" v-for="(level, key) in levels" :key="key">{{ level.title }}</option>
-                  </select>
-                  <span class="is-invalid">{{ errors[0] }}</span>
-                </ValidationProvider>
-              </div>
-            </div>
-            <div class="col-sm-4">
-              <div class="form-group">
-                <label for="speciality">Especialidad <span>(*)</span></label>
-                <ValidationProvider name="especialidad" rules="required" v-slot="{ errors }">
-                  <select name="speciality" id="speciality" v-model="speciality" class="form-control">
-                    <option :value="null">Seleccione</option>
-                    <option :value="key" v-for="(speciality, key) in specialities" :key="key">{{ speciality }}</option>
-                  </select>
-                  <span class="is-invalid">{{ errors[0] }}</span>
-                </ValidationProvider>
-              </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label for="birthday">Fecha de nacimiento: <span>(*)</span></label>
+              <ValidationProvider name="fecha de nacimiento" rules="required" v-slot="{ errors }">
+                <input type="date" class="form-control" id="birthday" name="birthday" v-model="birthday" />
+                <span class="is-invalid">{{ errors[0] }}</span>
+              </ValidationProvider>
             </div>
           </div>
-
-          <hr class="WorkWithUs__Separator" />
-
-          <div class="WorkWithUs__buttons">
-            <button class="WorkWithUs__button WorkWithUs__button--first" :disabled="!valid" @click.prevent="next">Siguiente <i class="fas fa-chevron-right"></i></button>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label for="age">Edad: <span>(*)</span></label>
+              <ValidationProvider name="edad" rules="required|numeric|min_value:18|max_value:80" v-slot="{ errors }">
+                <input type="number" class="form-control" id="age" name="age" v-model.number="age" />
+                <span class="is-invalid">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </div>
           </div>
-        </form>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label for="phone">Teléfono fijo:</label>
+              <ValidationProvider name="teléfono fijo" rules="min:7" v-slot="{ errors }">
+                <input type="text" class="form-control" id="phone" name="phone" v-model="phone" />
+                <span class="is-invalid">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label for="mobile">Teléfono celular: <span>(*)</span></label>
+              <ValidationProvider name="teléfono celular" rules="required|min:9" v-slot="{ errors }">
+                <input type="text" class="form-control" id="mobile" name="mobile" v-model="mobile" />
+                <span class="is-invalid">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label for="email">Correo: <span>(*)</span></label>
+              <ValidationProvider name="correo" rules="required|email" v-slot="{ errors }">
+                <input type="email" class="form-control" id="email" name="email" v-model="email" />
+                <span class="is-invalid">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </div>
+          </div>
+        </div>
+
+        <hr class="WorkWithUs__Separator" />
+
+        <h3 class="WorkWithUs__title">Ubicación actual</h3>
+
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label for="city">Departamento: <span>(*)</span></label>
+              <ValidationProvider name="departamento" rules="required" v-slot="{ errors }">
+                <select name="city" id="city" v-model="city" class="form-control" @change="selectCity">
+                  <option :value="null">Seleccione</option>
+                  <option :value="item.id" v-for="item in cities" :key="item.id">{{ item.name }}</option>
+                </select>
+                <span class="is-invalid">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label for="province">Provincia: <span>(*)</span></label>
+              <ValidationProvider name="provincia" rules="required" v-slot="{ errors }">
+                <select name="province" id="province" v-model="province" class="form-control" @change="selectProvince">
+                  <option :value="null">Seleccione</option>
+                  <option :value="item.id" v-for="item in provinces" :key="item.id">{{ item.name }}</option>
+                </select>
+                <span class="is-invalid">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label for="district">Distrito: <span>(*)</span></label>
+              <ValidationProvider name="distrito" rules="required" v-slot="{ errors }">
+                <select name="district" id="district" v-model="district" class="form-control">
+                  <option :value="null">Seleccione</option>
+                  <option :value="item.id" v-for="item in districts" :key="item.id">{{ item.name }}</option>
+                </select>
+                <span class="is-invalid">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="address">Domicilio: <span>(*)</span></label>
+              <ValidationProvider name="domicilio" rules="required" v-slot="{ errors }">
+                <input type="text" class="form-control" id="address" name="address" v-model="address" />
+                <span class="is-invalid">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="reference">Referencia:</label>
+              <ValidationProvider name="referencia" rules="" v-slot="{ errors }">
+                <input type="text" class="form-control" id="reference" name="reference" v-model="reference" />
+                <span class="is-invalid">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </div>
+          </div>
+        </div>
+
+        <hr class="WorkWithUs__Separator" />
+
+        <h3 class="WorkWithUs__title">Interés de postulación</h3>
+
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label for="local">Sede a la que postula: <span>(*)</span></label>
+              <ValidationProvider name="sede" rules="required" v-slot="{ errors }">
+                <select name="local" id="local" v-model="local" class="form-control">
+                  <option :value="null">Seleccione</option>
+                  <option :value="key" v-for="(local, key) in locals" :key="key">{{ local }}</option>
+                </select>
+                <span class="is-invalid">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </div>
+          </div>
+          <div v-if="isTeacher" class="col-sm-4">
+            <div class="form-group">
+              <label for="level">Nivel: <span>(*)</span></label>
+              <ValidationProvider name="nivel" rules="required" v-slot="{ errors }">
+                <select name="level" id="level" v-model="level" class="form-control">
+                  <option :value="null">Seleccione</option>
+                  <option :value="level.key" v-for="(level, key) in levels" :key="key">{{ level.title }}</option>
+                </select>
+                <span class="is-invalid">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label for="speciality">Especialidad <span>(*)</span></label>
+              <ValidationProvider name="especialidad" rules="required" v-slot="{ errors }">
+                <select name="speciality" id="speciality" v-model="speciality" class="form-control">
+                  <option :value="null">Seleccione</option>
+                  <option :value="key" v-for="(speciality, key) in specialities" :key="key">{{ speciality }}</option>
+                </select>
+                <span class="is-invalid">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </div>
+          </div>
+        </div>
+
+        <hr class="WorkWithUs__Separator" />
+
+        <div class="WorkWithUs__buttons">
+          <button type="submit" class="WorkWithUs__button WorkWithUs__button--first" :disabled="!valid" >Siguiente <i class="fas fa-chevron-right"></i></button>
+        </div>
       </ValidationObserver>
     </div>
   </section>
@@ -268,7 +276,8 @@ export default {
       ],
       locals: this.wpData.locals,
       specialities: this.wpData.specialities,
-      typesPhoto: [ 'image/jpeg', 'image/png' ]
+      typesPhoto: [ 'image/jpeg', 'image/png' ],
+      showErrorPhoto: false
     };
   },
 
@@ -472,6 +481,7 @@ export default {
       const files = tgt.files;
 
       if ( this.checkTypePhoto( files[0].type ) && this.checkSizePhoto( files[0].size ) ) {
+        this.showErrorPhoto = false;
         this.avatar.file = files[0];
         this.avatar.name = files[0].name;
         this.avatar.loaded = true;
@@ -487,20 +497,53 @@ export default {
           name: this.avatar.name,
           loaded: this.avatar.loaded
         });
+      } else {
+        this.showErrorPhoto = true;
+        this.resetAvatar();
+      }
 
+      /* const { valid } = await this.$refs.photo.validate( event );
+
+      if ( valid ) {
+        const tgt = event.target || window.event.srcElement;
+        const files = tgt.files;
+
+        this.avatar.file = files[0];
+        this.avatar.name = files[0].name;
+        this.avatar.loaded = true;
+
+        const fr = new FileReader();
+        fr.onload = () => {
+          this.avatar.result = fr.result;
+        };
+        fr.readAsDataURL( files[0]);
+
+        this.$store.dispatch( 'applications/setPhoto', {
+          file: this.avatar.file,
+          name: this.avatar.name,
+          loaded: this.avatar.loaded
+        });
+      } else {
+        this.resetAvatar();
+      } */
+    },
+    handlePhotoDelete() {
+      this.resetAvatar();
+    },
+    async next() {
+      const isValid = await this.$refs.observerGeneral.validate();
+
+      if ( ! isValid ) {
         return;
       }
 
-      this.resetAvatar();
-    },
-    next() {
       this.$store.dispatch( 'setStep', 2 );
     },
     checkTypePhoto( type ) {
       return this.typesPhoto.includes( type );
     },
     checkSizePhoto( size ) {
-      return 2097152 > size;
+      return 1048576 > size;
     },
     resetAvatar() {
       this.avatar.file = null;

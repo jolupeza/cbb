@@ -1,7 +1,7 @@
 <template>
   <section class="Studies">
     <div class="container">
-      <ValidationObserver ref="observer" tag="form" @submit.prevent="addStudy" v-slot="{ valid }">
+      <ValidationObserver ref="observerStudies" tag="form" @submit.prevent="addStudy" v-slot="{ valid }">
         <h3 class="WorkWithUs__title">Grados, títulos obtenidos o estudios completados</h3>
 
         <div class="row">
@@ -188,7 +188,7 @@ export default {
 
   methods: {
     async addStudy() {
-      const isValid = await this.$refs.observer.validate();
+      const isValid = await this.$refs.observerStudies.validate();
 
       if ( ! isValid ) {
         return;
@@ -200,7 +200,7 @@ export default {
         degree: this.degree
       }).then( () => {
         this.resetDataStudies();
-        this.$refs.observer.reset();
+        this.$refs.observerStudies.reset();
       });
     },
     async addExperience() {

@@ -110,6 +110,9 @@ export default {
         height: 38px;
       }
     }
+    &__title {
+
+    }
     &__fileWrapper {
       align-items: center;
       border: 1px solid $secondColorAlt;
@@ -118,7 +121,7 @@ export default {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      overflow: hidden;
+      //overflow: hidden;
       padding: 1em;
       position: relative;
       &::after {
@@ -156,6 +159,16 @@ export default {
         display: block;
         font-size: 0.875em;
         text-align: center;
+      }
+      &__delete {
+        background-color: $firstColorAlt;
+        border-radius: 50%;
+        color: $white;
+        cursor: pointer;
+        padding: 0.4rem 0.8rem;
+        position: absolute;
+        right: -15px;
+        top: -15px;
       }
     }
   }

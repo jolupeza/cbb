@@ -72,8 +72,8 @@ class Jobapplications
             die('¡Acceso denegado!');
         }
 
-        $data['photo'] = $_FILES['photo'];
-        if (!$this->checkPhoto($data['photo'])) {
+        $data['photo'] = isset($_FILES['photo']) ? $_FILES['photo'] : null;
+        if (!empty($data['photo']) && !$this->checkPhoto($data['photo'])) {
             $result['msg'] = 'La imagen de su foto no es válida. Por favor vuelva a cargarla.';
             wp_send_json($result);
         }

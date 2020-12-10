@@ -29,8 +29,7 @@ const state = {
   photo: { file: null, name: '', loaded: false },
   cv: { file: null, name: '', loaded: false },
   studies: [],
-  experiences: [],
-  review: ''
+  experiences: []
 };
 
 const getters = {
@@ -105,9 +104,6 @@ const actions = {
   },
   setReference( context, reference ) {
     context.commit( 'SET_REFERENCE', reference );
-  },
-  setReview( context, review ) {
-    context.commit( 'SET_REVIEW', review );
   },
   setStudies( context, data ) {
     return new Promise( resolve => {
@@ -240,9 +236,6 @@ const mutations = {
   SET_EXPERIENCES( state, data ) {
     state.experiences.push( data );
   },
-  SET_REVIEW( state, review ) {
-    state.review = review;
-  },
   SET_PHOTO( state, { file, name, loaded }) {
     state.photo.file = file;
     state.photo.name = name;
@@ -292,7 +285,12 @@ const mutations = {
     state.photo.loaded = false;
     state.studies = [];
     state.experiences = [];
-    state.review = '';
+    state.cv.file = null;
+    state.cv.name = '';
+    state.cv.loaded = false;
+    state.level = null;
+    state.local = null;
+    state.speciality = null;
   },
   RESET_PHOTO( state ) {
     state.photo.file = null;
