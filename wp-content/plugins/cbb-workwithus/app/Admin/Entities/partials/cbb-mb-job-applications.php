@@ -139,7 +139,9 @@
     <!-- Photo -->
     <p class="content-mb">
         <label for="mb_photo">Foto: </label>
-        <img width="100" src="<?php echo $photo; ?>" alt="" />
+        <?php if (!empty($photo)) : ?>
+            <img width="100" src="<?php echo $photo; ?>" alt="" />
+        <?php endif; ?>
     </p>
 
     <!-- Cv -->
