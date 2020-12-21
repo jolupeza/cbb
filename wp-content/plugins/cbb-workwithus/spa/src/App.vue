@@ -53,9 +53,9 @@ export default {
 
   mounted() {
     const wrapper = document.getElementById( 'wp-vue-workwithus-main' );
-    const levelId = parseInt( wrapper.dataset.levelid );
+    const areaId = parseInt( wrapper.dataset.areaId );
 
-    this.$store.dispatch( 'applications/setLevelId', levelId );
+    this.$store.dispatch( 'applications/setAreaId', areaId );
   }
 };
 </script>

@@ -7,7 +7,7 @@ import dataProvinces from '@/assets/resources/provinces.json';
 import dataDistricts from '@/assets/resources/districts.json';
 
 const state = {
-  levelId: null,
+  areaId: null,
   level: null,
   local: null,
   speciality: null,
@@ -39,10 +39,10 @@ const getters = {
   hasExperiences( state ) {
     return 0 < state.experiences.length;
   },
-  getLevelSlug( state ) {
-    for ( const id in wpData.levels ) {
-      if ( parseInt( id ) === state.levelId ) {
-        return wpData.levels[id];
+  getAreaSlug( state ) {
+    for ( const id in wpData.areas ) {
+      if ( parseInt( id ) === state.areaId ) {
+        return wpData.areas[id];
       }
     }
 
@@ -123,8 +123,8 @@ const actions = {
   setCv( context, { file, name, loaded }) {
     context.commit( 'SET_CV', { file, name, loaded });
   },
-  setLevelId( context, id ) {
-    context.commit( 'SET_LEVEL_ID', id );
+  setAreaId( context, id ) {
+    context.commit( 'SET_AREA_ID', id );
   },
   async register({ state }, { nonce, action }) {
     try {
@@ -132,7 +132,7 @@ const actions = {
 
       formData.append( 'nonce', nonce );
       formData.append( 'action', action );
-      formData.append( 'level', state.levelId );
+      formData.append( 'area', state.areaId );
       formData.append( 'document', state.document );
       formData.append( 'apepaterno', state.apepaterno );
       formData.append( 'apematerno', state.apematerno );
@@ -148,7 +148,7 @@ const actions = {
       formData.append( 'district', methods.findNameDistrict( state.district ) );
       formData.append( 'address', state.address );
       formData.append( 'reference', state.reference );
-      formData.append( 'levelEducation', null === state.level ? '' : state.level );
+      formData.append( 'level', state.level );
       formData.append( 'local', state.local );
       formData.append( 'speciality', state.speciality );
       formData.append( 'studies', JSON.stringify( state.studies ) );
@@ -255,8 +255,8 @@ const mutations = {
   SET_SPECIALITY( state, speciality ) {
     state.speciality = speciality;
   },
-  SET_LEVEL_ID( state, id ) {
-    state.levelId = id;
+  SET_AREA_ID( state, id ) {
+    state.areaId = id;
   },
   REMOVE_STUDY( state, index ) {
     state.studies.splice( index, 1 );

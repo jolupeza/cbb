@@ -227,7 +227,7 @@
               <ValidationProvider name="nivel" rules="required" v-slot="{ errors }">
                 <select name="level" id="level" v-model="level" class="form-control">
                   <option :value="null">Seleccione</option>
-                  <option :value="level.key" v-for="(level, key) in levels" :key="key">{{ level.title }}</option>
+                  <option :value="key" v-for="(level, key) in levels" :key="key">{{ level }}</option>
                 </select>
                 <span class="is-invalid">{{ errors[0] }}</span>
               </ValidationProvider>
@@ -269,11 +269,7 @@ export default {
         loaded: false,
         result: null
       },
-      levels: [
-        { key: 'inicial', title: 'Inicial' },
-        { key: 'primaria', title: 'Primaria' },
-        { key: 'secundaria', title: 'Secundaria' }
-      ],
+      levels: this.wpData.levels,
       locals: this.wpData.locals,
       specialities: this.wpData.specialities,
       typesPhoto: [ 'image/jpeg', 'image/png' ],
@@ -292,10 +288,10 @@ export default {
       districts: state => state.all
     }),
     ...mapGetters( 'applications', {
-      slugLevel: 'getLevelSlug'
+      slugArea: 'getAreaSlug'
     }),
     isTeacher() {
-      return 'docente' === this.slugLevel || 'auxiliar' === this.slugLevel;
+      return 'docente' === this.slugArea || 'auxiliar' === this.slugArea;
     },
     document: {
       get() {

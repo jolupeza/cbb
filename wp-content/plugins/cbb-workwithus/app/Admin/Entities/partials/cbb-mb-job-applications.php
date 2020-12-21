@@ -29,7 +29,6 @@
     $review = !empty($values['mb_review']) ? esc_attr($values['mb_review'][0]) : '';
     $studies = !empty($values['mb_studies']) ? unserialize($values['mb_studies'][0]) : '';
     $experiences = !empty($values['mb_experiences']) ? unserialize($values['mb_experiences'][0]) : '';
-    $levelEducation = !empty($values['mb_level_education']) ? esc_attr($values['mb_level_education'][0]) : '';
     $photo = !empty($values['mb_photo']) ? esc_url($values['mb_photo'][0]) : '';
     $cv = !empty($values['mb_cv']) ? esc_url($values['mb_cv'][0]) : '';
 
@@ -128,12 +127,6 @@
     <p class="content-mb">
         <label for="mb_reference">Referencia: </label>
         <textarea rows="6" name="mb_reference" id="mb_reference"><?php echo $reference; ?></textarea>
-    </p>
-
-    <!-- Level Education -->
-    <p class="content-mb">
-        <label for="mb_level_education">Nivel: </label>
-        <input type="text" name="mb_level_education" id="mb_level_education" value="<?php echo $levelEducation; ?>" />
     </p>
 
     <!-- Photo -->
