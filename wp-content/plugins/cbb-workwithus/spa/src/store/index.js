@@ -5,6 +5,7 @@ import provinces from '@/store/modules/provinces';
 import districts from '@/store/modules/districts';
 import applications from '@/store/modules/applications';
 import degrees from '@/store/modules/degrees';
+import specialities from '@/store/modules/specialities';
 
 Vue.use( Vuex );
 
@@ -54,6 +55,7 @@ export default new Vuex.Store({
     provinces,
     districts,
     applications,
-    degrees
+    degrees,
+    specialities
   }
 });

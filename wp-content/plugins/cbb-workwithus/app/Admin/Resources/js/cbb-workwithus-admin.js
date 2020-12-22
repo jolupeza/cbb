@@ -1,9 +1,12 @@
 (function( $ ) {
     'use strict';
 
+    const wrapperAddTaxonomySpecialities = document.querySelector( 'body.taxonomy-job_specialities' );
+    let checkboxAreas = null;
+
     $(function() {
         // var animate = '';
-        
+
         renderFeaturedImage( $ );
 
         $( '.set-file' ).on( 'click', function( evt ) {
@@ -25,22 +28,27 @@
             // Remove the image, toggle the anchors
             resetUploadForm( $, container_media );
         });
-        
+
         /* $('#mb_animate').on('change', function() {
            var animation = $(this).val(),
             text = $('#js-animate');
-           
+
            if (animation.length === '') {
                return;
            }
-           
+
            if (animate.length !== '') {
                text.removeClass(animate);
            }
-           
+
            text.addClass(animation);
            animate = animation;
         }); */
+
+        if ( wrapperAddTaxonomySpecialities ) {
+            const formAddTag = wrapperAddTaxonomySpecialities.querySelector( '#addtag' );
+            checkboxAreas = formAddTag.querySelectorAll( 'input[name="areas[]"]' );
+        }
     });
 
     /**
@@ -170,7 +178,7 @@
         container_media
             .children( 'p' )
             .hide();
-    
+
         container_media
             .children('i.Fieldset-icon')
             .hide();
@@ -218,4 +226,6 @@
         });
 
     }
+
+
 })( jQuery );

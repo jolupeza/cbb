@@ -7,8 +7,8 @@ const state = {
 const getters = {};
 
 const actions = {
-  retrieve( context, levelId ) {
-    degreeApi.retrieve( levelId ).then( degrees => {
+  retrieve( context, areaId ) {
+    degreeApi.retrieve( areaId ).then( degrees => {
       context.commit( 'RETRIEVE', degrees );
     });
   }

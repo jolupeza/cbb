@@ -48,14 +48,20 @@ export default {
     ...mapState({
       step: state => state.step,
       loading: state => state.loading
+    }),
+    ...mapState( 'applications', {
+      areaId: state => state.areaId
     })
   },
 
   mounted() {
     const wrapper = document.getElementById( 'wp-vue-workwithus-main' );
-    const levelId = parseInt( wrapper.dataset.levelid );
+    const areaId = parseInt( wrapper.dataset.areaId );
 
-    this.$store.dispatch( 'applications/setLevelId', levelId );
+    this.$store.dispatch( 'applications/setAreaId', areaId )
+      .then( () => {
+        this.$store.dispatch( 'specialities/retrieve', this.areaId );
+      });
   }
 };
 </script>

@@ -165,7 +165,7 @@ export default {
 
   computed: {
     ...mapState( 'applications', {
-      levelId: state => state.levelId
+      areaId: state => state.areaId
     }),
     ...mapState( 'degrees', {
       degrees: state => state.all
@@ -178,7 +178,7 @@ export default {
 
   created() {
     if ( 0 === this.degrees.length ) {
-      this.$store.dispatch( 'degrees/retrieve', this.levelId );
+      this.$store.dispatch( 'degrees/retrieve', this.areaId );
     }
   },
 
