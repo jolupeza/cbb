@@ -4,6 +4,7 @@ namespace CBB_WorkWithUs\Admin\Entities;
 
 use CBB_WorkWithUs\Admin\Exports\JobApplication;
 use CBB_WorkWithUs\Admin\Taxonomies\Joblevel;
+use CBB_WorkWithUs\Admin\Taxonomies\JobLevels;
 use CBB_WorkWithUs\Admin\Taxonomies\JobLocal;
 use CBB_WorkWithUs\Admin\Taxonomies\JobSpeciality;
 use CBB_WorkWithUs\Includes\Loader;
@@ -38,14 +39,17 @@ class Jobapplications
 
     public function init()
     {
-        $adminJobLevels = new Joblevel($this->loader, $this->domain);
-        $adminJobLevels->init();
+        $adminJobArea = new Joblevel($this->loader, $this->domain);
+        $adminJobArea->init();
 
         $adminJobSpeciality = new JobSpeciality($this->loader, $this->domain);
         $adminJobSpeciality->init();
 
         $adminJobLocal = new JobLocal($this->loader, $this->domain);
         $adminJobLocal->init();
+
+        $adminJobLevel = new JobLevels($this->loader, $this->domain);
+        $adminJobLevel->init();
 
         $this->loader->add_action('add_meta_boxes', $this, 'cdMbJobapplicationsAdd');
         $this->loader->add_filter('views_edit-jobapplications', $this, 'displayButtonDownloadApplications');
@@ -106,10 +110,10 @@ class Jobapplications
         $data['district'] = sanitize_text_field($_POST['district']);
         $data['address'] = sanitize_text_field($_POST['address']);
         $data['reference'] = sanitize_text_field($_POST['reference']);
-        $data['levelEducation'] = !empty($_POST['levelEducation']) ? sanitize_text_field($_POST['levelEducation']) : null;
+        $data['level'] = (int)sanitize_text_field($_POST['level']);
         $data['local'] = (int)sanitize_text_field($_POST['local']);
         $data['speciality'] = (int)sanitize_text_field($_POST['speciality']);
-        $data['level'] = (int)sanitize_text_field($_POST['level']);
+        $data['area'] = (int)sanitize_text_field($_POST['area']);
         $data['studies'] = json_decode(stripslashes($_POST['studies']));
         $data['experiences'] = json_decode(stripslashes($_POST['experiences']));
 
@@ -188,16 +192,14 @@ class Jobapplications
         add_post_meta($postId, 'mb_province', $data['province']);
         add_post_meta($postId, 'mb_district', $data['district']);
         add_post_meta($postId, 'mb_address', $data['address']);
-        if (!is_null($data['levelEducation'])) {
-            add_post_meta($postId, 'mb_level_education', $data['levelEducation']);
-        }
         add_post_meta($postId, 'mb_reference', $data['reference']);
         add_post_meta($postId, 'mb_studies', $data['studies']);
         add_post_meta($postId, 'mb_experiences', $data['experiences']);
 
-        wp_set_object_terms($postId, $data['level'], 'joblevels');
+        wp_set_object_terms($postId, $data['area'], 'joblevels');
         wp_set_object_terms($postId, $data['speciality'], 'job_specialities');
         wp_set_object_terms($postId, $data['local'], 'job_locals');
+        wp_set_object_terms($postId, $data['level'], 'job_levels');
     }
 
     protected function uploadPhoto($namePhoto, $photo)

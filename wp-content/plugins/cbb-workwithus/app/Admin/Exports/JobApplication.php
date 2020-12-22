@@ -89,7 +89,9 @@ class JobApplication
             'N3' => 'Nivel',
             'O3' => 'Sede',
             'P3' => 'Especialidad',
-            'Q3' => 'Tipo Postulación'
+            'Q3' => 'Área',
+            'R3' => 'Estudios',
+            'S3' => 'Experiencia Laboral'
         );
         return $this->headers;
     }
@@ -123,7 +125,8 @@ class JobApplication
                 $district = !empty($values['mb_district']) ? esc_attr($values['mb_district'][0]) : '';
                 $address = !empty($values['mb_address']) ? esc_attr($values['mb_address'][0]) : '';
                 $reference = !empty($values['mb_reference']) ? esc_attr($values['mb_reference'][0]) : '';
-                $levelEducation = !empty($values['mb_level_education']) ? esc_attr($values['mb_level_education'][0]) : '';
+                $studies = !empty($values['mb_studies']) ? unserialize($values['mb_studies'][0]) : '';
+                $experiences = !empty($values['mb_experiences']) ? unserialize($values['mb_experiences'][0]) : '';
 
                 $typePostulation = wp_get_object_terms($id, 'joblevels');
                 $typePostulation = !is_wp_error($typePostulation) ? $typePostulation[0]->name : '';
@@ -133,6 +136,9 @@ class JobApplication
 
                 $local = wp_get_object_terms($id, 'job_locals');
                 $nameLocal = !is_wp_error($local) ? $local[0]->name : '';
+
+                $level = wp_get_object_terms($id, 'job_levels');
+                $nameLevel = !is_wp_error($level) ? $level[0]->name : '';
 
                 $excel->getActiveSheet()->setCellValue('A'.$i, "{$name} {$firstName} {$lastName}");
                 $excel->getActiveSheet()->getStyle('A'.$i)->getFont()->setSize(10);
@@ -173,7 +179,7 @@ class JobApplication
                 $excel->getActiveSheet()->setCellValue('M'.$i, $reference);
                 $excel->getActiveSheet()->getStyle('M'.$i)->getFont()->setSize(10);
 
-                $excel->getActiveSheet()->setCellValue('N'.$i, $levelEducation);
+                $excel->getActiveSheet()->setCellValue('N'.$i, $nameLevel);
                 $excel->getActiveSheet()->getStyle('N'.$i)->getFont()->setSize(10);
 
                 $excel->getActiveSheet()->setCellValue('O'.$i, $nameLocal);
@@ -184,6 +190,12 @@ class JobApplication
 
                 $excel->getActiveSheet()->setCellValue('Q'.$i, $typePostulation);
                 $excel->getActiveSheet()->getStyle('Q'.$i)->getFont()->setSize(10);
+
+                $excel->getActiveSheet()->setCellValue('R'.$i, count($studies));
+                $excel->getActiveSheet()->getStyle('R'.$i)->getFont()->setSize(10);
+
+                $excel->getActiveSheet()->setCellValue('S'.$i, count($experiences));
+                $excel->getActiveSheet()->getStyle('S'.$i)->getFont()->setSize(10);
 
                 ++$i;
             }
