@@ -124,7 +124,10 @@ const actions = {
     context.commit( 'SET_CV', { file, name, loaded });
   },
   setAreaId( context, id ) {
-    context.commit( 'SET_AREA_ID', id );
+    return new Promise( ( resolve ) => {
+      context.commit( 'SET_AREA_ID', id );
+      resolve();
+    });
   },
   async register({ state }, { nonce, action }) {
     try {

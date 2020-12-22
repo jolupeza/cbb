@@ -271,7 +271,6 @@ export default {
       },
       levels: this.wpData.levels,
       locals: this.wpData.locals,
-      specialities: this.wpData.specialities,
       typesPhoto: [ 'image/jpeg', 'image/png' ],
       showErrorPhoto: false
     };
@@ -286,6 +285,12 @@ export default {
     }),
     ...mapState( 'districts', {
       districts: state => state.all
+    }),
+    ...mapState( 'applications', {
+      areaId: state => state.areaId
+    }),
+    ...mapState( 'specialities', {
+      specialities: state => state.all
     }),
     ...mapGetters( 'applications', {
       slugArea: 'getAreaSlug'
